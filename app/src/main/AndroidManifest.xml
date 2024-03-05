@@ -23,11 +23,11 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/API_KEY_ADMOB" />
+            android:value="${API_KEY_ADMOB}" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/API_KEY_LOCATION" />
+            android:value="${API_KEY_LOCATION}" />
 
         <activity
             android:name=".ui.language.LanguageActivity"

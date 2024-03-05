@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">Anlık Depremler</string>
+
+
+    <string name="title_home">Anasayfa</string>
+    <string name="near">Yakınınız</string>
+    <string name="settings">Ayarlar</string>
+    <string name="now">Son Dakikalar</string>
+
+    <!--    ADS Information's -->
+    <string name="BANNER_ADS_TEST" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="BANNER_ADS_REAL" translatable="false">ca-app-pub-5779807348211992/8637487009</string>
+
+    <string name="success_permission_granted_notification">Bildirim izni Verildi</string>
+    <string name="permission_denied_notification">Bildirim izni reddedildi</string>
+
+    <string name="error_update_failed">Güncelleme sırasında bir hata oluştu</string>
+    <string name="success_update_downloaded">Güncelleme Başarılı</string>
+    <string name="thank_you_for_review">Yorumlarınız için teşekkür ederiz :)</string>
+    <string name="done">Tamam</string>
+    <string name="numbersKey" translatable="false">1234567890</string>
+    <string name="near_earthquake">Yakınınızdaki Depremler</string>
+    <string name="now_earthquake">Son Dakika Tüm Depremler</string>
+    <string name="earthquakes">Depremler</string>
+    <string name="language">Dil</string>
+    <string name="change_theme">Tema Değiştirme</string>
+    <string name="change_language">Dil Değiştirme</string>
+    <string name="english_turkish">English - Türkçe</string>
+    <string name="rate_the_app">Uygulamayı Oyla</string>
+    <string name="notification_permission">Bildirim İzni</string>
+    <string name="share_app">Uygulamayı Paylaş</string>
+    <string name="privace_policy">Gizlilik Politikası</string>
+    <string name="terms_condition">Koşullar&amp;Şartlar</string>
+    <string name="contact_us">Bizimle İletişime Geç</string>
+    <string name="e_mail" translatable="false">hesap_yok_a@hotmail.com</string>
+    <string name="notification">bildirim</string>
+    <string name="contact_us_producter">deprem uygulama içi</string>
+    <string name="send_mail">Mail i Gönder</string>
+    <string name="error_not_mail_installed">Hiçbir Mail Uygulaması Bulamadık</string>
+
+    <string name="hello_blank_fragment">HELLO</string>
+    <string name="map">Harita</string>
+    <string name="filter">Filtre</string>
+    <string name="this_week_filter">Bu Hafta</string>
+    <string name="search_message">Veri Bulunamadı</string>
+    <string name="distance">Uzaklık</string>
+    <string name="depth">Derinlik</string>
+    <string name="hour">Saat</string>
+    <string name="date">Tarih</string>
+    <string name="revize">Ölçümler Ort.</string>
+    <string name="list">Liste</string>
+    <string name="search">Arama</string>
+    <string name="search_hint">Yer Adı Giriniz</string>
+    <string name="call">Ara</string>
+    <string name="directions">Google Harita</string>
+    <string name="resend_code">Tekrar Dene</string>
+    <string name="cancel">İptal</string>
+    <string name="error_message">Bir şeyler Yanlış Gitti...</string>
+    <string name="error_server">Sunucumuz Bakımda...</string>
+
+    <string name="location_enable">Lokasyon İzni Açık</string>
+    <string name="please_accept_location">Lütfen Lokasyon İzni Onaylayın</string>
+    <string name="clear">Temizle</string>
+    <string name="apply_filter">Filterı Uygula</string>
+    <string name="start_date">Başlangıç Tarihi</string>
+    <string name="end_date">Bitiş Tarihi</string>
+    <string name="ml">Şiddet</string>
+    <string name="location_filter_info">Lokasyon filtresi yapmak istiyorsanız o konuma basılı tutunuz.</string>
+
+</resources>
