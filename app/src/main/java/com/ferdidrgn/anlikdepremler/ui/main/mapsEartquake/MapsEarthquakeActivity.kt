@@ -24,7 +24,7 @@ import com.ferdidrgn.anlikdepremler.enums.ToMain
 import com.ferdidrgn.anlikdepremler.model.Earthquake
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.handler.CenterSmoothScroller
-import com.ferdidrgn.anlikdepremler.tools.NavigationHandler
+import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
 import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -217,7 +217,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
             if (result.resultCode == Activity.RESULT_OK) {
                 getLocation()
             } else {
-                NavigationHandler.instance.toMainActivityClearTask(this, ToMain.Home)
+                NavHandler.instance.toMainActivityClearTask(this, ToMain.Home)
                 showToast(getString(R.string.please_accept_location))
             }
         }

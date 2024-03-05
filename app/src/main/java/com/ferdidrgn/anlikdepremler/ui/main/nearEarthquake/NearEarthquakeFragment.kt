@@ -10,7 +10,7 @@ import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentNearEarthquakeBinding
 import com.ferdidrgn.anlikdepremler.enums.ToMain
 import com.ferdidrgn.anlikdepremler.tools.*
-import com.ferdidrgn.anlikdepremler.tools.NavigationHandler
+import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.ui.main.MainActivity
 import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
 import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
@@ -111,7 +111,7 @@ class NearEarthquakeFragment :
             if (result.resultCode == Activity.RESULT_OK) {
                 currentLocation()
             } else {
-                NavigationHandler.instance.toMainActivityClearTask(
+                NavHandler.instance.toMainActivityClearTask(
                     requireContext(),
                     ToMain.Home
                 )
