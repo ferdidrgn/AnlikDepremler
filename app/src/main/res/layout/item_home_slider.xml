@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="homeSliderData"
+            type="com.ferdidrgn.anlikdepremler.model.HomeSliderData" />
+
+        <variable
+            name="listener"
+            type="com.ferdidrgn.anlikdepremler.ui.main.home.SliderDetailsAdapterListener" />
+
+        <variable
+            name="index"
+            type="Integer" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextColor2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@{homeSliderData.title}"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/done" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvShow"
+            style="@style/CardBackgroundTint_StrokeColor"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgShow"
+                style="@style/ShapeableImageViewStyle"
+                imageUrl="@{homeSliderData.image}"
+                android:layout_width="match_parent"
+                android:scaleType="fitCenter"
+                android:layout_height="250dp"
+                android:onClick="@{() -> listener.onSliderDetailsAdapterListener(homeSliderData)}"
+                android:src="@drawable/ic_home" />
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </LinearLayout>
+</layout>

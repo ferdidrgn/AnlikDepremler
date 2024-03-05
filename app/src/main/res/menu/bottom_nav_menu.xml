@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homeFragmentNav"
+        android:icon="@drawable/ic_home_selector"
+        android:title="@string/title_home"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/nearEarthquakeFragmentNav"
+        android:icon="@drawable/ic_gps_location_navigation_pin"
+        android:title="@string/near"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/nowEarthquakeFragmentNav"
+        android:icon="@drawable/ic_map"
+        android:title="@string/now"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/settingsFragmentNav"
+        android:icon="@drawable/ic_settings_selector"
+        android:title="@string/settings"
+        app:showAsAction="withText" />
+
+</menu>

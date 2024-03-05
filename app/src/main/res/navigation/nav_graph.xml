@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragmentNav">
+
+    <fragment
+        android:id="@+id/homeFragmentNav"
+        android:name="com.ferdidrgn.anlikdepremler.ui.main.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/nearEarthquakeFragmentNav"
+        android:name="com.ferdidrgn.anlikdepremler.ui.main.nearEarthquake.NearEarthquakeFragment"
+        android:label="NearEarthquakeFragment"/>
+    <fragment
+        android:id="@+id/nowEarthquakeFragmentNav"
+        android:name="com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeFragment"
+        android:label="NowEarthquakeFragment"/>
+    <fragment
+        android:id="@+id/settingsFragmentNav"
+        android:name="com.ferdidrgn.anlikdepremler.ui.main.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+</navigation>

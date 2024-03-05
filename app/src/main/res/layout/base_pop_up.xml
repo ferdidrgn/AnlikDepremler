@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/container"
+        style="@style/rectangle_primary6_10_border_primary3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="20dp">
+
+        <TextView
+            android:id="@+id/tbTitle"
+            style="@style/TextColor2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="40sp"
+            tools:text="title" />
+
+        <ImageView
+            android:id="@+id/imgSuccess"
+            style="@style/ImgTintColor"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:src="@drawable/ic_warning"
+            android:textSize="21sp" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            style="@style/TextColor2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            tools:text="description" />
+
+        <LinearLayout
+            android:id="@+id/llButtons"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/negativeTv"
+                style="@style/PopUpBtnNegative"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_primary4_10"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/white_light"
+                android:textSize="16sp"
+                tools:text="cancel" />
+
+            <TextView
+                android:id="@+id/positiveTv"
+                style="@style/PopUpBtnPositive"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/white_light"
+                android:textSize="16sp"
+                tools:text="Done" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

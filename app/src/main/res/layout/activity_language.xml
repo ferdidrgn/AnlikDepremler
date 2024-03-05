@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ferdidrgn.anlikdepremler.ui.language.LanguageViewModel" />
+    </data>
+
+    <LinearLayout
+        style="@style/ScreenBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".ui.language.LanguageActivity">
+
+        <com.ferdidrgn.anlikdepremler.tools.components.CustomToolbar
+            android:id="@+id/customToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cst_toolbar_backIcon_visible="true"
+            app:cst_toolbar_text="@string/language" />
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/BANNER_ADS_REAL" />
+
+        <LinearLayout
+            android:id="@+id/llTurkish"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="45dp"
+            android:background="@{viewModel.whichButtonSelected ? @drawable/bg_rectangle_primary2_border_primary3 :@drawable/bg_primary2_10_border_error_red}"
+            android:clickable="@{viewModel.whichButtonSelected ? true: false}"
+            android:gravity="center"
+            android:onClick="@{()-> viewModel.turkishLanguageItemClicked()}">
+
+            <TextView
+                android:id="@+id/tvEnglish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Türkçe"
+                android:textColor="@{viewModel.whichButtonSelected ? @color/primary6 : @color/primary3}"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEnglish"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="8dp"
+            android:background="@{viewModel.whichButtonSelected ? @drawable/bg_primary2_10_border_error_red : @drawable/bg_rectangle_primary2_border_primary3}"
+            android:clickable="@{viewModel.whichButtonSelected ? false: true}"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.englishLanguageItemClicked()}">
+
+            <TextView
+                android:id="@+id/tvArabic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="English"
+                android:textColor="@{viewModel.whichButtonSelected ? @color/primary3 : @color/primary6}"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>
