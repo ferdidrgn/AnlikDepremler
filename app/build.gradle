@@ -26,6 +26,12 @@ android {
         versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        buildConfigField "String", "API_KEY_LOCATION", "\"${properties.getProperty("API_KEY_LOCATION")}\""
+        buildConfigField "String", "API_KEY_ADMOB", "\"${properties.getProperty("API_KEY_ADMOB")}\""
     }
 
     buildTypes {
@@ -33,7 +39,7 @@ android {
             buildConfigField "Boolean", "DEBUG_MODE", "false"
             buildConfigField 'String', 'API_ADDRESS', "\"https://furkansezgin.com.tr/\""
             buildConfigField 'String', 'AD_ID', "\"ca-app-pub-5779807348211992/8637487009\""
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
