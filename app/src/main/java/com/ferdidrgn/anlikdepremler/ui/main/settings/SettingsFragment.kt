@@ -35,6 +35,12 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         clickEvents()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        builderADS(requireContext(), binding.adView)
+    }
+
     private fun clickEvents() {
 
         viewModel.btnLanguageClicked.observe(viewLifecycleOwner) {
