@@ -69,7 +69,7 @@
 
         <TextView
             android:id="@+id/tvHeader"
-            style="@style/TextColor2"
+            style="@style/TextColorHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"

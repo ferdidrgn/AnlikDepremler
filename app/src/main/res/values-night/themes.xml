@@ -16,8 +16,8 @@
         <!-- Secondary Color -->
         <item name="colorSecondary">@color/dark6</item>
         <item name="colorSecondaryVariant">@color/dark7</item>
-        <item name="colorOnSecondary">@color/white_light</item>
-        <item name="colorOnSecondaryFixed">@color/pink_light</item>
+        <item name="colorOnSecondary">@color/primary7</item>
+        <item name="colorOnSecondaryFixed">@color/primary</item>
 
         <!-- Background Color -->
         <item name="colorSurface">@color/pink_success</item>
@@ -80,7 +80,7 @@
         <item name="android:background">@color/black</item>
     </style>
 
-    <style name="CardBackground_pink_success">
+    <style name="CardBackground_primary3">
         <item name="android:background">@color/dark10</item>
     </style>
 
@@ -105,8 +105,8 @@
         <item name="android:textColor">@color/dark7</item>
     </style>
 
-    <style name="TextColor2">
-        <item name="android:textColor">@color/white_light</item>
+    <style name="TextColorHeader">
+        <item name="android:textColor">@color/primary7</item>
     </style>
 
     <style name="TextColor_primary2">
@@ -141,7 +141,7 @@
 
     <style name="rounded_primary2_10_border_primary3">
         <item name="android:background">@drawable/bg_dark2_10_border_dark3</item>
-        <item name="android:textColor">@color/white_light</item>
+        <item name="android:textColor">@color/primary7</item>
     </style>
 
     <style name="rectangle_primary2_border_primary3">

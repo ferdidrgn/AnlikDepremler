@@ -47,7 +47,7 @@
                     android:layout_height="85dp">
 
                     <com.google.android.material.card.MaterialCardView
-                        style="@style/CardBackground_pink_success"
+                        style="@style/CardBackground_primary3"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_centerInParent="true"
