@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/depth"
-                    android:textSize="12sp"
+                    android:textSize="13.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -143,8 +143,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_marginStart="15dp"
                 android:text="@{earthquake.depth + ` km`}"
-                android:textSize="11sp"
+                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="@+id/ll1"
                 app:layout_constraintStart_toStartOf="@id/ll1"
                 app:layout_constraintTop_toBottomOf="@id/ll1"
@@ -171,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/revize"
-                    android:textSize="12sp"
+                    android:textSize="13.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -181,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@{earthquake.revize}"
-                android:textSize="11sp"
+                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="@+id/ll3"
                 app:layout_constraintStart_toStartOf="@+id/ll3"
                 app:layout_constraintTop_toBottomOf="@+id/ll3"
@@ -208,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="@string/date"
-                    android:textSize="12sp"
+                    android:textSize="13.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -216,9 +217,8 @@
                 android:id="@+id/rlDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp"
                 app:layout_constraintEnd_toStartOf="@+id/rlTime"
                 app:layout_constraintStart_toStartOf="@+id/ll2"
                 app:layout_constraintTop_toBottomOf="@+id/ll2">
@@ -228,7 +228,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{earthquake.date}"
-                    android:textSize="11sp"
+                    android:textSize="13sp"
                     tools:text="12.02.2023" />
 
             </RelativeLayout>
@@ -255,7 +255,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="@string/hour"
-                    android:textSize="12sp"
+                    android:textSize="13.5sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -263,7 +263,7 @@
                 android:id="@+id/rlTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="@+id/ll4"
                 app:layout_constraintStart_toStartOf="@+id/ll4"
@@ -274,7 +274,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{earthquake.time}"
-                    android:textSize="11sp"
+                    android:textSize="13sp"
                     tools:text="07.10.2023" />
 
             </RelativeLayout>
