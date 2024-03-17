@@ -113,7 +113,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/rounded_main_secondary_radius_10"
-                android:src="@drawable/ic_filter_on"
+                android:src="@drawable/ic_filter"
                 android:visibility="gone" />
         </RelativeLayout>
 
