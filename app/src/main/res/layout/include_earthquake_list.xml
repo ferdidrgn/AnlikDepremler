@@ -44,7 +44,7 @@
                     android:src="@drawable/ic_map" />
 
                 <TextView
-                    style="@style/TextColor"
+                    style="@style/TextColor_primary8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -90,7 +90,7 @@
 
                     <TextView
                         android:id="@+id/tvFilter"
-                        style="@style/TextColor"
+                        style="@style/TextColor_primary8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
