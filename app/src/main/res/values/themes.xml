@@ -23,9 +23,9 @@
         <!-- Background Color -->
         <item name="colorSurface">@color/pink_success</item>
         <item name="colorOnSurface">@color/red_err</item>
-        <item name="colorOnSurfaceVariant">@color/red</item>
+        <item name="colorOnSurfaceVariant">@color/red_err</item>
         <item name="colorOnSurfaceInverse">@color/green_light</item>
-        <item name="colorOnTertiary">@color/blue_light</item>
+        <item name="colorOnTertiary">@color/primary10</item>
 
     </style>
 
@@ -82,10 +82,6 @@
         <item name="android:backgroundTint">@color/primary3</item>
     </style>
 
-    <style name="TintBlueLight">
-        <item name="android:tint">@color/blue_light</item>
-    </style>
-
     <style name="ViewBackground">
         <item name="android:background">@color/primary</item>
     </style>
@@ -99,16 +95,16 @@
         <item name="android:textColor">@color/pink_success</item>
     </style>
 
-    <style name="TextColor">
-        <item name="android:textColor">@color/primary5</item>
-    </style>
-
     <style name="TextColorHeader">
-        <item name="android:textColor">@color/primary3</item>
+        <item name="android:textColor">@color/primary10</item>
     </style>
 
     <style name="TextColor_primary2">
-        <item name="android:textColor">@color/primary2</item>
+        <item name="android:textColor">@color/primary4</item>
+    </style>
+
+    <style name="TextColor_primary8">
+        <item name="android:textColor">@color/primary8</item>
     </style>
 
     <style name="PopUpBtnNegative">
