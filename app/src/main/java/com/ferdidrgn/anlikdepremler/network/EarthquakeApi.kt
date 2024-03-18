@@ -8,4 +8,7 @@ interface EarthquakeApi {
 
     @GET("kandilli/")
     suspend fun getEarthquake(): Response<ArrayList<Earthquake>>
+
+    @GET("kandilli/api/limit/10")
+    suspend fun getTopTenEarthquakeList(): Response<ArrayList<Earthquake>>
 }

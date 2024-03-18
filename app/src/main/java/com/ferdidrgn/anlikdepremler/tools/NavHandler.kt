@@ -59,7 +59,7 @@ class NavHandler {
     fun toMainActivity(context: Context, toMain: ToMain) {
         val intent = Intent(context, MainActivity::class.java)
         intent.putExtra(TO_MAIN, toMain)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(intent)
     }
 

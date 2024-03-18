@@ -13,4 +13,8 @@ class EarthquakeRepository @Inject constructor(
     suspend fun getEarthquake(): Resource<ArrayList<Earthquake>?> = safeApiCall {
         api.getEarthquake()
     }
+
+    suspend fun getTopTenEarthquakeList(): Resource<ArrayList<Earthquake>?> = safeApiCall {
+        api.getTopTenEarthquakeList()
+    }
 }
