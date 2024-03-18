@@ -16,6 +16,10 @@
             type="com.ferdidrgn.anlikdepremler.ui.main.home.TopTenEarthquakeAdapter" />
 
         <variable
+            name="topTenLocationEarthquakeAdapter"
+            type="com.ferdidrgn.anlikdepremler.ui.main.home.TopTenLocationEarthquakeAdapter" />
+
+        <variable
             name="viewModel"
             type="com.ferdidrgn.anlikdepremler.ui.main.MainViewModel" />
     </data>
@@ -32,96 +36,166 @@
             android:layout_height="wrap_content"
             app:cst_toolbar_text="@string/app_name" />
 
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/BANNER_ADS_REAL" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:context=".ui.main.home.HomeFragment">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/vpSlider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                app:setAdapter="@{homeSliderAdapter}"
-                app:submitList="@{viewModel.homeSliderList}"
-                tools:listitem="@layout/item_home_slider" />
-
-            <com.rd.PageIndicatorView
-                android:id="@+id/indicator"
-                style="@style/PageIndicatorView"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="12dp" />
-        </LinearLayout>
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvTopTen"
-                    style="@style/TextColor_primary8"
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="@string/top_ten_earthquake"
-                    android:textAlignment="textStart"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toTopOf="@+id/rvTopFiveEarthquake"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginVertical="5dp"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/BANNER_ADS_REAL" />
 
-                <TextView
-                    android:id="@+id/tvSeeAllNowEarthquake"
-                    style="@style/TextColorHeader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:onClick="@{() -> viewModel.onNowEartquake()}"
-                    android:paddingHorizontal="5dp"
-                    android:text="@string/see_all"
-                    android:textAlignment="textEnd"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/rvTopFiveEarthquake"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvTopFiveEarthquake"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="7dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    tools:context=".ui.main.home.HomeFragment">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vpSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:overScrollMode="never"
+                        app:setAdapter="@{homeSliderAdapter}"
+                        app:submitList="@{viewModel.homeSliderList}"
+                        tools:listitem="@layout/item_home_slider" />
+
+                    <com.rd.PageIndicatorView
+                        android:id="@+id/indicator"
+                        style="@style/PageIndicatorView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="12dp" />
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:overScrollMode="never"
-                    app:adapter="@{topTenEarthquakeAdapter}"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTopTen"
-                    app:submitList="@{viewModel.getTopTenEarthquakeList}"
-                    tools:itemCount="5"
-                    tools:layout_editor_absoluteX="1dp"
-                    tools:listitem="@layout/item_top_ten_earthquake" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTopTen"
+                        style="@style/TextColor_primary8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="@string/top_ten_earthquake"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toTopOf="@+id/rvTopFiveEarthquake"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSeeAllNowEarthquake"
+                        style="@style/TextColorHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:onClick="@{() -> viewModel.onTopTenEarthquake()}"
+                        android:paddingHorizontal="5dp"
+                        android:text="@string/see_all"
+                        android:textAlignment="textEnd"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toTopOf="@+id/rvTopFiveEarthquake"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvTopFiveEarthquake"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="7dp"
+                        android:layout_marginTop="10dp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        app:adapter="@{topTenEarthquakeAdapter}"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTopTen"
+                        app:submitList="@{viewModel.getTopTenEarthquakeList}"
+                        tools:itemCount="5"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:listitem="@layout/item_top_ten_earthquake" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvChooseCityEarthquake"
+                        style="@style/TextColor_primary8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="@string/top_ten_location_eartquake"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSeeAllLocationEarthquake"
+                        style="@style/TextColorHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> viewModel.onTopLocationEarthquake()}"
+                        android:paddingHorizontal="5dp"
+                        android:text="@string/see_all"
+                        android:textAlignment="textEnd"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                        android:id="@+id/csChooseCityEarthquake"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="5dp"
+                        app:custom_edit_hint="@string/location"
+                        app:custom_edit_text="@={viewModel.location}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvChooseCityEarthquake" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvChooseCityEarthquake"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="7dp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        app:adapter="@{topTenLocationEarthquakeAdapter}"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_constraintTop_toBottomOf="@+id/csChooseCityEarthquake"
+                        app:submitList="@{viewModel.getTopTenLocationEarthquakeList}"
+                        tools:itemCount="5"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:listitem="@layout/item_top_ten_location_earthquake" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

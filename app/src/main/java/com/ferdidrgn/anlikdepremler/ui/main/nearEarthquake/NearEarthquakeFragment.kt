@@ -97,7 +97,7 @@ class NearEarthquakeFragment :
                     }
 
                     viewModel.apply {
-                        location?.stopUpdateLocation()
+                        this@NearEarthquakeFragment.location?.stopUpdateLocation()
                         earthquakeBodyRequest.userLat = latLng?.latitude
                         earthquakeBodyRequest.userLong = latLng?.longitude
                         getLocationFilter()
