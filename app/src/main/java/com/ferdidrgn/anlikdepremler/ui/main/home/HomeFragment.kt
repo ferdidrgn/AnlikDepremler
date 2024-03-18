@@ -39,6 +39,7 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
         binding.viewModel = viewModel
         binding.homeSliderAdapter = HomeSliderHorizontalAdapter(viewModel)
         binding.topTenEarthquakeAdapter = TopTenEarthquakeAdapter(viewModel)
+        binding.topTenLocationEarthquakeAdapter = TopTenLocationEarthquakeAdapter(viewModel)
 
         handler = MainSliderHandler()
 
@@ -70,6 +71,17 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
                 )
             }
 
+            clickSeeAllLocationEarthquake.observe(this@HomeFragment) {
+                NavHandler.instance.toMainActivity(
+                    requireActivity() as MainActivity, ToMain.NowEarthquake
+                )
+            }
+
+            binding.csChooseCityEarthquake.changeableText { isTrue ->
+                if (isTrue)
+                    getTopTenLocationEarthquake()
+            }
+
             if (viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
                 error.observe(viewLifecycleOwner) { Err ->
                     Err?.message?.let { showToast(it) }
@@ -95,7 +107,7 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
 
     private fun setUpEarthquakeAdapter() {
         rvTopFiveEarthquake.apply {
-           val newAdapter =
+            val newAdapter =
                 TopTenEarthquakeAdapter(viewModel)
             val linearLayoutManager = LinearLayoutManager(
                 requireContext(), LinearLayoutManager.HORIZONTAL, false

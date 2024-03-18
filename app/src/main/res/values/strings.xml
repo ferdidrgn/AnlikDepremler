@@ -68,5 +68,7 @@
     <string name="location_filter_info">Lokasyon filtresi yapmak istiyorsanız o konuma basılı tutunuz.</string>
     <string name="top_ten_earthquake">En Güncel 10 Deprem</string>
     <string name="see_all">Hepsini Göster...</string>
+    <string name="top_ten_location_eartquake">En Güncel 10 Deprem Konumu</string>
+    <string name="location">Lokasyon (*I*stanbul)</string>
 
 </resources>
