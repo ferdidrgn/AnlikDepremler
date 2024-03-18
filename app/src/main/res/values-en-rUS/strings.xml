@@ -61,5 +61,7 @@
     <string name="end_date">End Date</string>
     <string name="ml">Severe</string>
     <string name="location_filter_info">If you want to make a location filter, hold down that location.</string>
+    <string name="top_ten_earthquake">Top Ten Earthquake</string>
+    <string name="see_all">See All...</string>
 
 </resources>

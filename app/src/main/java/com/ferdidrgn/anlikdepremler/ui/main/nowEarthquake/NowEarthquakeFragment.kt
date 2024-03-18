@@ -5,7 +5,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentNowEarthquakeBinding

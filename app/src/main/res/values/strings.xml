@@ -66,5 +66,7 @@
     <string name="end_date">Bitiş Tarihi</string>
     <string name="ml">Şiddet</string>
     <string name="location_filter_info">Lokasyon filtresi yapmak istiyorsanız o konuma basılı tutunuz.</string>
+    <string name="top_ten_earthquake">En Güncel 10 Deprem</string>
+    <string name="see_all">Hepsini Göster...</string>
 
 </resources>

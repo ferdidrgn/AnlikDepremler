@@ -23,7 +23,6 @@ import com.ferdidrgn.anlikdepremler.databinding.FragmentMapsNowEarthquakeBinding
 import com.ferdidrgn.anlikdepremler.enums.ToMain
 import com.ferdidrgn.anlikdepremler.model.Earthquake
 import com.ferdidrgn.anlikdepremler.tools.*
-import com.ferdidrgn.anlikdepremler.tools.handler.CenterSmoothScroller
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
 import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
@@ -38,7 +37,6 @@ import com.google.android.gms.maps.model.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
@@ -48,13 +46,10 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     lateinit var gMap: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var latLng: LatLng? = null
-    private lateinit var adapter: NowEarthquakeAdapter
     private var earthquakeList = ArrayList<Earthquake>()
     private var cameEarthquakeList = ArrayList<Earthquake>()
-    private lateinit var smoothScroller: RecyclerView.SmoothScroller
     var location: GetCurrentLocation? = null
     private var isNearEarthquake = false
-    private lateinit var rvMap: RecyclerView
 
     override fun getVM(): Lazy<MainViewModel> = viewModels()
 
@@ -64,7 +59,6 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     override fun onCreateFinished(savedInstanceState: Bundle?) {
         binding.viewModel = viewModel
         builderADS(this, binding.adView)
-        rvMap = binding.rvMap
 
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -164,7 +158,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
             } ?: return@setOnMarkerClickListener false
 
             val position = earthquakeList.indexOf(item)
-            rvMap.apply {
+            binding.rvMap.apply {
                 scrollToPosition(position)
                 /*smoothScroller = CenterSmoothScroller(requireContext())
                 val snapHelper: SnapHelper = PagerSnapHelper()
@@ -272,20 +266,20 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     }
 
     private fun setUpEarthquakeAdapter() {
-        rvMap.apply {
-            this@MapsEarthquakeActivity.adapter =
-                NowEarthquakeAdapter(viewModel, true)
+        val newAdapter = NowEarthquakeAdapter(viewModel, true)
+
+        binding.rvMap.apply {
             val linearLayoutManager = LinearLayoutManager(
                 this@MapsEarthquakeActivity, LinearLayoutManager.HORIZONTAL, false
             )
-            smoothScroller = CenterSmoothScroller(this@MapsEarthquakeActivity)
+            //var smoothScroller: RecyclerView.SmoothScroller = CenterSmoothScroller(this@MapsEarthquakeActivity)
             val snapHelper: SnapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(rvMap)
+            snapHelper.attachToRecyclerView(this@apply)
             onFlingListener = null
             itemAnimator = null
 
-            this@MapsEarthquakeActivity.adapter.updateData(earthquakeList)
-            adapter = this@MapsEarthquakeActivity.adapter
+            //this@MapsEarthquakeActivity.adapter.updateData(earthquakeList)
+            adapter = newAdapter
             layoutManager = linearLayoutManager
 
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -341,7 +335,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
                 }
             })
         }
-        adapter.addMarker { earthquake ->
+        newAdapter.addMarker { earthquake ->
             addMarker(earthquake)
         }
     }

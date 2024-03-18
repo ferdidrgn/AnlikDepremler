@@ -1,12 +1,7 @@
 package com.ferdidrgn.anlikdepremler.ui.main
 
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
-import com.ferdidrgn.anlikdepremler.base.Err
 import com.ferdidrgn.anlikdepremler.base.Resource
 import com.ferdidrgn.anlikdepremler.filter.getAllFilterQueriers
 import com.ferdidrgn.anlikdepremler.filter.getFilterOneWeek
@@ -19,6 +14,7 @@ import com.ferdidrgn.anlikdepremler.repository.HomeSliderRepository
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.ui.main.home.SliderDetailsAdapterListener
+import com.ferdidrgn.anlikdepremler.ui.main.home.TopTenEarthquakeAdapterListener
 import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthQuakeAdapterListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -30,7 +26,8 @@ import kotlin.collections.ArrayList
 class MainViewModel @Inject constructor(
     private val earthquakeRepository: EarthquakeRepository,
     private val homeSliderRepository: HomeSliderRepository,
-) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener {
+) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener,
+    TopTenEarthquakeAdapterListener {
 
     var earthquakeBodyRequest = EarthquakeBodyRequest()
     private var job: Job? = null
@@ -40,6 +37,7 @@ class MainViewModel @Inject constructor(
     var filterNowList = ArrayList<Earthquake>()
     var filterNearList = ArrayList<Earthquake>()
 
+    var getTopTenEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var homeSliderList = MutableLiveData<List<HomeSliderData>>()
 
     var ml = MutableStateFlow("")
@@ -56,15 +54,35 @@ class MainViewModel @Inject constructor(
     val clickClose = LiveEvent<Boolean>()
     val clickApply = LiveEvent<Boolean>()
 
+    val clickSeeAllNowEarthquake = LiveEvent<Boolean>()
+
     init {
         changeStatus(false)
     }
 
-    fun getHomeSlider() {
+    fun getHomePage() {
         mainScope {
             showLoading()
             homeSliderList.value = homeSliderRepository.createExampleHomeSliderList()
-            hideLoading()
+
+            //Top Five Earthquake
+            when (val response = earthquakeRepository.getTopTenEarthquakeList()) {
+                is Resource.Success -> {
+                    response.data?.let { getTopFiveEarthquake ->
+                        getTopTenEarthquakeList.postValue(getTopFiveEarthquake)
+                        timeHideLoading()
+                    }
+                }
+
+                is Resource.Error -> {
+                    serverMessage(response.error)
+                    hideLoading()
+                }
+
+                else -> {
+                    hideLoading()
+                }
+            }
         }
     }
 
@@ -81,10 +99,12 @@ class MainViewModel @Inject constructor(
                         timeHideLoading()
                     }
                 }
+
                 is Resource.Error -> {
                     serverMessage(response.error)
                     hideLoading()
                 }
+
                 else -> {
                     hideLoading()
                 }
@@ -105,10 +125,12 @@ class MainViewModel @Inject constructor(
                     getNowEarthquakeList.postValue(filterNowList)
                     timeHideLoading()
                 }
+
                 is Resource.Error -> {
                     serverMessage(response.error)
                     hideLoading()
                 }
+
                 else -> {
                     hideLoading()
                 }
@@ -151,10 +173,12 @@ class MainViewModel @Inject constructor(
                     getNearEarthquakeList.postValue(filterNearList)
                     timeHideLoading()
                 }
+
                 is Resource.Error -> {
                     serverMessage(response.error)
                     hideLoading()
                 }
+
                 else -> {
                     hideLoading()
                 }
@@ -186,10 +210,12 @@ class MainViewModel @Inject constructor(
 
                     timeHideLoading()
                 }
+
                 is Resource.Error -> {
                     serverMessage(response.error)
                     hideLoading()
                 }
+
                 else -> {
                     hideLoading()
                 }
@@ -204,6 +230,8 @@ class MainViewModel @Inject constructor(
 
     override fun onSliderDetailsAdapterListener(homeSliderData: HomeSliderData) {}
     override fun onNowEarthquakeItemClicked(position: Int) {}
+    override fun onTopTenEarthquakeAdapterListener(earthquake: Earthquake) {}
+
 
     //Click Events
     fun onClickMap() {
@@ -225,6 +253,10 @@ class MainViewModel @Inject constructor(
 
     fun onClickApply() {
         clickApply.postValue(true)
+    }
+
+    fun onNowEartquake() {
+        clickSeeAllNowEarthquake.postValue(true)
     }
 
 }
