@@ -1,10 +1,10 @@
 <h3 align="left">Anlık Depremler</h3>
 
-- 🌱 We present to you the instantaneous earthquake data that occurred in Turkey.
+1- 🌱 We present to you the instantaneous earthquake data that occurred in Turkey.
   
-- 🔭 Google Play Link: [AnlikDepremler](https://play.google.com/store/apps/details?id=com.ferdidrgn.anlikdepremler)
+2- 🔭 Google Play Link: [AnlikDepremler](https://play.google.com/store/apps/details?id=com.ferdidrgn.anlikdepremler)
 
-- 💬 Technologies used in the project:
+3- 💬 Technologies used in the project:
 
 <ul>
   <li>Dagger - Hilt</li>
