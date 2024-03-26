@@ -104,23 +104,4 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
         super.onPause()
         handler.removeChanging()
     }
-
-    private fun setUpEarthquakeAdapter() {
-        rvTopFiveEarthquake.apply {
-            val newAdapter =
-                TopTenEarthquakeAdapter(viewModel)
-            val linearLayoutManager = LinearLayoutManager(
-                requireContext(), LinearLayoutManager.HORIZONTAL, false
-            )
-            val snapHelper: SnapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(rvTopFiveEarthquake)
-            onFlingListener = null
-            itemAnimator = null
-
-            //this@HomeFragment.adapter.updateData(earthquakeList)
-            adapter = newAdapter
-            layoutManager = linearLayoutManager
-        }
-    }
-
 }

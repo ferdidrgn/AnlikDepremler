@@ -3,6 +3,7 @@ package com.ferdidrgn.anlikdepremler.ui.main.settings
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.activityViewModels
@@ -28,6 +29,8 @@ import com.ferdidrgn.anlikdepremler.ui.main.MainActivity
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint
+import android.provider.Settings
+import androidx.annotation.RequiresApi
 
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding>(),
@@ -43,6 +46,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
 
     override fun onCreateFinished(savedInstanceState: Bundle?) {
         binding.viewModel = viewModel
+        binding.visibility = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
         builderADS(requireContext(), binding.adView)
         initBillingClint()
@@ -62,7 +66,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 NavHandler.instance.toLanguageActivity(requireContext())
             }
             btnNotificationPermission.observe(viewLifecycleOwner) {
-
+                openNotificationSettings()
             }
             btnOnShareAppClick.observe(viewLifecycleOwner) {
                 requireContext().shareLink()
@@ -109,6 +113,29 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+    }
+
+    private fun openNotificationSettings() {
+        val intent = Intent()
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O -> {
+                intent.action = Settings.ACTION_APP_NOTIFICATION_SETTINGS
+                intent.putExtra(Settings.EXTRA_APP_PACKAGE, requireActivity().packageName)
+            }
+
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> {
+                intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                intent.putExtra("app_package", requireActivity().packageName)
+                intent.putExtra("app_uid", requireActivity().applicationInfo.uid)
+            }
+
+            else -> {
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                intent.addCategory(Intent.CATEGORY_DEFAULT)
+                intent.data = android.net.Uri.parse("package:${requireActivity().packageName}")
+            }
+        }
+        requireContext().startActivity(intent)
     }
 
     private fun reviewRequest() {

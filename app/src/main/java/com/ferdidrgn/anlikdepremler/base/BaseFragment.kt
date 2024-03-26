@@ -13,7 +13,6 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
     protected lateinit var viewModel: VM
     protected lateinit var binding: DB
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
