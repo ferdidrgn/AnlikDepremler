@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="visibility"
+            type="Boolean" />
+
         <variable
             name="viewModel"
             type="com.ferdidrgn.anlikdepremler.ui.main.settings.SettingsViewModel" />
@@ -194,14 +200,15 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/btnNotifiactionPermission"
+                    android:id="@+id/btnNotificationPermission"
                     style="@style/rectangle_primary2_border_primary3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:onClick="@{() -> viewModel.onRateAppClick()}"
+                    android:onClick="@{() -> viewModel.onNotificationPermissionClick()}"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="13dp">
+                    android:paddingVertical="13dp"
+                    android:visibility="@{visibility ? View.VISIBLE : View.GONE}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
