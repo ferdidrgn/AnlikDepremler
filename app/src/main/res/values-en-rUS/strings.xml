@@ -66,5 +66,11 @@
     <string name="see_all">See All...</string>
     <string name="top_ten_location_eartquake">Top Ten Location Earthquake</string>
     <string name="location">Location (*I*stanbul)</string>
+    <string name="billing_error">Billing service connection is disconnected, You can try to reconnect if necessary.</string>
+    <string name="billing_cancel">User canceled the purchase process.</string>
+    <string name="billing_failed">Purchase process failed</string>
+    <string name="billing_details_failed">Product details could not be loaded</string>
+    <string name="billing_consume_failed">Purchased product could not be consumed</string>
+    <string name="billing_consume_success">Purchased product has been successfully consumed, necessary transactions can be made.</string>
 
 </resources>

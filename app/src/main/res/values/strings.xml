@@ -71,5 +71,11 @@
     <string name="see_all">Hepsini Göster...</string>
     <string name="top_ten_location_eartquake">En Güncel 10 Deprem Konumu</string>
     <string name="location">Lokasyon (*I*stanbul)</string>
+    <string name="billing_error">Faturalandırma hizmeti bağlantısı kesildi, gerekirse tekrar bağlanmayı deneyiniz.</string>
+    <string name="billing_cancel">Kullanıcı satın alma işlemi iptal etti.</string>
+    <string name="billing_failed">Satın alma işlemi başarısız</string>
+    <string name="billing_details_failed">Ürün detayları yüklenemedi</string>
+    <string name="billing_consume_failed">Satın alınan ürün tüketilemedi</string>
+    <string name="billing_consume_success">Satın alınan ürün başarıyla tüketildi, gerekli işlemler yapılabilir.</string>
 
 </resources>

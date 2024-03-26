@@ -6,12 +6,21 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.activityViewModels
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingFlowParams
+import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.ConsumeParams
+import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.PurchasesUpdatedListener
+import com.android.billingclient.api.SkuDetailsParams
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentSettingsBinding
 import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivace
 import com.ferdidrgn.anlikdepremler.tools.APP_LINK
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
+import com.ferdidrgn.anlikdepremler.tools.DONATION_SMALL
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.tools.builderADS
 import com.ferdidrgn.anlikdepremler.tools.showToast
@@ -21,7 +30,11 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding>() {
+class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding>(),
+    PurchasesUpdatedListener {
+
+    private lateinit var billingClient: BillingClient
+    private var isBillingLoadSuccess = false
 
     override fun getVM(): Lazy<SettingsViewModel> = activityViewModels()
 
@@ -32,6 +45,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         binding.viewModel = viewModel
 
         builderADS(requireContext(), binding.adView)
+        initBillingClint()
         clickEvents()
     }
 
@@ -80,7 +94,10 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             }
 
             btnBuyCoffeeGooglePlayClick.observe(viewLifecycleOwner) {
-
+                if (isBillingLoadSuccess)
+                    loadAllSkus(DONATION_SMALL)
+                else
+                    showToast(getString(R.string.billing_error))
             }
         }
     }
@@ -145,6 +162,89 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             startActivity(Intent.createChooser(i, getString(R.string.send_mail)))
         } catch (ex: ActivityNotFoundException) {
             showToast(getString(R.string.error_not_mail_installed))
+        }
+    }
+
+    private fun initBillingClint() {
+        billingClient = BillingClient.newBuilder(requireContext())
+            .setListener(this)
+            .enablePendingPurchases()
+            .build()
+
+        billingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingServiceDisconnected() {
+                showToast(getString(R.string.billing_error))// Faturalandırma hizmeti bağlantısı kesildi, gerekirse tekrar bağlanmayı deneyebiliriz.
+            }
+
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                    // Faturalandırma bağlantısı başarıyla kuruldu, satın alma işlemlerini gerçekleştirebiliriz.
+                    isBillingLoadSuccess = true
+                } else {
+                    showToast(getString(R.string.billing_error) + " " + billingResult.debugMessage) //"Faturalandırma bağlantısı başarısız: ${billingResult.debugMessage}"
+                }
+            }
+        })
+    }
+
+    private fun loadAllSkus(productId: String) {
+        val skuDetailsParams = SkuDetailsParams.newBuilder()
+            .setSkusList(listOf(productId))
+            .setType(BillingClient.SkuType.INAPP)
+            .build()
+
+        billingClient.querySkuDetailsAsync(skuDetailsParams) { billingResult, skuDetailsList ->
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                skuDetailsList?.let { skuDetails ->
+                    if (skuDetails.isNotEmpty()) {
+                        val skuDetails = skuDetails[0]
+                        val billingFlowParams = BillingFlowParams.newBuilder()
+                            .setSkuDetails(skuDetails)
+                            .build()
+
+                        billingClient.launchBillingFlow(requireActivity(), billingFlowParams)
+                    }
+                }
+            } else {
+                showToast(getString(R.string.billing_details_failed) + " " + billingResult.debugMessage)
+            }
+        }
+    }
+
+    override fun onPurchasesUpdated(
+        billingResult: BillingResult,
+        purchases: MutableList<Purchase>?
+    ) {
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+            handlePurchases(purchases)
+        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
+            showToast(getString(R.string.billing_cancel))   //"Kullanıcı satın alma işlemi iptal etti"
+        } else {
+            showToast(getString(R.string.billing_failed) + " " + billingResult.debugMessage)
+        }
+    }
+
+    private fun handlePurchases(purchases: List<Purchase>) {
+        for (purchase in purchases) {
+            if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
+                // Satın alınan ürünleri işleme almak için burada gerekli işlemler yapılabilir.
+                consumePurchase(purchase)
+            }
+        }
+    }
+
+    private fun consumePurchase(purchase: Purchase) {
+        val consumeParams = ConsumeParams.newBuilder()
+            .setPurchaseToken(purchase.purchaseToken)
+            .build()
+
+        billingClient.consumeAsync(consumeParams) { billingResult, purchaseToken ->
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchaseToken != null) {
+                // Satın alınan ürün başarıyla tüketildi, gerekli işlemler yapılabilir.
+                showToast(getString(R.string.billing_consume_success))
+            } else {
+                showToast(getString(R.string.billing_consume_failed) + " " + billingResult.debugMessage)
+            }
         }
     }
 }
