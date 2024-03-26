@@ -29,13 +29,15 @@ class SettingsViewModel @Inject constructor(
     val btnChangeThemeClicked = LiveEvent<Boolean>()
     val btnPrivacePolicyClicked = LiveEvent<Boolean>()
     val btnTermsAndConditionsClicked = LiveEvent<Boolean>()
+    val btnBuyCoffeeUrlClick = LiveEvent<Boolean>()
+    val btnBuyCoffeeGooglePlayClick = LiveEvent<Boolean>()
 
     init {
         ClientPreferences.inst.apply {
             if (userLat != null && userLong != null) {
                 this@SettingsViewModel.userLat.value = this.userLat?.toDouble()!!
                 this@SettingsViewModel.userLong.value = this.userLong?.toDouble()!!
-                this@SettingsViewModel.userLocation.value =this.userLocation.toString()
+                this@SettingsViewModel.userLocation.value = this.userLocation.toString()
             }
         }
     }
@@ -52,14 +54,17 @@ class SettingsViewModel @Inject constructor(
                         }
                         hideLoading()
                     }
+
                     Response.Empty -> {
                         errorMessage.postValue(message(R.string.error_server))
                         hideLoading()
                     }
+
                     Response.ServerError -> {
                         errorMessage.postValue(message(R.string.error_server))
                         hideLoading()
                     }
+
                     else -> {
                         errorMessage.postValue(message(R.string.error_message))
                         hideLoading()
@@ -102,5 +107,13 @@ class SettingsViewModel @Inject constructor(
 
     fun onTermsAndConditionsClick() {
         btnTermsAndConditionsClicked.postValue(true)
+    }
+
+    fun onBuyCoffeeUrlClick() {
+        btnBuyCoffeeUrlClick.postValue(true)
+    }
+
+    fun onBuyCoffeeGooglePlayClick() {
+        btnBuyCoffeeGooglePlayClick.postValue(true)
     }
 }

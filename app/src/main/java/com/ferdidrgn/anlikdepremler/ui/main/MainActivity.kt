@@ -208,5 +208,5 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             finish()
     }
 
-    override fun changeTheme() = setTheme(R.style.Theme_AnlıkDepremler)
+    override fun changeTheme() = setTheme(R.style.Theme_AnlikDepremler)
 }

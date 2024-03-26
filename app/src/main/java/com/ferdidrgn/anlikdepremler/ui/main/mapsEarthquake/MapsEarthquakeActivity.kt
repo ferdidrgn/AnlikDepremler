@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.mapsEartquake
+package com.ferdidrgn.anlikdepremler.ui.main.mapsEarthquake
 
 import android.Manifest
 import android.app.Activity

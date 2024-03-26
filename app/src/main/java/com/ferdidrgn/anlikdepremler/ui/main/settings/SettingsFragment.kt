@@ -43,35 +43,45 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
 
     private fun clickEvents() {
 
-        viewModel.btnLanguageClicked.observe(viewLifecycleOwner) {
-            NavHandler.instance.toLanguageActivity(requireContext())
-        }
-        viewModel.btnNotificationPermission.observe(viewLifecycleOwner) {
+        viewModel.apply {
+            btnLanguageClicked.observe(viewLifecycleOwner) {
+                NavHandler.instance.toLanguageActivity(requireContext())
+            }
+            btnNotificationPermission.observe(viewLifecycleOwner) {
 
-        }
-        viewModel.btnOnShareAppClick.observe(viewLifecycleOwner) {
-            requireContext().shareLink()
-        }
-        viewModel.btnRateAppClicked.observe(viewLifecycleOwner) {
-            reviewRequest()
-        }
-        viewModel.btnContactUsClicked.observe(viewLifecycleOwner) {
-            contactUs()
-        }
-        viewModel.btnChangeThemeClicked.observe(viewLifecycleOwner) {
-            themeLightOrDark()
-        }
-        viewModel.btnPrivacePolicyClicked.observe(viewLifecycleOwner) {
-            NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
-                requireContext(),
-                WhichTermsAndPrivace.PrivaceAndPolicy
-            )
-        }
-        viewModel.btnTermsAndConditionsClicked.observe(viewLifecycleOwner) {
-            NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
-                requireContext(),
-                WhichTermsAndPrivace.TermsAndCondtion
-            )
+            }
+            btnOnShareAppClick.observe(viewLifecycleOwner) {
+                requireContext().shareLink()
+            }
+            btnRateAppClicked.observe(viewLifecycleOwner) {
+                reviewRequest()
+            }
+            btnContactUsClicked.observe(viewLifecycleOwner) {
+                contactUs()
+            }
+            btnChangeThemeClicked.observe(viewLifecycleOwner) {
+                themeLightOrDark()
+            }
+            btnPrivacePolicyClicked.observe(viewLifecycleOwner) {
+                NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
+                    requireContext(),
+                    WhichTermsAndPrivace.PrivaceAndPolicy
+                )
+            }
+            btnTermsAndConditionsClicked.observe(viewLifecycleOwner) {
+                NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
+                    requireContext(),
+                    WhichTermsAndPrivace.TermsAndCondtion
+                )
+            }
+
+            btnBuyCoffeeUrlClick.observe(viewLifecycleOwner) {
+                NavHandler.instance.toBuyCoffeeUrl(requireContext())
+            }
+
+            btnBuyCoffeeGooglePlayClick.observe(viewLifecycleOwner) {
+
+            }
         }
     }
 

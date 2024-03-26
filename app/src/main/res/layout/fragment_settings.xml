@@ -161,8 +161,8 @@
                             style="@style/ImgTintColor"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
                             android:layout_marginStart="-5dp"
+                            android:layout_weight="0.7"
                             android:src="@drawable/ic_language_web_word" />
 
                         <TextView
@@ -438,6 +438,91 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:text="@string/contact_us"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/ImgTintColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_arrow_right_couple" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnBuyCoffeeUrl"
+                    style="@style/rectangle_primary2_border_primary3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:onClick="@{() -> viewModel.onBuyCoffeeUrlClick()}"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="13dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            style="@style/ImgTintColor"
+                            android:layout_width="24dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_coffee_love_wedding" />
+
+                        <TextView
+                            style="@style/TextColor_primary8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:text="@string/buy_me_coffee"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/ImgTintColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_arrow_right_couple" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btnBuyCoffeeGooglePlay"
+                    style="@style/rectangle_primary2_border_primary3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:onClick="@{() -> viewModel.onBuyCoffeeGooglePlayClick()}"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="13dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            style="@style/ImgTintColor"
+                            android:layout_width="24dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/googleg_disabled_color_18" />
+
+                        <TextView
+                            style="@style/TextColor_primary8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:text="@string/buy_me_coffee"
                             android:textSize="18sp" />
 
                     </LinearLayout>
