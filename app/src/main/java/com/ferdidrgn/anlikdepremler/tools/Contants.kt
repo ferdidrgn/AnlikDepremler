@@ -31,6 +31,8 @@ const val LAT_LAT = 39.821049
 const val LAT_LONG = 34.808573
 const val NEAR_EARTHQUAKE = "nearEarthquake"
 
+const val DONATION_SMALL = "donation_small"
+
 const val FILTER_LIST = "FILTER_LIST"
 const val APP_LINK = "https://play.google.com/store/apps/details?id=com.ferdidrgn.anlikdepremler"
 
