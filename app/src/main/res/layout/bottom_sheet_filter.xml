@@ -71,10 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginHorizontal="50dp"
-            android:layout_marginTop="15dp"
-            android:onClick="@{()->viewModel.onBtnChooseLocationClick()}"
-            android:paddingHorizontal="14dp"
-            android:paddingVertical="10dp">
+            android:layout_marginTop="5dp"
+            android:onClick="@{()->viewModel.onBtnChooseLocationClick()}">
 
             <TextView
                 style="@style/TextColorHeader"
@@ -100,7 +98,7 @@
             android:id="@+id/mapBottomSheet"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:visibility="@{viewModel.clickMapLocation ? View.VISIBLE : View.GONE}" />
@@ -158,14 +156,23 @@
 
                 </LinearLayout>
 
-                <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                    android:id="@+id/tvMl"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
-                    android:textAlignment="textStart"
-                    app:custom_edit_hint="@string/ml"
-                    app:custom_edit_text="@={viewModel.ml}" />
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                        android:id="@+id/tvMl"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="textStart"
+                        app:custom_edit_hint="@string/ml"
+                        app:custom_edit_text="@={viewModel.ml}" />
+                </LinearLayout>
 
                 <RelativeLayout
                     style="@style/rectangle_bottom_10_primary2_border_primary3"

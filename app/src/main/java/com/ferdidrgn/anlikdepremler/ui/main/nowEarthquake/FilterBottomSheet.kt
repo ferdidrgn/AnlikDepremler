@@ -112,9 +112,10 @@ class FilterBottomSheet(
         //locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
         //locationListener = LocationListener { location ->
         ClientPreferences.inst.apply {
-            val exampleLocation = if (userLat != null && userLong != null)
-                LatLng(userLat!!.toDouble(), userLong!!.toDouble())
-            else LatLng(LAT_LAT, LAT_LONG)
+            val exampleLocation =
+                if (userLat != null && userLong != null && userLat?.toDouble() != 0.0 && userLong?.toDouble() != 0.0) {
+                    LatLng(userLat!!.toDouble(), userLong!!.toDouble())
+                } else LatLng(LAT_LAT, LAT_LONG)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(exampleLocation, 15f))
         }
 
@@ -124,7 +125,7 @@ class FilterBottomSheet(
     private fun isThereBeforeLatLong() {
         mMap.clear()
         with(viewModel.earthquakeBodyRequest) {
-            if (this.userLat != null && this.userLong != null) {
+            if (this.userLat != null && this.userLong != null && userLat != 0.0 && userLong != 0.0) {
                 mMap.addMarker(MarkerOptions().position(LatLng(userLat!!, userLong!!)))
                 mMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(LatLng(userLat!!, userLong!!), 15f)
