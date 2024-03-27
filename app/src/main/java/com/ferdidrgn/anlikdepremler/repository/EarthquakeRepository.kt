@@ -14,11 +14,27 @@ class EarthquakeRepository @Inject constructor(
         api.getEarthquake()
     }
 
+    suspend fun getLocationEarthquakeList(city: String): Resource<ArrayList<Earthquake>?> =
+        safeApiCall { api.getLocationEarthquakeList(city) }
+
     suspend fun getTopTenEarthquakeList(): Resource<ArrayList<Earthquake>?> = safeApiCall {
         api.getTopTenEarthquakeList()
     }
 
-    suspend fun getTopTenLocationEarthquakeList(location: String, limit: Int = 10): Resource<ArrayList<Earthquake>?> = safeApiCall {
-        api.getTopTenLocationEarthquakeList(location, limit)
+    suspend fun getTopTenLocationEarthquakeList(
+        city: String, limit: Int = 10
+    ): Resource<ArrayList<Earthquake>?> = safeApiCall {
+        api.getTopTenLocationEarthquakeList(city, limit)
+    }
+
+    suspend fun getOnlyDateEarthquakeList(date: String): Resource<ArrayList<Earthquake>?> =
+        safeApiCall {
+            api.getOnlyDateEarthquakeList(date)
+        }
+
+    suspend fun getDateBetweenEarthquakeList(
+        startDate: String, endDate: String
+    ): Resource<ArrayList<Earthquake>?> = safeApiCall {
+        api.getDateBetweenEarthquakeList(startDate, endDate)
     }
 }

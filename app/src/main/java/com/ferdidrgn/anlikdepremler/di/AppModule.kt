@@ -1,6 +1,5 @@
 package com.ferdidrgn.anlikdepremler.di
 
-import android.media.session.MediaSession.Token
 import com.ferdidrgn.anlikdepremler.BuildConfig
 import com.ferdidrgn.anlikdepremler.network.*
 import com.ferdidrgn.anlikdepremler.network.EarthquakeApi
