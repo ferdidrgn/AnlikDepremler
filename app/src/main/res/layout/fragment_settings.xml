@@ -167,7 +167,6 @@
                             style="@style/ImgTintColor"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="-5dp"
                             android:layout_weight="0.7"
                             android:src="@drawable/ic_language_web_word" />
 
