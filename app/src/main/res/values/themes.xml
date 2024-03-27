@@ -126,7 +126,7 @@
     </style>
 
     <style name="ImgTintColor">
-        <item name="android:tint">@color/primary3</item>
+        <item name="android:tint">@color/primary4</item>
     </style>
 
     <style name="CstToolbarBg">

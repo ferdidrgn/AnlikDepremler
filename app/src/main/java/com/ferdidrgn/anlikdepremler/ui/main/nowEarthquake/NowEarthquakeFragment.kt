@@ -1,5 +1,6 @@
 package com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -30,13 +31,10 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
         binding.includeEarthquakeList.tvHeader.text = getString(R.string.now_earthquake)
         binding.includeEarthquakeList.nowEarthquakeAdapter = NowEarthquakeAdapter(viewModel, false)
 
-        observeServiceData()
-
     }
 
     private fun observeServiceData() {
         with(viewModel) {
-            getNowEarthquake()
 
             //Swipe Refresh
             binding.includeEarthquakeList.swipeRefreshLayout.setOnRefreshListener {
@@ -59,11 +57,11 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
                             earthquakeBodyRequest.userLat = lng?.latitude
                             earthquakeBodyRequest.userLong = lng?.longitude
 
-                            if (clickClear.value == true) {
+                            if (clickFilterClear.value == true) {
                                 getNowEarthquake()
                             } else {
                                 getFilters()
-                                clickClear.postValue(false)
+                                clickFilterClear.postValue(false)
                             }
                         }.show(parentFragmentManager, "filterBottomSheet")
                     }
@@ -84,6 +82,16 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        observeServiceData()
+    }
+    override fun onPause() {
+        super.onPause()
+        viewModel.getNowEarthquakeList.postValue(null)
+    }
+
     private fun scrollToTop() {
         Handler(Looper.getMainLooper()).postDelayed({
             val linearLayoutManager = LinearLayoutManager(requireContext())
@@ -100,10 +108,5 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
             viewModel.earthquakeBodyRequest.search = text.lowercase()
             observeServiceData()
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.getNowEarthquakeList.postValue(null)
     }
 }

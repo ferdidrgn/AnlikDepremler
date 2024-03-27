@@ -76,7 +76,7 @@ class FilterBottomSheet(
                 dismiss()
             }
 
-            clickClear.observe(this@FilterBottomSheet) {
+            clickFilterClear.observe(this@FilterBottomSheet) {
                 if (it) {
                     earthquakeBodyRequest = EarthquakeBodyRequest()
                     earthquakeBodyRequest.apply {

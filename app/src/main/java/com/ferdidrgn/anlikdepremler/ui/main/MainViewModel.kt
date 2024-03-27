@@ -53,7 +53,7 @@ class MainViewModel @Inject constructor(
 
     val clickMap = LiveEvent<Boolean>()
     val clickList = LiveEvent<Boolean>()
-    val clickClear = LiveEvent<Boolean>()
+    val clickFilterClear = LiveEvent<Boolean>()
     val clickClose = LiveEvent<Boolean>()
     val clickApply = LiveEvent<Boolean>()
 
@@ -128,8 +128,8 @@ class MainViewModel @Inject constructor(
     fun getNowEarthquake() {
         mainScope {
             showLoading()
-
             changeStatus(false)
+
             when (val response = earthquakeRepository.getEarthquake()) {
                 is Resource.Success -> {
                     response.data?.let { getEarthquake ->
@@ -285,7 +285,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun onClickClear() {
-        clickClear.postValue(true)
+        clickFilterClear.postValue(true)
     }
 
     fun onClickClose() {

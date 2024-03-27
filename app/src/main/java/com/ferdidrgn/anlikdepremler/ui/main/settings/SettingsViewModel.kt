@@ -61,7 +61,7 @@ class SettingsViewModel @Inject constructor(
                     }
 
                     Response.ServerError -> {
-                        errorMessage.postValue(message(R.string.error_server))
+                        errorMessage.postValue(message(R.string.error_message))
                         hideLoading()
                     }
 
