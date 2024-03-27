@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.ferdidrgn.anlikdepremler.base.BaseActivity
 import com.ferdidrgn.anlikdepremler.databinding.ActivityTermsAndConditionsandPrivacePolicyBinding
-import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivace
+import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.tools.WHICH_TERMS_PRIVACE
 import com.ferdidrgn.anlikdepremler.tools.builderADS
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +28,7 @@ class TermsAndConditionsandPrivacePolicyActivity :
 
     private fun observe() {
         val type = intent.getSerializableExtra(WHICH_TERMS_PRIVACE)
-        viewModel.getHtmlFromUrl(type as WhichTermsAndPrivace)
+        viewModel.getHtmlFromUrl(type as WhichTermsAndPrivacy)
     }
 
 }

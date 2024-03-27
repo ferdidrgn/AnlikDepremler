@@ -4,7 +4,7 @@ import android.text.Html
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.enums.Response
-import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivace
+import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueries
 import com.ferdidrgn.anlikdepremler.tools.mainScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,22 +20,22 @@ class TermsAndConditionsandPrivacePolicyViewModel @Inject constructor(private va
     val toolBarText = MutableStateFlow("")
 
 
-    fun getHtmlFromUrl(whichTermsAndPrivace: WhichTermsAndPrivace) {
+    fun getHtmlFromUrl(whichTermsAndPrivacy: WhichTermsAndPrivacy) {
         mainScope {
             showLoading()
 
             //NOT: We determined the data we will pull from the db and also determined the toolbar text.
-            when (whichTermsAndPrivace) {
-                WhichTermsAndPrivace.TermsAndCondtion -> {
+            when (whichTermsAndPrivacy) {
+                WhichTermsAndPrivacy.TermsAndCondition -> {
                     toolBarText.value = message(R.string.terms_condition)
                     appToolsFireBaseQueries.getTermsConditionOrPricavePolicy("termsAndCondition") { status, html ->
                         hideLoading()
                         loopWhen(status, html)
                     }
                 }
-                WhichTermsAndPrivace.PrivaceAndPolicy -> {
+                WhichTermsAndPrivacy.PrivacyAndPolicy -> {
                     toolBarText.value = message(R.string.privace_policy)
-                    appToolsFireBaseQueries.getTermsConditionOrPricavePolicy("privacePolicy") { status, html ->
+                    appToolsFireBaseQueries.getTermsConditionOrPricavePolicy("privacyPolicy") { status, html ->
                         hideLoading()
                         loopWhen(status, html)
                     }

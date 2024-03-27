@@ -7,7 +7,7 @@ import com.ferdidrgn.anlikdepremler.R
 
 enum class ToMain { Home, NearEarthquake, NowEarthquake, Settings }
 
-enum class WhichTermsAndPrivace { TermsAndCondtion, PrivaceAndPolicy }
+enum class WhichTermsAndPrivacy { TermsAndCondition, PrivacyAndPolicy }
 
 enum class Response { Empty, ServerError, ThereIs, NotEqual }
 enum class Environment(val url: String) {
