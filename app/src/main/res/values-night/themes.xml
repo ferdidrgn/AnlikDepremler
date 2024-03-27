@@ -98,7 +98,7 @@
     </style>
 
     <style name="TextColorHeader">
-        <item name="android:textColor">@color/primary7</item>
+        <item name="android:textColor">@color/dark7</item>
     </style>
 
     <style name="TextColor_primary2">

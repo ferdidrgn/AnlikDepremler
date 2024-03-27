@@ -6,7 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.finishAffinity
 import com.ferdidrgn.anlikdepremler.enums.ToMain
-import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivace
+import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.model.Earthquake
 import com.ferdidrgn.anlikdepremler.ui.language.LanguageActivity
 import com.ferdidrgn.anlikdepremler.ui.main.MainActivity
@@ -81,11 +81,11 @@ class NavHandler {
 
     fun toTermsConditionsAndPrivacePolicyActivity(
         context: Context,
-        whichTermsAndPrivace: WhichTermsAndPrivace
+        whichTermsAndPrivacy: WhichTermsAndPrivacy
     ) {
         val intent = Intent(context, TermsAndConditionsandPrivacePolicyActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.putExtra(WHICH_TERMS_PRIVACE, whichTermsAndPrivace)
+        intent.putExtra(WHICH_TERMS_PRIVACE, whichTermsAndPrivacy)
         context.startActivity(intent)
     }
 

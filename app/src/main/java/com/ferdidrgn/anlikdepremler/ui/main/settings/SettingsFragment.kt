@@ -18,7 +18,7 @@ import com.android.billingclient.api.SkuDetailsParams
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentSettingsBinding
-import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivace
+import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.tools.APP_LINK
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.DONATION_SMALL
@@ -30,7 +30,6 @@ import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint
 import android.provider.Settings
-import androidx.annotation.RequiresApi
 
 @AndroidEntryPoint
 class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding>(),
@@ -83,13 +82,13 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             btnPrivacePolicyClicked.observe(viewLifecycleOwner) {
                 NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
                     requireContext(),
-                    WhichTermsAndPrivace.PrivaceAndPolicy
+                    WhichTermsAndPrivacy.PrivacyAndPolicy
                 )
             }
             btnTermsAndConditionsClicked.observe(viewLifecycleOwner) {
                 NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
                     requireContext(),
-                    WhichTermsAndPrivace.TermsAndCondtion
+                    WhichTermsAndPrivacy.TermsAndCondition
                 )
             }
 
