@@ -39,7 +39,7 @@ open class BaseViewModel : ViewModel() {
     fun serverMessage(err: Err?) {
         error.postValue(
             Err(
-                message = message(R.string.error_server),
+                message = err?.message,
                 code = err?.code
             )
         )

@@ -84,6 +84,11 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.getNowEarthquakeList.postValue(null)
+    }
+
     private fun scrollToTop() {
         Handler(Looper.getMainLooper()).postDelayed({
             val linearLayoutManager = LinearLayoutManager(requireContext())
@@ -100,10 +105,5 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
             viewModel.earthquakeBodyRequest.search = text.lowercase()
             observeServiceData()
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.getNowEarthquakeList.postValue(null)
     }
 }

@@ -132,11 +132,6 @@ class NearEarthquakeFragment :
         location?.inicializeLocation()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        getLocationFromUser()
-    }
-
     override fun onResume() {
         super.onResume()
         getLocationFromUser()

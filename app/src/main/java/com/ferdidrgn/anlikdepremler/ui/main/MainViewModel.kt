@@ -128,8 +128,8 @@ class MainViewModel @Inject constructor(
     fun getNowEarthquake() {
         mainScope {
             showLoading()
-
             changeStatus(false)
+
             when (val response = earthquakeRepository.getEarthquake()) {
                 is Resource.Success -> {
                     response.data?.let { getEarthquake ->
