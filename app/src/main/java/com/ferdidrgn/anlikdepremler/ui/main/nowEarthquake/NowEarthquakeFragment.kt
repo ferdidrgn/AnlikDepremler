@@ -1,6 +1,5 @@
 package com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -105,7 +104,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
         job?.cancel()
         job = CoroutineScope(Dispatchers.Main).launch {
             delay(500)
-            viewModel.earthquakeBodyRequest.search = text.lowercase()
+            viewModel.earthquakeBodyRequest.location = text.lowercase()
             observeServiceData()
         }
     }

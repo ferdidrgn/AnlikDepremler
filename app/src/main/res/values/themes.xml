@@ -83,7 +83,7 @@
     </style>
 
     <style name="ViewBackground">
-        <item name="android:background">@color/primary</item>
+        <item name="android:background">@color/primary5</item>
     </style>
 
     <style name="CstBtnColorPrimary2">
@@ -103,7 +103,7 @@
         <item name="android:textColor">@color/primary4</item>
     </style>
 
-    <style name="TextColor_primary8">
+    <style name="TextColor_primary9">
         <item name="android:textColor">@color/primary8</item>
     </style>
 
@@ -135,7 +135,7 @@
 
     <style name="rounded_primary2_10_border_primary3">
         <item name="android:background">@drawable/bg_primary2_10_border_primary3</item>
-        <item name="android:textColor">@color/primary7</item>
+        <item name="android:textColor">@color/primary6</item>
     </style>
 
     <style name="rectangle_primary2_border_primary3">

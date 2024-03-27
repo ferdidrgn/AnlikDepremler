@@ -13,6 +13,7 @@
 
     <string name="success_permission_granted_notification">Bildirim izni Verildi</string>
     <string name="permission_denied_notification">Bildirim izni reddedildi</string>
+    <string name="permission_denied_location">Konum izni reddedildi</string>
 
     <string name="error_update_failed">Güncelleme sırasında bir hata oluştu</string>
     <string name="success_update_downloaded">Güncelleme Başarılı</string>
@@ -62,7 +63,7 @@
     <string name="location_enable">Lokasyon İzni Açık</string>
     <string name="please_accept_location">Lütfen Lokasyon İzni Onaylayın</string>
     <string name="clear">Temizle</string>
-    <string name="apply_filter">Filterı Uygula</string>
+    <string name="apply_filter">Filtreyi Uygula</string>
     <string name="start_date">Başlangıç Tarihi</string>
     <string name="end_date">Bitiş Tarihi</string>
     <string name="ml">Şiddet</string>
@@ -71,6 +72,7 @@
     <string name="see_all">Hepsini Göster...</string>
     <string name="top_ten_location_eartquake">En Güncel 10 Deprem Konumu</string>
     <string name="location">Lokasyon (*I*stanbul)</string>
+    <string name="choose_location">Lokasyon Yaz / Haritadan Seç</string>
     <string name="billing_error">Faturalandırma hizmeti bağlantısı kesildi, gerekirse tekrar bağlanmayı deneyiniz.</string>
     <string name="billing_cancel">Kullanıcı satın alma işlemi iptal etti.</string>
     <string name="billing_failed">Satın alma işlemi başarısız</string>

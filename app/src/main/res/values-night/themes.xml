@@ -98,15 +98,15 @@
     </style>
 
     <style name="TextColorHeader">
-        <item name="android:textColor">@color/dark7</item>
+        <item name="android:textColor">@color/dark10</item>
     </style>
 
     <style name="TextColor_primary2">
         <item name="android:textColor">@color/dark2</item>
     </style>
 
-    <style name="TextColor_primary8">
-        <item name="android:textColor">@color/dark8</item>
+    <style name="TextColor_primary9">
+        <item name="android:textColor">@color/dark9</item>
     </style>
 
     <style name="PopUpBtnNegative">

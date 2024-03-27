@@ -1,12 +1,10 @@
 package com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake
 
-
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.core.content.ContextCompat
@@ -25,9 +23,11 @@ import com.ferdidrgn.anlikdepremler.model.dummyModel.EarthquakeBodyRequest
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.LAT_LAT
 import com.ferdidrgn.anlikdepremler.tools.LAT_LONG
+import com.ferdidrgn.anlikdepremler.tools.showToast
 import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @AndroidEntryPoint
 class FilterBottomSheet(
@@ -40,7 +40,6 @@ class FilterBottomSheet(
     private lateinit var locationListener: LocationListener
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     private var latLong: LatLng? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +81,12 @@ class FilterBottomSheet(
                     earthquakeBodyRequest.apply {
                         userLat = null
                         userLong = null
+                        location = ""
+                        ml = ""
+                        startDate = ""
+                        endDate = ""
                     }
+                    location.value = ""
                     ml.value = ""
                     startDate.value = ""
                     endDate.value = ""
@@ -113,9 +117,10 @@ class FilterBottomSheet(
         //locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
         //locationListener = LocationListener { location ->
         ClientPreferences.inst.apply {
-            val exampleLocation = if (userLat != null && userLong != null)
-                LatLng(userLat!!.toDouble(), userLong!!.toDouble())
-            else LatLng(LAT_LAT, LAT_LONG)
+            val exampleLocation =
+                if (userLat != null && userLong != null && userLat?.toDouble() != 0.0 && userLong?.toDouble() != 0.0) {
+                    LatLng(userLat!!.toDouble(), userLong!!.toDouble())
+                } else LatLng(LAT_LAT, LAT_LONG)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(exampleLocation, 15f))
         }
 
@@ -125,7 +130,7 @@ class FilterBottomSheet(
     private fun isThereBeforeLatLong() {
         mMap.clear()
         with(viewModel.earthquakeBodyRequest) {
-            if (this.userLat != null && this.userLong != null) {
+            if (this.userLat != null && this.userLong != null && userLat != 0.0 && userLong != 0.0) {
                 mMap.addMarker(MarkerOptions().position(LatLng(userLat!!, userLong!!)))
                 mMap.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(LatLng(userLat!!, userLong!!), 15f)
@@ -156,7 +161,7 @@ class FilterBottomSheet(
                 }
             } else {
                 //permission denied
-                Toast.makeText(requireContext(), "Permisson needed!", Toast.LENGTH_LONG).show()
+                showToast(getString(R.string.permission_denied_location))
             }
         }
     }
