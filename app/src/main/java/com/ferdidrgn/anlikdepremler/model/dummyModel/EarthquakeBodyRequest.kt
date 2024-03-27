@@ -1,7 +1,7 @@
 package com.ferdidrgn.anlikdepremler.model.dummyModel
 
 class EarthquakeBodyRequest(
-    var search: String = "",
+    var location: String = "",
     var ml: String = "",
     var startDate: String = "",
     var endDate: String = "",

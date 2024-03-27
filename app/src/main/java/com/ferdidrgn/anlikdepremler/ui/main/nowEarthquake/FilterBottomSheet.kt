@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.core.content.ContextCompat
@@ -28,6 +27,7 @@ import com.ferdidrgn.anlikdepremler.tools.showToast
 import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @AndroidEntryPoint
 class FilterBottomSheet(
@@ -81,7 +81,12 @@ class FilterBottomSheet(
                     earthquakeBodyRequest.apply {
                         userLat = null
                         userLong = null
+                        location = ""
+                        ml = ""
+                        startDate = ""
+                        endDate = ""
                     }
+                    location.value = ""
                     ml.value = ""
                     startDate.value = ""
                     endDate.value = ""

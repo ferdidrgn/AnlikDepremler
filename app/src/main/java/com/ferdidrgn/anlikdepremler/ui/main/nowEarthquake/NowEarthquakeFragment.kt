@@ -104,7 +104,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
         job?.cancel()
         job = CoroutineScope(Dispatchers.Main).launch {
             delay(500)
-            viewModel.earthquakeBodyRequest.search = text.lowercase()
+            viewModel.earthquakeBodyRequest.location = text.lowercase()
             observeServiceData()
         }
     }

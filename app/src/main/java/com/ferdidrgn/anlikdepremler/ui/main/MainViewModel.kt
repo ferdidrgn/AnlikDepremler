@@ -30,8 +30,13 @@ class MainViewModel @Inject constructor(
 ) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener,
     TopTenLocationEarthquakeAdapterListener, TopTenEarthquakeAdapterListener {
 
-    var earthquakeBodyRequest = EarthquakeBodyRequest()
     private var job: Job? = null
+
+    var earthquakeBodyRequest = EarthquakeBodyRequest()
+    var location = MutableStateFlow("")
+    var ml = MutableStateFlow("")
+    var startDate = MutableStateFlow("")
+    var endDate = MutableStateFlow("")
 
     var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var getNearEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
@@ -42,20 +47,14 @@ class MainViewModel @Inject constructor(
     var getTopTenLocationEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var homeSliderList = MutableLiveData<List<HomeSliderData>>()
 
-    var ml = MutableStateFlow("")
-    var search = MutableStateFlow("")
-    var startDate = MutableStateFlow("")
-    var endDate = MutableStateFlow("")
-    var location = MutableStateFlow("")
-
     var isNearPage = MutableLiveData(false)
     var clickableHeaderMenus = MutableLiveData<Boolean>()
 
     val clickMap = LiveEvent<Boolean>()
     val clickList = LiveEvent<Boolean>()
-    val clickFilterClear = LiveEvent<Boolean>()
     val clickClose = LiveEvent<Boolean>()
     val clickApply = LiveEvent<Boolean>()
+    val clickFilterClear = LiveEvent<Boolean>()
     val clickMapLocation = MutableLiveData(false)
 
     val clickSeeAllNowEarthquake = LiveEvent<Boolean>()
@@ -181,6 +180,7 @@ class MainViewModel @Inject constructor(
     private fun getAllFilter(): ArrayList<Earthquake>? {
         showLoading()
         var filterList: ArrayList<Earthquake>? = null
+        earthquakeBodyRequest.location = location.value
         earthquakeBodyRequest.ml = ml.value
         earthquakeBodyRequest.startDate = startDate.value
         earthquakeBodyRequest.endDate = endDate.value
@@ -227,7 +227,6 @@ class MainViewModel @Inject constructor(
     }
 
     fun cancelDataFetching() {
-        // Eğer işlem çalışıyorsa, iptal et
         if (job?.isActive == true) {
             job?.cancel()
         }
