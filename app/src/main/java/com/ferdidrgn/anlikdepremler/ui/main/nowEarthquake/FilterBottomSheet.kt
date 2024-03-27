@@ -1,6 +1,5 @@
 package com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake
 
-
 import android.Manifest
 import android.content.pm.PackageManager
 import android.location.LocationListener
@@ -25,6 +24,7 @@ import com.ferdidrgn.anlikdepremler.model.dummyModel.EarthquakeBodyRequest
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.LAT_LAT
 import com.ferdidrgn.anlikdepremler.tools.LAT_LONG
+import com.ferdidrgn.anlikdepremler.tools.showToast
 import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +40,6 @@ class FilterBottomSheet(
     private lateinit var locationListener: LocationListener
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     private var latLong: LatLng? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,7 +155,7 @@ class FilterBottomSheet(
                 }
             } else {
                 //permission denied
-                Toast.makeText(requireContext(), "Permisson needed!", Toast.LENGTH_LONG).show()
+                showToast(getString(R.string.permission_denied_location))
             }
         }
     }

@@ -86,7 +86,7 @@
 
             <TextView
                 android:id="@+id/tvLocation"
-                style="@style/TextColor_primary8"
+                style="@style/TextColor_primary9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"

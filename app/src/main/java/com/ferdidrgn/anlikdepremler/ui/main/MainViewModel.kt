@@ -49,13 +49,14 @@ class MainViewModel @Inject constructor(
     var location = MutableStateFlow("")
 
     var isNearPage = MutableLiveData(false)
-    var clickableHeaderMenus = LiveEvent<Boolean>()
+    var clickableHeaderMenus = MutableLiveData<Boolean>()
 
     val clickMap = LiveEvent<Boolean>()
     val clickList = LiveEvent<Boolean>()
     val clickFilterClear = LiveEvent<Boolean>()
     val clickClose = LiveEvent<Boolean>()
     val clickApply = LiveEvent<Boolean>()
+    val clickMapLocation = MutableLiveData(false)
 
     val clickSeeAllNowEarthquake = LiveEvent<Boolean>()
     val clickSeeAllLocationEarthquake = LiveEvent<Boolean>()
@@ -294,6 +295,10 @@ class MainViewModel @Inject constructor(
 
     fun onClickApply() {
         clickApply.postValue(true)
+    }
+
+    fun onBtnChooseLocationClick() {
+        clickMapLocation.value = !(clickMapLocation.value ?: false)
     }
 
     fun onTopTenEarthquake() {

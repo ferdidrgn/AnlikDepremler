@@ -62,7 +62,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/TextColor_primary8"
+                                style="@style/TextColor_primary9"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@{viewModel.userLocation}"
@@ -70,7 +70,7 @@
                                 tools:text="Ferdi Durgun" />
 
                             <TextView
-                                style="@style/TextColor_primary8"
+                                style="@style/TextColor_primary9"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
@@ -127,7 +127,7 @@
                             android:src="@drawable/ic_brush_color_customization_layout_paint" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -171,7 +171,7 @@
                             android:src="@drawable/ic_language_web_word" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -223,7 +223,7 @@
                             android:src="@drawable/ic_alarm_alert_bell_notification" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -266,7 +266,7 @@
                             android:src="@drawable/ic_rating_star" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -309,7 +309,7 @@
                             android:src="@drawable/ic_music_play_player_song" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -352,7 +352,7 @@
                             android:src="@drawable/ic_document_page_paper_sheet" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -395,7 +395,7 @@
                             android:src="@drawable/ic_menu_lines_hamburger_icon" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -439,7 +439,7 @@
                             android:src="@drawable/ic_email_mail_message_send" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -481,7 +481,7 @@
                             android:src="@drawable/ic_coffee_love_wedding" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
@@ -524,7 +524,7 @@
                             android:src="@drawable/googleg_disabled_color_18" />
 
                         <TextView
-                            style="@style/TextColor_primary8"
+                            style="@style/TextColor_primary9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"

@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
             type="com.ferdidrgn.anlikdepremler.ui.main.MainViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         style="@style/rectangle_top_10_primary2_border_primary3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/llHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent">
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/imgClose"
@@ -33,7 +36,7 @@
                 android:src="@drawable/ic_close_delete_exit_remove" />
 
             <TextView
-                style="@style/TextColor_primary8"
+                style="@style/TextColor_primary9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -61,35 +64,52 @@
             style="@style/ViewBackground"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="20dp"
-            android:background="@color/primary"
-            app:layout_constraintTop_toBottomOf="@+id/llHeader" />
+            android:layout_margin="20dp" />
+
+        <RelativeLayout
+            style="@style/rectangle_primary6_10_border_primary3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="15dp"
+            android:onClick="@{()->viewModel.onBtnChooseLocationClick()}"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp">
+
+            <TextView
+                style="@style/TextColorHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/choose_location"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/tvLocation"
-            style="@style/TextColor_primary8"
+            android:id="@+id/tvLocationDescription"
+            style="@style/TextColor_primary9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/location_filter_info"
-            app:layout_constraintTop_toBottomOf="@+id/viewLine" />
+            android:visibility="@{viewModel.clickMapLocation ? View.VISIBLE : View.GONE}" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/mapBottomSheet"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvLocation" />
+            android:visibility="@{viewModel.clickMapLocation ? View.VISIBLE : View.GONE}" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/mapBottomSheet">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,10 +117,23 @@
                 android:orientation="vertical"
                 android:paddingBottom="30dp">
 
+                <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                    android:id="@+id/tvLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:visibility="@{viewModel.clickMapLocation ? View.GONE : View.VISIBLE}"
+                    app:custom_edit_hint="@string/location"
+                    app:custom_edit_text="@={viewModel.location}" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -125,32 +158,22 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                    android:id="@+id/tvMl"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                        android:id="@+id/tvMl"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textAlignment="textStart"
-                        app:custom_edit_hint="@string/ml"
-                        app:custom_edit_text="@={viewModel.ml}" />
-                </LinearLayout>
+                    android:textAlignment="textStart"
+                    app:custom_edit_hint="@string/ml"
+                    app:custom_edit_text="@={viewModel.ml}" />
 
                 <RelativeLayout
-                    android:id="@+id/btnApply"
-                    android:onClick="@{()->viewModel.onClickApply()}"
                     style="@style/rectangle_bottom_10_primary2_border_primary3"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="50dp"
                     android:layout_marginTop="40dp"
+                    android:onClick="@{()->viewModel.onClickApply()}"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="10dp">
 
@@ -163,9 +186,7 @@
                         android:textSize="14sp" />
 
                 </RelativeLayout>
-
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>
