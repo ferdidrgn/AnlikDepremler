@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -15,7 +13,7 @@
     <LinearLayout
         style="@style/rectangle_top_10_primary2_border_primary3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -66,120 +64,265 @@
             android:layout_height="1dp"
             android:layout_margin="20dp" />
 
-        <RelativeLayout
-            style="@style/rectangle_primary6_10_border_primary3"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginTop="5dp"
-            android:onClick="@{()->viewModel.onBtnChooseLocationClick()}">
-
-            <TextView
-                style="@style/TextColorHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/choose_location"
-                android:textSize="14sp" />
-
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tvLocationDescription"
-            style="@style/TextColor_primary9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/location_filter_info"
-            android:visibility="@{viewModel.clickMapLocation ? View.VISIBLE : View.GONE}" />
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/mapBottomSheet"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
-            android:visibility="@{viewModel.clickMapLocation ? View.VISIBLE : View.GONE}" />
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="30dp">
+                android:orientation="vertical">
 
-                <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                    android:id="@+id/tvLocation"
+                <RelativeLayout
+                    android:id="@+id/btnOption1"
+                    style="@style/rectangle_primary6_10_border_primary3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:textAlignment="textStart"
-                    android:visibility="@{viewModel.clickMapLocation ? View.GONE : View.VISIBLE}"
-                    app:custom_edit_hint="@string/location"
-                    app:custom_edit_text="@={viewModel.location}" />
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="5dp"
+                    android:onClick="@{() -> viewModel.onOptionSelected(1)}">
+
+                    <TextView
+                        style="@style/TextColorHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/location"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/llOption1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.selectedOption == 1 ? View.VISIBLE : View.GONE}">
+
+                    <RelativeLayout
+                        style="@style/rectangle_primary2_10_border_error_red"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginHorizontal="60dp"
+                        android:onClick="@{() -> viewModel.onSubOptionChangeStatus()}">
+
+                        <TextView
+                            style="@style/TextColorHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/choose_location"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
 
                     <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                        android:id="@+id/tvStartDate"
-                        android:layout_width="0dp"
+                        android:id="@+id/tvLocation"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:textAlignment="textStart"
-                        app:custom_edit_hint="@string/start_date"
-                        app:custom_edit_text="@={viewModel.startDate}" />
+                        android:visibility="@{viewModel.subOption ? View.GONE : View.VISIBLE}"
+                        app:custom_edit_hint="@string/location"
+                        app:custom_edit_text="@={viewModel.location}" />
 
-                    <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                        android:id="@+id/tvEndDate"
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/tvLocationDescription"
+                        style="@style/TextColor_primary9"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="1"
-                        android:textAlignment="textStart"
-                        app:custom_edit_hint="@string/end_date"
-                        app:custom_edit_text="@={viewModel.endDate}" />
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/location_filter_info"
+                        android:visibility="@{viewModel.subOption ? View.VISIBLE : View.GONE}" />
+
+                    <androidx.fragment.app.FragmentContainerView
+                        android:id="@+id/mapBottomSheet"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="20dp"
+                        android:visibility="@{viewModel.subOption ? View.VISIBLE : View.GONE}" />
 
                 </LinearLayout>
 
+                <!-- Option 2 -->
+
+                <RelativeLayout
+                    android:id="@+id/btnOption2"
+                    style="@style/rectangle_primary6_10_border_primary3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="20dp"
+                    android:onClick="@{() -> viewModel.onOptionSelected(2)}">
+
+                    <TextView
+                        style="@style/TextColorHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/date"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
                 <LinearLayout
+                    android:id="@+id/llOption2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.selectedOption == 2 ? View.VISIBLE : View.GONE}">
+
+                    <!-- Option 2'nin içeriği -->
+
+                    <RelativeLayout
+                        style="@style/rectangle_primary2_10_border_error_red"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginHorizontal="60dp"
+                        android:onClick="@{() -> viewModel.onSubOptionChangeStatus()}">
+
+                        <TextView
+                            style="@style/TextColorHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/choose_date"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnSubOption2_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                            android:id="@+id/tvStartDate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="textStart"
+                            android:visibility="@{viewModel.subOption ? View.VISIBLE : View.GONE}"
+                            app:custom_edit_hint="@string/start_date"
+                            app:custom_edit_text="@={viewModel.startDate}" />
+
+                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                            android:id="@+id/tvEndDate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textAlignment="textStart"
+                            android:visibility="@{viewModel.subOption ? View.VISIBLE : View.GONE}"
+                            app:custom_edit_hint="@string/end_date"
+                            app:custom_edit_text="@={viewModel.endDate}" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btnSubOption2_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                            android:id="@+id/tvOnlyData"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="textStart"
+                            android:visibility="@{viewModel.subOption ? View.GONE : View.VISIBLE}"
+                            app:custom_edit_hint="@string/date"
+                            app:custom_edit_text="@={viewModel.onlyDate}" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Option 3 -->
+
+                <RelativeLayout
+                    android:id="@+id/btnOption3"
+                    style="@style/rectangle_primary6_10_border_primary3"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="15dp"
+                    android:onClick="@{() -> viewModel.onOptionSelected(3)}">
+
+                    <TextView
+                        style="@style/TextColorHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/ml"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/llOption3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_marginVertical="15dp"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.selectedOption == 3 ? View.VISIBLE : View.GONE}">
 
-                    <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                        android:id="@+id/tvMl"
-                        android:layout_width="0dp"
+                    <!-- Option 3'ün içeriği -->
+
+                    <RelativeLayout
+                        style="@style/rectangle_primary2_10_border_error_red"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginHorizontal="60dp">
+
+                        <TextView
+                            style="@style/TextColorHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/ml"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textAlignment="textStart"
-                        app:custom_edit_hint="@string/ml"
-                        app:custom_edit_text="@={viewModel.ml}" />
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                            android:id="@+id/tvMl"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="textStart"
+                            app:custom_edit_hint="@string/ml"
+                            app:custom_edit_text="@={viewModel.ml}" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <RelativeLayout
                     style="@style/rectangle_bottom_10_primary2_border_primary3"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginHorizontal="50dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginHorizontal="60dp"
+                    android:layout_marginVertical="20dp"
                     android:onClick="@{()->viewModel.onClickApply()}"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="10dp">

@@ -68,6 +68,7 @@
     <string name="top_ten_location_eartquake">Top Ten Location Earthquake</string>
     <string name="location">Location (*I*stanbul)</string>
     <string name="choose_location">Write Location / Select from Map</string>
+    <string name="choose_date">Choose a date / Between dates</string>
     <string name="billing_error">Billing service connection is disconnected, You can try to reconnect if necessary.</string>
     <string name="billing_cancel">User canceled the purchase process.</string>
     <string name="billing_failed">Purchase process failed</string>

@@ -10,8 +10,15 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.collections.ArrayList
 
-private fun isNotEmpty(value: String) = value.trim().isNotEmpty()
 private fun isNotEmpty(value: ArrayList<Earthquake>) = value.isNotEmpty()
+
+fun checkMapManuelStatus(userLat: Double, userLong: Double): Boolean {
+    return userLat != 0.0 && userLong != 0.0
+}
+
+fun checkBetweenData(startDate: String, endDate: String): Boolean {
+    return startDate.isNotEmpty() && endDate.isNotEmpty()
+}
 
 fun getAllFilterQueriers(
     earthquakeBodyRequest: EarthquakeBodyRequest,
@@ -20,66 +27,66 @@ fun getAllFilterQueriers(
 ) {
     var filterEarthquakeList: ArrayList<Earthquake>? = null
 
-    if (earthquakeBodyRequest.userLat != null && earthquakeBodyRequest.userLong != null && isNotEmpty(
-            earthquakeBodyRequest.startDate
-        ) && isNotEmpty(earthquakeBodyRequest.endDate) && isNotEmpty(earthquakeBodyRequest.endDate)
-    //konum, şiddet ve tarih
-    ) {
-        filterEarthquakeList = getAllFilterCheck(
-            getFilterEarthquakeList,
-            earthquakeBodyRequest, true, true, true
-        )
+    earthquakeBodyRequest.apply {
 
-    } else if (earthquakeBodyRequest.userLat != null && earthquakeBodyRequest.userLong != null &&
-        isNotEmpty(earthquakeBodyRequest.startDate) && isNotEmpty(earthquakeBodyRequest.endDate)
-    //konum ve tarih
-    ) {
-        filterEarthquakeList = getAllFilterCheck(
-            getFilterEarthquakeList,
-            earthquakeBodyRequest, true, true, false
-        )
+        //konum, şiddet ve tarih
+        if (checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
+            checkBetweenData(startDate, endDate) && ml.isNotEmpty()
+        ) {
+            filterEarthquakeList = getAllFilterCheck(
+                getFilterEarthquakeList,
+                earthquakeBodyRequest, true, true, true
+            )
+        }//konum ve tarih
+        else if (checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
+            checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) && ml.isEmpty()
+        ) {
+            filterEarthquakeList = getAllFilterCheck(
+                getFilterEarthquakeList,
+                earthquakeBodyRequest, true, true, false
+            )
 
-    } else if (earthquakeBodyRequest.userLat != null && earthquakeBodyRequest.userLong != null &&
-        isNotEmpty(earthquakeBodyRequest.ml) && earthquakeBodyRequest.startDate.isEmpty() && earthquakeBodyRequest.endDate.isEmpty()
-    //Konum ve Şiddet
-    ) {
-        filterEarthquakeList = getAllFilterCheck(
-            getFilterEarthquakeList,
-            earthquakeBodyRequest, true, false, true
-        )
-    } else if (isNotEmpty(earthquakeBodyRequest.ml) && isNotEmpty(earthquakeBodyRequest.startDate) && isNotEmpty(
-            earthquakeBodyRequest.endDate
-        )
-    //Şiddet ve Tarih
-    ) {
-        filterEarthquakeList = getAllFilterCheck(
-            getFilterEarthquakeList,
-            earthquakeBodyRequest, false, true, true
-        )
-    } else if (earthquakeBodyRequest.userLat != null && earthquakeBodyRequest.userLong != null &&
-        earthquakeBodyRequest.ml.isEmpty()
-    //Konum
-    ) {
-        filterEarthquakeList = getAllFilterCheck(
-            getFilterEarthquakeList,
-            earthquakeBodyRequest, true, false, false
-        )
-    } else if (isNotEmpty(earthquakeBodyRequest.ml) && earthquakeBodyRequest.startDate.isEmpty() && earthquakeBodyRequest.endDate.isEmpty()
-    //Şiddet
-    ) {
-        filterEarthquakeList = getAllFilterCheck(
-            getFilterEarthquakeList,
-            earthquakeBodyRequest, false, false, true
-        )
-    } else if (earthquakeBodyRequest.ml.isEmpty() && isNotEmpty(earthquakeBodyRequest.startDate) && isNotEmpty(
-            earthquakeBodyRequest.endDate
-        )
-    //Tarih
-    ) {
-        filterEarthquakeList = getAllFilterCheck(
-            getFilterEarthquakeList,
-            earthquakeBodyRequest, false, true, false
-        )
+        }//Konum ve Şiddet
+        else if (checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
+            ml.isNotEmpty() && !checkBetweenData(startDate, endDate)
+        ) {
+            filterEarthquakeList = getAllFilterCheck(
+                getFilterEarthquakeList,
+                earthquakeBodyRequest, true, false, true
+            )
+        } //Şiddet ve Tarih
+        else if (ml.isNotEmpty() && checkBetweenData(startDate, endDate) && !checkMapManuelStatus
+                (userLat ?: 0.0, userLong ?: 0.0)
+        ) {
+            filterEarthquakeList = getAllFilterCheck(
+                getFilterEarthquakeList,
+                earthquakeBodyRequest, false, true, true
+            )
+        } //Konum
+        else if (checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
+            ml.isEmpty() && !checkBetweenData(startDate, endDate)
+        ) {
+            filterEarthquakeList = getAllFilterCheck(
+                getFilterEarthquakeList,
+                earthquakeBodyRequest, true, false, false
+            )
+        } //Şiddet
+        else if (ml.isNotEmpty() && !checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
+            !checkBetweenData(startDate, endDate)
+        ) {
+            filterEarthquakeList = getAllFilterCheck(
+                getFilterEarthquakeList,
+                earthquakeBodyRequest, false, false, true
+            )
+        } //Tarih
+        else if (ml.isEmpty() && checkBetweenData(startDate, endDate) &&
+            !checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0)
+        ) {
+            filterEarthquakeList = getAllFilterCheck(
+                getFilterEarthquakeList,
+                earthquakeBodyRequest, false, true, false
+            )
+        }
     }
 
     return status.invoke(filterEarthquakeList)
@@ -98,7 +105,7 @@ fun getAllFilterCheck(
     var returnFilterList: ArrayList<Earthquake> = ArrayList()
 
     if (locationFilter) {
-        returnFilterList = getLocationFilter(
+        returnFilterList = getLocationFilterManuel(
             earthquakeBodyRequest.userLat!!,
             earthquakeBodyRequest.userLong!!,
             getFilterEarthquakeList
@@ -129,7 +136,7 @@ fun getAllFilterCheck(
     return returnFilterList
 }
 
-fun getLocationFilter(
+fun getLocationFilterManuel(
     latiute: Double,
     longitute: Double,
     earthquakeList: ArrayList<Earthquake>

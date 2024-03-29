@@ -27,7 +27,6 @@ import com.ferdidrgn.anlikdepremler.tools.showToast
 import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @AndroidEntryPoint
 class FilterBottomSheet(
@@ -77,25 +76,15 @@ class FilterBottomSheet(
 
             clickFilterClear.observe(this@FilterBottomSheet) {
                 if (it) {
-                    earthquakeBodyRequest = EarthquakeBodyRequest()
-                    earthquakeBodyRequest.apply {
-                        userLat = null
-                        userLong = null
-                        location = ""
-                        ml = ""
-                        startDate = ""
-                        endDate = ""
-                    }
-                    location.value = ""
-                    ml.value = ""
-                    startDate.value = ""
-                    endDate.value = ""
+                    clearXmlData()
                     mMap.clear()
                 }
             }
 
             clickApply.observe(this@FilterBottomSheet) {
                 // viewModel.getFilters()
+                if (viewModel.selectedOption.value == 3)
+                    latLong = null
                 onBtnApply(latLong)
                 dismiss()
             }
