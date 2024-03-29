@@ -19,7 +19,6 @@ import androidx.fragment.app.activityViewModels
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseBottomSheet
 import com.ferdidrgn.anlikdepremler.databinding.BottomSheetFilterBinding
-import com.ferdidrgn.anlikdepremler.model.dummyModel.EarthquakeBodyRequest
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.LAT_LAT
 import com.ferdidrgn.anlikdepremler.tools.LAT_LONG
@@ -69,25 +68,23 @@ class FilterBottomSheet(
     }
 
     private fun observe() {
-        with(viewModel) {
-            clickClose.observe(this@FilterBottomSheet) {
-                dismiss()
-            }
+        viewModel.clickClose.observe(this) {
+            dismiss()
+        }
 
-            clickFilterClear.observe(this@FilterBottomSheet) {
-                if (it) {
-                    clearXmlData()
-                    mMap.clear()
-                }
+        viewModel.clickFilterClear.observe(this) {
+            if (it) {
+                viewModel.clearXmlData()
+                mMap.clear()
             }
+        }
 
-            clickApply.observe(this@FilterBottomSheet) {
-                // viewModel.getFilters()
-                if (viewModel.selectedOption.value == 3)
-                    latLong = null
-                onBtnApply(latLong)
-                dismiss()
-            }
+        viewModel.clickApply.observe(this) {
+            // viewModel.getFilters()
+            if (viewModel.selectedOption.value == 3)
+                latLong = null
+            onBtnApply(latLong)
+            dismiss()
         }
     }
 

@@ -30,6 +30,20 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
         binding.includeEarthquakeList.tvHeader.text = getString(R.string.now_earthquake)
         binding.includeEarthquakeList.nowEarthquakeAdapter = NowEarthquakeAdapter(viewModel, false)
 
+        /*binding.includeEarthquakeList.apply {
+            viewModel = this@NowEarthquakeFragment.viewModel
+            tvHeader.text = getString(R.string.now_earthquake)
+            nowEarthquakeAdapter = NowEarthquakeAdapter(this@NowEarthquakeFragment.viewModel, false)
+
+            swipeRefreshLayout.setOnRefreshListener {
+                this@NowEarthquakeFragment.viewModel.refreshNowEarthquake()
+                swipeRefreshLayout.isRefreshing = false
+            }
+
+            llFilters.onClickThrottled {
+                resetAndShowFilterBottomSheet()
+            }
+        }*/
     }
 
     private fun observeServiceData() {
@@ -44,12 +58,10 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
                 binding.includeEarthquakeList.swipeRefreshLayout.isRefreshing = false
             }
 
-            clickableHeaderMenus.observe(viewLifecycleOwner) {
-                if (it) {
+            clickableHeaderMenus.observe(viewLifecycleOwner) { clickable ->
+                if (clickable) {
                     //Map icon Click
-                    clickMap.observe(viewLifecycleOwner) {
-                        NavHandler.instance.toMapsActivity(requireContext(), filterNowList, false)
-                    }
+                    observeMapIconClick()
 
                     //Filter icon Click
                     binding.includeEarthquakeList.llFilters.onClickThrottled {
@@ -80,6 +92,12 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
             error.observe(viewLifecycleOwner) { Err ->
                 Err?.message?.let { showToast(it) }
             }
+        }
+    }
+
+    private fun observeMapIconClick() {
+        viewModel.clickMap.observe(viewLifecycleOwner) {
+            NavHandler.instance.toMapsActivity(requireContext(), viewModel.filterNowList, false)
         }
     }
 

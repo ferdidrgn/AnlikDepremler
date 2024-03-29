@@ -73,6 +73,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- Option 1 -->
+
                 <RelativeLayout
                     android:id="@+id/btnOption1"
                     style="@style/rectangle_primary6_10_border_primary3"
@@ -98,6 +100,8 @@
                     android:layout_marginTop="15dp"
                     android:orientation="vertical"
                     android:visibility="@{viewModel.selectedOption == 1 ? View.VISIBLE : View.GONE}">
+
+                    <!-- Option 1'nin içeriği -->
 
                     <RelativeLayout
                         style="@style/rectangle_primary2_10_border_error_red"
