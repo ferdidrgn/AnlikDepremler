@@ -3,9 +3,11 @@ package com.ferdidrgn.anlikdepremler.ui.main
 import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.base.Resource
+import com.ferdidrgn.anlikdepremler.filter.checkBetweenData
+import com.ferdidrgn.anlikdepremler.filter.checkMapManuelStatus
 import com.ferdidrgn.anlikdepremler.filter.getAllFilterQueriers
 import com.ferdidrgn.anlikdepremler.filter.getFilterOneWeek
-import com.ferdidrgn.anlikdepremler.filter.getLocationFilter
+import com.ferdidrgn.anlikdepremler.filter.getLocationFilterManuel
 import com.ferdidrgn.anlikdepremler.model.Earthquake
 import com.ferdidrgn.anlikdepremler.model.HomeSliderData
 import com.ferdidrgn.anlikdepremler.model.dummyModel.EarthquakeBodyRequest
@@ -32,17 +34,22 @@ class MainViewModel @Inject constructor(
 
     private var job: Job? = null
 
+    //XML ve filter
     var earthquakeBodyRequest = EarthquakeBodyRequest()
     var location = MutableStateFlow("")
     var ml = MutableStateFlow("")
     var startDate = MutableStateFlow("")
     var endDate = MutableStateFlow("")
+    var onlyDate = MutableStateFlow("")
 
-    var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
-    var getNearEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var filterNowList = ArrayList<Earthquake>()
     var filterNearList = ArrayList<Earthquake>()
 
+    //Get Api List
+    var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
+    var getNearEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
+    var getDateEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
+    var getLocationApiEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var getTopTenEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var getTopTenLocationEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var homeSliderList = MutableLiveData<List<HomeSliderData>>()
@@ -50,18 +57,23 @@ class MainViewModel @Inject constructor(
     var isNearPage = MutableLiveData(false)
     var clickableHeaderMenus = MutableLiveData<Boolean>()
 
+    //XML Click
     val clickMap = LiveEvent<Boolean>()
     val clickList = LiveEvent<Boolean>()
     val clickClose = LiveEvent<Boolean>()
     val clickApply = LiveEvent<Boolean>()
     val clickFilterClear = LiveEvent<Boolean>()
-    val clickMapLocation = MutableLiveData(false)
 
     val clickSeeAllNowEarthquake = LiveEvent<Boolean>()
     val clickSeeAllLocationEarthquake = LiveEvent<Boolean>()
 
+    val selectedOption = MutableLiveData<Int>()
+
+    val subOption = MutableLiveData(false)
+
     init {
-        changeStatus(false)
+        selectedOption.value = -1
+        checkPageAndClickableMenus(false)
     }
 
     fun getHomePage() {
@@ -128,7 +140,7 @@ class MainViewModel @Inject constructor(
     fun getNowEarthquake() {
         mainScope {
             showLoading()
-            changeStatus(false)
+            checkPageAndClickableMenus(false)
 
             when (val response = earthquakeRepository.getEarthquake()) {
                 is Resource.Success -> {
@@ -180,22 +192,32 @@ class MainViewModel @Inject constructor(
     private fun getAllFilter(): ArrayList<Earthquake>? {
         showLoading()
         var filterList: ArrayList<Earthquake>? = null
-        earthquakeBodyRequest.location = location.value
-        earthquakeBodyRequest.ml = ml.value
-        earthquakeBodyRequest.startDate = startDate.value
-        earthquakeBodyRequest.endDate = endDate.value
+        earthquakeBodyRequest.apply {
+            location = this@MainViewModel.location.value
+            ml = this@MainViewModel.ml.value
+            onlyDate = this@MainViewModel.onlyDate.value
+            startDate = this@MainViewModel.startDate.value
+            endDate = this@MainViewModel.endDate.value
 
-        getAllFilterQueriers(
-            earthquakeBodyRequest,
-            getNowEarthquakeList.value.let { it!! },
-        ) { returnedFilterList ->
-            filterList = (returnedFilterList)
+            if (ml.isEmpty() && !checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
+                !checkBetweenData(startDate, endDate)
+            ) {
+                filterList = getNowEarthquakeList.value.let { it!! }
+                timeHideLoading()
+            } else {
+                getAllFilterQueriers(
+                    this,
+                    getNowEarthquakeList.value.let { it!! },
+                ) { returnedFilterList ->
+                    filterList = returnedFilterList
+                }
+                timeHideLoading()
+            }
         }
-        timeHideLoading()
         return filterList
     }
 
-    fun getLocationFilter() {
+    fun getNearLocationFilter() {
         job = mainScope {
             showLoading()
             clickableHeaderMenus.postValue(false)
@@ -205,11 +227,12 @@ class MainViewModel @Inject constructor(
                     response.data?.let { getEarthquake ->
                         earthquakeBodyRequest.userLat?.let { lat ->
                             earthquakeBodyRequest.userLong?.let { long ->
-                                filterNearList = getLocationFilter(lat, long, getEarthquake)
+                                filterNearList =
+                                    getLocationFilterManuel(lat, long, getEarthquake)
                             }
                         }
                     }
-                    changeStatus(true)
+                    checkPageAndClickableMenus(true)
                     getNearEarthquakeList.postValue(filterNearList)
                     timeHideLoading()
                 }
@@ -226,9 +249,74 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun cancelDataFetching() {
-        if (job?.isActive == true) {
-            job?.cancel()
+    fun getLocationApi() {
+        mainScope {
+            showLoading()
+            when (val response = earthquakeRepository.getLocationEarthquakeList(location.value)) {
+                is Resource.Success -> {
+                    response.data?.let { getLocationEarthquake ->
+                        getNowEarthquakeList.postValue(getLocationEarthquake)
+                    }
+                    timeHideLoading()
+                }
+
+                is Resource.Error -> {
+                    serverMessage(response.error)
+                    hideLoading()
+                }
+
+                else -> {
+                    hideLoading()
+                }
+            }
+        }
+    }
+
+    fun getDataBetweenApi() {
+        mainScope {
+            showLoading()
+            showToast("Başlangıç: ${startDate.value} Bitiş: ${endDate.value}")
+            when (val response =
+                earthquakeRepository.getDateBetweenEarthquakeList(startDate.value, endDate.value)) {
+                is Resource.Success -> {
+                    response.data?.let { getDataEarthquake ->
+                        getNowEarthquakeList.postValue(getDataEarthquake)
+                    }
+                    timeHideLoading()
+                }
+
+                is Resource.Error -> {
+                    serverMessage(response.error)
+                    hideLoading()
+                }
+
+                else -> {
+                    hideLoading()
+                }
+            }
+        }
+    }
+
+    fun getOnlyDataApi() {
+        mainScope {
+            showLoading()
+            when (val response = earthquakeRepository.getOnlyDateEarthquakeList(onlyDate.value)) {
+                is Resource.Success -> {
+                    response.data?.let { getDataEarthquake ->
+                        getNowEarthquakeList.postValue(getDataEarthquake)
+                    }
+                    timeHideLoading()
+                }
+
+                is Resource.Error -> {
+                    serverMessage(response.error)
+                    hideLoading()
+                }
+
+                else -> {
+                    hideLoading()
+                }
+            }
         }
     }
 
@@ -262,12 +350,27 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun changeStatus(value: Boolean) {
+    private fun checkPageAndClickableMenus(value: Boolean) {
         isNearPage.postValue(value)
         clickableHeaderMenus.postValue(value)
     }
 
-    //Liseners
+    fun clearXmlData() {
+        earthquakeBodyRequest = EarthquakeBodyRequest()
+        location.value = ""
+        ml.value = ""
+        onlyDate.value = ""
+        startDate.value = ""
+        endDate.value = ""
+    }
+
+    fun cancelDataFetching() {
+        if (job?.isActive == true) {
+            job?.cancel()
+        }
+    }
+
+    //Listeners
     override fun onSliderDetailsAdapterListener(homeSliderData: HomeSliderData) {}
     override fun onNowEarthquakeItemClicked(position: Int) {}
     override fun onTopTenEarthquakeAdapterListener(earthquake: Earthquake) {}
@@ -294,10 +397,34 @@ class MainViewModel @Inject constructor(
 
     fun onClickApply() {
         clickApply.postValue(true)
+
+        if (selectedOption.value == 1) {
+            if (subOption.value == true)
+                getNearLocationFilter()
+            else
+                getLocationApi()
+        } else if (selectedOption.value == 2) {
+            if (subOption.value == true)
+                getOnlyDataApi()
+            else
+                getDataBetweenApi()
+        } else if (selectedOption.value == 3) {
+            earthquakeBodyRequest.apply {
+                userLat = null
+                userLong = null
+            }
+            startDate.value = ""
+            endDate.value = ""
+            getFilters()
+        }
     }
 
-    fun onBtnChooseLocationClick() {
-        clickMapLocation.value = !(clickMapLocation.value ?: false)
+    fun onOptionSelected(option: Int) {
+        selectedOption.value = option
+    }
+
+    fun onSubOptionChangeStatus() {
+        subOption.postValue(subOption.value?.not())
     }
 
     fun onTopTenEarthquake() {

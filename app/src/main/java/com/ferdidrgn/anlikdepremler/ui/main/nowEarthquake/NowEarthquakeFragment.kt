@@ -34,6 +34,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
 
     private fun observeServiceData() {
         with(viewModel) {
+            getNowEarthquake()
 
             //Swipe Refresh
             binding.includeEarthquakeList.swipeRefreshLayout.setOnRefreshListener {
@@ -52,6 +53,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
 
                     //Filter icon Click
                     binding.includeEarthquakeList.llFilters.onClickThrottled {
+                        location.value = ""
                         FilterBottomSheet { lng ->
                             earthquakeBodyRequest.userLat = lng?.latitude
                             earthquakeBodyRequest.userLong = lng?.longitude
@@ -86,6 +88,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
 
         observeServiceData()
     }
+
     override fun onPause() {
         super.onPause()
         viewModel.getNowEarthquakeList.postValue(null)

@@ -1,7 +1,6 @@
 package com.ferdidrgn.anlikdepremler.ui.main.nearEarthquake
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
@@ -100,7 +99,7 @@ class NearEarthquakeFragment :
                         this@NearEarthquakeFragment.location?.stopUpdateLocation()
                         earthquakeBodyRequest.userLat = latLng?.latitude
                         earthquakeBodyRequest.userLong = latLng?.longitude
-                        getLocationFilter()
+                        getNearLocationFilter()
                     }
                 }
             })

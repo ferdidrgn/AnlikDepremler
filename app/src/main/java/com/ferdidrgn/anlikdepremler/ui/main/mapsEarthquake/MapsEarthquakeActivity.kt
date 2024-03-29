@@ -232,7 +232,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
                 latLng = LatLng(location.latitude, location.longitude)
                 viewModel.earthquakeBodyRequest.userLat = location.latitude
                 viewModel.earthquakeBodyRequest.userLong = location.longitude
-                viewModel.getLocationFilter()
+                viewModel.getNearLocationFilter()
             } else {
                 //Eski Konum Yoksa Şu anki konumu dinlemeliyiz
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -259,7 +259,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
                         location?.stopUpdateLocation()
                         viewModel.earthquakeBodyRequest.userLat = it?.latitude
                         viewModel.earthquakeBodyRequest.userLong = it?.longitude
-                        viewModel.getLocationFilter()
+                        viewModel.getNearLocationFilter()
                     }
                 }
             })

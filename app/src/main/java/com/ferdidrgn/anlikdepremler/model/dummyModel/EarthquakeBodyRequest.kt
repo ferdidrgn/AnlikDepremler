@@ -5,6 +5,7 @@ class EarthquakeBodyRequest(
     var ml: String = "",
     var startDate: String = "",
     var endDate: String = "",
+    var onlyDate: String = "",
     var userLat: Double? = null,
     var userLong: Double? = null,
 )
