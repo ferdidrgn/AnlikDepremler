@@ -35,12 +35,15 @@ class NearEarthquakeFragment :
     override fun onCreateFinished(savedInstanceState: Bundle?) {
         builderADS(requireContext(), binding.adView)
 
-        binding.includeEarthquakeList.viewModel = viewModel
-        binding.includeEarthquakeList.tvHeader.text = getString(R.string.near_earthquake)
-        binding.includeEarthquakeList.llFilters.hide()
-        //binding.includeEarthquakeList.tvFilter.text = getString(R.string.this_week_filter)
-        binding.includeEarthquakeList.nowEarthquakeAdapter = NowEarthquakeAdapter(viewModel, false)
+        binding.includeEarthquakeList.apply {
+            viewModel = this@NearEarthquakeFragment.viewModel
+            tvHeader.text = getString(R.string.near_earthquake)
+            binding.includeEarthquakeList.llFilters.hide()
+            nowEarthquakeAdapter =
+                NowEarthquakeAdapter(this@NearEarthquakeFragment.viewModel, false)
+        }
 
+        location?.inicializeLocation()
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
 
@@ -50,6 +53,15 @@ class NearEarthquakeFragment :
 
     private fun observeEarthquakeData() {
         with(viewModel) {
+
+            //Swipe Refresh
+            binding.includeEarthquakeList.swipeRefreshLayout.setOnRefreshListener {
+                getNearEarthquakeList.postValue(null)
+                isNearPage.postValue(true)
+                getLocationFromUser()
+                binding.includeEarthquakeList.swipeRefreshLayout.isRefreshing = false
+            }
+
             //Map icon Click
             clickableHeaderMenus.observe(viewLifecycleOwner) {
                 if (it) {
@@ -66,9 +78,9 @@ class NearEarthquakeFragment :
     }
 
     private fun getLocationFromUser() {
-        if (!isLocationEnabled(requireContext())) {
+        if (!isLocationEnabled(requireContext()))
             enableLocation(requireActivity(), launcher)
-        }
+
         currentLocation()
     }
 
@@ -82,27 +94,23 @@ class NearEarthquakeFragment :
     }
 
     private fun currentLocation() {
-        location =
-            GetCurrentLocation(requireActivity() as MainActivity, object : locationListener {
-                override fun locationResponse(locationResult: LocationResult) {
-                    locationResult.lastLocation?.latitude?.let { lat ->
-                        locationResult.lastLocation?.longitude?.let { long ->
-                            latLng = LatLng(lat, long)
-                            ClientPreferences.inst.userLat = lat.toFloat()
-                            ClientPreferences.inst.userLong = long.toFloat()
-                        }
-                    } ?: kotlin.run {
-                        LatLng(LAT_LAT, LAT_LONG)
+        location?.inicializeLocation()
+        location = GetCurrentLocation(requireActivity() as MainActivity, object : locationListener {
+            override fun locationResponse(locationResult: LocationResult) {
+                latLng = locationResult.lastLocation?.latitude?.let { lat ->
+                    locationResult.lastLocation?.longitude?.let { long ->
+                        LatLng(lat, long)
                     }
+                } ?: LatLng(LAT_LAT, LAT_LONG)
+            }
+        })
 
-                    viewModel.apply {
-                        this@NearEarthquakeFragment.location?.stopUpdateLocation()
-                        earthquakeBodyRequest.userLat = latLng?.latitude
-                        earthquakeBodyRequest.userLong = latLng?.longitude
-                        getNearLocationFilter()
-                    }
-                }
-            })
+        location?.stopUpdateLocation()
+        showToast("ilk lat long= ${latLng?.latitude} ${latLng?.longitude}")
+        viewModel.earthquakeBodyRequest.userLat = latLng?.latitude
+        viewModel.earthquakeBodyRequest.userLong = latLng?.longitude
+        viewModel.getNearLocationFilter()
+        observeEarthquakeData()
     }
 
     private var launcher =
@@ -124,11 +132,6 @@ class NearEarthquakeFragment :
         grantResults: IntArray
     ) {
         location?.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        location?.inicializeLocation()
     }
 
     override fun onResume() {

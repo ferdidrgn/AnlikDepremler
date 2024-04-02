@@ -224,16 +224,17 @@ class MainViewModel @Inject constructor(
             when (val response = earthquakeRepository.getEarthquake()) {
                 is Resource.Success -> {
                     filterNearList.clear()
+                    showToast("lat" + earthquakeBodyRequest.userLat + "long" + earthquakeBodyRequest.userLong)
                     response.data?.let { getEarthquake ->
                         earthquakeBodyRequest.userLat?.let { lat ->
                             earthquakeBodyRequest.userLong?.let { long ->
-                                filterNearList =
-                                    getLocationFilterManuel(lat, long, getEarthquake)
+                                filterNearList = getLocationFilterManuel(lat, long, getEarthquake)
                             }
                         }
                     }
-                    checkPageAndClickableMenus(true)
+                    showToast("/////filerList"+ getNearEarthquakeList.value)
                     getNearEarthquakeList.postValue(filterNearList)
+                    showToast("/////getNearList" + getNearEarthquakeList.value)
                     timeHideLoading()
                 }
 

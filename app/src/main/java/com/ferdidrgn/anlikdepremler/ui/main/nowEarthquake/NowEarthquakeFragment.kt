@@ -26,58 +26,34 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
     override fun onCreateFinished(savedInstanceState: Bundle?) {
         builderADS(requireContext(), binding.adView)
 
-        binding.includeEarthquakeList.viewModel = viewModel
-        binding.includeEarthquakeList.tvHeader.text = getString(R.string.now_earthquake)
-        binding.includeEarthquakeList.nowEarthquakeAdapter = NowEarthquakeAdapter(viewModel, false)
-
-        /*binding.includeEarthquakeList.apply {
+        binding.includeEarthquakeList.apply {
             viewModel = this@NowEarthquakeFragment.viewModel
             tvHeader.text = getString(R.string.now_earthquake)
             nowEarthquakeAdapter = NowEarthquakeAdapter(this@NowEarthquakeFragment.viewModel, false)
 
             swipeRefreshLayout.setOnRefreshListener {
-                this@NowEarthquakeFragment.viewModel.refreshNowEarthquake()
+                this@NowEarthquakeFragment.viewModel.apply {
+                    getNearEarthquakeList.postValue(null)
+                    isNearPage.postValue(false)
+                    getNowEarthquake()
+                }
                 swipeRefreshLayout.isRefreshing = false
             }
 
             llFilters.onClickThrottled {
-                resetAndShowFilterBottomSheet()
+                observeFilterIconClick()
             }
-        }*/
+        }
     }
 
     private fun observeServiceData() {
         with(viewModel) {
             getNowEarthquake()
 
-            //Swipe Refresh
-            binding.includeEarthquakeList.swipeRefreshLayout.setOnRefreshListener {
-                getNearEarthquakeList.postValue(null)
-                isNearPage.postValue(false)
-                getNowEarthquake()
-                binding.includeEarthquakeList.swipeRefreshLayout.isRefreshing = false
-            }
-
             clickableHeaderMenus.observe(viewLifecycleOwner) { clickable ->
                 if (clickable) {
                     //Map icon Click
                     observeMapIconClick()
-
-                    //Filter icon Click
-                    binding.includeEarthquakeList.llFilters.onClickThrottled {
-                        location.value = ""
-                        FilterBottomSheet { lng ->
-                            earthquakeBodyRequest.userLat = lng?.latitude
-                            earthquakeBodyRequest.userLong = lng?.longitude
-
-                            if (clickFilterClear.value == true) {
-                                getNowEarthquake()
-                            } else {
-                                getFilters()
-                                clickFilterClear.postValue(false)
-                            }
-                        }.show(parentFragmentManager, "filterBottomSheet")
-                    }
                 }
             }
 
@@ -98,6 +74,23 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
     private fun observeMapIconClick() {
         viewModel.clickMap.observe(viewLifecycleOwner) {
             NavHandler.instance.toMapsActivity(requireContext(), viewModel.filterNowList, false)
+        }
+    }
+
+    private fun observeFilterIconClick() {
+       viewModel.apply {
+            location.value = ""
+            FilterBottomSheet { lng ->
+                earthquakeBodyRequest.userLat = lng?.latitude
+                earthquakeBodyRequest.userLong = lng?.longitude
+
+                if (clickFilterClear.value == true) {
+                    getNowEarthquake()
+                } else {
+                    getFilters()
+                    clickFilterClear.postValue(false)
+                }
+            }.show(parentFragmentManager, "filterBottomSheet")
         }
     }
 

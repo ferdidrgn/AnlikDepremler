@@ -4,6 +4,7 @@ import com.ferdidrgn.anlikdepremler.model.Earthquake
 import com.ferdidrgn.anlikdepremler.model.dummyModel.EarthquakeBodyRequest
 import com.ferdidrgn.anlikdepremler.tools.cameDate
 import com.ferdidrgn.anlikdepremler.tools.changeStringToDate
+import com.ferdidrgn.anlikdepremler.tools.showToast
 import com.ferdidrgn.anlikdepremler.tools.timeBetweenWeek
 import java.util.*
 import kotlin.math.sin
@@ -137,19 +138,17 @@ fun getAllFilterCheck(
 }
 
 fun getLocationFilterManuel(
-    latiute: Double,
-    longitute: Double,
+    lat: Double,
+    long: Double,
     earthquakeList: ArrayList<Earthquake>
 ): ArrayList<Earthquake> {
     val filterWeekList = ArrayList<Earthquake>()
     var returnFilterList = ArrayList<Earthquake>()
 
-    val lat: Double = latiute
-    val long: Double = longitute
-
     val earthRadius = 6371.0 // Dünya'nın yarı çapı kilometre cinsinden
 
     // Radyan cinsinden enlem ve boylam değerleri
+    showToast("lat: $lat, long: $long")
     val latRad = Math.toRadians(lat)
     val lonRad = Math.toRadians(long)
 
