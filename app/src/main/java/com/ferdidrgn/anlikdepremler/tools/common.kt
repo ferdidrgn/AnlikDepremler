@@ -13,7 +13,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.core.location.LocationManagerCompat
+import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.Err
+import com.ferdidrgn.anlikdepremler.enums.ToMain
 import com.google.android.gms.ads.*
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.*
@@ -115,6 +117,11 @@ fun builderADS(context: Context, view: AdView) {
             // covers the screen.
         }
     }
+}
+
+fun grantedPermissionMainAction(context: Context) {
+    NavHandler.instance.toMainActivityClearTask(context, ToMain.Home)
+    showToast(context.getString(R.string.please_accept_location))
 }
 
 fun isLocationEnabled(context: Context): Boolean {

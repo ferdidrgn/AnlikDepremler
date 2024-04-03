@@ -1,8 +1,11 @@
 package com.ferdidrgn.anlikdepremler.ui.main.nearEarthquake
 
+import android.Manifest
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
@@ -24,8 +27,8 @@ class NearEarthquakeFragment :
 
     private var job: Job? = null
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var latLng: LatLng? = null
     var location: GetCurrentLocation? = null
+    private var latLng: LatLng? = null
 
     override fun getVM(): Lazy<MainViewModel> = activityViewModels()
 
@@ -52,7 +55,6 @@ class NearEarthquakeFragment :
             }
         }
 
-        location?.inicializeLocation()
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
 
@@ -62,6 +64,7 @@ class NearEarthquakeFragment :
 
     private fun observeEarthquakeData() {
         with(viewModel) {
+            getNearLocationFilter()
 
             //Map icon Click
             clickableHeaderMenus.observe(viewLifecycleOwner) {
@@ -80,9 +83,33 @@ class NearEarthquakeFragment :
 
     private fun getLocationFromUser() {
         if (!isLocationEnabled(requireContext()))
-            enableLocation(requireActivity(), launcher)
+            enableLocation(requireActivity(), requestOldLocationPermissionLauncher)
+        else {
 
-        currentLocation()
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    latLng = LatLng(location.latitude, location.longitude)
+                    viewModel.earthquakeBodyRequest.userLat = location.latitude
+                    viewModel.earthquakeBodyRequest.userLong = location.longitude
+                    viewModel.getNearLocationFilter()
+                } else {
+                    //Eski Konum Yoksa Şu anki konumu dinlemeliyiz
+                    requestNowLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                    currentLocation()
+                }
+                currentLocation()
+            }
+        }
     }
 
     private fun updateUiAfterSearch(text: String, isValid: Boolean) {
@@ -103,29 +130,28 @@ class NearEarthquakeFragment :
                         LatLng(lat, long)
                     }
                 } ?: LatLng(LAT_LAT, LAT_LONG)
+                location?.stopUpdateLocation()
+                viewModel.earthquakeBodyRequest.userLat = latLng?.latitude
+                viewModel.earthquakeBodyRequest.userLong = latLng?.longitude
+                observeEarthquakeData()
             }
         })
-
-
-        showToast("ilk lat long= ${latLng?.latitude} ${latLng?.longitude}")
-        location?.stopUpdateLocation()
-        viewModel.earthquakeBodyRequest.userLat = latLng?.latitude
-        viewModel.earthquakeBodyRequest.userLong = latLng?.longitude
-        viewModel.getNearLocationFilter()
-        observeEarthquakeData()
     }
 
-    private var launcher =
-        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
+    private val requestNowLocationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted)
                 currentLocation()
-            } else {
-                NavHandler.instance.toMainActivityClearTask(
-                    requireContext(),
-                    ToMain.Home
-                )
-                showToast(getString(R.string.please_accept_location))
-            }
+            else
+                grantedPermissionMainAction(requireContext())
+        }
+
+    private var requestOldLocationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK)
+                currentLocation()
+            else
+                grantedPermissionMainAction(requireContext())
         }
 
     override fun onRequestPermissionsResult(
@@ -136,8 +162,9 @@ class NearEarthquakeFragment :
         location?.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+        location?.inicializeLocation()
         getLocationFromUser()
     }
 

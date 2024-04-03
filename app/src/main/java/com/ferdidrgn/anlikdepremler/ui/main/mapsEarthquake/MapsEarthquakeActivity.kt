@@ -45,10 +45,10 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     lateinit var gMap: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    var location: GetCurrentLocation? = null
     private var latLng: LatLng? = null
     private var earthquakeList = ArrayList<Earthquake>()
     private var cameEarthquakeList = ArrayList<Earthquake>()
-    var location: GetCurrentLocation? = null
     private var isNearEarthquake = false
 
     override fun getVM(): Lazy<MainViewModel> = viewModels()
@@ -132,14 +132,22 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
         }
     }
 
-    private val requestPermissionLauncher =
+    private var requestOldLocationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK)
+                getLocation()
+            else
+                grantedPermissionMainAction(this)
+        }
+
+    private val requestNowLocationPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted)
                 setUpMap()
             else
-                this.onBackPressed()
+                grantedPermissionMainAction(this)
         }
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -170,7 +178,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
         }
 
         if (isNearEarthquake)
-            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            requestNowLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
     private fun setUpMap() {
@@ -184,64 +192,43 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
         ) {
             return
         }
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
 
         gMap.isMyLocationEnabled = false
-        if (isNearEarthquake) {
-            if (!isLocationEnabled(this)) {
-                enableLocation(this, launcher)
-            } else {
-                getLocation()
-            }
-        }
+        if (isNearEarthquake)
+            getLocation()
     }
 
-    private var launcher =
-        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                getLocation()
-            } else {
-                NavHandler.instance.toMainActivityClearTask(this, ToMain.Home)
-                showToast(getString(R.string.please_accept_location))
-            }
-        }
-
     private fun getLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
-        fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-            if (location != null) {
-                latLng = LatLng(location.latitude, location.longitude)
-                viewModel.earthquakeBodyRequest.userLat = location.latitude
-                viewModel.earthquakeBodyRequest.userLong = location.longitude
-                viewModel.getNearLocationFilter()
-            } else {
-                //Eski Konum Yoksa Şu anki konumu dinlemeliyiz
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-                currentLocation()
+        if (!isLocationEnabled(this))
+            enableLocation(this, requestOldLocationPermissionLauncher)
+        else {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
             }
-            currentLocation()
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    latLng = LatLng(location.latitude, location.longitude)
+                    viewModel.earthquakeBodyRequest.userLat = location.latitude
+                    viewModel.earthquakeBodyRequest.userLong = location.longitude
+                    viewModel.getNearLocationFilter()
+                } else {
+                    //Eski Konum Yoksa Şu anki konumu dinlemeliyiz
+                    requestNowLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                    currentLocation()
+                }
+                currentLocation()
 
-            latLng?.let {
-                val cameraUpdate = CameraUpdateFactory.newLatLngZoom(it, 17f)
-                gMap.animateCamera(cameraUpdate)
+                latLng?.let {
+                    val cameraUpdate = CameraUpdateFactory.newLatLngZoom(it, 17f)
+                    gMap.animateCamera(cameraUpdate)
+                }
             }
         }
     }
