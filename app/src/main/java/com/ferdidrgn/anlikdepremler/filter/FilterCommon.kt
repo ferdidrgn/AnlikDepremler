@@ -148,9 +148,7 @@ fun getLocationFilterManuel(
     val earthRadius = 6371.0 // Dünya'nın yarı çapı kilometre cinsinden
 
     // Radyan cinsinden enlem ve boylam değerleri
-    showToast("lat: $lat, long: $long")
     val latRad = Math.toRadians(lat)
-    val lonRad = Math.toRadians(long)
 
     // 120 km'lik alanı hesapla
     val distance = 60.0

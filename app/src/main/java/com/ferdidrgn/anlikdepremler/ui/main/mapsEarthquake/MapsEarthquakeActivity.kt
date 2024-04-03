@@ -83,9 +83,8 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     private fun observeArgumentsData() {
         isNearEarthquake = intent.getBooleanExtra(NEAR_EARTHQUAKE, false)
         cameEarthquakeList = intent.getSerializableExtra(FILTER_LIST) as ArrayList<Earthquake>
-        if (isNearEarthquake) {
+        if (isNearEarthquake)
             getLocation()
-        }
 
         if (cameEarthquakeList.size > 0) {
             viewModel.getNowEarthquakeList.postValue(cameEarthquakeList)
@@ -486,7 +485,8 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     override fun onPause() {
         super.onPause()
-        location?.stopUpdateLocation()
+        if (isNearEarthquake)
+            location?.stopUpdateLocation()
     }
 
     override fun onDestroy() {

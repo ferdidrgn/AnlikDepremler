@@ -41,6 +41,15 @@ class NearEarthquakeFragment :
             binding.includeEarthquakeList.llFilters.hide()
             nowEarthquakeAdapter =
                 NowEarthquakeAdapter(this@NearEarthquakeFragment.viewModel, false)
+
+            swipeRefreshLayout.setOnRefreshListener {
+                this@NearEarthquakeFragment.viewModel.apply {
+                    getNearEarthquakeList.postValue(null)
+                    isNearPage.postValue(true)
+                    getLocationFromUser()
+                }
+                swipeRefreshLayout.isRefreshing = false
+            }
         }
 
         location?.inicializeLocation()
@@ -53,14 +62,6 @@ class NearEarthquakeFragment :
 
     private fun observeEarthquakeData() {
         with(viewModel) {
-
-            //Swipe Refresh
-            binding.includeEarthquakeList.swipeRefreshLayout.setOnRefreshListener {
-                getNearEarthquakeList.postValue(null)
-                isNearPage.postValue(true)
-                getLocationFromUser()
-                binding.includeEarthquakeList.swipeRefreshLayout.isRefreshing = false
-            }
 
             //Map icon Click
             clickableHeaderMenus.observe(viewLifecycleOwner) {
@@ -105,8 +106,9 @@ class NearEarthquakeFragment :
             }
         })
 
-        location?.stopUpdateLocation()
+
         showToast("ilk lat long= ${latLng?.latitude} ${latLng?.longitude}")
+        location?.stopUpdateLocation()
         viewModel.earthquakeBodyRequest.userLat = latLng?.latitude
         viewModel.earthquakeBodyRequest.userLong = latLng?.longitude
         viewModel.getNearLocationFilter()
@@ -142,7 +144,6 @@ class NearEarthquakeFragment :
     override fun onPause() {
         super.onPause()
         location?.stopUpdateLocation()
-        viewModel.isNearPage.postValue(false)
         viewModel.cancelDataFetching()
     }
 

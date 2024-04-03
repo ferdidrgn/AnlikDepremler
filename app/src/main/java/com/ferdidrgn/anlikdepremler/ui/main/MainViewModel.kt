@@ -230,9 +230,12 @@ class MainViewModel @Inject constructor(
                             earthquakeBodyRequest.userLong?.let { long ->
                                 filterNearList = getLocationFilterManuel(lat, long, getEarthquake)
                             }
+                        } ?: run {
+                            filterNearList =
+                                getLocationFilterManuel(LAT_LAT, LAT_LONG, getEarthquake)
                         }
                     }
-                    showToast("/////filerList"+ getNearEarthquakeList.value)
+                    showToast("/////filerList" + getNearEarthquakeList.value)
                     getNearEarthquakeList.postValue(filterNearList)
                     showToast("/////getNearList" + getNearEarthquakeList.value)
                     timeHideLoading()
