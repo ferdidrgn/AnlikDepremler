@@ -149,7 +149,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:21.0.0'
     //maps
     implementation 'com.google.android.gms:play-services-maps:18.2.0'
-    implementation 'com.google.android.gms:play-services-location:21.2.0'
+    implementation 'com.google.android.gms:play-services-location:21.1.0'
 
     //in-app buying
     implementation 'com.android.billingclient:billing-ktx:6.2.0'

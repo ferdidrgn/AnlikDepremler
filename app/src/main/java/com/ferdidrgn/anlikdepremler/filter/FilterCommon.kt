@@ -142,8 +142,7 @@ fun getLocationFilterManuel(
     long: Double,
     earthquakeList: ArrayList<Earthquake>
 ): ArrayList<Earthquake> {
-    val filterWeekList = ArrayList<Earthquake>()
-    var returnFilterList = ArrayList<Earthquake>()
+    val returnFilterList = ArrayList<Earthquake>()
 
     val earthRadius = 6371.0 // Dünya'nın yarı çapı kilometre cinsinden
 
@@ -163,10 +162,9 @@ fun getLocationFilterManuel(
 
     earthquakeList.forEach { earthquake ->
         if (earthquake.latitude?.toDouble()!! in minLat..maxLat && earthquake.longitude?.toDouble()!! in minLon..maxLon) {
-            filterWeekList.add(earthquake)
+            returnFilterList.add(earthquake)
         }
     }
-    returnFilterList = filterWeekList
     return returnFilterList
 }
 
