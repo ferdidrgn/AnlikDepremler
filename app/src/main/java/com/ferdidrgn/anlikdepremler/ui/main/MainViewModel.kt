@@ -73,7 +73,7 @@ class MainViewModel @Inject constructor(
 
     init {
         selectedOption.value = -1
-        checkPageAndClickableMenus(false)
+        falseToNearPageAndClickableMenus()
     }
 
     fun getHomePage() {
@@ -140,7 +140,7 @@ class MainViewModel @Inject constructor(
     fun getNowEarthquake() {
         mainScope {
             showLoading()
-            checkPageAndClickableMenus(false)
+            falseToNearPageAndClickableMenus()
 
             when (val response = earthquakeRepository.getEarthquake()) {
                 is Resource.Success -> {
@@ -259,6 +259,7 @@ class MainViewModel @Inject constructor(
             when (val response = earthquakeRepository.getLocationEarthquakeList(location.value)) {
                 is Resource.Success -> {
                     response.data?.let { getLocationEarthquake ->
+                        getLocationApiEarthquakeList.postValue(getLocationEarthquake)
                         getNowEarthquakeList.postValue(getLocationEarthquake)
                     }
                     timeHideLoading()
@@ -284,6 +285,7 @@ class MainViewModel @Inject constructor(
                 earthquakeRepository.getDateBetweenEarthquakeList(startDate.value, endDate.value)) {
                 is Resource.Success -> {
                     response.data?.let { getDataEarthquake ->
+                        getDateEarthquakeList.postValue(getDataEarthquake)
                         getNowEarthquakeList.postValue(getDataEarthquake)
                     }
                     timeHideLoading()
@@ -307,6 +309,7 @@ class MainViewModel @Inject constructor(
             when (val response = earthquakeRepository.getOnlyDateEarthquakeList(onlyDate.value)) {
                 is Resource.Success -> {
                     response.data?.let { getDataEarthquake ->
+                        getDateEarthquakeList.postValue(getDataEarthquake)
                         getNowEarthquakeList.postValue(getDataEarthquake)
                     }
                     timeHideLoading()
@@ -354,9 +357,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun checkPageAndClickableMenus(value: Boolean) {
-        isNearPage.postValue(value)
-        clickableHeaderMenus.postValue(value)
+    private fun falseToNearPageAndClickableMenus() {
+        isNearPage.postValue(false)
+        clickableHeaderMenus.postValue(false)
     }
 
     fun clearXmlData() {

@@ -117,9 +117,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private fun checkForAppUpdate() {
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
 
-        if (updateType == AppUpdateType.FLEXIBLE) {
+        if (updateType == AppUpdateType.FLEXIBLE)
             appUpdateManager.registerListener(installStateUpdatedListener)
-        }
 
         appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
             val isUpdteAvailable = info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
@@ -128,9 +127,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                 AppUpdateType.IMMEDIATE -> info.isImmediateUpdateAllowed
                 else -> false
             }
-            if (isUpdteAvailable && isUpdateAllowed) {
+
+            if (isUpdteAvailable && isUpdateAllowed)
                 appUpdateManager.startUpdateFlowForResult(info, updateType, this, MY_CODE)
-            }
         }
     }
 

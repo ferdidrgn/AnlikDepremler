@@ -94,7 +94,7 @@ class NetworkManager(activity: AppCompatActivity) {
         activityBase.finish()
     }
 
-    fun closeApp() {
+    private fun closeApp() {
         activityBase.finishAffinity()
     }
 }
