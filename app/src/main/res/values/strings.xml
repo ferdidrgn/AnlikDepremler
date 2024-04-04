@@ -40,7 +40,6 @@
     <string name="send_mail">Mail i Gönder</string>
     <string name="error_not_mail_installed">Hiçbir Mail Uygulaması Bulamadık</string>
 
-    <string name="hello_blank_fragment">HELLO</string>
     <string name="map">Harita</string>
     <string name="filter">Filtre</string>
     <string name="this_week_filter">Bu Hafta</string>
@@ -62,6 +61,7 @@
 
     <string name="location_enable">Lokasyon İzni Açık</string>
     <string name="please_accept_location">Lütfen Lokasyon İzni Onaylayın</string>
+    <string name="should_manuel_location_permission">Konum izni reddedildi. Uygulama ayarlarından izin verebilirsiniz.</string>
     <string name="clear">Temizle</string>
     <string name="apply_filter">Filtreyi Uygula</string>
     <string name="start_date">Başlangıç Tarihi</string>

@@ -3,6 +3,7 @@ package com.ferdidrgn.anlikdepremler.tools
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.finishAffinity
 import com.ferdidrgn.anlikdepremler.enums.ToMain
@@ -92,6 +93,13 @@ class NavHandler {
     fun toBuyCoffeeUrl(context: Context) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse("https://banabicoffee.com/@ferdidrgn")
+        context.startActivity(intent)
+    }
+
+    fun toPhoneSettings(context: Context, activity: AppCompatActivity){
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", activity.packageName, null)
+        intent.data = uri
         context.startActivity(intent)
     }
 }

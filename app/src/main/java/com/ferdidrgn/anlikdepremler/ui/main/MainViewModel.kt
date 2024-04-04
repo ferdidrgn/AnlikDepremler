@@ -232,6 +232,7 @@ class MainViewModel @Inject constructor(
                         }
                     }
                     getNearEarthquakeList.postValue(filterNearList)
+                    clickableHeaderMenus.postValue(true)
                     timeHideLoading()
                 }
 
