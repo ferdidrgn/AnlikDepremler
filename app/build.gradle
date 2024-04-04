@@ -73,8 +73,13 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.20"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.23"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //compose - for debug
+    implementation "androidx.ui:ui-tooling:0.1.0-dev17"
+    implementation "androidx.compose.runtime:runtime:1.6.5"
+    implementation "androidx.compose.compiler:compiler:1.5.11"
 
     //page indicator
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
@@ -88,16 +93,16 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
 
     //Dagger - Hilt
-    implementation 'com.google.dagger:hilt-android:2.48'
-    kapt 'com.google.dagger:hilt-compiler:2.48'
+    implementation 'com.google.dagger:hilt-android:2.51.1'
+    kapt 'com.google.dagger:hilt-compiler:2.51.1'
 
     // For instrumentation tests
-    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.48'
-    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.48'
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.51.1'
+    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.51.1'
 
     // For local unit tests
-    testImplementation 'com.google.dagger:hilt-android-testing:2.48'
-    kaptTest 'com.google.dagger:hilt-compiler:2.48'
+    testImplementation 'com.google.dagger:hilt-android-testing:2.51.1'
+    kaptTest 'com.google.dagger:hilt-compiler:2.51.1'
 
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.7.7"
@@ -111,15 +116,15 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     //Kotlin Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0'
 
     //retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
-    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 
     //secure Preference
     implementation 'com.scottyab:secure-preferences-lib:0.1.7'
@@ -129,12 +134,12 @@ dependencies {
 
     //circular image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.mikhaellopez:circularimageview:4.3.0'
+    implementation 'com.mikhaellopez:circularimageview:4.3.1'
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.15.1'
-    kapt 'com.github.bumptech.glide:compiler:4.13.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    kapt 'com.github.bumptech.glide:compiler:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
     //app review
     implementation 'com.google.android.play:review:2.0.1'
