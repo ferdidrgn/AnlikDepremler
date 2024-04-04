@@ -235,7 +235,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     private fun currentLocation() {
         location =
-            GetCurrentLocation(this, object : locationListener {
+            GetCurrentLocation(this, object : CurrentLocationListener {
                 override fun locationResponse(locationResult: LocationResult) {
                     latLng = locationResult.lastLocation?.latitude?.let { lat ->
                         locationResult.lastLocation?.longitude?.let { long ->
@@ -467,7 +467,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     override fun onStart() {
         super.onStart()
         if (isNearEarthquake)
-            location?.inicializeLocation()
+            location?.initializeLocation()
     }
 
     override fun onPause() {

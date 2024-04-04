@@ -57,6 +57,7 @@
 
     <string name="location_enable">Location Enable</string>
     <string name="please_accept_location">Please Accept Locationn</string>
+    <string name="should_manuel_location_permission">Location permission denied. You can allow it from the application settings.</string>
     <string name="clear">Clear</string>
     <string name="apply_filter">Apply Filter</string>
     <string name="start_date">Start Date</string>
