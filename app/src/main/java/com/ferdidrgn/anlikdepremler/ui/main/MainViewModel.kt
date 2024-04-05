@@ -3,16 +3,18 @@ package com.ferdidrgn.anlikdepremler.ui.main
 import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.base.Resource
+import com.ferdidrgn.anlikdepremler.domain.GetDateBetweenEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetEarthquakeUseCase
 import kotlinx.coroutines.flow.collectLatest
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
 import com.ferdidrgn.anlikdepremler.domain.model.dummyModel.EarthquakeBodyRequest
-import com.ferdidrgn.anlikdepremler.repository.EarthquakeRepositoryOlder
-import com.ferdidrgn.anlikdepremler.data.repositroy.HomeSliderRepository
+import com.ferdidrgn.anlikdepremler.data.repositroy.EarthquakeRepositoryOlder
 import com.ferdidrgn.anlikdepremler.domain.GetExampleHomeSliderUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetLocationEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.GetOnlyDateEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetTopTenEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.GetTopTenLocationEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.ui.main.home.SliderDetailsAdapterListener
@@ -32,6 +34,9 @@ class MainViewModel @Inject constructor(
     private val getEarthquakeUseCase: GetEarthquakeUseCase,
     private val getLocationEarthquakeUseCase: GetLocationEarthquakeUseCase,
     private val getTopTenEarthquakeUseCase: GetTopTenEarthquakeUseCase,
+    private val getTopTenLocationEarthquakeUseCase: GetTopTenLocationEarthquakeUseCase,
+    private val getOnlyDateEarthquakeUseCase: GetOnlyDateEarthquakeUseCase,
+    private val getDateBetweenEarthquakeUseCase: GetDateBetweenEarthquakeUseCase,
 ) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener,
     TopTenLocationEarthquakeAdapterListener, TopTenEarthquakeAdapterListener {
 
@@ -124,22 +129,21 @@ class MainViewModel @Inject constructor(
     fun getTopTenLocationEarthquake() {
         mainScope {
             showLoading()
-            when (val response =
-                earthquakeRepositoryOlder.getTopTenLocationEarthquakeList(location.value)) {
-                is Resource.Success -> {
-                    response.data?.let { getTopTenLocationEarthquake ->
-                        getTopTenLocationEarthquakeList.postValue(getTopTenLocationEarthquake)
-                        timeHideLoading()
+            getTopTenLocationEarthquakeUseCase(location.value).collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getTopTenLocationEarthquake ->
+                            getTopTenLocationEarthquakeList.postValue(getTopTenLocationEarthquake)
+                            timeHideLoading()
+                        }
                     }
-                }
 
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
 
-                else -> {
-                    hideLoading()
+                    else -> hideLoading()
                 }
             }
         }
@@ -177,23 +181,23 @@ class MainViewModel @Inject constructor(
         mainScope {
             showLoading()
 
-            when (val response = earthquakeRepositoryOlder.getEarthquake()) {
-                is Resource.Success -> {
-                    response.data?.let { getEarthquake ->
-                        getNowEarthquakeList.postValue(getEarthquake)
+            getEarthquakeUseCase().collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getEarthquake ->
+                            getNowEarthquakeList.postValue(getEarthquake)
+                        }
+                        filterNowList = getAllFilter() ?: ArrayList()
+                        getNowEarthquakeList.postValue(filterNowList)
+                        timeHideLoading()
                     }
-                    filterNowList = getAllFilter() ?: ArrayList()
-                    getNowEarthquakeList.postValue(filterNowList)
-                    timeHideLoading()
-                }
 
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
 
-                else -> {
-                    hideLoading()
+                    else -> hideLoading()
                 }
             }
         }
@@ -231,28 +235,29 @@ class MainViewModel @Inject constructor(
         job = mainScope {
             showLoading()
             clickableHeaderMenus.postValue(false)
-            when (val response = earthquakeRepositoryOlder.getEarthquake()) {
-                is Resource.Success -> {
-                    filterNearList.clear()
-                    response.data?.let { getEarthquake ->
-                        earthquakeBodyRequest.userLat?.let { lat ->
-                            earthquakeBodyRequest.userLong?.let { long ->
-                                filterNearList = getLocationFilterManuel(lat, long, getEarthquake)
+            getEarthquakeUseCase().collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        filterNearList.clear()
+                        response.data?.let { getEarthquake ->
+                            earthquakeBodyRequest.userLat?.let { lat ->
+                                earthquakeBodyRequest.userLong?.let { long ->
+                                    filterNearList =
+                                        getLocationFilterManuel(lat, long, getEarthquake)
+                                }
                             }
                         }
+                        getNearEarthquakeList.postValue(filterNearList)
+                        clickableHeaderMenus.postValue(true)
+                        timeHideLoading()
                     }
-                    getNearEarthquakeList.postValue(filterNearList)
-                    clickableHeaderMenus.postValue(true)
-                    timeHideLoading()
-                }
 
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
 
-                else -> {
-                    hideLoading()
+                    else -> hideLoading()
                 }
             }
         }
@@ -285,27 +290,25 @@ class MainViewModel @Inject constructor(
     fun getDataBetweenApi() {
         mainScope {
             showLoading()
-            showToast("Başlangıç: ${startDate.value} Bitiş: ${endDate.value}")
-            when (val response =
-                earthquakeRepositoryOlder.getDateBetweenEarthquakeList(
-                    startDate.value,
-                    endDate.value
-                )) {
-                is Resource.Success -> {
-                    response.data?.let { getDataEarthquake ->
-                        getDateEarthquakeList.postValue(getDataEarthquake)
-                        getNowEarthquakeList.postValue(getDataEarthquake)
+            getDateBetweenEarthquakeUseCase(
+                startDate.value,
+                endDate.value
+            ).collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getDateBetweenEarthquake ->
+                            getDateEarthquakeList.postValue(getDateBetweenEarthquake)
+                            getNowEarthquakeList.postValue(getDateBetweenEarthquake)
+                        }
+                        timeHideLoading()
                     }
-                    timeHideLoading()
-                }
 
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
 
-                else -> {
-                    hideLoading()
+                    else -> hideLoading()
                 }
             }
         }
@@ -314,23 +317,22 @@ class MainViewModel @Inject constructor(
     fun getOnlyDataApi() {
         mainScope {
             showLoading()
-            when (val response =
-                earthquakeRepositoryOlder.getOnlyDateEarthquakeList(onlyDate.value)) {
-                is Resource.Success -> {
-                    response.data?.let { getDataEarthquake ->
-                        getDateEarthquakeList.postValue(getDataEarthquake)
-                        getNowEarthquakeList.postValue(getDataEarthquake)
+            getOnlyDateEarthquakeUseCase(onlyDate.value).collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getOnlyDateEarthquake ->
+                            getDateEarthquakeList.postValue(getOnlyDateEarthquake)
+                            getNowEarthquakeList.postValue(getOnlyDateEarthquake)
+                            timeHideLoading()
+                        }
                     }
-                    timeHideLoading()
-                }
 
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
 
-                else -> {
-                    hideLoading()
+                    else -> hideLoading()
                 }
             }
         }
@@ -340,27 +342,27 @@ class MainViewModel @Inject constructor(
         mainScope {
             showLoading()
 
-            when (val response = earthquakeRepositoryOlder.getEarthquake()) {
-                is Resource.Success -> {
-                    response.data?.let { getEarthquake ->
-                        getNowEarthquakeList.postValue(getEarthquake)
+            getEarthquakeUseCase().collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getEarthquake ->
+                            getNowEarthquakeList.postValue(getEarthquake)
+                        }
+                        clickableHeaderMenus.postValue(true)
+                        getNowEarthquakeList.value?.forEach { earthquake ->
+                            filterNowList = getFilterOneWeek(earthquake)
+                        }
+                        getNowEarthquakeList.postValue(filterNowList)
+
+                        timeHideLoading()
                     }
-                    clickableHeaderMenus.postValue(true)
-                    getNowEarthquakeList.value?.forEach { earthquake ->
-                        filterNowList = getFilterOneWeek(earthquake)
+
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
                     }
-                    getNowEarthquakeList.postValue(filterNowList)
 
-                    timeHideLoading()
-                }
-
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
-
-                else -> {
-                    hideLoading()
+                    else -> hideLoading()
                 }
             }
         }
@@ -381,9 +383,8 @@ class MainViewModel @Inject constructor(
     }
 
     fun cancelDataFetching() {
-        if (job?.isActive == true) {
+        if (job?.isActive == true)
             job?.cancel()
-        }
     }
 
     //Listeners
