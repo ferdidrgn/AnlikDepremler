@@ -4,14 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.tools.enums.ContextLanguages
 import com.ferdidrgn.anlikdepremler.tools.enums.Languages
-import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueries
+import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueriesRepository
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class LanguageViewModel @Inject constructor(
-    private val appToolsFireBaseQueries: AppToolsFireBaseQueries
+    private val appToolsFireBaseQueriesRepository: AppToolsFireBaseQueriesRepository
 ) : BaseViewModel() {
 
 

@@ -3,7 +3,7 @@ package com.ferdidrgn.anlikdepremler.ui.main.settings
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
-import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueries
+import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueriesRepository
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.tools.mainScope
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val appToolsFireBaseQueries: AppToolsFireBaseQueries
+    private val appToolsFireBaseQueriesRepository: AppToolsFireBaseQueriesRepository
 ) : BaseViewModel() {
 
     val userLat = MutableStateFlow(0.0)
@@ -46,7 +46,7 @@ class SettingsViewModel @Inject constructor(
         var valueReturn = ""
         mainScope {
             showLoading()
-            appToolsFireBaseQueries.getContactUsEmail { status, contactUs ->
+            appToolsFireBaseQueriesRepository.getContactUsEmail { status, contactUs ->
                 when (status) {
                     Response.ThereIs -> {
                         contactUs?.let { data ->

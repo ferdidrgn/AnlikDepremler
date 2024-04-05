@@ -11,9 +11,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TermsAndConditionsandPrivacePolicyActivity :
-    BaseActivity<TermsAndConditionsandPrivacePolicyViewModel, ActivityTermsAndConditionsandPrivacePolicyBinding>() {
+    BaseActivity<TermsAndConditionAndPrivacyPolicyViewModel, ActivityTermsAndConditionsandPrivacePolicyBinding>() {
 
-    override fun getVM(): Lazy<TermsAndConditionsandPrivacePolicyViewModel> = viewModels()
+    override fun getVM(): Lazy<TermsAndConditionAndPrivacyPolicyViewModel> = viewModels()
 
     override fun getDataBinding(): ActivityTermsAndConditionsandPrivacePolicyBinding =
         ActivityTermsAndConditionsandPrivacePolicyBinding.inflate(layoutInflater)

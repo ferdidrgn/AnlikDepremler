@@ -1,18 +1,20 @@
-package com.ferdidrgn.anlikdepremler.repository
+package com.ferdidrgn.anlikdepremler.data.repositroy
 
+import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueriesRepository
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import javax.inject.Inject
 
-class AppToolsFireBaseQueries {
+class AppToolsFireBaseQueriesRepositoryImpl @Inject constructor() :
+    AppToolsFireBaseQueriesRepository {
 
     private val fireStoreAppToolsRef = Firebase.firestore.collection("AppTools")
 
-    fun getTermsConditionOrPrivacyPolicy(
+    override fun getTermsConditionOrPrivacyPolicy(
         whichTermsAndPrivacy: String,
         status: (Response, String?) -> Unit
     ) {
-
         fireStoreAppToolsRef.orderBy(whichTermsAndPrivacy)
             .addSnapshotListener { value, error ->
                 if (error != null) status.invoke(Response.ServerError, null)
@@ -27,17 +29,15 @@ class AppToolsFireBaseQueries {
                                     ) as String else ""
                                 status.invoke(Response.ThereIs, html)
                             }
-                        } else {
+                        } else
                             status.invoke(Response.Empty, null)
-                        }
-                    } else {
+                    } else
                         status.invoke(Response.Empty, null)
-                    }
                 }
             }
     }
 
-    fun getContactUsEmail(status: (Response, String?) -> Unit) {
+    override fun getContactUsEmail(status: (Response, String?) -> Unit) {
         fireStoreAppToolsRef.orderBy("contactUsEmail")
             .addSnapshotListener { value, error ->
                 if (error != null) status.invoke(Response.ServerError, null)
@@ -50,12 +50,10 @@ class AppToolsFireBaseQueries {
                                     if (document.get("contactUsEmail") != null) document.get("contactUsEmail") as String else ""
                                 status.invoke(Response.ThereIs, email)
                             }
-                        } else {
+                        } else
                             status.invoke(Response.Empty, null)
-                        }
-                    } else {
+                    } else
                         status.invoke(Response.Empty, null)
-                    }
                 }
             }
     }

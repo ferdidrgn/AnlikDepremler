@@ -10,11 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppRepositoryModule {
-
-    @Singleton
-    @Provides
-    fun provideUserAppToolsFireBaseQueries() = AppToolsFireBaseQueries()
+object AppRepositorySingletonModule {
 
     @Singleton
     @Provides

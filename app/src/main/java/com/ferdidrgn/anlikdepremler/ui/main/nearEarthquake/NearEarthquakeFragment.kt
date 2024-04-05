@@ -128,8 +128,8 @@ class NearEarthquakeFragment :
                         }
                     }.apply {
                         location?.stopUpdateLocation()
-                        viewModel.earthquakeBodyRequest.userLat = latLng?.latitude
-                        viewModel.earthquakeBodyRequest.userLong = latLng?.longitude
+                        viewModel.earthquakeBodyRequest.userLat = latLng?.latitude ?: LAT_LAT
+                        viewModel.earthquakeBodyRequest.userLong = latLng?.longitude ?: LAT_LONG
                         observeEarthquakeData()
                     }
                 }

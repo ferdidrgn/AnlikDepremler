@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsandPrivacePolicyViewModel" />
+            type="com.ferdidrgn.anlikdepremler.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionAndPrivacyPolicyViewModel" />
     </data>
 
 
