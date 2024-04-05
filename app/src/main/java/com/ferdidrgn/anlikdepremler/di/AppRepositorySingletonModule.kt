@@ -15,8 +15,4 @@ object AppRepositorySingletonModule {
     @Singleton
     @Provides
     fun provideEarthquakeRepository(api: EarthquakeApi) = EarthquakeRepositoryOlder(api)
-
-    @Singleton
-    @Provides
-    fun provideHomeSliderRepository() = HomeSliderRepository()
 }

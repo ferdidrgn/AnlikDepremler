@@ -4,6 +4,8 @@ import com.ferdidrgn.anlikdepremler.domain.GetContactUsEmailUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetContactUsEmailUseCaseImpl
 import com.ferdidrgn.anlikdepremler.domain.GetEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetEarthquakeUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.GetExampleHomeSliderUseCase
+import com.ferdidrgn.anlikdepremler.domain.GetExampleHomeSliderUseCaseImpl
 import com.ferdidrgn.anlikdepremler.domain.GetTermsConditionOrPrivacyPolicyUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetTermsConditionOrPrivacyPolicyUseCaseImpl
 import dagger.Binds
@@ -29,4 +31,8 @@ abstract class AppUseCaseModule {
     abstract fun bindGetTermsConditionOrPrivacyPolicyUseCase(
         getTermsConditionOrPrivacyPolicyUseCaseImpl: GetTermsConditionOrPrivacyPolicyUseCaseImpl
     ): GetTermsConditionOrPrivacyPolicyUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindGetExampleHomeSliderUseCase(getExampleHomeSliderUseCaseImpl: GetExampleHomeSliderUseCaseImpl): GetExampleHomeSliderUseCase
 }

@@ -9,7 +9,8 @@ import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
 import com.ferdidrgn.anlikdepremler.domain.model.dummyModel.EarthquakeBodyRequest
 import com.ferdidrgn.anlikdepremler.repository.EarthquakeRepositoryOlder
-import com.ferdidrgn.anlikdepremler.repository.HomeSliderRepository
+import com.ferdidrgn.anlikdepremler.data.repositroy.HomeSliderRepository
+import com.ferdidrgn.anlikdepremler.domain.GetExampleHomeSliderUseCase
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.ui.main.home.SliderDetailsAdapterListener
@@ -25,7 +26,7 @@ import kotlin.collections.ArrayList
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val earthquakeRepositoryOlder: EarthquakeRepositoryOlder,
-    private val homeSliderRepository: HomeSliderRepository,
+    private val getExampleHomeSliderUseCase: GetExampleHomeSliderUseCase,
     private val getEarthquakeUseCase: GetEarthquakeUseCase,
 ) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener,
     TopTenLocationEarthquakeAdapterListener, TopTenEarthquakeAdapterListener {
@@ -77,7 +78,12 @@ class MainViewModel @Inject constructor(
     fun getHomePage() {
         mainScope {
             showLoading()
-            homeSliderList.value = homeSliderRepository.createExampleHomeSliderList()
+            getExampleHomeSliderUseCase().collectLatest { response ->
+                response.let { homeSlider ->
+                    homeSliderList.postValue(homeSlider)
+                    timeHideLoading()
+                }
+            }
 
             //Top Ten All Earthquake
             getTopTenEarthquake()
