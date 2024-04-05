@@ -3,16 +3,20 @@ package com.ferdidrgn.anlikdepremler.ui.termsAndConditionsandPrivacePolicy
 import android.text.Html
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
+import com.ferdidrgn.anlikdepremler.domain.GetContactUsEmailUseCase
+import com.ferdidrgn.anlikdepremler.domain.GetTermsConditionOrPrivacyPolicyUseCase
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
-import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueries
 import com.ferdidrgn.anlikdepremler.tools.mainScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class TermsAndConditionsandPrivacePolicyViewModel @Inject constructor(private val appToolsFireBaseQueries: AppToolsFireBaseQueries) :
+class TermsAndConditionAndPrivacyPolicyViewModel @Inject constructor(
+    private val getContactUsEmailUseCase: GetContactUsEmailUseCase,
+    private val getTermsConditionOrPrivacyPolicyUseCase: GetTermsConditionOrPrivacyPolicyUseCase
+) :
     BaseViewModel() {
 
 
@@ -28,14 +32,15 @@ class TermsAndConditionsandPrivacePolicyViewModel @Inject constructor(private va
             when (whichTermsAndPrivacy) {
                 WhichTermsAndPrivacy.TermsAndCondition -> {
                     toolBarText.value = message(R.string.terms_condition)
-                    appToolsFireBaseQueries.getTermsConditionOrPrivacyPolicy("termsAndCondition") { status, html ->
+                    getTermsConditionOrPrivacyPolicyUseCase("termsAndCondition") { status, html ->
                         hideLoading()
                         loopWhen(status, html)
                     }
                 }
+
                 WhichTermsAndPrivacy.PrivacyAndPolicy -> {
                     toolBarText.value = message(R.string.privace_policy)
-                    appToolsFireBaseQueries.getTermsConditionOrPrivacyPolicy("privacyPolicy") { status, html ->
+                    getTermsConditionOrPrivacyPolicyUseCase("privacyPolicy") { status, html ->
                         hideLoading()
                         loopWhen(status, html)
                     }
@@ -55,14 +60,17 @@ class TermsAndConditionsandPrivacePolicyViewModel @Inject constructor(private va
                         value = data
                     }
                 }
+
                 Response.Empty -> {
                     value = message(R.string.error_server)
                     errorMessage.postValue(value)
                 }
+
                 Response.ServerError -> {
                     value = message(R.string.error_server)
                     errorMessage.postValue(value)
                 }
+
                 else -> {
                     value = message(R.string.error_message)
                     errorMessage.postValue(value)

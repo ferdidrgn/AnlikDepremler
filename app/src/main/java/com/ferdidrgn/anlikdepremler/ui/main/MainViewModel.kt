@@ -33,7 +33,6 @@ class MainViewModel @Inject constructor(
     private var job: Job? = null
 
     //XML ve filter
-
     var earthquakeBodyRequest = EarthquakeBodyRequest()
     var location = MutableStateFlow("")
     var ml = MutableStateFlow("")
@@ -140,25 +139,6 @@ class MainViewModel @Inject constructor(
         mainScope {
             showLoading()
             falseToNearPageAndClickableMenus()
-
-            /*when (val response = earthquakeRepositoryOlder.getEarthquake()) {
-                is Resource.Success -> {
-                    response.data?.let { getEarthquake ->
-                        getNowEarthquakeList.postValue(getEarthquake)
-                        clickableHeaderMenus.postValue(true)
-                        timeHideLoading()
-                    }
-                }
-
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
-
-                else -> {
-                    hideLoading()
-                }
-            }*/
 
             //collectlatest -> eger 2 defa emit edilirse ilk emit iptal olur 2. emit calisir. ilk emit bitmeden 2.ye gecilir
             //collect -> tum emitler calisir, ilk emitin bitmesini bekler sonra digerine gecer.
