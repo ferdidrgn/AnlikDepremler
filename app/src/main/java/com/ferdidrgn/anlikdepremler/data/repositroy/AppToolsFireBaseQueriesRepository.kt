@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.repository
+package com.ferdidrgn.anlikdepremler.data.repositroy
 
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 

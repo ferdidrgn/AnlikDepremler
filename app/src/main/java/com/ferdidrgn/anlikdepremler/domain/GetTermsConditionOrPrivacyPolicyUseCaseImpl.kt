@@ -1,6 +1,6 @@
 package com.ferdidrgn.anlikdepremler.domain
 
-import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueriesRepository
+import com.ferdidrgn.anlikdepremler.data.repositroy.AppToolsFireBaseQueriesRepository
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import javax.inject.Inject
 

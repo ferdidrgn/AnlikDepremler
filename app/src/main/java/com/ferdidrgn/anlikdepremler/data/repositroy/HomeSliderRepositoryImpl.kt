@@ -1,11 +1,13 @@
-package com.ferdidrgn.anlikdepremler.repository
+package com.ferdidrgn.anlikdepremler.data.repositroy
 
-import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class HomeSliderRepository {
+class HomeSliderRepositoryImpl @Inject constructor() : HomeSliderRepository {
 
-    fun createExampleHomeSliderList(): List<HomeSliderData> {
+    override fun createExampleHomeSliderList(): Flow<List<HomeSliderData>> = flow {
         val homeSliderList = ArrayList<HomeSliderData>()
 
         val slider1 = HomeSliderData(
@@ -32,6 +34,6 @@ class HomeSliderRepository {
         )
         homeSliderList.add(slider3)
 
-        return homeSliderList
+        emit(homeSliderList)
     }
 }

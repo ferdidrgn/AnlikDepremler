@@ -1,6 +1,5 @@
 package com.ferdidrgn.anlikdepremler.data.repositroy
 
-import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueriesRepository
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
