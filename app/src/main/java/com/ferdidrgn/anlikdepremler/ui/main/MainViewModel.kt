@@ -11,6 +11,8 @@ import com.ferdidrgn.anlikdepremler.domain.model.dummyModel.EarthquakeBodyReques
 import com.ferdidrgn.anlikdepremler.repository.EarthquakeRepositoryOlder
 import com.ferdidrgn.anlikdepremler.data.repositroy.HomeSliderRepository
 import com.ferdidrgn.anlikdepremler.domain.GetExampleHomeSliderUseCase
+import com.ferdidrgn.anlikdepremler.domain.GetLocationEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.GetTopTenEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.ui.main.home.SliderDetailsAdapterListener
@@ -28,6 +30,8 @@ class MainViewModel @Inject constructor(
     private val earthquakeRepositoryOlder: EarthquakeRepositoryOlder,
     private val getExampleHomeSliderUseCase: GetExampleHomeSliderUseCase,
     private val getEarthquakeUseCase: GetEarthquakeUseCase,
+    private val getLocationEarthquakeUseCase: GetLocationEarthquakeUseCase,
+    private val getTopTenEarthquakeUseCase: GetTopTenEarthquakeUseCase,
 ) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener,
     TopTenLocationEarthquakeAdapterListener, TopTenEarthquakeAdapterListener {
 
@@ -97,21 +101,21 @@ class MainViewModel @Inject constructor(
     private fun getTopTenEarthquake() {
         mainScope {
             showLoading()
-            when (val response = earthquakeRepositoryOlder.getTopTenEarthquakeList()) {
-                is Resource.Success -> {
-                    response.data?.let { getTopTenEarthquake ->
-                        getTopTenEarthquakeList.postValue(getTopTenEarthquake)
-                        timeHideLoading()
+            getTopTenEarthquakeUseCase().collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getTopTenEarthquake ->
+                            getTopTenEarthquakeList.postValue(getTopTenEarthquake)
+                            timeHideLoading()
+                        }
                     }
-                }
 
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
 
-                else -> {
-                    hideLoading()
+                    else -> hideLoading()
                 }
             }
         }
@@ -257,23 +261,22 @@ class MainViewModel @Inject constructor(
     fun getLocationApi() {
         mainScope {
             showLoading()
-            when (val response =
-                earthquakeRepositoryOlder.getLocationEarthquakeList(location.value)) {
-                is Resource.Success -> {
-                    response.data?.let { getLocationEarthquake ->
-                        getLocationApiEarthquakeList.postValue(getLocationEarthquake)
-                        getNowEarthquakeList.postValue(getLocationEarthquake)
+            getLocationEarthquakeUseCase(location.value).collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getLocationEarthquake ->
+                            getLocationApiEarthquakeList.postValue(getLocationEarthquake)
+                            getNowEarthquakeList.postValue(getLocationEarthquake)
+                        }
+                        timeHideLoading()
                     }
-                    timeHideLoading()
-                }
 
-                is Resource.Error -> {
-                    serverMessage(response.error)
-                    hideLoading()
-                }
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
 
-                else -> {
-                    hideLoading()
+                    else -> hideLoading()
                 }
             }
         }
