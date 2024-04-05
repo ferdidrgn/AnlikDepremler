@@ -1,7 +1,7 @@
 package com.ferdidrgn.anlikdepremler.tools
 
-import com.ferdidrgn.anlikdepremler.enums.ContextLanguages
-import com.ferdidrgn.anlikdepremler.enums.Languages
+import com.ferdidrgn.anlikdepremler.tools.enums.ContextLanguages
+import com.ferdidrgn.anlikdepremler.tools.enums.Languages
 import com.ferdidrgn.anlikdepremler.tools.helpers.PreferencesManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

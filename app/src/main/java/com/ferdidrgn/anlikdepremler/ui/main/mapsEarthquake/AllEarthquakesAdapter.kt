@@ -5,7 +5,7 @@ import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseStaggeredAdapter
 import com.ferdidrgn.anlikdepremler.databinding.ItemNowEarthquakeListBinding
 import com.ferdidrgn.anlikdepremler.databinding.ItemNowEarthqukeMapsBinding
-import com.ferdidrgn.anlikdepremler.model.Earthquake
+import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 
 class NowEarthquakeAdapter(
     private val nowEarthQuakeAdapterListener: NowEarthQuakeAdapterListener,

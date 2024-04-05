@@ -12,8 +12,8 @@ import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.base.Err
 import com.ferdidrgn.anlikdepremler.databinding.FragmentHomeBinding
-import com.ferdidrgn.anlikdepremler.enums.ToMain
-import com.ferdidrgn.anlikdepremler.model.HomeSliderData
+import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
+import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.tools.builderADS
 import com.ferdidrgn.anlikdepremler.tools.getPositionAndSendHandler2

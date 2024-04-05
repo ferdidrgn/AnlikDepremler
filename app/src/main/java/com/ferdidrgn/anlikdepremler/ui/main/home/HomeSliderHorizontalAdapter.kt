@@ -3,7 +3,7 @@ package com.ferdidrgn.anlikdepremler.ui.main.home
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseAdapter
 import com.ferdidrgn.anlikdepremler.databinding.ItemHomeSliderBinding
-import com.ferdidrgn.anlikdepremler.model.HomeSliderData
+import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
 
 class HomeSliderHorizontalAdapter(
     private val sliderDetailsAdapterListener: SliderDetailsAdapterListener

@@ -1,6 +1,6 @@
-package com.ferdidrgn.anlikdepremler.network
+package com.ferdidrgn.anlikdepremler.data.api
 
-import com.ferdidrgn.anlikdepremler.model.Earthquake
+import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

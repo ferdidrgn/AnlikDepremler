@@ -1,7 +1,7 @@
-package com.ferdidrgn.anlikdepremler.network
+package com.ferdidrgn.anlikdepremler.data
 
 import com.ferdidrgn.anlikdepremler.BuildConfig
-import com.ferdidrgn.anlikdepremler.enums.Environment
+import com.ferdidrgn.anlikdepremler.tools.enums.Environment
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.log
 import okhttp3.HttpUrl

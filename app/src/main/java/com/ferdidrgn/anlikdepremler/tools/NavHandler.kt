@@ -6,9 +6,9 @@ import android.net.Uri
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.finishAffinity
-import com.ferdidrgn.anlikdepremler.enums.ToMain
-import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivacy
-import com.ferdidrgn.anlikdepremler.model.Earthquake
+import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
+import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
+import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.ui.language.LanguageActivity
 import com.ferdidrgn.anlikdepremler.ui.main.MainActivity
 import com.ferdidrgn.anlikdepremler.ui.main.mapsEarthquake.MapsEarthquakeActivity

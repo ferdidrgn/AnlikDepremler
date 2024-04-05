@@ -3,15 +3,12 @@ package com.ferdidrgn.anlikdepremler.ui.main
 import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.base.Resource
-import com.ferdidrgn.anlikdepremler.filter.checkBetweenData
-import com.ferdidrgn.anlikdepremler.filter.checkMapManuelStatus
-import com.ferdidrgn.anlikdepremler.filter.getAllFilterQueriers
-import com.ferdidrgn.anlikdepremler.filter.getFilterOneWeek
-import com.ferdidrgn.anlikdepremler.filter.getLocationFilterManuel
-import com.ferdidrgn.anlikdepremler.model.Earthquake
-import com.ferdidrgn.anlikdepremler.model.HomeSliderData
-import com.ferdidrgn.anlikdepremler.model.dummyModel.EarthquakeBodyRequest
-import com.ferdidrgn.anlikdepremler.repository.EarthquakeRepository
+import com.ferdidrgn.anlikdepremler.domain.GetEarthquakeUseCase
+import kotlinx.coroutines.flow.collectLatest
+import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
+import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
+import com.ferdidrgn.anlikdepremler.domain.model.dummyModel.EarthquakeBodyRequest
+import com.ferdidrgn.anlikdepremler.repository.EarthquakeRepositoryOlder
 import com.ferdidrgn.anlikdepremler.repository.HomeSliderRepository
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
@@ -27,14 +24,16 @@ import kotlin.collections.ArrayList
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val earthquakeRepository: EarthquakeRepository,
+    private val earthquakeRepositoryOlder: EarthquakeRepositoryOlder,
     private val homeSliderRepository: HomeSliderRepository,
+    private val getEarthquakeUseCase: GetEarthquakeUseCase,
 ) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener,
     TopTenLocationEarthquakeAdapterListener, TopTenEarthquakeAdapterListener {
 
     private var job: Job? = null
 
     //XML ve filter
+
     var earthquakeBodyRequest = EarthquakeBodyRequest()
     var location = MutableStateFlow("")
     var ml = MutableStateFlow("")
@@ -93,7 +92,7 @@ class MainViewModel @Inject constructor(
     private fun getTopTenEarthquake() {
         mainScope {
             showLoading()
-            when (val response = earthquakeRepository.getTopTenEarthquakeList()) {
+            when (val response = earthquakeRepositoryOlder.getTopTenEarthquakeList()) {
                 is Resource.Success -> {
                     response.data?.let { getTopTenEarthquake ->
                         getTopTenEarthquakeList.postValue(getTopTenEarthquake)
@@ -117,7 +116,7 @@ class MainViewModel @Inject constructor(
         mainScope {
             showLoading()
             when (val response =
-                earthquakeRepository.getTopTenLocationEarthquakeList(location.value)) {
+                earthquakeRepositoryOlder.getTopTenLocationEarthquakeList(location.value)) {
                 is Resource.Success -> {
                     response.data?.let { getTopTenLocationEarthquake ->
                         getTopTenLocationEarthquakeList.postValue(getTopTenLocationEarthquake)
@@ -142,7 +141,7 @@ class MainViewModel @Inject constructor(
             showLoading()
             falseToNearPageAndClickableMenus()
 
-            when (val response = earthquakeRepository.getEarthquake()) {
+            /*when (val response = earthquakeRepositoryOlder.getEarthquake()) {
                 is Resource.Success -> {
                     response.data?.let { getEarthquake ->
                         getNowEarthquakeList.postValue(getEarthquake)
@@ -159,6 +158,27 @@ class MainViewModel @Inject constructor(
                 else -> {
                     hideLoading()
                 }
+            }*/
+
+            //collectlatest -> eger 2 defa emit edilirse ilk emit iptal olur 2. emit calisir. ilk emit bitmeden 2.ye gecilir
+            //collect -> tum emitler calisir, ilk emitin bitmesini bekler sonra digerine gecer.
+            getEarthquakeUseCase().collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getEarthquake ->
+                            getNowEarthquakeList.postValue(getEarthquake)
+                            clickableHeaderMenus.postValue(true)
+                            timeHideLoading()
+                        }
+                    }
+
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
+
+                    else -> hideLoading()
+                }
             }
         }
     }
@@ -167,7 +187,7 @@ class MainViewModel @Inject constructor(
         mainScope {
             showLoading()
 
-            when (val response = earthquakeRepository.getEarthquake()) {
+            when (val response = earthquakeRepositoryOlder.getEarthquake()) {
                 is Resource.Success -> {
                     response.data?.let { getEarthquake ->
                         getNowEarthquakeList.postValue(getEarthquake)
@@ -221,7 +241,7 @@ class MainViewModel @Inject constructor(
         job = mainScope {
             showLoading()
             clickableHeaderMenus.postValue(false)
-            when (val response = earthquakeRepository.getEarthquake()) {
+            when (val response = earthquakeRepositoryOlder.getEarthquake()) {
                 is Resource.Success -> {
                     filterNearList.clear()
                     response.data?.let { getEarthquake ->
@@ -251,7 +271,8 @@ class MainViewModel @Inject constructor(
     fun getLocationApi() {
         mainScope {
             showLoading()
-            when (val response = earthquakeRepository.getLocationEarthquakeList(location.value)) {
+            when (val response =
+                earthquakeRepositoryOlder.getLocationEarthquakeList(location.value)) {
                 is Resource.Success -> {
                     response.data?.let { getLocationEarthquake ->
                         getLocationApiEarthquakeList.postValue(getLocationEarthquake)
@@ -277,7 +298,10 @@ class MainViewModel @Inject constructor(
             showLoading()
             showToast("Başlangıç: ${startDate.value} Bitiş: ${endDate.value}")
             when (val response =
-                earthquakeRepository.getDateBetweenEarthquakeList(startDate.value, endDate.value)) {
+                earthquakeRepositoryOlder.getDateBetweenEarthquakeList(
+                    startDate.value,
+                    endDate.value
+                )) {
                 is Resource.Success -> {
                     response.data?.let { getDataEarthquake ->
                         getDateEarthquakeList.postValue(getDataEarthquake)
@@ -301,7 +325,8 @@ class MainViewModel @Inject constructor(
     fun getOnlyDataApi() {
         mainScope {
             showLoading()
-            when (val response = earthquakeRepository.getOnlyDateEarthquakeList(onlyDate.value)) {
+            when (val response =
+                earthquakeRepositoryOlder.getOnlyDateEarthquakeList(onlyDate.value)) {
                 is Resource.Success -> {
                     response.data?.let { getDataEarthquake ->
                         getDateEarthquakeList.postValue(getDataEarthquake)
@@ -326,7 +351,7 @@ class MainViewModel @Inject constructor(
         mainScope {
             showLoading()
 
-            when (val response = earthquakeRepository.getEarthquake()) {
+            when (val response = earthquakeRepositoryOlder.getEarthquake()) {
                 is Resource.Success -> {
                     response.data?.let { getEarthquake ->
                         getNowEarthquakeList.postValue(getEarthquake)

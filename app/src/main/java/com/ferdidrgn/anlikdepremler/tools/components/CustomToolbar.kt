@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ferdidrgn.anlikdepremler.R
-import com.ferdidrgn.anlikdepremler.enums.ToolBarTitles
+import com.ferdidrgn.anlikdepremler.tools.enums.ToolBarTitles
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.hide
 import com.ferdidrgn.anlikdepremler.tools.show

@@ -18,7 +18,7 @@ import com.android.billingclient.api.SkuDetailsParams
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentSettingsBinding
-import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivacy
+import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.tools.APP_LINK
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.DONATION_SMALL

@@ -1,8 +1,8 @@
 package com.ferdidrgn.anlikdepremler.di
 
 import com.ferdidrgn.anlikdepremler.BuildConfig
-import com.ferdidrgn.anlikdepremler.network.*
-import com.ferdidrgn.anlikdepremler.network.EarthquakeApi
+import com.ferdidrgn.anlikdepremler.data.HeaderInterceptor
+import com.ferdidrgn.anlikdepremler.data.api.EarthquakeApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.SnapHelper
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseActivity
 import com.ferdidrgn.anlikdepremler.databinding.FragmentMapsNowEarthquakeBinding
-import com.ferdidrgn.anlikdepremler.enums.ToMain
-import com.ferdidrgn.anlikdepremler.model.Earthquake
+import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
+import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel

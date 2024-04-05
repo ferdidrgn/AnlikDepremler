@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.model.dummyModel
+package com.ferdidrgn.anlikdepremler.domain.model.dummyModel
 
 class EarthquakeBodyRequest(
     var location: String = "",

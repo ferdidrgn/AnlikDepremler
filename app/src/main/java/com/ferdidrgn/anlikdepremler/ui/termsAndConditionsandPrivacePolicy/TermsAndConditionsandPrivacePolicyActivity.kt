@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.ferdidrgn.anlikdepremler.base.BaseActivity
 import com.ferdidrgn.anlikdepremler.databinding.ActivityTermsAndConditionsandPrivacePolicyBinding
-import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivacy
+import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.tools.WHICH_TERMS_PRIVACE
 import com.ferdidrgn.anlikdepremler.tools.builderADS
 import dagger.hilt.android.AndroidEntryPoint
