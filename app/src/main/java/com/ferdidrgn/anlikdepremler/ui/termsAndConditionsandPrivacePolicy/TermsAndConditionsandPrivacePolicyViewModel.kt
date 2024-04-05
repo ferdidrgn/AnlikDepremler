@@ -3,8 +3,8 @@ package com.ferdidrgn.anlikdepremler.ui.termsAndConditionsandPrivacePolicy
 import android.text.Html
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
-import com.ferdidrgn.anlikdepremler.enums.Response
-import com.ferdidrgn.anlikdepremler.enums.WhichTermsAndPrivacy
+import com.ferdidrgn.anlikdepremler.tools.enums.Response
+import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueries
 import com.ferdidrgn.anlikdepremler.tools.mainScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,14 +28,14 @@ class TermsAndConditionsandPrivacePolicyViewModel @Inject constructor(private va
             when (whichTermsAndPrivacy) {
                 WhichTermsAndPrivacy.TermsAndCondition -> {
                     toolBarText.value = message(R.string.terms_condition)
-                    appToolsFireBaseQueries.getTermsConditionOrPricavePolicy("termsAndCondition") { status, html ->
+                    appToolsFireBaseQueries.getTermsConditionOrPrivacyPolicy("termsAndCondition") { status, html ->
                         hideLoading()
                         loopWhen(status, html)
                     }
                 }
                 WhichTermsAndPrivacy.PrivacyAndPolicy -> {
                     toolBarText.value = message(R.string.privace_policy)
-                    appToolsFireBaseQueries.getTermsConditionOrPricavePolicy("privacyPolicy") { status, html ->
+                    appToolsFireBaseQueries.getTermsConditionOrPrivacyPolicy("privacyPolicy") { status, html ->
                         hideLoading()
                         loopWhen(status, html)
                     }

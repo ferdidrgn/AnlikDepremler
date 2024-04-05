@@ -1,7 +1,7 @@
 package com.ferdidrgn.anlikdepremler.repository
 
 import com.ferdidrgn.anlikdepremler.R
-import com.ferdidrgn.anlikdepremler.model.HomeSliderData
+import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
 
 class HomeSliderRepository {
 

@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.model
+package com.ferdidrgn.anlikdepremler.domain.model
 
 import com.ferdidrgn.anlikdepremler.base.ListAdapterItem
 

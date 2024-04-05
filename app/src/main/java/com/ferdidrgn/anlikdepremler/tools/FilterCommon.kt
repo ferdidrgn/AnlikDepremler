@@ -1,7 +1,7 @@
-package com.ferdidrgn.anlikdepremler.filter
+package com.ferdidrgn.anlikdepremler.tools
 
-import com.ferdidrgn.anlikdepremler.model.Earthquake
-import com.ferdidrgn.anlikdepremler.model.dummyModel.EarthquakeBodyRequest
+import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
+import com.ferdidrgn.anlikdepremler.domain.model.dummyModel.EarthquakeBodyRequest
 import com.ferdidrgn.anlikdepremler.tools.cameDate
 import com.ferdidrgn.anlikdepremler.tools.changeStringToDate
 import com.ferdidrgn.anlikdepremler.tools.showToast
@@ -31,32 +31,52 @@ fun getAllFilterQueriers(
     earthquakeBodyRequest.apply {
 
         //konum, şiddet ve tarih
-        if (checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
-            checkBetweenData(startDate, endDate) && ml.isNotEmpty()
+        if (checkMapManuelStatus(
+                userLat ?: 0.0, userLong ?: 0.0
+            ) &&
+            checkBetweenData(
+                startDate,
+                endDate
+            ) && ml.isNotEmpty()
         ) {
-            filterEarthquakeList = getAllFilterCheck(
-                getFilterEarthquakeList,
-                earthquakeBodyRequest, true, true, true
-            )
+            filterEarthquakeList =
+                getAllFilterCheck(
+                    getFilterEarthquakeList,
+                    earthquakeBodyRequest, true, true, true
+                )
         }//konum ve tarih
-        else if (checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
-            checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) && ml.isEmpty()
+        else if (checkMapManuelStatus(
+                userLat ?: 0.0, userLong ?: 0.0
+            ) &&
+            checkMapManuelStatus(
+                userLat ?: 0.0, userLong ?: 0.0
+            ) && ml.isEmpty()
         ) {
-            filterEarthquakeList = getAllFilterCheck(
-                getFilterEarthquakeList,
-                earthquakeBodyRequest, true, true, false
-            )
+            filterEarthquakeList =
+                getAllFilterCheck(
+                    getFilterEarthquakeList,
+                    earthquakeBodyRequest, true, true, false
+                )
 
         }//Konum ve Şiddet
-        else if (checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
-            ml.isNotEmpty() && !checkBetweenData(startDate, endDate)
-        ) {
-            filterEarthquakeList = getAllFilterCheck(
-                getFilterEarthquakeList,
-                earthquakeBodyRequest, true, false, true
+        else if (checkMapManuelStatus(
+                userLat ?: 0.0, userLong ?: 0.0
+            ) &&
+            ml.isNotEmpty() && !checkBetweenData(
+                startDate,
+                endDate
             )
+        ) {
+            filterEarthquakeList =
+                getAllFilterCheck(
+                    getFilterEarthquakeList,
+                    earthquakeBodyRequest, true, false, true
+                )
         } //Şiddet ve Tarih
-        else if (ml.isNotEmpty() && checkBetweenData(startDate, endDate) && !checkMapManuelStatus
+        else if (ml.isNotEmpty() && checkBetweenData(
+                startDate,
+                endDate
+            ) && !checkMapManuelStatus
                 (userLat ?: 0.0, userLong ?: 0.0)
         ) {
             filterEarthquakeList = getAllFilterCheck(

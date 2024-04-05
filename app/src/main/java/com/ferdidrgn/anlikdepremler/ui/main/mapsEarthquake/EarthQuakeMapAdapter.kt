@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ferdidrgn.anlikdepremler.R
-import com.ferdidrgn.anlikdepremler.model.Earthquake
+import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 
 class EarthQuakeMapAdapter(private val earthquakeList: List<Earthquake?>) :
     RecyclerView.Adapter<EarthQuakeMapAdapter.MapHolder>() {

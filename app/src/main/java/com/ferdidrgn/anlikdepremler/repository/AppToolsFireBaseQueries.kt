@@ -1,6 +1,6 @@
 package com.ferdidrgn.anlikdepremler.repository
 
-import com.ferdidrgn.anlikdepremler.enums.Response
+import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -8,12 +8,12 @@ class AppToolsFireBaseQueries {
 
     private val fireStoreAppToolsRef = Firebase.firestore.collection("AppTools")
 
-    fun getTermsConditionOrPricavePolicy(
-        whichTermsAndPrivace: String,
+    fun getTermsConditionOrPrivacyPolicy(
+        whichTermsAndPrivacy: String,
         status: (Response, String?) -> Unit
     ) {
 
-        fireStoreAppToolsRef.orderBy(whichTermsAndPrivace)
+        fireStoreAppToolsRef.orderBy(whichTermsAndPrivacy)
             .addSnapshotListener { value, error ->
                 if (error != null) status.invoke(Response.ServerError, null)
                 else {
@@ -22,8 +22,8 @@ class AppToolsFireBaseQueries {
                             val documents = value.documents
                             for (document in documents) {
                                 val html =
-                                    if (document.get(whichTermsAndPrivace) != null) document.get(
-                                        whichTermsAndPrivace
+                                    if (document.get(whichTermsAndPrivacy) != null) document.get(
+                                        whichTermsAndPrivacy
                                     ) as String else ""
                                 status.invoke(Response.ThereIs, html)
                             }

@@ -9,7 +9,7 @@
 
         <variable
             name="earthquake"
-            type="com.ferdidrgn.anlikdepremler.model.Earthquake" />
+            type="com.ferdidrgn.anlikdepremler.domain.model.Earthquake" />
 
         <variable
             name="listener"

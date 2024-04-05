@@ -1,6 +1,6 @@
 package com.ferdidrgn.anlikdepremler.di
 
-import com.ferdidrgn.anlikdepremler.network.EarthquakeApi
+import com.ferdidrgn.anlikdepremler.data.api.EarthquakeApi
 import com.ferdidrgn.anlikdepremler.repository.*
 import dagger.Module
 import dagger.Provides
@@ -18,7 +18,7 @@ object AppRepositoryModule {
 
     @Singleton
     @Provides
-    fun provideEarthquakeRepository(api: EarthquakeApi) = EarthquakeRepository(api)
+    fun provideEarthquakeRepository(api: EarthquakeApi) = EarthquakeRepositoryOlder(api)
 
     @Singleton
     @Provides

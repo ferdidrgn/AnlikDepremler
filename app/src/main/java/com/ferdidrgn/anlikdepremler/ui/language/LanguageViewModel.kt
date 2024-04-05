@@ -2,8 +2,8 @@ package com.ferdidrgn.anlikdepremler.ui.language
 
 import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
-import com.ferdidrgn.anlikdepremler.enums.ContextLanguages
-import com.ferdidrgn.anlikdepremler.enums.Languages
+import com.ferdidrgn.anlikdepremler.tools.enums.ContextLanguages
+import com.ferdidrgn.anlikdepremler.tools.enums.Languages
 import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueries
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -2,7 +2,7 @@ package com.ferdidrgn.anlikdepremler.ui.main.settings
 
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
-import com.ferdidrgn.anlikdepremler.enums.Response
+import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import com.ferdidrgn.anlikdepremler.repository.AppToolsFireBaseQueries
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent

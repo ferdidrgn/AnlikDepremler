@@ -16,7 +16,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseActivity
 import com.ferdidrgn.anlikdepremler.databinding.ActivityMainBinding
-import com.ferdidrgn.anlikdepremler.enums.ToMain
+import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.TO_MAIN
 import com.ferdidrgn.anlikdepremler.tools.showToast

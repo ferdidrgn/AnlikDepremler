@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.enums
+package com.ferdidrgn.anlikdepremler.tools.enums
 
 import android.content.Context
 import androidx.annotation.StringRes
