@@ -231,14 +231,14 @@ class MainViewModel @Inject constructor(
         return filterList
     }
 
-    fun getNearLocationFilter() {
+    fun getNearLocationFilter(isNearPage: Boolean) {
         job = mainScope {
             showLoading()
             clickableHeaderMenus.postValue(false)
             getEarthquakeUseCase().collectLatest { response ->
                 when (response) {
                     is Resource.Success -> {
-                        filterNearList.clear()
+                        filterNearList = ArrayList()
                         response.data?.let { getEarthquake ->
                             earthquakeBodyRequest.userLat?.let { lat ->
                                 earthquakeBodyRequest.userLong?.let { long ->
@@ -246,9 +246,10 @@ class MainViewModel @Inject constructor(
                                         getLocationFilterManuel(lat, long, getEarthquake)
                                 }
                             }
+                            this@MainViewModel.isNearPage.postValue(isNearPage)
+                            getNearEarthquakeList.postValue(filterNearList)
+                            clickableHeaderMenus.postValue(true)
                         }
-                        getNearEarthquakeList.postValue(filterNearList)
-                        clickableHeaderMenus.postValue(true)
                         timeHideLoading()
                     }
 
@@ -417,7 +418,7 @@ class MainViewModel @Inject constructor(
 
         if (selectedOption.value == 1) {
             if (subOption.value == true)
-                getNearLocationFilter()
+                getNearLocationFilter(false)
             else
                 getLocationApi()
         } else if (selectedOption.value == 2) {
