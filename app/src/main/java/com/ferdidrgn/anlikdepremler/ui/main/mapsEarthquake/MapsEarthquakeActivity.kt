@@ -45,7 +45,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     lateinit var gMap: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    var location: GetCurrentLocation? = null
+    var location: LocationManager? = null
     private var latLng: LatLng? = null
     private var earthquakeList = ArrayList<Earthquake>()
     private var cameEarthquakeList = ArrayList<Earthquake>()
@@ -63,9 +63,6 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(this)
 
         binding.nowEarthquakeAdapter = NowEarthquakeAdapter(viewModel, true)
 
@@ -202,28 +199,22 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
         if (!isLocationEnabled(this))
             enableLocation(this, requestOldLocationPermissionLauncher)
         else {
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                return
-            }
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+            //Permission control is done in LocationManager.
+            location = LocationManager(this, object : CurrentLocationListener {
+                override fun locationResponse(locationResult: LocationResult) {}
+            })
+
+            location?.getLastKnownLocation { location ->
                 if (location != null) {
                     latLng = LatLng(location.latitude, location.longitude)
                     viewModel.earthquakeBodyRequest.userLat = location.latitude
                     viewModel.earthquakeBodyRequest.userLong = location.longitude
-                    viewModel.getNearLocationFilter()
+                    viewModel.getNearLocationFilter(true)
+                    observeEarthquakeData()
                 } else {
                     //Eski Konum Yoksa Şu anki konumu dinlemeliyiz
                     requestNowLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-                    currentLocation()
                 }
-                currentLocation()
 
                 latLng?.let {
                     val cameraUpdate = CameraUpdateFactory.newLatLngZoom(it, 17f)
@@ -231,24 +222,6 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
                 }
             }
         }
-    }
-
-    private fun currentLocation() {
-        location =
-            GetCurrentLocation(this, object : CurrentLocationListener {
-                override fun locationResponse(locationResult: LocationResult) {
-                    latLng = locationResult.lastLocation?.latitude?.let { lat ->
-                        locationResult.lastLocation?.longitude?.let { long ->
-                            LatLng(lat, long)
-                        }
-                    }.also {
-                        location?.stopUpdateLocation()
-                        viewModel.earthquakeBodyRequest.userLat = it?.latitude
-                        viewModel.earthquakeBodyRequest.userLong = it?.longitude
-                        viewModel.getNearLocationFilter()
-                    }
-                }
-            })
     }
 
     private fun setUpEarthquakeAdapter() {
@@ -455,30 +428,10 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
             NavHandler.instance.toMainActivity(this, ToMain.NowEarthquake)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        location?.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if (isNearEarthquake)
-            location?.initializeLocation()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (isNearEarthquake)
-            location?.stopUpdateLocation()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         binding.unbind()
+        location?.stopUpdateLocation()
         viewModel.getNowEarthquakeList.postValue(null)
     }
 }

@@ -78,7 +78,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
     }
 
     private fun observeFilterIconClick() {
-       viewModel.apply {
+        viewModel.apply {
             location.value = ""
             FilterBottomSheet { lng ->
                 earthquakeBodyRequest.userLat = lng?.latitude
