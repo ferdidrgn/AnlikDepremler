@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.ui.main.MainViewModel" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel" />
 
         <variable
             name="nowEarthquakeAdapter"
@@ -18,7 +18,7 @@
         style="@style/ScreenBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.mapsEarthquake.MapsEarthquakeActivity">
+        tools:context=".presentation.ui.main.mapsEarthquake.MapsEarthquakeActivity">
 
         <include
             android:id="@+id/mapMarker"

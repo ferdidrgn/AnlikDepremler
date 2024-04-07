@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.language
+package com.ferdidrgn.anlikdepremler.presentation.ui.language
 
 import android.os.Bundle
 import androidx.activity.viewModels

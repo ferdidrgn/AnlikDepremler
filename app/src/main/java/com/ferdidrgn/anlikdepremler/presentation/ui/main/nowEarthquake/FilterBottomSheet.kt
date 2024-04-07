@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake
+package com.ferdidrgn.anlikdepremler.presentation.ui.main.nowEarthquake
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -23,7 +23,7 @@ import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.LAT_LAT
 import com.ferdidrgn.anlikdepremler.tools.LAT_LONG
 import com.ferdidrgn.anlikdepremler.tools.showToast
-import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 

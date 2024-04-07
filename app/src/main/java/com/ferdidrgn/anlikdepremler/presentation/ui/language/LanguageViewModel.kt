@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.language
+package com.ferdidrgn.anlikdepremler.presentation.ui.language
 
 import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.ui.main.MainViewModel" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel" />
 
         <variable
             name="nowEarthquakeAdapter"
@@ -24,7 +24,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.main.nowEarthquake.NowEarthquakeFragment">
+            tools:context=".presentation.ui.main.nowEarthquake.NowEarthquakeFragment">
 
             <LinearLayout
                 android:id="@+id/btnMap"

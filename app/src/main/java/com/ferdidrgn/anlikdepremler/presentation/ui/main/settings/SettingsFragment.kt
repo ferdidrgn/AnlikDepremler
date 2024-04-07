@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.settings
+package com.ferdidrgn.anlikdepremler.presentation.ui.main.settings
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -25,7 +25,7 @@ import com.ferdidrgn.anlikdepremler.tools.DONATION_SMALL
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.tools.builderADS
 import com.ferdidrgn.anlikdepremler.tools.showToast
-import com.ferdidrgn.anlikdepremler.ui.main.MainActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.AndroidEntryPoint

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.ViewDataBinding
 import com.ferdidrgn.anlikdepremler.R
+import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.*
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {

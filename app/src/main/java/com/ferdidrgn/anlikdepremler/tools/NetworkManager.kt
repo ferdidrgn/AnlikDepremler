@@ -10,7 +10,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BasePopUp
-import com.ferdidrgn.anlikdepremler.ui.main.MainActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
 
 class NetworkManager(activity: AppCompatActivity) {
     val contextBase = activity.applicationContext

@@ -73,5 +73,5 @@ class NowEarthquakeAdapter(
 }
 
 interface NowEarthQuakeAdapterListener {
-    fun onNowEarthquakeItemClicked(position: Int)
+    fun onNowEarthquakeItemClicked(position: Int){}
 }
