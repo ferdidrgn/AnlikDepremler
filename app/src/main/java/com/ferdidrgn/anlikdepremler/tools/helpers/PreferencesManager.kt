@@ -29,7 +29,7 @@ open class PreferencesManager {
         return targetPreferences.getBoolean(key, defaultValue)
     }
 
-    fun getFloat(key: String?,defaultValue: Float?): Float? {
+    fun getFloat(key: String?, defaultValue: Float?): Float? {
         return targetPreferences.getFloat(key, 0f)
     }
 

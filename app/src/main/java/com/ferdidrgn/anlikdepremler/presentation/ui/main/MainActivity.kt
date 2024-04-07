@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main
+package com.ferdidrgn.anlikdepremler.presentation.ui.main
 
 import android.Manifest
 import android.content.ActivityNotFoundException

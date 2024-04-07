@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.nearEarthquake
+package com.ferdidrgn.anlikdepremler.presentation.ui.main.nearEarthquake
 
 import android.Manifest
 import android.app.Activity
@@ -10,7 +10,7 @@ import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentNearEarthquakeBinding
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
-import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
 import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
@@ -108,7 +108,6 @@ class NearEarthquakeFragment :
             if (isGranted) {
                 location = LocationManager(requireContext(), object : CurrentLocationListener {
                     override fun locationResponse(locationResult: LocationResult) {
-                        showToast("Location Updated: ${locationResult.lastLocation}")
                         latLng = locationResult.lastLocation?.latitude?.let { lat ->
                             locationResult.lastLocation?.longitude?.let { long ->
                                 LatLng(lat, long)

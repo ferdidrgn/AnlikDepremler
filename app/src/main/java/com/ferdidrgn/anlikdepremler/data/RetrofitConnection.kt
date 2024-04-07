@@ -34,11 +34,11 @@ class HeaderInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         setHostBaseUrl()
-        var token: String = if (ClientPreferences.inst.token.isNullOrEmpty().not()) {
+        val token: String = if (ClientPreferences.inst.token.isNullOrEmpty().not())
             String.format("Bearer %s", ClientPreferences.inst.token)
-        }else{
+        else
             String.format("Bearer %s", ClientPreferences.inst.guestToken)
-        }
+
         log(token)
 
         var request = chain.request()
@@ -70,7 +70,6 @@ class HeaderInterceptor : Interceptor {
                 e.printStackTrace()
             }
         }
-
         return chain.proceed(request)
     }
 }

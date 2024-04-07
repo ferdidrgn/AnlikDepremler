@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.home
+package com.ferdidrgn.anlikdepremler.presentation.ui.main.home
 
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
@@ -20,8 +20,8 @@ import com.ferdidrgn.anlikdepremler.tools.getPositionAndSendHandler2
 import com.ferdidrgn.anlikdepremler.tools.helpers.MainSliderHandler
 import com.ferdidrgn.anlikdepremler.tools.ioScope
 import com.ferdidrgn.anlikdepremler.tools.showToast
-import com.ferdidrgn.anlikdepremler.ui.main.MainActivity
-import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -13,7 +13,7 @@
 
         <variable
             name="listener"
-            type="com.ferdidrgn.anlikdepremler.ui.main.home.SliderDetailsAdapterListener" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.home.SliderDetailsAdapterListener" />
 
         <variable
             name="index"

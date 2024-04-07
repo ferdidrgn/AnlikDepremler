@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main
+package com.ferdidrgn.anlikdepremler.presentation.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
@@ -9,17 +9,16 @@ import kotlinx.coroutines.flow.collectLatest
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
 import com.ferdidrgn.anlikdepremler.domain.model.dummyModel.EarthquakeBodyRequest
-import com.ferdidrgn.anlikdepremler.data.repositroy.EarthquakeRepositoryOlder
 import com.ferdidrgn.anlikdepremler.domain.GetExampleHomeSliderUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetLocationEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetOnlyDateEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetTopTenEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetTopTenLocationEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.SliderDetailsAdapterListener
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.TopTenEarthquakeAdapterListener
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.TopTenLocationEarthquakeAdapterListener
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
-import com.ferdidrgn.anlikdepremler.ui.main.home.SliderDetailsAdapterListener
-import com.ferdidrgn.anlikdepremler.ui.main.home.TopTenEarthquakeAdapterListener
-import com.ferdidrgn.anlikdepremler.ui.main.home.TopTenLocationEarthquakeAdapterListener
 import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthQuakeAdapterListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -29,7 +28,6 @@ import kotlin.collections.ArrayList
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val earthquakeRepositoryOlder: EarthquakeRepositoryOlder,
     private val getExampleHomeSliderUseCase: GetExampleHomeSliderUseCase,
     private val getEarthquakeUseCase: GetEarthquakeUseCase,
     private val getLocationEarthquakeUseCase: GetLocationEarthquakeUseCase,
@@ -387,12 +385,6 @@ class MainViewModel @Inject constructor(
         if (job?.isActive == true)
             job?.cancel()
     }
-
-    //Listeners
-    override fun onSliderDetailsAdapterListener(homeSliderData: HomeSliderData) {}
-    override fun onNowEarthquakeItemClicked(position: Int) {}
-    override fun onTopTenEarthquakeAdapterListener(earthquake: Earthquake) {}
-    override fun onTopTenLocationEarthquakeAdapterListener(earthquake: Earthquake) {}
 
 
     //Click Events

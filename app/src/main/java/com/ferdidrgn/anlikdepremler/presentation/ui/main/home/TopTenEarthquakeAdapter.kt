@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.home
+package com.ferdidrgn.anlikdepremler.presentation.ui.main.home
 
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseAdapter
@@ -22,5 +22,5 @@ class TopTenEarthquakeAdapter(
 }
 
 interface TopTenEarthquakeAdapterListener {
-    fun onTopTenEarthquakeAdapterListener(earthquake: Earthquake)
+    fun onTopTenEarthquakeAdapterListener(earthquake: Earthquake){}
 }

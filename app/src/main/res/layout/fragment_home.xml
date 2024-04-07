@@ -9,19 +9,19 @@
 
         <variable
             name="homeSliderAdapter"
-            type="com.ferdidrgn.anlikdepremler.ui.main.home.HomeSliderHorizontalAdapter" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.home.HomeSliderHorizontalAdapter" />
 
         <variable
             name="topTenEarthquakeAdapter"
-            type="com.ferdidrgn.anlikdepremler.ui.main.home.TopTenEarthquakeAdapter" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.home.TopTenEarthquakeAdapter" />
 
         <variable
             name="topTenLocationEarthquakeAdapter"
-            type="com.ferdidrgn.anlikdepremler.ui.main.home.TopTenLocationEarthquakeAdapter" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.home.TopTenLocationEarthquakeAdapter" />
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.ui.main.MainViewModel" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -62,7 +62,7 @@
                     android:layout_marginTop="30dp"
                     android:gravity="center"
                     android:orientation="vertical"
-                    tools:context=".ui.main.home.HomeFragment">
+                    tools:context=".presentation.ui.main.home.HomeFragment">
 
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/vpSlider"

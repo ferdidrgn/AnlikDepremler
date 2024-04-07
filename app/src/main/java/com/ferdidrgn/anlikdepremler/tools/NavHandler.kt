@@ -9,10 +9,10 @@ import androidx.core.app.ActivityCompat.finishAffinity
 import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
 import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
-import com.ferdidrgn.anlikdepremler.ui.language.LanguageActivity
-import com.ferdidrgn.anlikdepremler.ui.main.MainActivity
-import com.ferdidrgn.anlikdepremler.ui.main.mapsEarthquake.MapsEarthquakeActivity
-import com.ferdidrgn.anlikdepremler.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsandPrivacePolicyActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.language.LanguageActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.mapsEarthquake.MapsEarthquakeActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsandPrivacePolicyActivity
 
 class NavHandler {
 

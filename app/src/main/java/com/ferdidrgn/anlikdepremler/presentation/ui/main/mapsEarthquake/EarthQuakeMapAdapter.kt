@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.mapsEarthquake
+package com.ferdidrgn.anlikdepremler.presentation.ui.main.mapsEarthquake
 
 import android.view.LayoutInflater
 import android.view.View

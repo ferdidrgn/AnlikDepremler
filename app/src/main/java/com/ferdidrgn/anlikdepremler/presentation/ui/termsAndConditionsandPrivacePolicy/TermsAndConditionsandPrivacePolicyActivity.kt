@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.termsAndConditionsandPrivacePolicy
+package com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivacePolicy
 
 import android.os.Bundle
 import androidx.activity.viewModels

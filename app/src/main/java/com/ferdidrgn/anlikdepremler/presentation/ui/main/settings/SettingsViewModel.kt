@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.settings
+package com.ferdidrgn.anlikdepremler.presentation.ui.main.settings
 
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel

@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake
+package com.ferdidrgn.anlikdepremler.presentation.ui.main.nowEarthquake
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,7 +9,8 @@ import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentNowEarthquakeBinding
 import com.ferdidrgn.anlikdepremler.tools.*
-import com.ferdidrgn.anlikdepremler.ui.main.MainViewModel
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
+import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
