@@ -66,10 +66,11 @@ class MainViewModel @Inject constructor(
     var clickableHeaderMenus = MutableLiveData<Boolean>()
 
     //XML Click
-    val clickMap = LiveEvent<Boolean>()
     val clickList = LiveEvent<Boolean>()
     val clickClose = LiveEvent<Boolean>()
     val clickApply = LiveEvent<Boolean>()
+    val clickMap = LiveEvent<Boolean>()
+    val clickFilter = LiveEvent<Boolean>()
     val clickFilterClear = LiveEvent<Boolean>()
 
     val clickSeeAllNowEarthquake = LiveEvent<Boolean>()
@@ -90,7 +91,7 @@ class MainViewModel @Inject constructor(
             getExampleHomeSliderUseCase().collectLatest { response ->
                 response.let { homeSlider ->
                     homeSliderList.postValue(homeSlider)
-                    timeHideLoading()
+                    hideLoading()
                 }
             }
 
@@ -113,7 +114,7 @@ class MainViewModel @Inject constructor(
                     is Resource.Success -> {
                         response.data?.let { getTopTenEarthquake ->
                             getTopTenEarthquakeList.postValue(getTopTenEarthquake)
-                            timeHideLoading()
+                            hideLoading()
                         }
                     }
 
@@ -136,7 +137,7 @@ class MainViewModel @Inject constructor(
                     is Resource.Success -> {
                         response.data?.let { getTopTenLocationEarthquake ->
                             getTopTenLocationEarthquakeList.postValue(getTopTenLocationEarthquake)
-                            timeHideLoading()
+                            hideLoading()
                         }
                     }
 
@@ -164,7 +165,7 @@ class MainViewModel @Inject constructor(
                         response.data?.let { getEarthquake ->
                             getNowEarthquakeList.postValue(getEarthquake)
                             clickableHeaderMenus.postValue(true)
-                            timeHideLoading()
+                            hideLoading()
                         }
                     }
 
@@ -191,7 +192,7 @@ class MainViewModel @Inject constructor(
                         }
                         filterNowList = getAllFilter() ?: ArrayList()
                         getNowEarthquakeList.postValue(filterNowList)
-                        timeHideLoading()
+                        hideLoading()
                     }
 
                     is Resource.Error -> {
@@ -219,7 +220,7 @@ class MainViewModel @Inject constructor(
                 !checkBetweenData(startDate, endDate)
             ) {
                 filterList = getNowEarthquakeList.value.let { it!! }
-                timeHideLoading()
+                hideLoading()
             } else {
                 getAllFilterQueriers(
                     this,
@@ -227,7 +228,7 @@ class MainViewModel @Inject constructor(
                 ) { returnedFilterList ->
                     filterList = returnedFilterList
                 }
-                timeHideLoading()
+                hideLoading()
             }
         }
         return filterList
@@ -252,7 +253,7 @@ class MainViewModel @Inject constructor(
                             getNearEarthquakeList.postValue(filterNearList)
                             clickableHeaderMenus.postValue(true)
                         }
-                        timeHideLoading()
+                        hideLoading()
                     }
 
                     is Resource.Error -> {
@@ -276,7 +277,7 @@ class MainViewModel @Inject constructor(
                             getLocationApiEarthquakeList.postValue(getLocationEarthquake)
                             getNowEarthquakeList.postValue(getLocationEarthquake)
                         }
-                        timeHideLoading()
+                        hideLoading()
                     }
 
                     is Resource.Error -> {
@@ -303,7 +304,7 @@ class MainViewModel @Inject constructor(
                             getDateEarthquakeList.postValue(getDateBetweenEarthquake)
                             getNowEarthquakeList.postValue(getDateBetweenEarthquake)
                         }
-                        timeHideLoading()
+                        hideLoading()
                     }
 
                     is Resource.Error -> {
@@ -326,7 +327,7 @@ class MainViewModel @Inject constructor(
                         response.data?.let { getOnlyDateEarthquake ->
                             getDateEarthquakeList.postValue(getOnlyDateEarthquake)
                             getNowEarthquakeList.postValue(getOnlyDateEarthquake)
-                            timeHideLoading()
+                            hideLoading()
                         }
                     }
 
@@ -357,7 +358,7 @@ class MainViewModel @Inject constructor(
                         }
                         getNowEarthquakeList.postValue(filterNowList)
 
-                        timeHideLoading()
+                        hideLoading()
                     }
 
                     is Resource.Error -> {
@@ -395,6 +396,11 @@ class MainViewModel @Inject constructor(
     fun onClickMap() {
         if (clickableHeaderMenus.value == true)
             clickMap.postValue(true)
+    }
+
+    fun onClickFilter() {
+        if (clickableHeaderMenus.value == true)
+            clickFilter.postValue(true)
     }
 
     fun onClickList() {

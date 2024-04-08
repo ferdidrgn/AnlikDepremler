@@ -1,10 +1,7 @@
 package com.ferdidrgn.anlikdepremler.base
 
-import android.os.Handler
-import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.tools.getContext
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.tools.mainScope
@@ -27,15 +24,6 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
-    fun timeHideLoading() {
-        mainScope {
-            showLoading()
-            Handler(Looper.getMainLooper()).postDelayed({
-                hideLoading()
-            }, 2000)
-        }
-    }
-
     fun serverMessage(err: Err?) {
         error.postValue(
             Err(
@@ -44,6 +32,7 @@ open class BaseViewModel : ViewModel() {
             )
         )
     }
+
     fun message(message: Int): String {
         return getContext().resources?.getString(message).toString()
     }

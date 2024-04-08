@@ -40,10 +40,6 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
                 }
                 swipeRefreshLayout.isRefreshing = false
             }
-
-            llFilters.onClickThrottled {
-                observeFilterIconClick()
-            }
         }
     }
 
@@ -55,6 +51,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
                 if (clickable) {
                     //Map icon Click
                     observeMapIconClick()
+                    observeFilterIconClick()
                 }
             }
 
@@ -73,31 +70,35 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
     }
 
     private fun observeMapIconClick() {
-        viewModel.clickMap.observe(viewLifecycleOwner) {
-            NavHandler.instance.toMapsActivity(requireContext(), viewModel.filterNowList, false)
+        viewModel.clickMap.observe(viewLifecycleOwner) { isMapClick ->
+            if (isMapClick)
+                NavHandler.instance.toMapsActivity(requireContext(), viewModel.filterNowList, false)
         }
     }
 
     private fun observeFilterIconClick() {
         viewModel.apply {
-            location.value = ""
-            FilterBottomSheet { lng ->
-                earthquakeBodyRequest.userLat = lng?.latitude
-                earthquakeBodyRequest.userLong = lng?.longitude
+            clickFilter.observe(viewLifecycleOwner) { isFilterClick ->
+                if (isFilterClick) {
+                    location.value = ""
+                    FilterBottomSheet { lng ->
+                        earthquakeBodyRequest.userLat = lng?.latitude
+                        earthquakeBodyRequest.userLong = lng?.longitude
 
-                if (clickFilterClear.value == true) {
-                    getNowEarthquake()
-                } else {
-                    getFilters()
-                    clickFilterClear.postValue(false)
+                        if (clickFilterClear.value == true)
+                            getNowEarthquake()
+                        else {
+                            getFilters()
+                            clickFilterClear.postValue(false)
+                        }
+                    }.show(parentFragmentManager, "filterBottomSheet")
                 }
-            }.show(parentFragmentManager, "filterBottomSheet")
+            }
         }
     }
 
     override fun onStart() {
         super.onStart()
-
         observeServiceData()
     }
 
