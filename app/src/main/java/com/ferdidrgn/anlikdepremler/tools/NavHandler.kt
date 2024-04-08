@@ -12,7 +12,7 @@ import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.presentation.ui.language.LanguageActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.mapsEarthquake.MapsEarthquakeActivity
-import com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsandPrivacePolicyActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsandPrivacyPolicyActivity
 
 class NavHandler {
 
@@ -84,9 +84,9 @@ class NavHandler {
         context: Context,
         whichTermsAndPrivacy: WhichTermsAndPrivacy
     ) {
-        val intent = Intent(context, TermsAndConditionsandPrivacePolicyActivity::class.java)
+        val intent = Intent(context, TermsAndConditionsandPrivacyPolicyActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.putExtra(WHICH_TERMS_PRIVACE, whichTermsAndPrivacy)
+        intent.putExtra(WHICH_TERMS_PRIVACY, whichTermsAndPrivacy)
         context.startActivity(intent)
     }
 

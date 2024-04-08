@@ -3,7 +3,7 @@ package com.ferdidrgn.anlikdepremler.presentation.ui.main.settings
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
-import com.ferdidrgn.anlikdepremler.data.repositroy.AppToolsFireBaseQueriesRepository
+import com.ferdidrgn.anlikdepremler.domain.GetContactUsEmailUseCase
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.tools.mainScope
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val appToolsFireBaseQueriesRepository: AppToolsFireBaseQueriesRepository
+    private val getContactUsEmailUseCase: GetContactUsEmailUseCase,
 ) : BaseViewModel() {
 
     val userLat = MutableStateFlow(0.0)
@@ -46,7 +46,7 @@ class SettingsViewModel @Inject constructor(
         var valueReturn = ""
         mainScope {
             showLoading()
-            appToolsFireBaseQueriesRepository.getContactUsEmail { status, contactUs ->
+            getContactUsEmailUseCase { status, contactUs ->
                 when (status) {
                     Response.ThereIs -> {
                         contactUs?.let { data ->
@@ -101,7 +101,7 @@ class SettingsViewModel @Inject constructor(
         btnChangeThemeClicked.postValue(true)
     }
 
-    fun onPrivacePolicyClick() {
+    fun onPrivacyPolicyClick() {
         btnPrivacePolicyClicked.postValue(true)
     }
 

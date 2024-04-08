@@ -5,12 +5,12 @@ import androidx.activity.viewModels
 import com.ferdidrgn.anlikdepremler.base.BaseActivity
 import com.ferdidrgn.anlikdepremler.databinding.ActivityTermsAndConditionsandPrivacePolicyBinding
 import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
-import com.ferdidrgn.anlikdepremler.tools.WHICH_TERMS_PRIVACE
+import com.ferdidrgn.anlikdepremler.tools.WHICH_TERMS_PRIVACY
 import com.ferdidrgn.anlikdepremler.tools.builderADS
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TermsAndConditionsandPrivacePolicyActivity :
+class TermsAndConditionsandPrivacyPolicyActivity :
     BaseActivity<TermsAndConditionAndPrivacyPolicyViewModel, ActivityTermsAndConditionsandPrivacePolicyBinding>() {
 
     override fun getVM(): Lazy<TermsAndConditionAndPrivacyPolicyViewModel> = viewModels()
@@ -27,7 +27,7 @@ class TermsAndConditionsandPrivacePolicyActivity :
 
 
     private fun observe() {
-        val type = intent.getSerializableExtra(WHICH_TERMS_PRIVACE)
+        val type = intent.getSerializableExtra(WHICH_TERMS_PRIVACY)
         viewModel.getHtmlFromUrl(type as WhichTermsAndPrivacy)
     }
 

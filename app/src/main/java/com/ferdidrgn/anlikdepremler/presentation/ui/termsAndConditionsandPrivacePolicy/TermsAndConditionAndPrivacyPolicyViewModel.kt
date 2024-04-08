@@ -3,8 +3,9 @@ package com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivac
 import android.text.Html
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
-import com.ferdidrgn.anlikdepremler.domain.GetContactUsEmailUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetTermsConditionOrPrivacyPolicyUseCase
+import com.ferdidrgn.anlikdepremler.tools.PRIVACY_POLICY
+import com.ferdidrgn.anlikdepremler.tools.TERMS_AND_CONDITION
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.tools.mainScope
@@ -14,7 +15,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TermsAndConditionAndPrivacyPolicyViewModel @Inject constructor(
-    private val getContactUsEmailUseCase: GetContactUsEmailUseCase,
     private val getTermsConditionOrPrivacyPolicyUseCase: GetTermsConditionOrPrivacyPolicyUseCase
 ) :
     BaseViewModel() {
@@ -32,7 +32,7 @@ class TermsAndConditionAndPrivacyPolicyViewModel @Inject constructor(
             when (whichTermsAndPrivacy) {
                 WhichTermsAndPrivacy.TermsAndCondition -> {
                     toolBarText.value = message(R.string.terms_condition)
-                    getTermsConditionOrPrivacyPolicyUseCase("termsAndCondition") { status, html ->
+                    getTermsConditionOrPrivacyPolicyUseCase(TERMS_AND_CONDITION) { status, html ->
                         hideLoading()
                         loopWhen(status, html)
                     }
@@ -40,7 +40,7 @@ class TermsAndConditionAndPrivacyPolicyViewModel @Inject constructor(
 
                 WhichTermsAndPrivacy.PrivacyAndPolicy -> {
                     toolBarText.value = message(R.string.privace_policy)
-                    getTermsConditionOrPrivacyPolicyUseCase("privacyPolicy") { status, html ->
+                    getTermsConditionOrPrivacyPolicyUseCase(PRIVACY_POLICY) { status, html ->
                         hideLoading()
                         loopWhen(status, html)
                     }
