@@ -80,16 +80,10 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 themeLightOrDark()
             }
             btnPrivacePolicyClicked.observe(viewLifecycleOwner) {
-                NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
-                    requireContext(),
-                    WhichTermsAndPrivacy.PrivacyAndPolicy
-                )
+                goToTermsAndConditionsAction(true)
             }
             btnTermsAndConditionsClicked.observe(viewLifecycleOwner) {
-                NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
-                    requireContext(),
-                    WhichTermsAndPrivacy.TermsAndCondition
-                )
+                goToTermsAndConditionsAction(false)
             }
 
             btnBuyCoffeeUrlClick.observe(viewLifecycleOwner) {
@@ -112,6 +106,13 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         }
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+    }
+
+    private fun goToTermsAndConditionsAction(isPrivacyPolicy: Boolean) {
+        NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
+            requireContext(),
+            if (isPrivacyPolicy) WhichTermsAndPrivacy.PrivacyAndPolicy else WhichTermsAndPrivacy.TermsAndCondition
+        )
     }
 
     private fun openNotificationSettings() {
@@ -199,16 +200,16 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
 
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingServiceDisconnected() {
-                showToast(getString(R.string.billing_error))// Faturalandırma hizmeti bağlantısı kesildi, gerekirse tekrar bağlanmayı deneyebiliriz.
+                // Faturalandırma hizmeti bağlantısı kesildi, gerekirse tekrar bağlanmayı deneyebiliriz.
+                showToast(getString(R.string.billing_error))
             }
 
             override fun onBillingSetupFinished(billingResult: BillingResult) {
-                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                    // Faturalandırma bağlantısı başarıyla kuruldu, satın alma işlemlerini gerçekleştirebiliriz.
-                    isBillingLoadSuccess = true
-                } else {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK)
+                    isBillingLoadSuccess =
+                        true // Faturalandırma bağlantısı başarıyla kuruldu, satın alma işlemlerini gerçekleştirebiliriz.
+                else
                     showToast(getString(R.string.billing_error) + " " + billingResult.debugMessage) //"Faturalandırma bağlantısı başarısız: ${billingResult.debugMessage}"
-                }
             }
         })
     }
@@ -231,9 +232,8 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                         billingClient.launchBillingFlow(requireActivity(), billingFlowParams)
                     }
                 }
-            } else {
+            } else
                 showToast(getString(R.string.billing_details_failed) + " " + billingResult.debugMessage)
-            }
         }
     }
 
@@ -241,21 +241,18 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         billingResult: BillingResult,
         purchases: MutableList<Purchase>?
     ) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null)
             handlePurchases(purchases)
-        } else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
+        else if (billingResult.responseCode == BillingClient.BillingResponseCode.USER_CANCELED)
             showToast(getString(R.string.billing_cancel))   //"Kullanıcı satın alma işlemi iptal etti"
-        } else {
+        else
             showToast(getString(R.string.billing_failed) + " " + billingResult.debugMessage)
-        }
     }
 
     private fun handlePurchases(purchases: List<Purchase>) {
         for (purchase in purchases) {
-            if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-                // Satın alınan ürünleri işleme almak için burada gerekli işlemler yapılabilir.
-                consumePurchase(purchase)
-            }
+            if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED)
+                consumePurchase(purchase) // Satın alınan ürünleri işleme almak için burada gerekli işlemler yapılabilir.
         }
     }
 
@@ -265,12 +262,10 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             .build()
 
         billingClient.consumeAsync(consumeParams) { billingResult, purchaseToken ->
-            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchaseToken != null) {
-                // Satın alınan ürün başarıyla tüketildi, gerekli işlemler yapılabilir.
-                showToast(getString(R.string.billing_consume_success))
-            } else {
+            if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchaseToken != null)
+                showToast(getString(R.string.billing_consume_success)) // Satın alınan ürün başarıyla tüketildi, gerekli işlemler yapılabilir.
+            else
                 showToast(getString(R.string.billing_consume_failed) + " " + billingResult.debugMessage)
-            }
         }
     }
 }

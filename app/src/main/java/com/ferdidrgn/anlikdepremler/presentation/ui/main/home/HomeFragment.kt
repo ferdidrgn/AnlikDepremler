@@ -4,11 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
-import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.base.Err
 import com.ferdidrgn.anlikdepremler.databinding.FragmentHomeBinding
@@ -54,9 +49,9 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
                 ioScope {
                     binding.apply {
                         homeSliderAdapter?.differ?.submitList(homeSliderList as List<HomeSliderData?>?)
-                        if (homeSliderList != null) {
+                        if (homeSliderList != null)
                             indicator.count = homeSliderList.size
-                        }
+
                         vpSlider.getPositionAndSendHandler2(homeSliderList, handler) {
                             indicator.selection = it
                         }

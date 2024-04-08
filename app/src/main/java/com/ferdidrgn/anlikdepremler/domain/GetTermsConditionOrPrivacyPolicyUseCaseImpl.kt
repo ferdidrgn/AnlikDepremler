@@ -10,10 +10,6 @@ class GetTermsConditionOrPrivacyPolicyUseCaseImpl @Inject constructor(
 
     override operator fun invoke(
         whichTermsAndPrivacy: String,
-        status: (Response, String?) -> Unit
-    ): Unit =
-        appToolsFireBaseQueriesRepository.getTermsConditionOrPrivacyPolicy(
-            whichTermsAndPrivacy,
-            status
-        )
+        status: (Response, String?) -> Unit): Unit =
+        appToolsFireBaseQueriesRepository.getTermsConditionOrPrivacyPolicy(whichTermsAndPrivacy, status)
 }

@@ -7,6 +7,6 @@ import javax.inject.Inject
 class GetContactUsEmailUseCaseImpl @Inject constructor(
     private val appToolsFireBaseQueriesRepository: AppToolsFireBaseQueriesRepository,
 ) : GetContactUsEmailUseCase {
-    override fun invoke(status: (Response, String?) -> Unit) =
+    override fun invoke(status: (Response, String?) -> Unit): Unit =
         appToolsFireBaseQueriesRepository.getContactUsEmail(status)
 }
