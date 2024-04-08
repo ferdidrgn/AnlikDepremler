@@ -60,13 +60,14 @@
                 style="@style/TextColorHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:text="@string/earthquakes"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/now_earthquake"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/btnMap"
-                app:layout_constraintEnd_toStartOf="@+id/llFilters"
-                app:layout_constraintStart_toEndOf="@+id/btnMap"
-                app:layout_constraintTop_toTopOf="@+id/btnMap" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/llFilters"
@@ -75,7 +76,7 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
                 android:onClick="@{() -> viewModel.onClickFilter()}"
-                android:visibility="@{viewModel.clickableHeaderMenus ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewModel.isNearPage ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -119,11 +120,12 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvHeader"
+                app:layout_constraintVertical_bias="0.0"
                 app:setAdapter="@{nowEarthquakeAdapter}"
                 app:submitListSet="@{viewModel.isNearPage() ? viewModel.getNearEarthquakeList : viewModel.getNowEarthquakeList}"
-                tools:layout_editor_absoluteX="1dp"
                 tools:listitem="@layout/item_now_earthquake_list" />
 
             <TextView
