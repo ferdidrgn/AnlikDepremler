@@ -21,7 +21,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvEarthquakes"
         style="@style/CardBackgroundTint_StrokeColor"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="3dp"
         app:cardBackgroundColor="@color/purple_200">
@@ -131,8 +131,8 @@
 
                 <ImageView
                     style="@style/ImgTintColor"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_push_pin" />
 
                 <TextView
@@ -142,7 +142,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/merienda_black"
                     android:text="@string/depth"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -154,6 +154,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/merienda_bold"
                 android:text="@{earthquake.depth + ` km`}"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@+id/ll1"
                 app:layout_constraintStart_toStartOf="@id/ll1"
                 app:layout_constraintTop_toBottomOf="@id/ll1"
@@ -163,16 +164,18 @@
                 android:id="@+id/ll3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/tvLocation"
+                app:layout_constraintStart_toEndOf="@+id/ll1"
                 app:layout_constraintTop_toBottomOf="@+id/tvLocation">
 
                 <ImageView
                     style="@style/ImgTintColor"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_clipboard_copy_duplicate_paste_icon" />
 
                 <TextView
@@ -182,7 +185,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/merienda_black"
                     android:text="@string/revize"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -194,6 +197,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/merienda_bold"
                 android:text="@{earthquake.revize}"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@+id/ll3"
                 app:layout_constraintStart_toStartOf="@+id/ll3"
                 app:layout_constraintTop_toBottomOf="@+id/ll3"
@@ -211,8 +215,8 @@
 
                 <ImageView
                     style="@style/ImgTintColor"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_calendar_date_schedule_time" />
 
                 <TextView
@@ -222,7 +226,7 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/merienda_black"
                     android:text="@string/date"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -230,10 +234,7 @@
                 android:id="@+id/rlDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp"
-                android:padding="6dp"
+                android:layout_marginVertical="5dp"
                 app:layout_constraintEnd_toStartOf="@+id/rlTime"
                 app:layout_constraintStart_toStartOf="@+id/ll2"
                 app:layout_constraintTop_toBottomOf="@+id/ll2">
@@ -243,8 +244,10 @@
                     style="@style/TextColor_primary2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/merienda_bold"
                     android:text="@{earthquake.date}"
+                    android:textSize="12sp"
                     tools:text="12.02.2023" />
 
             </RelativeLayout>
@@ -262,8 +265,8 @@
 
                 <ImageView
                     style="@style/ImgTintColor"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_alarm_clock_time_watch" />
 
                 <TextView
@@ -273,7 +276,7 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/merienda_black"
                     android:text="@string/hour"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -281,10 +284,8 @@
                 android:id="@+id/rlTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
                 android:paddingHorizontal="14dp"
-                android:paddingVertical="6dp"
+                android:layout_marginVertical="5dp"
                 app:layout_constraintEnd_toEndOf="@+id/ll4"
                 app:layout_constraintStart_toStartOf="@+id/ll4"
                 app:layout_constraintTop_toBottomOf="@+id/ll4">
@@ -294,9 +295,10 @@
                     style="@style/TextColor_primary2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/merienda_bold"
                     android:text="@{earthquake.time}"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     tools:text="07.10.2023" />
 
             </RelativeLayout>
