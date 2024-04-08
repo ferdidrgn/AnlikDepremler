@@ -1,7 +1,9 @@
 package com.ferdidrgn.anlikdepremler.presentation.ui.main
 
 import androidx.lifecycle.MutableLiveData
+import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
+import com.ferdidrgn.anlikdepremler.base.Err
 import com.ferdidrgn.anlikdepremler.base.Resource
 import com.ferdidrgn.anlikdepremler.domain.GetDateBetweenEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.GetEarthquakeUseCase
@@ -98,6 +100,8 @@ class MainViewModel @Inject constructor(
             //Top Ten Location Earthquake
             location.emit("Istanbul")
             getTopTenLocationEarthquake()
+
+            hideLoading()
         }
     }
 
@@ -137,7 +141,7 @@ class MainViewModel @Inject constructor(
                     }
 
                     is Resource.Error -> {
-                        serverMessage(response.error)
+                        serverMessage(Err(message = message(R.string.error_empty_response)))
                         hideLoading()
                     }
 

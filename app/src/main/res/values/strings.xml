@@ -57,6 +57,7 @@
     <string name="resend_code">Tekrar Dene</string>
     <string name="cancel">İptal</string>
     <string name="error_message">Bir şeyler Yanlış Gitti...</string>
+    <string name="error_empty_response">Herhangi bir deprem bilgisi bulunamadı</string>
     <string name="error_server">Sunucumuz Bakımda...</string>
 
     <string name="location_enable">Lokasyon İzni Açık</string>
@@ -70,8 +71,8 @@
     <string name="location_filter_info">Lokasyon filtresi yapmak istiyorsanız o konuma basılı tutunuz.</string>
     <string name="top_ten_earthquake">En Güncel 10 Deprem</string>
     <string name="see_all">Hepsini Göster...</string>
-    <string name="top_ten_location_eartquake">En Güncel 10 Deprem Konumu</string>
-    <string name="location">Lokasyon (*I*stanbul)</string>
+    <string name="top_ten_location_earthquake">En Güncel 10 Deprem (Konum)</string>
+    <string name="location">Lokasyon (*Istanbul)</string>
     <string name="choose_location">Lokasyon Yaz / Haritadan Seç</string>
     <string name="choose_date">Bir tarihte / Tarihler Arası</string>
     <string name="billing_error">Faturalandırma hizmeti bağlantısı kesildi, gerekirse tekrar bağlanmayı deneyiniz.</string>

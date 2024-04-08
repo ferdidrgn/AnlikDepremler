@@ -55,42 +55,79 @@
                     ads:adSize="BANNER"
                     ads:adUnitId="@string/BANNER_ADS_REAL" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    tools:context=".presentation.ui.main.home.HomeFragment">
-
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/vpSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clipToPadding="false"
-                        android:overScrollMode="never"
-                        app:setAdapter="@{homeSliderAdapter}"
-                        app:submitList="@{viewModel.homeSliderList}"
-                        tools:listitem="@layout/item_home_slider" />
-
-                    <com.rd.PageIndicatorView
-                        android:id="@+id/indicator"
-                        style="@style/PageIndicatorView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="12dp" />
-                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvChooseCityEarthquake"
+                        style="@style/TextColor_primary8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:text="@string/top_ten_location_earthquake"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSeeAllLocationEarthquake"
+                        style="@style/TextColorHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> viewModel.onTopLocationEarthquake()}"
+                        android:paddingHorizontal="5dp"
+                        android:text="@string/see_all"
+                        android:textAlignment="textEnd"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                        android:id="@+id/csChooseCityEarthquake"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="60dp"
+                        android:layout_marginTop="10dp"
+                        app:custom_edit_hint="@string/location"
+                        app:custom_edit_text="@={viewModel.location}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvChooseCityEarthquake" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvChooseCityEarthquake"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="7dp"
+                        android:layout_marginTop="5dp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        app:adapter="@{topTenLocationEarthquakeAdapter}"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_constraintTop_toBottomOf="@+id/csChooseCityEarthquake"
+                        app:submitList="@{viewModel.getTopTenLocationEarthquakeList}"
+                        tools:itemCount="5"
+                        tools:layout_editor_absoluteX="1dp"
+                        tools:listitem="@layout/item_top_ten_location_earthquake" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tvTopTen"
-                        style="@style/TextColor_primary9"
+                        style="@style/TextColor_primary8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
@@ -134,66 +171,32 @@
                         tools:listitem="@layout/item_top_ten_earthquake" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="20dp"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    tools:context=".presentation.ui.main.home.HomeFragment">
 
-                    <TextView
-                        android:id="@+id/tvChooseCityEarthquake"
-                        style="@style/TextColor_primary9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:text="@string/top_ten_location_eartquake"
-                        android:textAlignment="textStart"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvSeeAllLocationEarthquake"
-                        style="@style/TextColorHeader"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{() -> viewModel.onTopLocationEarthquake()}"
-                        android:paddingHorizontal="5dp"
-                        android:text="@string/see_all"
-                        android:textAlignment="textEnd"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                        android:id="@+id/csChooseCityEarthquake"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="5dp"
-                        app:custom_edit_hint="@string/location"
-                        app:custom_edit_text="@={viewModel.location}"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvChooseCityEarthquake" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvChooseCityEarthquake"
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vpSlider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="7dp"
                         android:clipToPadding="false"
-                        android:orientation="horizontal"
                         android:overScrollMode="never"
-                        app:adapter="@{topTenLocationEarthquakeAdapter}"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                        app:layout_constraintTop_toBottomOf="@+id/csChooseCityEarthquake"
-                        app:submitList="@{viewModel.getTopTenLocationEarthquakeList}"
-                        tools:itemCount="5"
-                        tools:layout_editor_absoluteX="1dp"
-                        tools:listitem="@layout/item_top_ten_location_earthquake" />
+                        app:setAdapter="@{homeSliderAdapter}"
+                        app:submitList="@{viewModel.homeSliderList}"
+                        tools:listitem="@layout/item_home_slider" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.rd.PageIndicatorView
+                        android:id="@+id/indicator"
+                        style="@style/PageIndicatorView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="12dp" />
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

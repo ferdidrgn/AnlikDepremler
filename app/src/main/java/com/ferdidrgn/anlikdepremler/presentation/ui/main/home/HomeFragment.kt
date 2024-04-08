@@ -28,7 +28,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
 
     private lateinit var handler: MainSliderHandler
-    private lateinit var rvTopFiveEarthquake: RecyclerView
 
     override fun getVM(): Lazy<MainViewModel> = activityViewModels()
     override fun getDataBinding(): FragmentHomeBinding =

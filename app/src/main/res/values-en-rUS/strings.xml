@@ -53,6 +53,7 @@
     <string name="resend_code">Resend Code</string>
     <string name="cancel">Cancel</string>
     <string name="error_message">Something Wrong...</string>
+    <string name="error_empty_response">No earthquake information found</string>
     <string name="error_server">The server is under maintenance</string>
 
     <string name="location_enable">Location Enable</string>
@@ -66,8 +67,8 @@
     <string name="location_filter_info">If you want to make a location filter, hold down that location.</string>
     <string name="top_ten_earthquake">Top Ten Earthquake</string>
     <string name="see_all">See All...</string>
-    <string name="top_ten_location_eartquake">Top Ten Location Earthquake</string>
-    <string name="location">Location (*I*stanbul)</string>
+    <string name="top_ten_location_earthquake">Top Ten Location Earthquake</string>
+    <string name="location">Location (*Istanbul)</string>
     <string name="choose_location">Write Location / Select from Map</string>
     <string name="choose_date">Choose a date / Between dates</string>
     <string name="billing_error">Billing service connection is disconnected, You can try to reconnect if necessary.</string>

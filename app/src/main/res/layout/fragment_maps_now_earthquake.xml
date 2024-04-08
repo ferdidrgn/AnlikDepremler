@@ -44,7 +44,7 @@
                 android:src="@drawable/ic_format_list" />
 
             <TextView
-                style="@style/TextColor_primary9"
+                style="@style/TextColor_primary8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
