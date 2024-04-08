@@ -19,30 +19,30 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvEarthquakeMaps"
+        android:id="@+id/cvEarthquakes"
         style="@style/CardBackgroundTint_StrokeColor"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginVertical="5dp"
-        app:rippleColor="@android:color/transparent">
+        android:layout_marginVertical="3dp"
+        app:cardBackgroundColor="@color/purple_200">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="16dp">
+            android:paddingBottom="10dp">
 
             <LinearLayout
                 android:id="@+id/llImageFrame"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <RelativeLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="80dp"
                     android:layout_height="85dp">
 
@@ -51,14 +51,18 @@
                         android:layout_width="75dp"
                         android:layout_height="75dp"
                         android:layout_centerInParent="true"
-                        android:layout_marginEnd="5dp"
+                        android:layout_margin="5dp"
                         android:clipChildren="false"
                         android:clipToPadding="false"
                         android:divider="@android:color/transparent"
                         android:dividerHeight="0.0px"
                         android:elevation="5dp"
                         app:cardCornerRadius="15dp"
-                        app:cardElevation="5dp">
+                        app:cardElevation="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/tvMl"
@@ -71,15 +75,17 @@
                             android:textSize="30sp"
                             android:textStyle="bold"
                             tools:text="2.2" />
+
                     </com.google.android.material.card.MaterialCardView>
-                </RelativeLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     style="@style/TextColor_primary8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="21dp"
                     android:text="@string/distance"
                     android:textSize="14sp" />
 
@@ -100,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
@@ -110,8 +116,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/llImageFrame"
                 app:layout_constraintStart_toEndOf="@+id/llImageFrame"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/llImageFrame"
-                tools:text="Istanbul, Çınarcık" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Istanbul" />
 
             <LinearLayout
                 android:id="@+id/ll1"
@@ -125,27 +131,29 @@
 
                 <ImageView
                     style="@style/ImgTintColor"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/ic_push_pin" />
 
                 <TextView
+                    style="@style/TextColor_primary2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/merienda_black"
                     android:text="@string/depth"
-                    android:textSize="13.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvDepth"
+                style="@style/TextColor_primary2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="15dp"
+                android:fontFamily="@font/merienda_bold"
                 android:text="@{earthquake.depth + ` km`}"
-                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="@+id/ll1"
                 app:layout_constraintStart_toStartOf="@id/ll1"
                 app:layout_constraintTop_toBottomOf="@id/ll1"
@@ -163,30 +171,33 @@
 
                 <ImageView
                     style="@style/ImgTintColor"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_calculate" />
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_clipboard_copy_duplicate_paste_icon" />
 
                 <TextView
+                    style="@style/TextColor_primary2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/merienda_black"
                     android:text="@string/revize"
-                    android:textSize="13.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvRevize"
+                style="@style/TextColor_primary2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:fontFamily="@font/merienda_bold"
                 android:text="@{earthquake.revize}"
-                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="@+id/ll3"
                 app:layout_constraintStart_toStartOf="@+id/ll3"
                 app:layout_constraintTop_toBottomOf="@+id/ll3"
-                tools:text="10 Km" />
+                tools:text="10 km" />
 
             <LinearLayout
                 android:id="@+id/ll2"
@@ -200,16 +211,18 @@
 
                 <ImageView
                     style="@style/ImgTintColor"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/ic_calendar_date_schedule_time" />
 
                 <TextView
+                    style="@style/TextColor_primary2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:fontFamily="@font/merienda_black"
                     android:text="@string/date"
-                    android:textSize="13.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -217,18 +230,21 @@
                 android:id="@+id/rlDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:padding="6dp"
                 app:layout_constraintEnd_toStartOf="@+id/rlTime"
                 app:layout_constraintStart_toStartOf="@+id/ll2"
                 app:layout_constraintTop_toBottomOf="@+id/ll2">
 
                 <TextView
                     android:id="@+id/tvDate"
+                    style="@style/TextColor_primary2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/merienda_bold"
                     android:text="@{earthquake.date}"
-                    android:textSize="13sp"
                     tools:text="12.02.2023" />
 
             </RelativeLayout>
@@ -246,16 +262,18 @@
 
                 <ImageView
                     style="@style/ImgTintColor"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/ic_alarm_clock_time_watch" />
 
                 <TextView
+                    style="@style/TextColor_primary2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:fontFamily="@font/merienda_black"
                     android:text="@string/hour"
-                    android:textSize="13.5sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -263,22 +281,25 @@
                 android:id="@+id/rlTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="6dp"
                 app:layout_constraintEnd_toEndOf="@+id/ll4"
                 app:layout_constraintStart_toStartOf="@+id/ll4"
                 app:layout_constraintTop_toBottomOf="@+id/ll4">
 
                 <TextView
                     android:id="@+id/tvTime"
+                    style="@style/TextColor_primary2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/merienda_bold"
                     android:text="@{earthquake.time}"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     tools:text="07.10.2023" />
 
             </RelativeLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

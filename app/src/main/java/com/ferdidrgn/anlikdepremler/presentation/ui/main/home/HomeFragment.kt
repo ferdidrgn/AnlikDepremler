@@ -94,6 +94,7 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
         super.onResume()
         binding.indicator.selection = 0
         handler.addChanging()
+        observe()
         viewModel.error.removeObserver(Observer<Err?> { value ->
             // Observer işlemleri
         })
