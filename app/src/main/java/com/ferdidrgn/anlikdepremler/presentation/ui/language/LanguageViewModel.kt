@@ -4,28 +4,25 @@ import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.tools.enums.ContextLanguages
 import com.ferdidrgn.anlikdepremler.tools.enums.Languages
-import com.ferdidrgn.anlikdepremler.data.repositroy.AppToolsFireBaseQueriesRepository
+import com.ferdidrgn.anlikdepremler.domain.GetContactUsEmailUseCase
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class LanguageViewModel @Inject constructor(
-    private val appToolsFireBaseQueriesRepository: AppToolsFireBaseQueriesRepository
+    private val getContactUsEmailUseCase: GetContactUsEmailUseCase
 ) : BaseViewModel() {
 
-
     val whichButtonSelected = MutableLiveData<Boolean>()
-
     var selected: (() -> Unit)? = null
 
     fun firstState() {
         whichButtonSelected.postValue(false)
-        if (ClientPreferences.inst.language == Languages.TURKISH.language) {
+        if (ClientPreferences.inst.language == Languages.TURKISH.language)
             whichButtonSelected.postValue(false)
-        } else {
+        else
             whichButtonSelected.postValue(true)
-        }
     }
 
     fun turkishLanguageItemClicked() {

@@ -69,6 +69,14 @@ fun changeStringToDate(date: String): Calendar {
     return cameDate
 }
 
+fun changeDataShameFormat(backendDate: String): String? {
+    val backendDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val date: Date? = backendDateFormat.parse(backendDate)
+
+    val displayDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    return date?.let { displayDateFormat.format(it) }
+}
+
 fun showToast(
     message: String,
     context: Context? = com.ferdidrgn.anlikdepremler.AnlikDepremlerApp.inst.applicationContext

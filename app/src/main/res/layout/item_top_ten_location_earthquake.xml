@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/merienda_bold"
-                    android:text="@{earthquake.date}"
+                    app:dateFormat="@{earthquake.date}"
                     tools:text="12.02.2023" />
             </LinearLayout>
 

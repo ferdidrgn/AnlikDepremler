@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.ferdidrgn.anlikdepremler.base.BaseAdapter
 import com.ferdidrgn.anlikdepremler.base.BaseStaggeredAdapter
 import com.ferdidrgn.anlikdepremler.base.ListAdapterItem
+import com.ferdidrgn.anlikdepremler.tools.changeDataShameFormat
 import com.ferdidrgn.anlikdepremler.tools.components.CustomToolbar
 import com.ferdidrgn.anlikdepremler.tools.downloadFromUrl
 
@@ -110,5 +111,13 @@ object DataBindingUtil {
     fun submitList(vp: ViewPager2, list: List<ListAdapterItem>?) {
         val adapter = vp.adapter as? BaseAdapter<ViewDataBinding, ListAdapterItem>?
         adapter?.differ?.submitList(list)
+    }
+
+    @JvmStatic
+    @BindingAdapter("dateFormat")
+    fun setDateFormat(textView: TextView, date: String?) {
+        if (!date.isNullOrEmpty()) {
+            textView.text = changeDataShameFormat(date)
+        }
     }
 }
