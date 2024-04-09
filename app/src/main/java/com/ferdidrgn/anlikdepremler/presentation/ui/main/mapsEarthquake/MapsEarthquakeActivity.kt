@@ -134,7 +134,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
             if (result.resultCode == Activity.RESULT_OK)
                 getLocation()
             else
-                grantedPermissionMainAction(this)
+                grantedPermissionMainAction()
         }
 
     private val requestNowLocationPermissionLauncher =
@@ -144,7 +144,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
             if (isGranted)
                 setUpMap()
             else
-                grantedPermissionMainAction(this)
+                grantedPermissionMainAction()
         }
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -426,6 +426,11 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
             NavHandler.instance.toMainActivity(this, ToMain.NearEarthquake)
         else
             NavHandler.instance.toMainActivity(this, ToMain.NowEarthquake)
+    }
+
+    private fun grantedPermissionMainAction() {
+        NavHandler.instance.toMainActivityClearTask(this, ToMain.Home)
+        showToast(getString(R.string.please_accept_location))
     }
 
     override fun onDestroy() {
