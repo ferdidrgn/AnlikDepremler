@@ -10,8 +10,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.ferdidrgn.anlikdepremler.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import java.util.Timer
-import java.util.TimerTask
 
 class CustomEditText : ConstraintLayout {
     lateinit var editText: TextInputEditText
@@ -34,7 +32,7 @@ class CustomEditText : ConstraintLayout {
     }
 
     private val handler = Handler(Looper.getMainLooper())
-    private val DELAY: Long = 2000 // 2 seconds delay
+    private val delay: Long = 2000 // 2 seconds delay
     private var timerRunnable: Runnable? = null
 
     private fun initLayout(context: Context, attributeSet: AttributeSet?, style: Int?) {
@@ -72,7 +70,7 @@ class CustomEditText : ConstraintLayout {
                 }
 
                 // Post the runnable with a delay
-                handler.postDelayed(timerRunnable!!, DELAY)
+                handler.postDelayed(timerRunnable!!, delay)
             }
         })
     }

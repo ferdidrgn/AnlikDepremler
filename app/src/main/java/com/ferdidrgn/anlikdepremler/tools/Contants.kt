@@ -34,6 +34,8 @@ const val DONATION_SMALL = "donation_small"
 const val TERMS_AND_CONDITION = "termsAndCondition"
 const val PRIVACY_POLICY = "privacyPolicy"
 
+const val DEFAULT_DATE_FORMAT = "dd-MM-yyyy"
+
 const val FILTER_LIST = "FILTER_LIST"
 const val APP_LINK = "https://play.google.com/store/apps/details?id=com.ferdidrgn.anlikdepremler"
 
