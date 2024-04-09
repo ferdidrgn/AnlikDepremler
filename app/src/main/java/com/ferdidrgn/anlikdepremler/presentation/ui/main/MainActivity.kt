@@ -54,7 +54,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         checkForAppUpdate()
         askNotificationPermission()
         reviewPopUp()
-        whereTo()
+        whereToFromIntentActivity()
     }
 
 
@@ -87,7 +87,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
 
-    private fun whereTo() {
+    private fun whereToFromIntentActivity() {
         when (intent.getSerializableExtra(TO_MAIN) as ToMain?) {
 
             ToMain.Home -> binding.bottomNav.selectedItemId = R.id.homeFragmentNav
@@ -103,6 +103,19 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
+    fun whereToGetFragment(toMain: ToMain) {
+        when (toMain) {
+            ToMain.Home -> binding.bottomNav.selectedItemId = R.id.homeFragmentNav
+
+            ToMain.NearEarthquake -> binding.bottomNav.selectedItemId =
+                R.id.nearEarthquakeFragmentNav
+
+            ToMain.NowEarthquake -> binding.bottomNav.selectedItemId = R.id.nowEarthquakeFragmentNav
+
+            ToMain.Settings -> binding.bottomNav.selectedItemId = R.id.settingsFragmentNav
+        }
+    }
+
     private fun getNavHost() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
@@ -111,7 +124,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         val bottomNav =
             findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNav)
         bottomNav.setupWithNavController(navController)
-
     }
 
     private fun checkForAppUpdate() {

@@ -8,9 +8,11 @@ import androidx.fragment.app.activityViewModels
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentNearEarthquakeBinding
+import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
+import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
 import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
@@ -120,7 +122,7 @@ class NearEarthquakeFragment :
                     }
                 })
             } else
-                grantedPermissionMainAction(requireContext())
+                (requireActivity() as MainActivity).whereToGetFragment(ToMain.Home)
         }
 
     private var requestOldLocationPermissionLauncher =
@@ -128,7 +130,7 @@ class NearEarthquakeFragment :
             if (result.resultCode == Activity.RESULT_OK)
                 getLocationFromUser()
             else
-                grantedPermissionMainAction(requireContext())
+                (requireActivity() as MainActivity).whereToGetFragment(ToMain.Home)
         }
 
     override fun onResume() {
