@@ -210,15 +210,15 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                            android:id="@+id/tvStartDate"
+                        <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
+                            android:id="@+id/cdpStartDate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textAlignment="textStart"
                             android:visibility="@{viewModel.subOption ? View.VISIBLE : View.GONE}"
-                            app:custom_edit_hint="@string/start_date"
-                            app:custom_edit_text="@={viewModel.startDate}" />
+                            app:cst_date_picker_hint_text="@string/start_date"
+                            app:cst_picker_changeable_text="@={viewModel.startDate}" />
 
                         <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
                             android:id="@+id/tvEndDate"

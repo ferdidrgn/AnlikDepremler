@@ -28,6 +28,11 @@ object CustomDataBindingUtils {
             CustomToolbar::class, attribute = "bind:custom_toolbar_changeable_text", event =
             "bind:textAttrChanged", method = "bind:getToolBarText"
         ),
+        InverseBindingMethod(
+            type =
+            CustomDatePicker::class, attribute = "bind:cst_picker_changeable_text", event =
+            "bind:textAttrChanged", method = "bind:getText"
+        ),
     )
     class CustomEditTextBinder {
         companion object {
@@ -119,6 +124,38 @@ object CustomDataBindingUtils {
                 text?.let {
                     if (it != editText.editTextView.text.toString()) {
                         editText.editTextView.setText(it)
+                    }
+                }
+            }
+        }
+    }
+
+    class CustomDatePickerBinder {
+        companion object {
+
+            @BindingAdapter("app:textAttrChanged")
+            @JvmStatic
+            fun setListener(customDatePicker: CustomDatePicker, listener: InverseBindingListener?) {
+                if (listener != null) {
+                    customDatePicker.tvSelectedDate.doAfterTextChanged { listener.onChange() }
+                }
+            }
+
+            @InverseBindingAdapter(
+                attribute = "cst_picker_changeable_text",
+                event = "app:textAttrChanged"
+            )
+            @JvmStatic
+            fun getCustomEditText(nMe: CustomDatePicker): String {
+                return nMe.tvSelectedDate.text.toString()
+            }
+
+            @BindingAdapter("cst_picker_changeable_text")
+            @JvmStatic
+            fun setCustomEditText(customDatePicker: CustomDatePicker, text: String?) {
+                text?.let {
+                    if (it != customDatePicker.tvSelectedDate.text.toString()) {
+                        customDatePicker.tvSelectedDate.text = it
                     }
                 }
             }
