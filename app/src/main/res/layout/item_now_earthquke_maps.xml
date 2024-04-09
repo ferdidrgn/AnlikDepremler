@@ -135,7 +135,7 @@
                     android:src="@drawable/ic_push_pin" />
 
                 <TextView
-                    style="@style/TextColor_primary2"
+                    style="@style/TextColor_primary4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -147,7 +147,7 @@
 
             <TextView
                 android:id="@+id/tvDepth"
-                style="@style/TextColor_primary2"
+                style="@style/TextColor_primary4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -178,7 +178,7 @@
                     android:src="@drawable/ic_clipboard_copy_duplicate_paste_icon" />
 
                 <TextView
-                    style="@style/TextColor_primary2"
+                    style="@style/TextColor_primary4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -190,7 +190,7 @@
 
             <TextView
                 android:id="@+id/tvRevize"
-                style="@style/TextColor_primary2"
+                style="@style/TextColor_primary4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -219,7 +219,7 @@
                     android:src="@drawable/ic_calendar_date_schedule_time" />
 
                 <TextView
-                    style="@style/TextColor_primary2"
+                    style="@style/TextColor_primary4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -240,7 +240,7 @@
 
                 <TextView
                     android:id="@+id/tvDate"
-                    style="@style/TextColor_primary2"
+                    style="@style/TextColor_primary4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -269,7 +269,7 @@
                     android:src="@drawable/ic_alarm_clock_time_watch" />
 
                 <TextView
-                    style="@style/TextColor_primary2"
+                    style="@style/TextColor_primary4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -291,7 +291,7 @@
 
                 <TextView
                     android:id="@+id/tvTime"
-                    style="@style/TextColor_primary2"
+                    style="@style/TextColor_primary4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"

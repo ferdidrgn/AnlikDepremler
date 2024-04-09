@@ -3,7 +3,7 @@ package com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivac
 import android.text.Html
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
-import com.ferdidrgn.anlikdepremler.domain.GetTermsConditionOrPrivacyPolicyUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.GetTermsConditionOrPrivacyPolicyUseCase
 import com.ferdidrgn.anlikdepremler.tools.PRIVACY_POLICY
 import com.ferdidrgn.anlikdepremler.tools.TERMS_AND_CONDITION
 import com.ferdidrgn.anlikdepremler.tools.enums.Response

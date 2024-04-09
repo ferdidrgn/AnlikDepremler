@@ -25,4 +25,8 @@
         <attr name="cst_toolbar_text" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="CustomDatePicker">
+        <attr name="cst_date_picker_hint_text" format="string" />
+    </declare-styleable>
+
 </resources>

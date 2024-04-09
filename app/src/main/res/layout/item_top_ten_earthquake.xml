@@ -113,7 +113,7 @@
 
                 <TextView
                     android:id="@+id/tvDate"
-                    style="@style/TextColor_primary2"
+                    style="@style/TextColor_primary4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -141,7 +141,7 @@
 
                 <TextView
                     android:id="@+id/tvTime"
-                    style="@style/TextColor_primary2"
+                    style="@style/TextColor_primary4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"

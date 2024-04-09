@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.domain
+package com.ferdidrgn.anlikdepremler.domain.useCase
 
 import com.ferdidrgn.anlikdepremler.data.repositroy.HomeSliderRepository
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData

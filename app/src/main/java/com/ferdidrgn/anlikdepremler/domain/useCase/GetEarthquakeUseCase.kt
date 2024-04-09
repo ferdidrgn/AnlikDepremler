@@ -1,9 +1,9 @@
-package com.ferdidrgn.anlikdepremler.domain
+package com.ferdidrgn.anlikdepremler.domain.useCase
 
 import com.ferdidrgn.anlikdepremler.base.Resource
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import kotlinx.coroutines.flow.Flow
 
-interface GetTopTenEarthquakeUseCase {
+interface GetEarthquakeUseCase {
     operator fun invoke(): Flow<Resource<ArrayList<Earthquake>?>>
 }

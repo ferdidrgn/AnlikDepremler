@@ -99,7 +99,7 @@
         <item name="android:textColor">@color/primary10</item>
     </style>
 
-    <style name="TextColor_primary2">
+    <style name="TextColor_primary4">
         <item name="android:textColor">@color/primary4</item>
     </style>
 
