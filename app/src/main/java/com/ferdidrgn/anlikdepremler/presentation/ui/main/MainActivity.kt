@@ -60,34 +60,33 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun onResume() {
         super.onResume()
-        if (updateType == AppUpdateType.IMMEDIATE) {
+        if (updateType == AppUpdateType.IMMEDIATE)
             appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
-                if (info.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                if (info.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS)
                     appUpdateManager.startUpdateFlowForResult(info, updateType, this, MY_CODE)
-                }
             }
-        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (updateType == AppUpdateType.FLEXIBLE) {
+
+        if (updateType == AppUpdateType.FLEXIBLE)
             appUpdateManager.unregisterListener(installStateUpdatedListener)
-        }
+        networkMonitor.unregister()
+        binding.unbind()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == MY_CODE) {
-            if (resultCode != RESULT_OK) {
+        if (requestCode == MY_CODE)
+            if (resultCode != RESULT_OK)
                 showToast(getString(R.string.error_update_failed))
-            }
-        }
     }
 
     private fun whereToFromIntentActivity() {
-        whereToGetBottomNavItem(intent.getSerializableExtra(TO_MAIN) as ToMain)
+        val toMain = intent.getSerializableExtra(TO_MAIN) as ToMain?
+        whereToGetBottomNavItem(toMain ?: return)
     }
 
     fun whereToGetBottomNavItem(toMain: ToMain) {

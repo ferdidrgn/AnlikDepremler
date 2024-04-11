@@ -20,7 +20,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
     private var viewGroup: ViewGroup? = null
     protected lateinit var viewModel: VM
     protected lateinit var binding: DB
-    private lateinit var networkMonitor: NetworkManager
+    protected lateinit var networkMonitor: NetworkManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

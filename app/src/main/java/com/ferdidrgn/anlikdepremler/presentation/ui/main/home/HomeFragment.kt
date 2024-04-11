@@ -76,12 +76,10 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
                     getTopTenLocationEarthquake()
             }
 
-            if (viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            if (viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED))
                 error.observe(viewLifecycleOwner) { Err ->
                     Err?.message?.let { showToast(it) }
                 }
-            }
-
         }
     }
 

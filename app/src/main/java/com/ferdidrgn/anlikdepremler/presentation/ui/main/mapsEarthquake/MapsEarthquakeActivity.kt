@@ -435,8 +435,10 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.unbind()
+
         location?.stopUpdateLocation()
         viewModel.getNowEarthquakeList.postValue(null)
+        binding.unbind()
+        networkMonitor.unregister()
     }
 }
