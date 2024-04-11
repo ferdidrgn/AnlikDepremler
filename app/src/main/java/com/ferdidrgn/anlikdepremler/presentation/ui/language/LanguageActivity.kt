@@ -6,6 +6,7 @@ import com.ferdidrgn.anlikdepremler.base.BaseActivity
 import com.ferdidrgn.anlikdepremler.databinding.ActivityLanguageBinding
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.tools.builderADS
+import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,14 +25,16 @@ class LanguageActivity : BaseActivity<LanguageViewModel, ActivityLanguageBinding
     }
 
     private fun observeEvents() {
-        viewModel.selected = {
-            restart()
-        }
-
+        viewModel.selected = { restart() }
     }
 
     private fun restart() {
         NavHandler.instance.toMainActivityFinishAffinity(this)
         finishAffinity()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        NavHandler.instance.toMainActivity(this, ToMain.Settings)
     }
 }

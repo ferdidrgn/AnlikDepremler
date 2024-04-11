@@ -86,24 +86,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
-
     private fun whereToFromIntentActivity() {
-        when (intent.getSerializableExtra(TO_MAIN) as ToMain?) {
-
-            ToMain.Home -> binding.bottomNav.selectedItemId = R.id.homeFragmentNav
-
-            ToMain.NearEarthquake -> binding.bottomNav.selectedItemId =
-                R.id.nearEarthquakeFragmentNav
-
-            ToMain.NowEarthquake -> binding.bottomNav.selectedItemId = R.id.nowEarthquakeFragmentNav
-
-            ToMain.Settings -> binding.bottomNav.selectedItemId = R.id.settingsFragmentNav
-
-            else -> {}
-        }
+        whereToGetBottomNavItem(intent.getSerializableExtra(TO_MAIN) as ToMain)
     }
 
-    fun whereToGetFragment(toMain: ToMain) {
+    fun whereToGetBottomNavItem(toMain: ToMain) {
         when (toMain) {
             ToMain.Home -> binding.bottomNav.selectedItemId = R.id.homeFragmentNav
 
@@ -185,9 +172,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
-        if (isGranted) {
-            //showToast(getString(R.string.success_permission_granted_notification))
-        } else {
+        if (isGranted)
+        //showToast(getString(R.string.success_permission_granted_notification))
+        else {
             //showToast(getString(R.string.permission_denied_notification))
         }
     }
@@ -195,17 +182,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private fun askNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.POST_NOTIFICATIONS
+                    this, Manifest.permission.POST_NOTIFICATIONS
                 ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                // İzin zaten verilmişse yapılacak işlemler
-            } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-                // Kullanıcıya izin talebinin nedenini açıklamak için uygun bir durumdaysa yapılacak işlemler
-            } else {
-                // İzin talebinde bulun
+            )
+            // İzin zaten verilmişse yapılacak işlemler
+            else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS))
+            // Kullanıcıya izin talebinin nedenini açıklamak için uygun bir durumdaysa yapılacak işlemler
+            else
+            // İzin talebinde bulun
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            }
         }
     }
 

@@ -80,7 +80,7 @@ class NavHandler {
         context.startActivity(intent)
     }
 
-    fun toTermsConditionsAndPrivacePolicyActivity(
+    fun toTermsConditionsAndPrivacyPolicyActivity(
         context: Context,
         whichTermsAndPrivacy: WhichTermsAndPrivacy
     ) {
@@ -96,7 +96,7 @@ class NavHandler {
         context.startActivity(intent)
     }
 
-    fun toPhoneSettings(context: Context, activity: AppCompatActivity){
+    fun toPhoneSettings(context: Context, activity: AppCompatActivity) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts("package", activity.packageName, null)
         intent.data = uri

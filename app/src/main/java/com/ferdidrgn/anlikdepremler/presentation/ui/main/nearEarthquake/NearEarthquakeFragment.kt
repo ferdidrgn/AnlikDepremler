@@ -122,7 +122,7 @@ class NearEarthquakeFragment :
                     }
                 })
             } else
-                (requireActivity() as MainActivity).whereToGetFragment(ToMain.Home)
+                (requireActivity() as MainActivity).whereToGetBottomNavItem(ToMain.Home)
         }
 
     private var requestOldLocationPermissionLauncher =
@@ -130,7 +130,7 @@ class NearEarthquakeFragment :
             if (result.resultCode == Activity.RESULT_OK)
                 getLocationFromUser()
             else
-                (requireActivity() as MainActivity).whereToGetFragment(ToMain.Home)
+                (requireActivity() as MainActivity).whereToGetBottomNavItem(ToMain.Home)
         }
 
     override fun onResume() {

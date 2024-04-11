@@ -46,6 +46,7 @@ fun Context.setAppLocale(contextLanguages: String, languages: String): Context {
     val config = Configuration()
     config.setLocale(locale)
     config.setLayoutDirection(locale)
+    resources.updateConfiguration(config, resources.displayMetrics)
     ClientPreferences.inst.language = languages
     return createConfigurationContext(config)
 }

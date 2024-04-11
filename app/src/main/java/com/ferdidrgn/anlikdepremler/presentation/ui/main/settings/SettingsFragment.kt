@@ -63,6 +63,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         viewModel.apply {
             btnLanguageClicked.observe(viewLifecycleOwner) {
                 NavHandler.instance.toLanguageActivity(requireContext())
+                (requireActivity() as MainActivity).finishAffinity()
             }
             btnNotificationPermission.observe(viewLifecycleOwner) {
                 openNotificationSettings()
@@ -109,7 +110,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     }
 
     private fun goToTermsAndConditionsAction(isPrivacyPolicy: Boolean) {
-        NavHandler.instance.toTermsConditionsAndPrivacePolicyActivity(
+        NavHandler.instance.toTermsConditionsAndPrivacyPolicyActivity(
             requireContext(),
             if (isPrivacyPolicy) WhichTermsAndPrivacy.PrivacyAndPolicy else WhichTermsAndPrivacy.TermsAndCondition
         )
