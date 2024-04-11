@@ -86,7 +86,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getHomePage() {
-        mainScope {
+        ioScope {
             showLoading()
             getExampleHomeSliderUseCase().collectLatest { response ->
                 response.let { homeSlider ->

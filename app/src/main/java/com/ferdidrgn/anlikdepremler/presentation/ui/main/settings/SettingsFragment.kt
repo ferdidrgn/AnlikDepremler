@@ -63,7 +63,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         viewModel.apply {
             btnLanguageClicked.observe(viewLifecycleOwner) {
                 NavHandler.instance.toLanguageActivity(requireContext())
-                (requireActivity() as MainActivity).finishAffinity()
             }
             btnNotificationPermission.observe(viewLifecycleOwner) {
                 openNotificationSettings()

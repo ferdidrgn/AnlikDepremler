@@ -39,14 +39,9 @@ class NavHandler {
         context.startActivity(intent)
     }
 
-    fun toMapsActivity(
-        context: Context,
-        filterList: ArrayList<Earthquake>,
-        isNearEarthquake: Boolean
-    ) {
-        val intent = Intent(context, MapsEarthquakeActivity::class.java)
-        intent.putExtra(NEAR_EARTHQUAKE, isNearEarthquake)
-        intent.putExtra(FILTER_LIST, filterList)
+    fun toMainActivity(context: Context, toMain: ToMain) {
+        val intent = Intent(context, MainActivity::class.java)
+        intent.putExtra(TO_MAIN, toMain)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         context.startActivity(intent)
     }
@@ -58,19 +53,24 @@ class NavHandler {
         finishAffinity(context as AppCompatActivity)
     }
 
-    fun toMainActivity(context: Context, toMain: ToMain) {
-        val intent = Intent(context, MainActivity::class.java)
-        intent.putExtra(TO_MAIN, toMain)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        context.startActivity(intent)
-    }
-
     fun toMainActivityClearTask(context: Context, toMain: ToMain) {
         val intent = Intent(context, MainActivity::class.java)
         intent.putExtra(NAVIGATION_KEY, toMain)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         //intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+        context.startActivity(intent)
+    }
+
+    fun toMapsActivity(
+        context: Context,
+        filterList: ArrayList<Earthquake>,
+        isNearEarthquake: Boolean
+    ) {
+        val intent = Intent(context, MapsEarthquakeActivity::class.java)
+        intent.putExtra(NEAR_EARTHQUAKE, isNearEarthquake)
+        intent.putExtra(FILTER_LIST, filterList)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         context.startActivity(intent)
     }
 

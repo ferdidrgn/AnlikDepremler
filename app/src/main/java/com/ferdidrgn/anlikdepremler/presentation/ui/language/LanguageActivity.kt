@@ -25,12 +25,7 @@ class LanguageActivity : BaseActivity<LanguageViewModel, ActivityLanguageBinding
     }
 
     private fun observeEvents() {
-        viewModel.selected = { restart() }
-    }
-
-    private fun restart() {
-        NavHandler.instance.toMainActivityFinishAffinity(this)
-        finishAffinity()
+        viewModel.selected = { NavHandler.instance.toMainActivity(this, ToMain.Home) }
     }
 
     override fun onBackPressed() {
