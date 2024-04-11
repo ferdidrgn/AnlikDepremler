@@ -107,22 +107,8 @@ class NearEarthquakeFragment :
 
     private val requestNowLocationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (isGranted) {
-                location = LocationManager(requireContext(), object : CurrentLocationListener {
-                    override fun locationResponse(locationResult: LocationResult) {
-                        latLng = locationResult.lastLocation?.latitude?.let { lat ->
-                            locationResult.lastLocation?.longitude?.let { long ->
-                                LatLng(lat, long)
-                            }
-                        }
-                        viewModel.earthquakeBodyRequest.userLat = latLng?.latitude
-                        viewModel.earthquakeBodyRequest.userLong = latLng?.longitude
-                        location?.stopUpdateLocation()
-                        getLocationFromUser()
-                    }
-                })
-            } else
-                (requireActivity() as MainActivity).whereToGetBottomNavItem(ToMain.Home)
+            if (isGranted) locationListener()
+            else (requireActivity() as MainActivity).whereToGetBottomNavItem(ToMain.Home)
         }
 
     private var requestOldLocationPermissionLauncher =
@@ -132,6 +118,22 @@ class NearEarthquakeFragment :
             else
                 (requireActivity() as MainActivity).whereToGetBottomNavItem(ToMain.Home)
         }
+
+    private fun locationListener() {
+        location = LocationManager(requireContext(), object : CurrentLocationListener {
+            override fun locationResponse(locationResult: LocationResult) {
+                latLng = locationResult.lastLocation?.latitude?.let { lat ->
+                    locationResult.lastLocation?.longitude?.let { long ->
+                        LatLng(lat, long)
+                    }
+                }
+                viewModel.earthquakeBodyRequest.userLat = latLng?.latitude
+                viewModel.earthquakeBodyRequest.userLong = latLng?.longitude
+                location?.stopUpdateLocation()
+                getLocationFromUser()
+            }
+        })
+    }
 
     override fun onResume() {
         super.onResume()

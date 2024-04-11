@@ -61,7 +61,7 @@
     <string name="error_server">Sunucumuz Bakımda...</string>
 
     <string name="location_enable">Lokasyon İzni Açık</string>
-    <string name="please_accept_location">Lütfen Lokasyon İzni Onaylayın</string>
+    <string name="please_accept_location">Lütfen Lokasyon İznini Onaylayın</string>
     <string name="should_manuel_location_permission">Konum izni reddedildi. Uygulama ayarlarından izin verebilirsiniz.</string>
     <string name="clear">Temizle</string>
     <string name="apply_filter">Filtreyi Uygula</string>
@@ -75,6 +75,8 @@
     <string name="location">Lokasyon (*Istanbul)</string>
     <string name="choose_location">Lokasyon Yaz / Haritadan Seç</string>
     <string name="choose_date">Bir tarihte / Tarihler Arası</string>
+
+
     <string name="billing_error">Faturalandırma hizmeti bağlantısı kesildi, gerekirse tekrar bağlanmayı deneyiniz.</string>
     <string name="billing_cancel">Kullanıcı satın alma işlemi iptal etti.</string>
     <string name="billing_failed">Satın alma işlemi başarısız</string>
