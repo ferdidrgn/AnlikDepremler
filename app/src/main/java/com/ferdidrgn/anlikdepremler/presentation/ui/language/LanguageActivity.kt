@@ -27,9 +27,4 @@ class LanguageActivity : BaseActivity<LanguageViewModel, ActivityLanguageBinding
     private fun observeEvents() {
         viewModel.selected = { NavHandler.instance.toMainActivity(this, ToMain.Home) }
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        NavHandler.instance.toMainActivity(this, ToMain.Settings)
-    }
 }
