@@ -36,7 +36,6 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
         binding.topTenLocationEarthquakeAdapter = TopTenLocationEarthquakeAdapter(viewModel)
 
         handler = MainSliderHandler()
-
         observe()
 
     }
@@ -87,10 +86,10 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
         super.onResume()
         binding.indicator.selection = 0
         handler.addChanging()
-        observe()
         viewModel.error.removeObserver(Observer<Err?> { value ->
             // Observer işlemleri
         })
+        observe()
     }
 
     override fun onPause() {
