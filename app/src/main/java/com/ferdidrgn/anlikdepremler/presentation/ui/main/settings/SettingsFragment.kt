@@ -268,4 +268,11 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 showToast(getString(R.string.billing_consume_failed) + " " + billingResult.debugMessage)
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        billingClient.endConnection()
+        binding.unbind()
+    }
 }

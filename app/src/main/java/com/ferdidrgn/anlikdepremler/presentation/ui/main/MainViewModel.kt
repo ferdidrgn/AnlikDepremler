@@ -86,19 +86,13 @@ class MainViewModel @Inject constructor(
     }
 
     fun getHomePage() {
-        ioScope {
+        mainScope {
             showLoading()
-            getExampleHomeSliderUseCase().collectLatest { response ->
-                response.let { homeSlider ->
-                    homeSliderList.postValue(homeSlider)
-                    hideLoading()
-                }
-            }
 
-            //Top Ten All Earthquake
+            getHomeSlider()
+
             getTopTenEarthquake()
 
-            //Top Ten Location Earthquake
             location.emit("Istanbul")
             getTopTenLocationEarthquake()
 
@@ -106,10 +100,21 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    private fun getHomeSlider() {
+        mainScope {
+            getExampleHomeSliderUseCase().collectLatest { response ->
+                response.let { homeSlider ->
+                    homeSliderList.postValue(homeSlider)
+                }
+            }
+        }
+    }
+
     private fun getTopTenEarthquake() {
         mainScope {
             showLoading()
             getTopTenEarthquakeUseCase().collectLatest { response ->
+
                 when (response) {
                     is Resource.Success -> {
                         response.data?.let { getTopTenEarthquake ->
@@ -136,7 +141,9 @@ class MainViewModel @Inject constructor(
                 when (response) {
                     is Resource.Success -> {
                         response.data?.let { getTopTenLocationEarthquake ->
-                            getTopTenLocationEarthquakeList.postValue(getTopTenLocationEarthquake)
+                            getTopTenLocationEarthquakeList.postValue(
+                                getTopTenLocationEarthquake
+                            )
                             hideLoading()
                         }
                     }
