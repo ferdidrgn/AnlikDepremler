@@ -39,13 +39,13 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="45dp"
-            android:background="@{viewModel.whichButtonSelected ? @drawable/bg_rectangle_primary2_border_primary3 :@drawable/bg_primary2_10_border_error_red}"
+            android:background="@{viewModel.whichButtonSelected ? @drawable/bg_rectangle_primary2_border_primary3 :@drawable/bg_primary2_10_border_pink}"
             android:clickable="@{viewModel.whichButtonSelected ? true: false}"
             android:gravity="center"
             android:onClick="@{()-> viewModel.turkishLanguageItemClicked()}">
 
             <TextView
-                android:id="@+id/tvEnglish"
+                style="@style/TextColor_primary8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Türkçe"
@@ -60,13 +60,13 @@
             android:layout_height="60dp"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="8dp"
-            android:background="@{viewModel.whichButtonSelected ? @drawable/bg_primary2_10_border_error_red : @drawable/bg_rectangle_primary2_border_primary3}"
+            android:background="@{viewModel.whichButtonSelected ? @drawable/bg_primary2_10_border_pink : @drawable/bg_rectangle_primary2_border_primary3}"
             android:clickable="@{viewModel.whichButtonSelected ? false: true}"
             android:gravity="center"
             android:onClick="@{()->viewModel.englishLanguageItemClicked()}">
 
             <TextView
-                android:id="@+id/tvArabic"
+                style="@style/TextColor_primary8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="English"

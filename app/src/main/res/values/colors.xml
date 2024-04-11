@@ -21,8 +21,7 @@
 
 
     //Light Mode
-
-    <color name="primary">#363636</color>
+    <color name="primary">#333333</color>
     <color name="primary2">#373737</color>
     <color name="primary3">#555555</color>
     <color name="primary4">#818181</color>
@@ -33,7 +32,7 @@
     <color name="primary9">#CACACA</color>
     <color name="primary10">#E5E5E5</color>
 
-    <color name="pink_success">#EB4747</color>
+    <color name="pink">#EB4747</color>
 
     //Don't use this color for dark mode
     <color name="red_err">#B00020</color>

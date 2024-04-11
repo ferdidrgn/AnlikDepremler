@@ -273,6 +273,5 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         super.onDestroy()
 
         billingClient.endConnection()
-        binding.unbind()
     }
 }

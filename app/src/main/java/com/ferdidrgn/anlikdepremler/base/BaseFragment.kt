@@ -51,9 +51,4 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
     fun hideProgress() {
         (requireActivity() as BaseActivity<*, *>).hideProgress()
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.unbind()
-    }
 }

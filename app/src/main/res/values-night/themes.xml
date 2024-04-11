@@ -20,7 +20,7 @@
         <item name="colorOnSecondaryFixed">@color/primary</item>
 
         <!-- Background Color -->
-        <item name="colorSurface">@color/pink_success</item>
+        <item name="colorSurface">@color/pink</item>
         <item name="colorOnSurface">@color/red_err</item>
         <item name="colorOnSurfaceVariant">@color/red_err</item>
         <item name="colorOnSurfaceInverse">@color/green_light</item>
@@ -94,7 +94,7 @@
 
     <style name="TextInputBackground_TextColor">
         <item name="android:background">@drawable/bg_dark2_10_border_dark3</item>
-        <item name="android:textColor">@color/dark7</item>
+        <item name="android:textColor">@color/dark10</item>
     </style>
 
     <style name="TextColorHeader">
@@ -118,7 +118,7 @@
     </style>
 
     <style name="TextColorHint">
-        <item name="android:textColorHint">@color/dark7</item>
+        <item name="android:textColorHint">@color/dark9</item>
     </style>
 
     <style name="TextColorHintAndTextColor">
