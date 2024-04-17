@@ -13,7 +13,7 @@ import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
 import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
-import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
+import com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthquakeAdapter
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint

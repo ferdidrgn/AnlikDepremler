@@ -11,14 +11,14 @@
 
         <variable
             name="nowEarthquakeAdapter"
-            type="com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthquakeAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/ScreenBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.mapsEarthquake.MapsEarthquakeActivity">
+        tools:context=".presentation.ui.mapsEarthquake.MapsEarthquakeActivity">
 
         <include
             android:id="@+id/mapMarker"

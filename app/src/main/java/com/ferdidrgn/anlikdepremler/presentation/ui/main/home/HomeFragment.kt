@@ -58,13 +58,13 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
                 }
             }
 
-            clickSeeAllNowEarthquake.observe(this@HomeFragment) {
+            clickSeeAllNowEarthquake.observe(viewLifecycleOwner) {
                 NavHandler.instance.toMainActivity(
                     requireActivity() as MainActivity, ToMain.NowEarthquake
                 )
             }
 
-            clickSeeAllLocationEarthquake.observe(this@HomeFragment) {
+            clickSeeAllLocationEarthquake.observe(viewLifecycleOwner) {
                 NavHandler.instance.toMainActivity(
                     requireActivity() as MainActivity, ToMain.NowEarthquake
                 )
@@ -75,10 +75,6 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
                     getTopTenLocationEarthquake()
             }
 
-            if (viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED))
-                error.observe(viewLifecycleOwner) { Err ->
-                    Err?.message?.let { showToast(it) }
-                }
         }
     }
 
@@ -86,10 +82,6 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
         super.onResume()
         binding.indicator.selection = 0
         handler.addChanging()
-        viewModel.error.removeObserver(Observer<Err?> { value ->
-            // Observer işlemleri
-        })
-        observe()
     }
 
     override fun onPause() {

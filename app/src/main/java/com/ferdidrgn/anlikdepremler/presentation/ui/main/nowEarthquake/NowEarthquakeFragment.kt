@@ -10,7 +10,7 @@ import com.ferdidrgn.anlikdepremler.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentNowEarthquakeBinding
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
-import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
+import com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthquakeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 

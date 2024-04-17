@@ -76,11 +76,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.23"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    //compose - for debug
-    implementation "androidx.ui:ui-tooling:0.1.0-dev17"
-    implementation "androidx.compose.runtime:runtime:1.6.5"
-    implementation "androidx.compose.compiler:compiler:1.5.11"
-
     //page indicator
     implementation 'com.romandanylyk:pageindicatorview:1.0.3'
 
@@ -97,17 +92,17 @@ dependencies {
     kapt 'com.google.dagger:hilt-compiler:2.51.1'
 
     // For instrumentation tests
-    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.51.1'
-    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.51.1'
+    //androidTestImplementation 'com.google.dagger:hilt-android-testing:2.51.1'
+    //kaptAndroidTest 'com.google.dagger:hilt-compiler:2.51.1'
 
     // For local unit tests
-    testImplementation 'com.google.dagger:hilt-android-testing:2.51.1'
-    kaptTest 'com.google.dagger:hilt-compiler:2.51.1'
+    //testImplementation 'com.google.dagger:hilt-android-testing:2.51.1'
+    //kaptTest 'com.google.dagger:hilt-compiler:2.51.1'
 
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.7.7"
     implementation "androidx.navigation:navigation-ui-ktx:2.7.7"
-    androidTestImplementation "androidx.navigation:navigation-testing:2.7.7"
+    //androidTestImplementation "androidx.navigation:navigation-testing:2.7.7"
 
     //Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0"

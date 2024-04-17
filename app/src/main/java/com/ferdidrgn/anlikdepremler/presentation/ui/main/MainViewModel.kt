@@ -21,7 +21,7 @@ import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.TopTenEarthquakeAd
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.TopTenLocationEarthquakeAdapterListener
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
-import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthQuakeAdapterListener
+import com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthQuakeAdapterListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

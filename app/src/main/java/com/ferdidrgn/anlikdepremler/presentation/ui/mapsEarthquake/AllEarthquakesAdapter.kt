@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake
+package com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake
 
 import androidx.recyclerview.widget.RecyclerView
 import com.ferdidrgn.anlikdepremler.R

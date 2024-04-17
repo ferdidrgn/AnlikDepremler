@@ -13,7 +13,7 @@
 
         <variable
             name="nowEarthquakeAdapter"
-            type="com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter" />
+            type="com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthquakeAdapter" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

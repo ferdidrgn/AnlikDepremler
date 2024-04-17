@@ -21,8 +21,8 @@
 
 
     //Light Mode
-    <color name="primary">#333333</color>
-    <color name="primary2">#373737</color>
+    <color name="primary">#303030</color>
+    <color name="primary2">#383738</color>
     <color name="primary3">#555555</color>
     <color name="primary4">#818181</color>
     <color name="primary5">#979797</color>

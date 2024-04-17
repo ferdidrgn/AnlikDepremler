@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.presentation.ui.main.mapsEarthquake
+package com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake
 
 import android.Manifest
 import android.app.Activity
@@ -26,7 +26,6 @@ import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
-import com.ferdidrgn.anlikdepremler.ui.main.nowEarthquake.NowEarthquakeAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.CameraUpdateFactory
