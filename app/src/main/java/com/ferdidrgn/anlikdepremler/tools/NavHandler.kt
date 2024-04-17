@@ -11,7 +11,7 @@ import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.presentation.ui.language.LanguageActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
-import com.ferdidrgn.anlikdepremler.presentation.ui.main.mapsEarthquake.MapsEarthquakeActivity
+import com.ferdidrgn.anlikdepremler.presentation.mapsEarthquake.MapsEarthquakeActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsandPrivacyPolicyActivity
 
 class NavHandler {

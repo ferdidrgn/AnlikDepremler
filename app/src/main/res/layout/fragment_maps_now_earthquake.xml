@@ -18,7 +18,7 @@
         style="@style/ScreenBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.main.mapsEarthquake.MapsEarthquakeActivity">
+        tools:context=".presentation.mapsEarthquake.MapsEarthquakeActivity">
 
         <include
             android:id="@+id/mapMarker"
