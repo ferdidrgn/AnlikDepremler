@@ -243,18 +243,18 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
                     super.onScrolled(recyclerView, dx, dy)
                     var position = 0
                     position = if (dx < 0) {
-                        if (linearLayoutManager.findFirstCompletelyVisibleItemPosition() > -1) {
+                        if (linearLayoutManager.findFirstCompletelyVisibleItemPosition() > -1)
                             linearLayoutManager.findFirstCompletelyVisibleItemPosition()
-                        } else {
+                        else
                             linearLayoutManager.findFirstVisibleItemPosition()
-                        }
+
                     } else {
-                        if (linearLayoutManager.findLastCompletelyVisibleItemPosition() > -1) {
+                        if (linearLayoutManager.findLastCompletelyVisibleItemPosition() > -1)
                             linearLayoutManager.findLastCompletelyVisibleItemPosition()
-                        } else {
+                        else
                             linearLayoutManager.findLastVisibleItemPosition()
-                        }
                     }
+
                     if (earthquakeList.size - 1 >= position && position > -1) {
                         earthquakeList[position].apply {
                             if (latitude != null && longitude != null) {
