@@ -72,7 +72,6 @@ object DataBindingUtil {
     }
 
     //RECYCLERVIEW BaseStaggeredAdapter
-
     @BindingAdapter("setAdapter")
     @JvmStatic
     fun setAdapter(

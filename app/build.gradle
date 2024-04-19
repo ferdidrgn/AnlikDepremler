@@ -136,7 +136,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.16.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
-    //Carousel Recycleriew
+    //Carousel Recyclerview
     implementation 'com.github.sparrow007:carouselrecyclerview:1.2.6'
 
     //app review
