@@ -4,13 +4,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseStaggeredAdapter
 import com.ferdidrgn.anlikdepremler.databinding.ItemNowEarthquakeListBinding
-import com.ferdidrgn.anlikdepremler.databinding.ItemNowEarthqukeMapsBinding
+import com.ferdidrgn.anlikdepremler.databinding.ItemNowEarthquakeMapsBinding
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 
 class NowEarthquakeAdapter(
     private val nowEarthQuakeAdapterListener: NowEarthQuakeAdapterListener,
     private val comeFromMap: Boolean,
-) : BaseStaggeredAdapter<ItemNowEarthquakeListBinding, ItemNowEarthqukeMapsBinding, Earthquake>() {
+) : BaseStaggeredAdapter<ItemNowEarthquakeListBinding, ItemNowEarthquakeMapsBinding, Earthquake>() {
 
     override val comeMapData: Boolean = comeFromMap
 
@@ -42,10 +42,10 @@ class NowEarthquakeAdapter(
         }
     }
 
-    override val staggeredLayoutId: Int = R.layout.item_now_earthquke_maps
+    override val staggeredLayoutId: Int = R.layout.item_now_earthquake_maps
 
     override fun staggeredBind(
-        binding: ItemNowEarthqukeMapsBinding,
+        binding: ItemNowEarthquakeMapsBinding,
         item: Earthquake,
         position: Int
     ) {
@@ -73,5 +73,5 @@ class NowEarthquakeAdapter(
 }
 
 interface NowEarthQuakeAdapterListener {
-    fun onNowEarthquakeItemClicked(position: Int){}
+    fun onNowEarthquakeItemClicked(position: Int) {}
 }

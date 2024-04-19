@@ -12,6 +12,7 @@ import com.ferdidrgn.anlikdepremler.base.ListAdapterItem
 import com.ferdidrgn.anlikdepremler.tools.changeDataShameFormat
 import com.ferdidrgn.anlikdepremler.tools.components.CustomToolbar
 import com.ferdidrgn.anlikdepremler.tools.downloadFromUrl
+import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 
 object DataBindingUtil {
 
@@ -67,6 +68,28 @@ object DataBindingUtil {
     @BindingAdapter("submitList")
     @JvmStatic
     fun submitList(recyclerView: RecyclerView, list: List<ListAdapterItem>?) {
+        val adapter = recyclerView.adapter as? BaseAdapter<ViewDataBinding, ListAdapterItem>?
+        adapter?.differ?.submitList(list)
+    }
+
+    //CarouselRecyclerview
+    @BindingAdapter("setAdapter")
+    @JvmStatic
+    fun setAdapter(
+        recyclerView: CarouselRecyclerview,
+        adapter: BaseAdapter<ViewDataBinding, ListAdapterItem>?
+    ) {
+        adapter?.let { adapter ->
+            recyclerView.adapter = adapter
+            recyclerView.set3DItem(true)
+            recyclerView.setAlpha(true)
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    @BindingAdapter("submitList")
+    @JvmStatic
+    fun submitList(recyclerView: CarouselRecyclerview, list: List<ListAdapterItem>?) {
         val adapter = recyclerView.adapter as? BaseAdapter<ViewDataBinding, ListAdapterItem>?
         adapter?.differ?.submitList(list)
     }

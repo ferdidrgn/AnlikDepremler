@@ -47,7 +47,7 @@ class EarthQuakeMapAdapter(private val earthquakeList: List<Earthquake?>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_now_earthquke_maps, parent, false)
+            .inflate(R.layout.item_now_earthquake_maps, parent, false)
         return MapHolder(view)
     }
 

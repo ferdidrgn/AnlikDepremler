@@ -136,6 +136,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.16.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
+    //Carousel Recycleriew
+    implementation 'com.github.sparrow007:carouselrecyclerview:1.2.6'
+
     //app review
     implementation 'com.google.android.play:review:2.0.1'
     implementation 'com.google.android.play:review-ktx:2.0.1'
@@ -148,8 +151,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:23.0.0")
     implementation 'com.google.android.gms:play-services-auth:21.0.0'
     //maps
-    implementation 'com.google.android.gms:play-services-maps:18.0.0'
-    implementation 'com.google.android.gms:play-services-location:21.1.0'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
 
     //in-app buying
     implementation 'com.android.billingclient:billing-ktx:6.2.0'

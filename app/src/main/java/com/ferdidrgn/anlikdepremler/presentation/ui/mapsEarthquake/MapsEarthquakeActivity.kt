@@ -26,7 +26,6 @@ import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.tools.*
 import com.ferdidrgn.anlikdepremler.tools.NavHandler
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -43,7 +42,6 @@ import kotlin.collections.ArrayList
 class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthquakeBinding>() {
 
     lateinit var gMap: GoogleMap
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     var location: LocationManager? = null
     private var latLng: LatLng? = null
     private var earthquakeList = ArrayList<Earthquake>()
