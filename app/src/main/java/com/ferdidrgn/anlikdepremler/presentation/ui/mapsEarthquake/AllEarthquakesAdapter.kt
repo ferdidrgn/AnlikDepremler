@@ -1,6 +1,5 @@
 package com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake
 
-import androidx.recyclerview.widget.RecyclerView
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseStaggeredAdapter
 import com.ferdidrgn.anlikdepremler.databinding.ItemNowEarthquakeListBinding
@@ -13,17 +12,6 @@ class NowEarthquakeAdapter(
 ) : BaseStaggeredAdapter<ItemNowEarthquakeListBinding, ItemNowEarthquakeMapsBinding, Earthquake>() {
 
     override val comeMapData: Boolean = comeFromMap
-
-    private var selectedPosition: Int = RecyclerView.NO_POSITION
-
-    fun getSelectedPosition(): Int {
-        return selectedPosition
-    }
-
-    fun selectItem(position: Int) {
-        selectedPosition = position
-        notifyDataSetChanged()
-    }
 
     override val layoutId: Int = R.layout.item_now_earthquake_list
 

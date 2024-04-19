@@ -70,11 +70,8 @@ abstract class BaseStaggeredAdapter<BINDING : ViewDataBinding, WIDEBINDING : Vie
             )
         }
 
-        return if (viewType == 0) {
-            SingleViewHolder(binder)
-        } else {
-            DoubleViewHolder(binder)
-        }
+        return if (viewType == 0) SingleViewHolder(binder)
+        else DoubleViewHolder(binder)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

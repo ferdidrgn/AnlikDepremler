@@ -99,7 +99,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvChooseCityEarthquake" />
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                         android:id="@+id/rvChooseCityEarthquake"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -108,12 +108,15 @@
                         android:clipToPadding="false"
                         android:orientation="horizontal"
                         android:overScrollMode="never"
-                        app:adapter="@{topTenLocationEarthquakeAdapter}"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:scrollbars="horizontal"
+                        android:visibility="visible"
+                        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/csChooseCityEarthquake"
+                        app:setAdapter="@{topTenLocationEarthquakeAdapter}"
                         app:submitList="@{viewModel.getTopTenLocationEarthquakeList}"
-                        tools:itemCount="5"
                         tools:layout_editor_absoluteX="1dp"
                         tools:listitem="@layout/item_top_ten_location_earthquake" />
 
@@ -152,7 +155,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                         android:id="@+id/rvTopFiveEarthquake"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -161,14 +164,16 @@
                         android:clipToPadding="false"
                         android:orientation="horizontal"
                         android:overScrollMode="never"
-                        app:adapter="@{topTenEarthquakeAdapter}"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:scrollbars="horizontal"
+                        android:visibility="visible"
+                        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         app:layout_constraintTop_toBottomOf="@+id/tvTopTen"
-                        app:submitList="@{viewModel.getTopTenEarthquakeList}"
-                        tools:itemCount="5"
+                        app:setAdapter="@{topTenEarthquakeAdapter}"
+                        app:submitListSet="@{viewModel.getTopTenEarthquakeList}"
                         tools:layout_editor_absoluteX="1dp"
                         tools:listitem="@layout/item_top_ten_earthquake" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
