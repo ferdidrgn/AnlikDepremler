@@ -2,10 +2,7 @@ package com.ferdidrgn.anlikdepremler.presentation.ui.main.home
 
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import com.ferdidrgn.anlikdepremler.base.BaseFragment
-import com.ferdidrgn.anlikdepremler.base.Err
 import com.ferdidrgn.anlikdepremler.databinding.FragmentHomeBinding
 import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
@@ -14,7 +11,6 @@ import com.ferdidrgn.anlikdepremler.tools.builderADS
 import com.ferdidrgn.anlikdepremler.tools.getPositionAndSendHandler2
 import com.ferdidrgn.anlikdepremler.tools.helpers.MainSliderHandler
 import com.ferdidrgn.anlikdepremler.tools.ioScope
-import com.ferdidrgn.anlikdepremler.tools.showToast
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +33,6 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
 
         handler = MainSliderHandler()
         observe()
-
     }
 
     private fun observe() {
@@ -74,7 +69,6 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
                 if (isTrue)
                     getTopTenLocationEarthquake()
             }
-
         }
     }
 

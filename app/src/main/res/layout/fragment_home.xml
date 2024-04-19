@@ -99,18 +99,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvChooseCityEarthquake" />
 
+
                     <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                         android:id="@+id/rvChooseCityEarthquake"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="7dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="10dp"
                         android:clipToPadding="false"
                         android:orientation="horizontal"
                         android:overScrollMode="never"
                         android:scrollbars="horizontal"
                         android:visibility="visible"
-                        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -119,8 +119,8 @@
                         app:submitList="@{viewModel.getTopTenLocationEarthquakeList}"
                         tools:layout_editor_absoluteX="1dp"
                         tools:listitem="@layout/item_top_ten_location_earthquake" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                         android:text="@string/top_ten_earthquake"
                         android:textAlignment="textStart"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toTopOf="@+id/rvTopFiveEarthquake"
+                        app:layout_constraintBottom_toTopOf="@+id/rvTopTenEarthquake"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,14 +151,14 @@
                         android:text="@string/see_all"
                         android:textAlignment="textEnd"
                         android:textSize="14sp"
-                        app:layout_constraintBottom_toTopOf="@+id/rvTopFiveEarthquake"
+                        app:layout_constraintBottom_toTopOf="@+id/rvTopTenEarthquake"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
-                        android:id="@+id/rvTopFiveEarthquake"
+                        android:id="@+id/rvTopTenEarthquake"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="120dp"
                         android:layout_marginHorizontal="7dp"
                         android:layout_marginTop="10dp"
                         android:clipToPadding="false"
@@ -166,11 +166,11 @@
                         android:overScrollMode="never"
                         android:scrollbars="horizontal"
                         android:visibility="visible"
-                        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         app:layout_constraintTop_toBottomOf="@+id/tvTopTen"
                         app:setAdapter="@{topTenEarthquakeAdapter}"
-                        app:submitListSet="@{viewModel.getTopTenEarthquakeList}"
+                        app:submitList="@{viewModel.getTopTenEarthquakeList}"
+                        tools:itemCount="5"
                         tools:layout_editor_absoluteX="1dp"
                         tools:listitem="@layout/item_top_ten_earthquake" />
 

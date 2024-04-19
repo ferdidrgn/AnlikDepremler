@@ -97,7 +97,8 @@ class MainViewModel @Inject constructor(
 
             getTopTenEarthquake()
 
-            location.emit("Istanbul")
+            if (location.value.isEmpty())
+                location.emit("Istanbul")
             getTopTenLocationEarthquake()
 
             hideLoading()

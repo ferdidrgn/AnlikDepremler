@@ -22,5 +22,5 @@ class TopTenLocationEarthquakeAdapter(
 }
 
 interface TopTenLocationEarthquakeAdapterListener {
-    fun onTopTenLocationEarthquakeAdapterListener(earthquake: Earthquake){}
+    fun onTopTenLocationEarthquakeAdapterListener(earthquake: Earthquake) {}
 }
