@@ -128,16 +128,12 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     private var requestOldLocationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK)
-                getLocation()
-            else
-                grantedPermissionMainAction()
+            if (result.resultCode == Activity.RESULT_OK) getLocation()
+            else grantedPermissionMainAction()
         }
 
     private val requestNowLocationPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted)
                 setUpMap()
             else
@@ -147,11 +143,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     private val callback = OnMapReadyCallback { googleMap ->
         gMap = googleMap
         gMap.setMapStyle(
-            MapStyleOptions.loadRawResourceStyle(
-                this@MapsEarthquakeActivity,
-                R.raw.map_style
-            )
-        )
+            MapStyleOptions.loadRawResourceStyle(this@MapsEarthquakeActivity, R.raw.map_style))
         gMap.setOnMarkerClickListener { marker ->
             val item = earthquakeList.find { earthquake ->
                 marker.position.latitude == earthquake.latitude?.toDouble() &&
