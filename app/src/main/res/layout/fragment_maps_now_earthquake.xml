@@ -177,7 +177,7 @@
             app:setAdapter="@{nowEarthquakeAdapter}"
             app:submitListSet="@{viewModel.isNearPage() ? viewModel.getNearEarthquakeList : viewModel.getNowEarthquakeList}"
             tools:layout_editor_absoluteX="1dp"
-            tools:listitem="@layout/item_now_earthquke_maps" />
+            tools:listitem="@layout/item_now_earthquake_maps" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
