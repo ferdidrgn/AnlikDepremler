@@ -25,7 +25,7 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
         FragmentHomeBinding.inflate(layoutInflater)
 
     override fun onCreateFinished(savedInstanceState: Bundle?) {
-        builderADS(requireContext(), binding.adView)
+        setAds(binding.adView)
         binding.viewModel = viewModel
         binding.homeSliderAdapter = HomeSliderHorizontalAdapter(viewModel)
         binding.topTenEarthquakeAdapter = TopTenEarthquakeAdapter(viewModel)
@@ -74,6 +74,7 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
 
     override fun onResume() {
         super.onResume()
+        setAds(binding.adView)
         binding.indicator.selection = 0
         handler.addChanging()
     }

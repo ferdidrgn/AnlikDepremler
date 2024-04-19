@@ -13,6 +13,7 @@ import androidx.databinding.ViewDataBinding
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.*
+import com.google.android.gms.ads.AdView
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompatActivity() {
 
@@ -89,6 +90,10 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCompa
                 }
             )
         )
+    }
+
+    fun setAds(adView: AdView) {
+        builderADS(this, adView)
     }
 
     override fun onDestroy() {

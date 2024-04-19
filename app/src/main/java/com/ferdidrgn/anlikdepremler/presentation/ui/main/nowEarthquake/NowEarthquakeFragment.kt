@@ -25,7 +25,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
         FragmentNowEarthquakeBinding.inflate(layoutInflater)
 
     override fun onCreateFinished(savedInstanceState: Bundle?) {
-        builderADS(requireContext(), binding.adView)
+        setAds(binding.adView)
 
         binding.includeEarthquakeList.apply {
             viewModel = this@NowEarthquakeFragment.viewModel
@@ -99,6 +99,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
 
     override fun onStart() {
         super.onStart()
+        setAds(binding.adView)
         observeServiceData()
     }
 

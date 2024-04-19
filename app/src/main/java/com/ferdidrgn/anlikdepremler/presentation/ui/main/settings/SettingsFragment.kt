@@ -47,7 +47,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         binding.viewModel = viewModel
         binding.visibility = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
-        builderADS(requireContext(), binding.adView)
+        setAds(binding.adView)
         initBillingClint()
         clickEvents()
     }
@@ -55,7 +55,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun onResume() {
         super.onResume()
 
-        builderADS(requireContext(), binding.adView)
+        setAds(binding.adView)
     }
 
     private fun clickEvents() {

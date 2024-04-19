@@ -20,7 +20,7 @@ class TermsAndConditionsandPrivacyPolicyActivity :
 
     override fun onCreateFinished(savedInstance: Bundle?) {
         binding.viewModel = viewModel
-        builderADS(this, binding.adView)
+        setAds(binding.adView)
         binding.customToolbar.backIconOnBackPress(this)
         observe()
     }
@@ -29,6 +29,12 @@ class TermsAndConditionsandPrivacyPolicyActivity :
     private fun observe() {
         val type = intent.getSerializableExtra(WHICH_TERMS_PRIVACY)
         viewModel.getHtmlFromUrl(type as WhichTermsAndPrivacy)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setAds(binding.adView)
     }
 
 }

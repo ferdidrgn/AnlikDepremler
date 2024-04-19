@@ -33,7 +33,7 @@ class NearEarthquakeFragment :
         FragmentNearEarthquakeBinding.inflate(layoutInflater)
 
     override fun onCreateFinished(savedInstanceState: Bundle?) {
-        builderADS(requireContext(), binding.adView)
+        setAds(binding.adView)
 
         binding.includeEarthquakeList.apply {
             viewModel = this@NearEarthquakeFragment.viewModel
@@ -137,6 +137,7 @@ class NearEarthquakeFragment :
 
     override fun onResume() {
         super.onResume()
+        setAds(binding.adView)
         getLocationFromUser()
     }
 

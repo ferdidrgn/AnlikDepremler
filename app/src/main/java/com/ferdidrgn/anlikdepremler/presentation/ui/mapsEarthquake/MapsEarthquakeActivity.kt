@@ -55,7 +55,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     override fun onCreateFinished(savedInstanceState: Bundle?) {
         binding.viewModel = viewModel
-        builderADS(this, binding.adView)
+        setAds(binding.adView)
 
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -143,7 +143,8 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     private val callback = OnMapReadyCallback { googleMap ->
         gMap = googleMap
         gMap.setMapStyle(
-            MapStyleOptions.loadRawResourceStyle(this@MapsEarthquakeActivity, R.raw.map_style))
+            MapStyleOptions.loadRawResourceStyle(this@MapsEarthquakeActivity, R.raw.map_style)
+        )
         gMap.setOnMarkerClickListener { marker ->
             val item = earthquakeList.find { earthquake ->
                 marker.position.latitude == earthquake.latitude?.toDouble() &&
@@ -420,6 +421,12 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     private fun grantedPermissionMainAction() {
         NavHandler.instance.toMainActivityClearTask(this, ToMain.Home)
         showToast(getString(R.string.please_accept_location))
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setAds(binding.adView)
     }
 
     override fun onDestroy() {

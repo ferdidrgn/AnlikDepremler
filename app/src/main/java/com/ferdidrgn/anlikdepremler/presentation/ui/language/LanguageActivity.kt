@@ -19,12 +19,18 @@ class LanguageActivity : BaseActivity<LanguageViewModel, ActivityLanguageBinding
     override fun onCreateFinished(savedInstance: Bundle?) {
         binding.viewModel = viewModel
         viewModel.firstState()
-        builderADS(this, binding.adView)
+        setAds(binding.adView)
         observeEvents()
         binding.customToolbar.backIconOnBackPress(this)
     }
 
     private fun observeEvents() {
         viewModel.selected = { NavHandler.instance.toMainActivity(this, ToMain.Home) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setAds(binding.adView)
     }
 }
