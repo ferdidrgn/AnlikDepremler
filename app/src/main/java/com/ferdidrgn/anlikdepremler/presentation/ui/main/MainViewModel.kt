@@ -139,9 +139,7 @@ class MainViewModel @Inject constructor(
                 when (response) {
                     is Resource.Success -> {
                         response.data?.let { getTopTenLocationEarthquake ->
-                            getTopTenLocationEarthquakeList.postValue(
-                                getTopTenLocationEarthquake
-                            )
+                            getTopTenLocationEarthquakeList.postValue(getTopTenLocationEarthquake)
                             hideLoading()
                         }
                     }
@@ -170,8 +168,8 @@ class MainViewModel @Inject constructor(
                         response.data?.let { getEarthquake ->
                             getNowEarthquakeList.postValue(getEarthquake)
                             clickableHeaderMenus.postValue(true)
-                            hideLoading()
                         }
+                        hideLoading()
                     }
 
                     is Resource.Error -> {
@@ -279,7 +277,7 @@ class MainViewModel @Inject constructor(
                 when (response) {
                     is Resource.Success -> {
                         response.data?.let { getLocationEarthquake ->
-                            getLocationApiEarthquakeList.postValue(getLocationEarthquake)
+                            getLocationApiEarthquakeList.value = getLocationEarthquake
                             getNowEarthquakeList.postValue(getLocationEarthquake)
                         }
                         hideLoading()
