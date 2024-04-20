@@ -222,7 +222,7 @@ class MainViewModel @Inject constructor(
             endDate = this@MainViewModel.endDate.value
 
             if (ml.isEmpty() && !checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
-                !checkBetweenData(startDate, endDate)
+                !checkBetweenData(startDate, endDate) && onlyDate.isEmpty()
             ) {
                 filterList = getNowEarthquakeList.value.let { it!! }
                 hideLoading()
@@ -330,8 +330,8 @@ class MainViewModel @Inject constructor(
                         response.data?.let { getOnlyDateEarthquake ->
                             getDateEarthquakeList.postValue(getOnlyDateEarthquake)
                             getNowEarthquakeList.postValue(getOnlyDateEarthquake)
-                            hideLoading()
                         }
+                        hideLoading()
                     }
 
                     is Resource.Error -> {
