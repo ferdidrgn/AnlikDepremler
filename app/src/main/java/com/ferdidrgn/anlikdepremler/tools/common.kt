@@ -39,17 +39,6 @@ fun View.onClickThrottled(skipDurationMillis: Long = 750, action: () -> Unit) {
     }
 }
 
-fun timeBetweenWeek(): Calendar {
-    val today = Calendar.getInstance()
-    today.time = Date()
-
-    // Time Between
-    val startTimeForFilter = Calendar.getInstance()
-    startTimeForFilter.time = today.time
-    startTimeForFilter.add(Calendar.DAY_OF_YEAR, -7)
-    return startTimeForFilter
-}
-
 fun cameDate(date: String?): Calendar {
     // came Date Operations
     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())

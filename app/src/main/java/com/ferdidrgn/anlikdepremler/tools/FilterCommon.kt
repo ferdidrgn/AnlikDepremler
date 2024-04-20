@@ -2,11 +2,6 @@ package com.ferdidrgn.anlikdepremler.tools
 
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.domain.model.dummyModel.EarthquakeBodyRequest
-import com.ferdidrgn.anlikdepremler.tools.cameDate
-import com.ferdidrgn.anlikdepremler.tools.changeStringToDate
-import com.ferdidrgn.anlikdepremler.tools.showToast
-import com.ferdidrgn.anlikdepremler.tools.timeBetweenWeek
-import java.util.*
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.collections.ArrayList
@@ -208,23 +203,4 @@ fun distanceOperations(
 
     return r * c
 
-}
-
-fun getFilterOneWeek(item: Earthquake?): ArrayList<Earthquake> {
-    val filterWeekList = ArrayList<Earthquake>()
-
-    val today = Calendar.getInstance()
-    today.time = Date()
-
-    // Time Between
-    val startTimeForFilter = timeBetweenWeek()
-
-    // came Date Operations
-    val cameDate = cameDate(item?.date)
-
-    // date between to control
-    if (cameDate.after(startTimeForFilter) && cameDate.before(today)) {
-        filterWeekList.add(item!!)
-    }
-    return filterWeekList
 }

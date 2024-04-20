@@ -272,7 +272,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getLocationApi() {
+    private fun getLocationApi() {
         mainScope {
             showLoading()
             getLocationEarthquakeUseCase(location.value).collectLatest { response ->
@@ -296,7 +296,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getDataBetweenApi() {
+    private fun getDataBetweenApi() {
         mainScope {
             showLoading()
             getDateBetweenEarthquakeUseCase(startDate.value, endDate.value)
@@ -321,7 +321,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getOnlyDataApi() {
+    private fun getOnlyDataApi() {
         mainScope {
             showLoading()
             getOnlyDateEarthquakeUseCase(onlyDate.value).collectLatest { response ->
@@ -332,36 +332,6 @@ class MainViewModel @Inject constructor(
                             getNowEarthquakeList.postValue(getOnlyDateEarthquake)
                             hideLoading()
                         }
-                    }
-
-                    is Resource.Error -> {
-                        serverMessage(response.error)
-                        hideLoading()
-                    }
-
-                    else -> hideLoading()
-                }
-            }
-        }
-    }
-
-    fun getThisWeekFilter() {
-        mainScope {
-            showLoading()
-
-            getEarthquakeUseCase().collectLatest { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        response.data?.let { getEarthquake ->
-                            getNowEarthquakeList.postValue(getEarthquake)
-                        }
-                        clickableHeaderMenus.postValue(true)
-                        getNowEarthquakeList.value?.forEach { earthquake ->
-                            filterNowList = getFilterOneWeek(earthquake)
-                        }
-                        getNowEarthquakeList.postValue(filterNowList)
-
-                        hideLoading()
                     }
 
                     is Resource.Error -> {
