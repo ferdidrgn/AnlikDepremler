@@ -70,8 +70,7 @@ class CustomDatePicker : LinearLayout {
         val year: Int = cal.get(android.icu.util.Calendar.YEAR)
         val month: Int = cal.get(android.icu.util.Calendar.MONTH)
         val day: Int = cal.get(android.icu.util.Calendar.DAY_OF_MONTH)
-        val datePickerDialog =
-            DatePickerDialog(context, style, dateSetListener, year, month, day)
+        val datePickerDialog = DatePickerDialog(context, style, dateSetListener, year, month, day)
         datePickerDialog.show()
 
     }

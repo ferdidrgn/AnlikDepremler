@@ -299,27 +299,25 @@ class MainViewModel @Inject constructor(
     fun getDataBetweenApi() {
         mainScope {
             showLoading()
-            getDateBetweenEarthquakeUseCase(
-                startDate.value,
-                endDate.value
-            ).collectLatest { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        response.data?.let { getDateBetweenEarthquake ->
-                            getDateEarthquakeList.postValue(getDateBetweenEarthquake)
-                            getNowEarthquakeList.postValue(getDateBetweenEarthquake)
+            getDateBetweenEarthquakeUseCase(startDate.value, endDate.value)
+                .collectLatest { response ->
+                    when (response) {
+                        is Resource.Success -> {
+                            response.data?.let { getDateBetweenEarthquake ->
+                                getDateEarthquakeList.postValue(getDateBetweenEarthquake)
+                                getNowEarthquakeList.postValue(getDateBetweenEarthquake)
+                            }
+                            hideLoading()
                         }
-                        hideLoading()
-                    }
 
-                    is Resource.Error -> {
-                        serverMessage(response.error)
-                        hideLoading()
-                    }
+                        is Resource.Error -> {
+                            serverMessage(response.error)
+                            hideLoading()
+                        }
 
-                    else -> hideLoading()
+                        else -> hideLoading()
+                    }
                 }
-            }
         }
     }
 
@@ -430,9 +428,9 @@ class MainViewModel @Inject constructor(
                 getLocationApi()
         } else if (selectedOption.value == 2) {
             if (subOption.value == true)
-                getOnlyDataApi()
-            else
                 getDataBetweenApi()
+            else
+                getOnlyDataApi()
         } else if (selectedOption.value == 3) {
             earthquakeBodyRequest.apply {
                 userLat = null
