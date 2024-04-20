@@ -117,7 +117,7 @@
 
     <style name="TextColorHint">
         <item name="android:textColorHint">@color/pink</item>
-
+        <item name="android:textColor">@color/primary8</item>
     </style>
 
     <style name="TextColorHintAndTextColor">

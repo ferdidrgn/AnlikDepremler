@@ -73,6 +73,10 @@ class MainViewModel @Inject constructor(
     val clickFilter = LiveEvent<Boolean>()
     val clickFilterClear = LiveEvent<Boolean>()
 
+    val clickCstmDatePickerStartDate = LiveEvent<Boolean?>()
+    val clickCstmDatePickerEndDate = LiveEvent<Boolean?>()
+    val clickCstmDatePickerOnlyDate = LiveEvent<Boolean?>()
+
     val clickSeeAllNowEarthquake = LiveEvent<Boolean>()
     val clickSeeAllLocationEarthquake = LiveEvent<Boolean>()
 
@@ -454,6 +458,18 @@ class MainViewModel @Inject constructor(
 
     fun onTopLocationEarthquake() {
         clickSeeAllLocationEarthquake.postValue(true)
+    }
+
+    fun onCstmDatePickerStartDateClick() {
+        clickCstmDatePickerStartDate.postValue(true)
+    }
+
+    fun onCstmDatePickerEndDateClick() {
+        clickCstmDatePickerEndDate.postValue(true)
+    }
+
+    fun onCstmDatePickerOnlyDateClick() {
+        clickCstmDatePickerOnlyDate.postValue(true)
     }
 
 }

@@ -215,21 +215,23 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:onClick="@{()-> viewModel.onCstmDatePickerStartDateClick()}"
                             android:textAlignment="textStart"
                             android:visibility="@{viewModel.subOption ? View.VISIBLE : View.GONE}"
                             app:cst_date_picker_hint_text="@string/start_date"
                             app:cst_picker_changeable_text="@={viewModel.startDate}" />
 
-                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                            android:id="@+id/tvEndDate"
+                        <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
+                            android:id="@+id/cdpEndDate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_weight="1"
+                            android:onClick="@{()-> viewModel.onCstmDatePickerEndDateClick()}"
                             android:textAlignment="textStart"
                             android:visibility="@{viewModel.subOption ? View.VISIBLE : View.GONE}"
-                            app:custom_edit_hint="@string/end_date"
-                            app:custom_edit_text="@={viewModel.endDate}" />
+                            app:cst_date_picker_hint_text="@string/end_date"
+                            app:cst_picker_changeable_text="@={viewModel.endDate}" />
 
                     </LinearLayout>
 
@@ -242,15 +244,16 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                            android:id="@+id/tvOnlyData"
+                        <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
+                            android:id="@+id/cdpOnlyDate"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:onClick="@{()-> viewModel.onCstmDatePickerOnlyDateClick()}"
                             android:textAlignment="textStart"
                             android:visibility="@{viewModel.subOption ? View.GONE : View.VISIBLE}"
-                            app:custom_edit_hint="@string/date"
-                            app:custom_edit_text="@={viewModel.onlyDate}" />
+                            app:cst_date_picker_hint_text="@string/date"
+                            app:cst_picker_changeable_text="@={viewModel.onlyDate}" />
                     </LinearLayout>
                 </LinearLayout>
 

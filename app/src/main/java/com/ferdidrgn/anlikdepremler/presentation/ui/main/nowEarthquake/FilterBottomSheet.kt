@@ -24,6 +24,7 @@ import com.ferdidrgn.anlikdepremler.tools.LAT_LAT
 import com.ferdidrgn.anlikdepremler.tools.LAT_LONG
 import com.ferdidrgn.anlikdepremler.tools.showToast
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel
+import com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -77,6 +78,16 @@ class FilterBottomSheet(
                 viewModel.clearXmlData()
                 mMap.clear()
             }
+        }
+
+        viewModel.clickCstmDatePickerStartDate.observe(this) {
+            binding.cdpStartDate.setCustomDataPickerClick()
+        }
+        viewModel.clickCstmDatePickerEndDate.observe(this) {
+            binding.cdpEndDate.setCustomDataPickerClick()
+        }
+        viewModel.clickCstmDatePickerOnlyDate.observe(this) {
+            binding.cdpOnlyDate.setCustomDataPickerClick()
         }
 
         viewModel.clickApply.observe(this) {

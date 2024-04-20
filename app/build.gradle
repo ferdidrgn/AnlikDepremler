@@ -22,8 +22,8 @@ android {
         applicationId "com.ferdidrgn.anlikdepremler"
         minSdk 23
         targetSdk 34
-        versionCode 10
-        versionName "1.8"
+        versionCode 1
+        versionName "1.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -155,7 +155,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:20.0.0'
 
     //in-app buying
-    implementation 'com.android.billingclient:billing-ktx:6.2.0'
+    implementation 'com.android.billingclient:billing-ktx:6.2.1'
 }
 
 // Google Services plugin's dependency

@@ -119,6 +119,7 @@
 
     <style name="TextColorHint">
         <item name="android:textColorHint">@color/dark9</item>
+        <item name="android:textColor">@color/dark10</item>
     </style>
 
     <style name="TextColorHintAndTextColor">
