@@ -139,6 +139,9 @@ dependencies {
     //Carousel Recyclerview
     implementation 'com.github.sparrow007:carouselrecyclerview:1.2.6'
 
+    //bottom sheet
+    implementation "com.github.TayfunCesur:CurvedBottomSheet:1.0.2"
+
     //app review
     implementation 'com.google.android.play:review:2.0.1'
     implementation 'com.google.android.play:review-ktx:2.0.1'

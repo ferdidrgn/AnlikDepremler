@@ -80,12 +80,11 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
         if (isNearEarthquake)
             getLocation()
 
-        if (cameEarthquakeList.size > 0) {
+        if (cameEarthquakeList.size > 0)
             viewModel.getNowEarthquakeList.postValue(cameEarthquakeList)
-        } else {
+        else
             if (!isNearEarthquake)
                 viewModel.getNowEarthquake()
-        }
     }
 
     private fun observeEarthquakeData() {
@@ -196,11 +195,13 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
             location?.getLastKnownLocation { location ->
                 if (location != null) {
-                    latLng = LatLng(location.latitude, location.longitude)
-                    viewModel.earthquakeBodyRequest.userLat = location.latitude
-                    viewModel.earthquakeBodyRequest.userLong = location.longitude
-                    viewModel.getNearLocationFilter(true)
-                    observeEarthquakeData()
+                    mainScope {
+                        latLng = LatLng(location.latitude, location.longitude)
+                        viewModel.userLat.emit(location.latitude)
+                        viewModel.userLong.emit(location.longitude)
+                        viewModel.getNearLocationFilter(true)
+                        observeEarthquakeData()
+                    }
                 } else {
                     //Eski Konum Yoksa Şu anki konumu dinlemeliyiz
                     requestNowLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)

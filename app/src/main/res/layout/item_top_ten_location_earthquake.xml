@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvLocation">
 
                 <com.google.android.material.card.MaterialCardView
-                    style="@style/CardBackground_primary3"
+                    style="@style/CardBackgroundTint_primary3"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:layout_margin="5dp"

@@ -18,10 +18,11 @@ class LanguageActivity : BaseActivity<LanguageViewModel, ActivityLanguageBinding
 
     override fun onCreateFinished(savedInstance: Bundle?) {
         binding.viewModel = viewModel
+        binding.customToolbar.backIconOnBackPress(this)
         viewModel.firstState()
         setAds(binding.adView)
         observeEvents()
-        binding.customToolbar.backIconOnBackPress(this)
+
     }
 
     private fun observeEvents() {

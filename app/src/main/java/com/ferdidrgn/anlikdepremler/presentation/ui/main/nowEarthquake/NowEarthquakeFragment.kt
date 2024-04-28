@@ -72,27 +72,15 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
     private fun observeMapIconClick() {
         viewModel.clickMap.observe(viewLifecycleOwner) { isMapClick ->
             if (isMapClick)
-                NavHandler.instance.toMapsActivity(requireContext(), viewModel.filterNowList, false)
+                NavHandler.instance.toMapsActivity(requireContext(), ArrayList(), false)
         }
     }
 
     private fun observeFilterIconClick() {
         viewModel.apply {
             clickFilter.observe(viewLifecycleOwner) { isFilterClick ->
-                if (isFilterClick) {
-                    location.value = ""
-                    FilterBottomSheet { lng ->
-                        earthquakeBodyRequest.userLat = lng?.latitude
-                        earthquakeBodyRequest.userLong = lng?.longitude
-
-                        if (clickFilterClear.value == true)
-                            getNowEarthquake()
-                        else {
-                            getFilters()
-                            clickFilterClear.postValue(false)
-                        }
-                    }.show(parentFragmentManager, "filterBottomSheet")
-                }
+                if (isFilterClick)
+                    NavHandler.instance.toFilterActivity(requireContext())
             }
         }
     }
@@ -112,16 +100,15 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
         Handler(Looper.getMainLooper()).postDelayed({
             val linearLayoutManager = LinearLayoutManager(requireContext())
             linearLayoutManager.scrollToPositionWithOffset(0, 0)
-            binding.includeEarthquakeList.rvEarthquake.layoutManager =
-                linearLayoutManager
-        }, 4000)
+            binding.includeEarthquakeList.rvEarthquake.layoutManager = linearLayoutManager
+        }, 3000)
     }
 
     private fun updateUiAfterSearch(text: String, isValid: Boolean) {
         job?.cancel()
         job = CoroutineScope(Dispatchers.Main).launch {
             delay(500)
-            viewModel.earthquakeBodyRequest.location = text.lowercase()
+            viewModel.location.emit(text.lowercase())
             observeServiceData()
         }
     }
