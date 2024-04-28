@@ -62,7 +62,7 @@ class NearEarthquakeFragment :
             clickableHeaderMenus.observe(viewLifecycleOwner) {
                 if (it) {
                     clickMap.observe(viewLifecycleOwner) {
-                        NavHandler.instance.toMapsActivity(requireContext(), filterNearList, true)
+                        NavHandler.instance.toMapsActivity(requireContext(), nearLocationList, true)
                     }
                 }
             }
@@ -81,13 +81,14 @@ class NearEarthquakeFragment :
             location = LocationManager(requireContext(), object : CurrentLocationListener {
                 override fun locationResponse(locationResult: LocationResult) {}
             })
-
             location?.getLastKnownLocation { location ->
                 if (location != null) {
-                    latLng = LatLng(location.latitude, location.longitude)
-                    viewModel.earthquakeBodyRequest.userLat = location.latitude
-                    viewModel.earthquakeBodyRequest.userLong = location.longitude
-                    observeEarthquakeData()
+                    mainScope {
+                        latLng = LatLng(location.latitude, location.longitude)
+                        viewModel.userLat.emit(location.latitude)
+                        viewModel.userLong.emit(location.longitude)
+                        observeEarthquakeData()
+                    }
                 } else {
                     //Eski Konum Yoksa Şu anki konumu dinlemeliyiz
                     requestNowLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -100,7 +101,7 @@ class NearEarthquakeFragment :
         job?.cancel()
         job = CoroutineScope(Dispatchers.Main).launch {
             delay(500)
-            viewModel.earthquakeBodyRequest.location = text.lowercase()
+            viewModel.location.emit(text.lowercase())
             observeEarthquakeData()
         }
     }
@@ -127,10 +128,12 @@ class NearEarthquakeFragment :
                         LatLng(lat, long)
                     }
                 }
-                viewModel.earthquakeBodyRequest.userLat = latLng?.latitude
-                viewModel.earthquakeBodyRequest.userLong = latLng?.longitude
-                location?.stopUpdateLocation()
-                getLocationFromUser()
+                mainScope {
+                    viewModel.userLat.emit(latLng?.latitude)
+                    viewModel.userLong.emit(latLng?.longitude)
+                    location?.stopUpdateLocation()
+                    getLocationFromUser()
+                }
             }
         })
     }

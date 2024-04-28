@@ -72,15 +72,11 @@
         <item name="strokeColor">@color/dark4</item>
     </style>
 
-    <style name="CardBackground">
-        <item name="android:background">@color/black</item>
-    </style>
-
     <style name="CardBackground_primary">
         <item name="android:background">@color/black</item>
     </style>
 
-    <style name="CardBackground_primary3">
+    <style name="CardBackgroundTint_primary3">
         <item name="android:backgroundTint">@color/dark3</item>
     </style>
 

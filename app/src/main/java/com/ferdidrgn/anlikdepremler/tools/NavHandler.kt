@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat.finishAffinity
 import com.ferdidrgn.anlikdepremler.tools.enums.ToMain
 import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
+import com.ferdidrgn.anlikdepremler.presentation.ui.filter.FilterActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.language.LanguageActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.MapsEarthquakeActivity
@@ -76,6 +77,12 @@ class NavHandler {
 
     fun toLanguageActivity(context: Context) {
         val intent = Intent(context, LanguageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(intent)
+    }
+
+    fun toFilterActivity(context: Context) {
+        val intent = Intent(context, FilterActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(intent)
     }

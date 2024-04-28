@@ -5,15 +5,11 @@ import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.base.Err
 import com.ferdidrgn.anlikdepremler.base.Resource
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetDateBetweenEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.useCase.GetEarthquakeUseCase
 import kotlinx.coroutines.flow.collectLatest
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
-import com.ferdidrgn.anlikdepremler.domain.model.dummyModel.EarthquakeBodyRequest
 import com.ferdidrgn.anlikdepremler.domain.useCase.GetExampleHomeSliderUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetLocationEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetOnlyDateEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.useCase.GetTopTenEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.useCase.GetTopTenLocationEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.SliderDetailsAdapterListener
@@ -32,32 +28,24 @@ import kotlin.collections.ArrayList
 class MainViewModel @Inject constructor(
     private val getExampleHomeSliderUseCase: GetExampleHomeSliderUseCase,
     private val getEarthquakeUseCase: GetEarthquakeUseCase,
-    private val getLocationEarthquakeUseCase: GetLocationEarthquakeUseCase,
     private val getTopTenEarthquakeUseCase: GetTopTenEarthquakeUseCase,
     private val getTopTenLocationEarthquakeUseCase: GetTopTenLocationEarthquakeUseCase,
-    private val getOnlyDateEarthquakeUseCase: GetOnlyDateEarthquakeUseCase,
-    private val getDateBetweenEarthquakeUseCase: GetDateBetweenEarthquakeUseCase,
 ) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener,
     TopTenLocationEarthquakeAdapterListener, TopTenEarthquakeAdapterListener {
 
     private var job: Job? = null
 
-    //XML ve filter
-    var earthquakeBodyRequest = EarthquakeBodyRequest()
+    //XML
     var location = MutableStateFlow("")
-    var ml = MutableStateFlow("")
-    var startDate = MutableStateFlow("")
-    var endDate = MutableStateFlow("")
-    var onlyDate = MutableStateFlow("")
 
-    var filterNowList = ArrayList<Earthquake>()
-    var filterNearList = ArrayList<Earthquake>()
+    //For Near Location Page
+    var userLat = MutableStateFlow<Double?>(null)
+    var userLong = MutableStateFlow<Double?>(null)
+    var nearLocationList = ArrayList<Earthquake>()
 
     //Get Api List
     var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var getNearEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
-    var getDateEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
-    var getLocationApiEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var getTopTenEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var getTopTenLocationEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var homeSliderList = MutableLiveData<List<HomeSliderData>>()
@@ -68,24 +56,13 @@ class MainViewModel @Inject constructor(
     //XML Click
     val clickList = LiveEvent<Boolean>()
     val clickClose = LiveEvent<Boolean>()
-    val clickApply = LiveEvent<Boolean>()
     val clickMap = LiveEvent<Boolean>()
     val clickFilter = LiveEvent<Boolean>()
-    val clickFilterClear = LiveEvent<Boolean>()
-
-    val clickCstmDatePickerStartDate = LiveEvent<Boolean?>()
-    val clickCstmDatePickerEndDate = LiveEvent<Boolean?>()
-    val clickCstmDatePickerOnlyDate = LiveEvent<Boolean?>()
 
     val clickSeeAllNowEarthquake = LiveEvent<Boolean>()
     val clickSeeAllLocationEarthquake = LiveEvent<Boolean>()
 
-    val selectedOption = MutableLiveData<Int>()
-
-    val subOption = MutableLiveData(false)
-
     init {
-        selectedOption.value = -1
         falseToNearPageAndClickableMenus()
     }
 
@@ -183,60 +160,6 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getFilters() {
-        mainScope {
-            showLoading()
-
-            getEarthquakeUseCase().collectLatest { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        response.data?.let { getEarthquake ->
-                            getNowEarthquakeList.postValue(getEarthquake)
-                        }
-                        filterNowList = getAllFilter() ?: ArrayList()
-                        getNowEarthquakeList.postValue(filterNowList)
-                        hideLoading()
-                    }
-
-                    is Resource.Error -> {
-                        serverMessage(response.error)
-                        hideLoading()
-                    }
-
-                    else -> hideLoading()
-                }
-            }
-        }
-    }
-
-    private fun getAllFilter(): ArrayList<Earthquake>? {
-        showLoading()
-        var filterList: ArrayList<Earthquake>? = null
-        earthquakeBodyRequest.apply {
-            location = this@MainViewModel.location.value
-            ml = this@MainViewModel.ml.value
-            onlyDate = this@MainViewModel.onlyDate.value
-            startDate = this@MainViewModel.startDate.value
-            endDate = this@MainViewModel.endDate.value
-
-            if (ml.isEmpty() && !checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
-                !checkBetweenData(startDate, endDate) && onlyDate.isEmpty()
-            ) {
-                filterList = getNowEarthquakeList.value.let { it!! }
-                hideLoading()
-            } else {
-                getAllFilterQueriers(
-                    this,
-                    getNowEarthquakeList.value.let { it!! },
-                ) { returnedFilterList ->
-                    filterList = returnedFilterList
-                }
-                hideLoading()
-            }
-        }
-        return filterList
-    }
-
     fun getNearLocationFilter(isNearPage: Boolean) {
         job = mainScope {
             showLoading()
@@ -244,90 +167,18 @@ class MainViewModel @Inject constructor(
             getEarthquakeUseCase().collectLatest { response ->
                 when (response) {
                     is Resource.Success -> {
-                        filterNearList = ArrayList()
+                        getNearEarthquakeList.postValue(null)
                         response.data?.let { getEarthquake ->
-                            earthquakeBodyRequest.userLat?.let { lat ->
-                                earthquakeBodyRequest.userLong?.let { long ->
-                                    filterNearList =
+                            nearLocationList =
+                                userLat.value?.let { lat ->
+                                    userLong.value?.let { long ->
                                         getLocationFilterManuel(lat, long, getEarthquake)
-                                }
-                            }
+                                    }
+                                } ?: ArrayList()
+
                             this@MainViewModel.isNearPage.postValue(isNearPage)
-                            getNearEarthquakeList.postValue(filterNearList)
+                            getNearEarthquakeList.postValue(nearLocationList)
                             clickableHeaderMenus.postValue(true)
-                        }
-                        hideLoading()
-                    }
-
-                    is Resource.Error -> {
-                        serverMessage(response.error)
-                        hideLoading()
-                    }
-
-                    else -> hideLoading()
-                }
-            }
-        }
-    }
-
-    private fun getLocationApi() {
-        mainScope {
-            showLoading()
-            getLocationEarthquakeUseCase(location.value).collectLatest { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        response.data?.let { getLocationEarthquake ->
-                            getLocationApiEarthquakeList.value = getLocationEarthquake
-                            getNowEarthquakeList.postValue(getLocationEarthquake)
-                        }
-                        hideLoading()
-                    }
-
-                    is Resource.Error -> {
-                        serverMessage(response.error)
-                        hideLoading()
-                    }
-
-                    else -> hideLoading()
-                }
-            }
-        }
-    }
-
-    private fun getDataBetweenApi() {
-        mainScope {
-            showLoading()
-            getDateBetweenEarthquakeUseCase(startDate.value, endDate.value)
-                .collectLatest { response ->
-                    when (response) {
-                        is Resource.Success -> {
-                            response.data?.let { getDateBetweenEarthquake ->
-                                getDateEarthquakeList.postValue(getDateBetweenEarthquake)
-                                getNowEarthquakeList.postValue(getDateBetweenEarthquake)
-                            }
-                            hideLoading()
-                        }
-
-                        is Resource.Error -> {
-                            serverMessage(response.error)
-                            hideLoading()
-                        }
-
-                        else -> hideLoading()
-                    }
-                }
-        }
-    }
-
-    private fun getOnlyDataApi() {
-        mainScope {
-            showLoading()
-            getOnlyDateEarthquakeUseCase(onlyDate.value).collectLatest { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        response.data?.let { getOnlyDateEarthquake ->
-                            getDateEarthquakeList.postValue(getOnlyDateEarthquake)
-                            getNowEarthquakeList.postValue(getOnlyDateEarthquake)
                         }
                         hideLoading()
                     }
@@ -348,15 +199,6 @@ class MainViewModel @Inject constructor(
         clickableHeaderMenus.postValue(false)
     }
 
-    fun clearXmlData() {
-        earthquakeBodyRequest = EarthquakeBodyRequest()
-        location.value = ""
-        ml.value = ""
-        onlyDate.value = ""
-        startDate.value = ""
-        endDate.value = ""
-    }
-
     fun cancelDataFetching() {
         if (job?.isActive == true)
             job?.cancel()
@@ -369,53 +211,17 @@ class MainViewModel @Inject constructor(
             clickMap.postValue(true)
     }
 
-    fun onClickFilter() {
-        if (clickableHeaderMenus.value == true)
-            clickFilter.postValue(true)
-    }
-
     fun onClickList() {
         clickList.postValue(true)
-    }
-
-    fun onClickClear() {
-        clickFilterClear.postValue(true)
     }
 
     fun onClickClose() {
         clickClose.postValue(true)
     }
 
-    fun onClickApply() {
-        clickApply.postValue(true)
-
-        if (selectedOption.value == 1) {
-            if (subOption.value == true)
-                getNearLocationFilter(false)
-            else
-                getLocationApi()
-        } else if (selectedOption.value == 2) {
-            if (subOption.value == true)
-                getDataBetweenApi()
-            else
-                getOnlyDataApi()
-        } else if (selectedOption.value == 3) {
-            earthquakeBodyRequest.apply {
-                userLat = null
-                userLong = null
-            }
-            startDate.value = ""
-            endDate.value = ""
-            getFilters()
-        }
-    }
-
-    fun onOptionSelected(option: Int) {
-        selectedOption.value = option
-    }
-
-    fun onSubOptionChangeStatus() {
-        subOption.postValue(subOption.value?.not())
+    fun onClickFilter() {
+        if (clickableHeaderMenus.value == true)
+            clickFilter.postValue(true)
     }
 
     fun onTopTenEarthquake() {
@@ -424,18 +230,6 @@ class MainViewModel @Inject constructor(
 
     fun onTopLocationEarthquake() {
         clickSeeAllLocationEarthquake.postValue(true)
-    }
-
-    fun onCstmDatePickerStartDateClick() {
-        clickCstmDatePickerStartDate.postValue(true)
-    }
-
-    fun onCstmDatePickerEndDateClick() {
-        clickCstmDatePickerEndDate.postValue(true)
-    }
-
-    fun onCstmDatePickerOnlyDateClick() {
-        clickCstmDatePickerOnlyDate.postValue(true)
     }
 
 }
