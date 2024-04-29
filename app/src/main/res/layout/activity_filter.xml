@@ -91,210 +91,218 @@
                 app:layout_behavior="com.tayfuncesur.curvedbottomsheet.TopSheetBehavior">
 
                 <LinearLayout
-                    android:id="@+id/content"
-                    style="@style/rectangle_top_10_primary2_border_primary3"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.9"
-                    android:clickable="false"
-                    android:focusable="false"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:weightSum="2">
 
-                    <TextView
-                        style="@style/TextColor_primary8"
+                    <LinearLayout
+                        android:id="@+id/content"
+                        style="@style/rectangle_top_10_primary2_border_primary3"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:gravity="center"
-                        android:text="@string/filter"
-                        android:textAllCaps="true"
-                        android:textSize="20sp" />
+                        android:layout_height="0dp"
+                        android:layout_weight="1.9"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                    <TextView
-                        android:id="@+id/tvClear"
-                        style="@style/TextColorHeader"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_marginEnd="20dp"
-                        android:onClick="@{()->viewModel.onClickClear()}"
-                        android:padding="3dp"
-                        android:text="@string/clear"
-                        android:textAllCaps="false"
-                        android:textSize="14sp" />
-
-                    <View
-                        android:id="@+id/viewLine"
-                        style="@style/ViewBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="10dp" />
-
-                    <androidx.core.widget.NestedScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
+                        <TextView
+                            style="@style/TextColor_primary8"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_marginTop="20dp"
+                            android:gravity="center"
+                            android:text="@string/filter"
+                            android:textAllCaps="true"
+                            android:textSize="20sp" />
 
-                            <RelativeLayout
-                                style="@style/rectangle_primary6_10_border_primary3"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginHorizontal="25dp"
-                                android:layout_marginTop="5dp">
+                        <TextView
+                            android:id="@+id/tvClear"
+                            style="@style/TextColorHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="20dp"
+                            android:onClick="@{()->viewModel.onClickClear()}"
+                            android:padding="3dp"
+                            android:text="@string/clear"
+                            android:textAllCaps="false"
+                            android:textSize="14sp" />
 
-                                <TextView
-                                    style="@style/TextColorHeader"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:text="@string/location"
-                                    android:textSize="14sp" />
-                            </RelativeLayout>
+                        <View
+                            android:id="@+id/viewLine"
+                            style="@style/ViewBackground"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="10dp" />
 
-                            <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                                android:id="@+id/tvLocation"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_marginHorizontal="20dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="1"
-                                android:textAlignment="textStart"
-                                app:custom_edit_hint="@string/location"
-                                app:custom_edit_text="@={viewModel.location}" />
-
-
-                            <RelativeLayout
-                                android:id="@+id/btnOption2"
-                                style="@style/rectangle_primary6_10_border_primary3"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginHorizontal="25dp"
-                                android:layout_marginTop="20dp">
-
-                                <TextView
-                                    style="@style/TextColorHeader"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:text="@string/date"
-                                    android:textSize="14sp" />
-
-                            </RelativeLayout>
+                        <androidx.core.widget.NestedScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
                             <LinearLayout
-                                android:id="@+id/btnSubOption2_1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="20dp"
-                                android:layout_marginTop="10dp"
-                                android:orientation="horizontal"
-                                android:weightSum="2">
+                                android:orientation="vertical">
 
-                                <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
-                                    android:id="@+id/cdpStartDate"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
+                                <RelativeLayout
+                                    style="@style/rectangle_primary6_10_border_primary3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginHorizontal="25dp"
+                                    android:layout_marginTop="5dp">
+
+                                    <TextView
+                                        style="@style/TextColorHeader"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:text="@string/location"
+                                        android:textSize="14sp" />
+                                </RelativeLayout>
+
+                                <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                                    android:id="@+id/tvLocation"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:layout_marginTop="10dp"
                                     android:layout_weight="1"
-                                    android:onClick="@{()-> viewModel.onCstmDatePickerStartDateClick()}"
                                     android:textAlignment="textStart"
-                                    app:cst_date_picker_hint_text="@string/start_date"
-                                    app:cst_picker_changeable_text="@={viewModel.startDate}" />
+                                    app:custom_edit_hint="@string/location"
+                                    app:custom_edit_text="@={viewModel.location}" />
 
-                                <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
-                                    android:id="@+id/cdpEndDate"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_weight="1"
-                                    android:onClick="@{()-> viewModel.onCstmDatePickerEndDateClick()}"
-                                    android:textAlignment="textStart"
-                                    app:cst_date_picker_hint_text="@string/end_date"
-                                    app:cst_picker_changeable_text="@={viewModel.endDate}" />
 
-                            </LinearLayout>
+                                <RelativeLayout
+                                    android:id="@+id/btnOption2"
+                                    style="@style/rectangle_primary6_10_border_primary3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginHorizontal="25dp"
+                                    android:layout_marginTop="20dp">
 
-                            <RelativeLayout
-                                android:id="@+id/btnOption3"
-                                style="@style/rectangle_primary6_10_border_primary3"
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginHorizontal="25dp"
-                                android:layout_marginTop="15dp">
+                                    <TextView
+                                        style="@style/TextColorHeader"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:text="@string/date"
+                                        android:textSize="14sp" />
 
-                                <TextView
-                                    style="@style/TextColorHeader"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:text="@string/ml"
-                                    android:textSize="14sp" />
-
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:id="@+id/llOption3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="20dp"
-                                android:layout_marginVertical="10dp"
-                                android:orientation="vertical"
-                                android:visibility="@{viewModel.selectedOption == 3 ? View.VISIBLE : View.GONE}">
+                                </RelativeLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/btnSubOption2_1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:layout_marginTop="10dp"
                                     android:orientation="horizontal"
                                     android:weightSum="2">
 
-                                    <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
-                                        android:id="@+id/tvMl"
+                                    <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
+                                        android:id="@+id/cdpStartDate"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
+                                        android:onClick="@{()-> viewModel.onCstmDatePickerStartDateClick()}"
                                         android:textAlignment="textStart"
-                                        app:custom_edit_hint="@string/ml"
-                                        app:custom_edit_text="@={viewModel.ml}" />
+                                        app:cst_date_picker_hint_text="@string/start_date"
+                                        app:cst_picker_changeable_text="@={viewModel.startDate}" />
+
+                                    <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
+                                        android:id="@+id/cdpEndDate"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_weight="1"
+                                        android:onClick="@{()-> viewModel.onCstmDatePickerEndDateClick()}"
+                                        android:textAlignment="textStart"
+                                        app:cst_date_picker_hint_text="@string/end_date"
+                                        app:cst_picker_changeable_text="@={viewModel.endDate}" />
+
                                 </LinearLayout>
-                            </LinearLayout>
 
-                            <RelativeLayout
-                                android:id="@+id/btnApply"
-                                style="@style/rectangle_bottom_10_primary2_border_primary3"
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:layout_marginHorizontal="60dp"
-                                android:layout_marginVertical="20dp"
-                                android:onClick="@{()->viewModel.onClickApply()}"
-                                android:paddingHorizontal="14dp"
-                                android:paddingVertical="10dp">
+                                <RelativeLayout
+                                    android:id="@+id/btnOption3"
+                                    style="@style/rectangle_primary6_10_border_primary3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:layout_marginHorizontal="25dp"
+                                    android:layout_marginTop="15dp">
 
-                                <TextView
-                                    style="@style/TextColorHeader"
-                                    android:layout_width="wrap_content"
+                                    <TextView
+                                        style="@style/TextColorHeader"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:text="@string/ml"
+                                        android:textSize="14sp" />
+
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/llOption3"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:text="@string/apply_filter"
-                                    android:textSize="14sp" />
+                                    android:layout_marginHorizontal="20dp"
+                                    android:layout_marginVertical="10dp"
+                                    android:orientation="vertical"
+                                    android:visibility="@{viewModel.selectedOption == 3 ? View.VISIBLE : View.GONE}">
 
-                            </RelativeLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
 
-                        </LinearLayout>
-                    </androidx.core.widget.NestedScrollView>
+                                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                                            android:id="@+id/tvMl"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:textAlignment="textStart"
+                                            app:custom_edit_hint="@string/ml"
+                                            app:custom_edit_text="@={viewModel.ml}" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/btnApply"
+                                    style="@style/rectangle_bottom_10_primary2_border_primary3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:layout_marginHorizontal="60dp"
+                                    android:layout_marginVertical="20dp"
+                                    android:onClick="@{()->viewModel.onClickApply()}"
+                                    android:paddingHorizontal="14dp"
+                                    android:paddingVertical="10dp">
+
+                                    <TextView
+                                        style="@style/TextColorHeader"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:text="@string/apply_filter"
+                                        android:textSize="14sp" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                        </androidx.core.widget.NestedScrollView>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imgBottomArrow"
+                        style="@style/ImgTintColor"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="0.1"
+                        android:src="@drawable/ic_arrow_down" />
+
                 </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/imgBottomArrow"
-                    style="@style/ImgTintColor"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="0.1"
-                    android:src="@drawable/ic_arrow_down" />
             </com.tayfuncesur.curvedbottomsheet.CurvedLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -97,10 +97,6 @@ class FilterActivity : BaseActivity<FilterViewModel, ActivityFilterBinding>(), O
             binding.cdpEndDate.setCustomDataPickerClick()
         }
 
-        viewModel.clickCstmDatePickerOnlyDate.observe(this) {
-            binding.cdpOnlyDate.setCustomDataPickerClick()
-        }
-
     }
 
     override fun onMapLongClick(latLng: LatLng) {
