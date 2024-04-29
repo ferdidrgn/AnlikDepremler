@@ -41,9 +41,6 @@ class FilterViewModel @Inject constructor(
     var endDate = MutableStateFlow("")
     var onlyDate = MutableStateFlow("")
 
-    val selectedOption = MutableLiveData<Int>()
-    val subOption = MutableLiveData(false)
-
     var filterNowList = ArrayList<Earthquake>()
     private var filterNearLocationList = ArrayList<Earthquake>()
 
@@ -60,7 +57,6 @@ class FilterViewModel @Inject constructor(
 
 
     init {
-        selectedOption.value = -1
         getNowEarthquake()
     }
 
@@ -263,14 +259,6 @@ class FilterViewModel @Inject constructor(
 
         if (ml.value.isNotEmpty())
             getMlFilter()
-    }
-
-    fun onOptionSelected(option: Int) {
-        selectedOption.value = option
-    }
-
-    fun onSubOptionChangeStatus() {
-        subOption.postValue(subOption.value?.not())
     }
 
     fun onCstmDatePickerStartDateClick() {

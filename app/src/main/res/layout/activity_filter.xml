@@ -98,7 +98,7 @@
 
                     <LinearLayout
                         android:id="@+id/content"
-                        style="@style/rectangle_top_10_primary2_border_primary3"
+                        style="@style/rectangle_primary2_border_primary3"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1.9"
@@ -172,7 +172,6 @@
                                     android:textAlignment="textStart"
                                     app:custom_edit_hint="@string/location"
                                     app:custom_edit_text="@={viewModel.location}" />
-
 
                                 <RelativeLayout
                                     android:id="@+id/btnOption2"
@@ -248,8 +247,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginHorizontal="20dp"
                                     android:layout_marginVertical="10dp"
-                                    android:orientation="vertical"
-                                    android:visibility="@{viewModel.selectedOption == 3 ? View.VISIBLE : View.GONE}">
+                                    android:orientation="vertical">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
