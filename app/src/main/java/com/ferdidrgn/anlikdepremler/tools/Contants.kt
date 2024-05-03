@@ -23,11 +23,9 @@ const val REVIEW_COUNT = "reviewCount"
 
 const val TO_MAIN = "TO_MAIN"
 const val WHICH_TERMS_PRIVACY = "WHICH_TERMS_PRIVACY"
-const val NAVIGATION_KEY = "NAVIGATION_KEY"
 
 const val LAT_LAT = 39.821049
 const val LAT_LONG = 34.808573
-const val NEAR_EARTHQUAKE = "nearEarthquake"
 
 const val DONATION_SMALL = "donation_small"
 

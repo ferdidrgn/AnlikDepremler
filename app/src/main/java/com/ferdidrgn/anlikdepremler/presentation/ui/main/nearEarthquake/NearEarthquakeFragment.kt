@@ -62,7 +62,8 @@ class NearEarthquakeFragment :
             clickableHeaderMenus.observe(viewLifecycleOwner) {
                 if (it) {
                     clickMap.observe(viewLifecycleOwner) {
-                        NavHandler.instance.toMapsActivity(requireContext(), nearLocationList, true)
+                        isNearPage.postValue(true)
+                        NavHandler.instance.toMapsActivity(requireContext(), nearLocationList)
                     }
                 }
             }

@@ -33,29 +33,58 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/BANNER_ADS_REAL"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@id/customToolbar" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingTop="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/adView">
+            app:layout_constraintTop_toBottomOf="@+id/customToolbar">
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adViewFirst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/BANNER_ADS_REAL"
+                ads:layout_constraintEnd_toEndOf="parent"
+                ads:layout_constraintStart_toStartOf="parent"
+                ads:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/btnMap"
+                style="@style/rounded_primary2_10_border_primary3"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:onClick="@{() -> viewModel.onClickMap()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/adViewFirst">
+
+                <ImageView
+                    style="@style/ImgTintColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="3dp"
+                    android:src="@drawable/ic_map" />
+
+                <TextView
+                    style="@style/TextColor_primary8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="6dp"
+                    android:text="@string/map" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFilterEarthquake"
                 itemAnimator="@{null}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="5dp"
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 android:overScrollMode="never"
@@ -64,9 +93,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnMap"
                 app:setAdapter="@{nowEarthquakeAdapter}"
-                app:submitListSet="@{viewModel.getNowFilterList}"
+                app:submitListSet="@{viewModel.getNowEarthquakeList}"
                 tools:listitem="@layout/item_now_earthquake_list" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -77,7 +106,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/adView">
+            app:layout_constraintTop_toBottomOf="@+id/customToolbar">
 
             <com.tayfuncesur.curvedbottomsheet.CurvedLayout
                 android:id="@+id/bottomSheet"
@@ -137,6 +166,15 @@
                             android:layout_height="1dp"
                             android:layout_margin="10dp" />
 
+                        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/adViewSecond"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="5dp"
+                            ads:adSize="BANNER"
+                            ads:adUnitId="@string/BANNER_ADS_REAL" />
+
                         <androidx.core.widget.NestedScrollView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -144,13 +182,14 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center"
                                 android:orientation="vertical">
 
                                 <RelativeLayout
                                     style="@style/rectangle_primary6_10_border_primary3"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
-                                    android:layout_marginHorizontal="25dp"
+                                    android:layout_marginHorizontal="20dp"
                                     android:layout_marginTop="5dp">
 
                                     <TextView
@@ -166,7 +205,7 @@
                                     android:id="@+id/tvLocation"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginHorizontal="20dp"
+                                    android:layout_marginHorizontal="25dp"
                                     android:layout_marginTop="10dp"
                                     android:layout_weight="1"
                                     android:textAlignment="textStart"
@@ -174,11 +213,10 @@
                                     app:custom_edit_text="@={viewModel.location}" />
 
                                 <RelativeLayout
-                                    android:id="@+id/btnOption2"
                                     style="@style/rectangle_primary6_10_border_primary3"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
-                                    android:layout_marginHorizontal="25dp"
+                                    android:layout_marginHorizontal="20dp"
                                     android:layout_marginTop="20dp">
 
                                     <TextView
@@ -192,10 +230,9 @@
                                 </RelativeLayout>
 
                                 <LinearLayout
-                                    android:id="@+id/btnSubOption2_1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginHorizontal="20dp"
+                                    android:layout_marginHorizontal="25dp"
                                     android:layout_marginTop="10dp"
                                     android:orientation="horizontal"
                                     android:weightSum="2">
@@ -224,11 +261,10 @@
                                 </LinearLayout>
 
                                 <RelativeLayout
-                                    android:id="@+id/btnOption3"
                                     style="@style/rectangle_primary6_10_border_primary3"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
-                                    android:layout_marginHorizontal="25dp"
+                                    android:layout_marginHorizontal="20dp"
                                     android:layout_marginTop="15dp">
 
                                     <TextView
@@ -242,10 +278,9 @@
                                 </RelativeLayout>
 
                                 <LinearLayout
-                                    android:id="@+id/llOption3"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginHorizontal="20dp"
+                                    android:layout_marginHorizontal="25dp"
                                     android:layout_marginVertical="10dp"
                                     android:orientation="vertical">
 
@@ -286,6 +321,13 @@
                                         android:textSize="14sp" />
 
                                 </RelativeLayout>
+
+                                <TextView
+                                    style="@style/TextColor_primary8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="6dp"
+                                    android:text="@string/filter_not" />
 
                             </LinearLayout>
                         </androidx.core.widget.NestedScrollView>

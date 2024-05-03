@@ -29,10 +29,10 @@ class FilterViewModel @Inject constructor(
     private var job: Job? = null
 
     //Get Api List
-    private var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
-    var getNowFilterList = MutableLiveData<ArrayList<Earthquake>?>()
+    var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     private var getDateEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     private var getLocationApiEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
+    private var mlEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
 
     //XML ve filter
     var location = MutableStateFlow("")
@@ -41,14 +41,12 @@ class FilterViewModel @Inject constructor(
     var endDate = MutableStateFlow("")
     var onlyDate = MutableStateFlow("")
 
-    var filterNowList = ArrayList<Earthquake>()
     private var filterNearLocationList = ArrayList<Earthquake>()
 
     var userLat = MutableStateFlow<Double?>(null)
     var userLong = MutableStateFlow<Double?>(null)
 
     //XML Click
-    val clickApply = LiveEvent<Boolean>()
     val clickFilterClear = LiveEvent<Boolean>()
     val clickMap = LiveEvent<Boolean>()
 
@@ -69,7 +67,6 @@ class FilterViewModel @Inject constructor(
                     is Resource.Success -> {
                         response.data?.let { getEarthquake ->
                             getNowEarthquakeList.postValue(getEarthquake)
-                            getNowFilterList.postValue(getEarthquake)
                         }
                         hideLoading()
                     }
@@ -85,7 +82,62 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    private fun getDataBetweenApi() {
+    private fun getLocationApi() {
+        mainScope {
+            showLoading()
+            getLocationEarthquakeUseCase(location.value).collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data?.let { getLocationEarthquake ->
+                            getLocationApiEarthquakeList.postValue(getLocationEarthquake)
+                            getNowEarthquakeList.postValue(getLocationEarthquake)
+                        }
+                        hideLoading()
+                    }
+
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
+
+                    else -> hideLoading()
+                }
+            }
+        }
+    }
+
+    /*private fun getNearLocationFilter() {
+        job = mainScope {
+            showLoading()
+            getEarthquakeUseCase().collectLatest { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        getNowEarthquakeList.postValue(null)
+                        response.data?.let { getEarthquake ->
+                            filterNearLocationList =
+                                userLat.value?.let { lat ->
+                                    userLong.value?.let { long ->
+                                        getLocationFilterManuel(lat, long, getEarthquake)
+                                    }
+                                } ?: ArrayList()
+
+                            getNowEarthquakeList.postValue(filterNearLocationList)
+                        }
+                        hideLoading()
+                    }
+
+                    is Resource.Error -> {
+                        serverMessage(response.error)
+                        hideLoading()
+                    }
+
+                    else -> hideLoading()
+                }
+            }
+        }
+    }*/
+
+    private fun getDateBetweenApi() {
         mainScope {
             showLoading()
             getDateBetweenEarthquakeUseCase(startDate.value, endDate.value)
@@ -94,7 +146,7 @@ class FilterViewModel @Inject constructor(
                         is Resource.Success -> {
                             response.data?.let { getDateBetweenEarthquake ->
                                 getDateEarthquakeList.postValue(getDateBetweenEarthquake)
-                                getNowFilterList.postValue(getDateBetweenEarthquake)
+                                getNowEarthquakeList.postValue(getDateBetweenEarthquake)
                             }
                             hideLoading()
                         }
@@ -110,31 +162,7 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    private fun getLocationApi() {
-        mainScope {
-            showLoading()
-            getLocationEarthquakeUseCase(location.value).collectLatest { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        response.data?.let { getLocationEarthquake ->
-                            getLocationApiEarthquakeList.postValue(getLocationEarthquake)
-                            getNowFilterList.postValue(getLocationEarthquake)
-                        }
-                        hideLoading()
-                    }
-
-                    is Resource.Error -> {
-                        serverMessage(response.error)
-                        hideLoading()
-                    }
-
-                    else -> hideLoading()
-                }
-            }
-        }
-    }
-
-    private fun getOnlyDataApi() {
+    /*private fun getOnlyDateApi() {
         mainScope {
             showLoading()
             getOnlyDateEarthquakeUseCase(onlyDate.value).collectLatest { response ->
@@ -142,7 +170,6 @@ class FilterViewModel @Inject constructor(
                     is Resource.Success -> {
                         response.data?.let { getOnlyDateEarthquake ->
                             getDateEarthquakeList.postValue(getOnlyDateEarthquake)
-                            getNowFilterList.postValue(getOnlyDateEarthquake)
                         }
                         hideLoading()
                     }
@@ -156,7 +183,7 @@ class FilterViewModel @Inject constructor(
                 }
             }
         }
-    }
+    }*/
 
     private fun getMlFilter() {
         mainScope {
@@ -168,8 +195,7 @@ class FilterViewModel @Inject constructor(
                         response.data?.let { getEarthquake ->
                             getNowEarthquakeList.postValue(getEarthquake)
                         }
-                        filterNowList = getOnlyMlFilter() ?: ArrayList()
-                        getNowFilterList.postValue(filterNowList)
+                        getOnlyMlFilter()
                         hideLoading()
                     }
 
@@ -184,7 +210,7 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    private fun getOnlyMlFilter(): ArrayList<Earthquake>? {
+    private fun getOnlyMlFilter() {
         val filterList = ArrayList<Earthquake>()
 
         getNowEarthquakeList.value?.forEach { earthquake ->
@@ -192,38 +218,8 @@ class FilterViewModel @Inject constructor(
                 if (earthquake.ml?.toDoubleOrNull()!! > ml.value.toDoubleOrNull()!!)
                     filterList.add(earthquake)
         }
-        return filterList
-    }
-
-    private fun getNearLocationFilter() {
-        job = mainScope {
-            showLoading()
-            getEarthquakeUseCase().collectLatest { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        getNowFilterList.postValue(null)
-                        response.data?.let { getEarthquake ->
-                            filterNearLocationList =
-                                userLat.value?.let { lat ->
-                                    userLong.value?.let { long ->
-                                        getLocationFilterManuel(lat, long, getEarthquake)
-                                    }
-                                } ?: ArrayList()
-
-                            getNowFilterList.postValue(filterNearLocationList)
-                        }
-                        hideLoading()
-                    }
-
-                    is Resource.Error -> {
-                        serverMessage(response.error)
-                        hideLoading()
-                    }
-
-                    else -> hideLoading()
-                }
-            }
-        }
+        mlEarthquakeList.postValue(filterList)
+        getNowEarthquakeList.postValue(filterList)
     }
 
     fun clearXmlData() {
@@ -236,29 +232,25 @@ class FilterViewModel @Inject constructor(
 
 
     //Click Events
+
+    fun onClickApply() {
+
+        if (location.value.isNotEmpty())
+            getLocationApi()
+
+        if (startDate.value.isNotEmpty() && endDate.value.isNotEmpty())
+            getDateBetweenApi()
+
+        if (ml.value.isNotEmpty())
+            getMlFilter()
+    }
+
     fun onClickMap() {
         clickMap.postValue(true)
     }
 
     fun onClickClear() {
         clickFilterClear.postValue(true)
-    }
-
-    fun onClickApply() {
-        clickApply.postValue(true)
-
-        if (location.value.isNotEmpty())
-            getLocationApi()
-        else
-            getNearLocationFilter()
-
-        if (startDate.value.isNotEmpty() && endDate.value.isNotEmpty())
-            getDataBetweenApi()
-        else
-            getOnlyDataApi()
-
-        if (ml.value.isNotEmpty())
-            getMlFilter()
     }
 
     fun onCstmDatePickerStartDateClick() {

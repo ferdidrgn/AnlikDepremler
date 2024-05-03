@@ -75,6 +75,7 @@
     <string name="location">Lokasyon (*Istanbul)</string>
     <string name="choose_location">Lokasyon Yaz / Haritadan Seç</string>
     <string name="choose_date">Bir tarihte / Tarihler Arası</string>
+    <string name="filter_not">**Şu anda filtreleme tek taraflı çalışıyor. Sadece bir seçenek ile filtre yapınız</string>
 
 
     <string name="billing_error">Faturalandırma hizmeti bağlantısı kesildi, gerekirse tekrar bağlanmayı deneyiniz.</string>

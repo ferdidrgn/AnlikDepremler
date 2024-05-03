@@ -71,16 +71,20 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
 
     private fun observeMapIconClick() {
         viewModel.clickMap.observe(viewLifecycleOwner) { isMapClick ->
-            if (isMapClick)
-                NavHandler.instance.toMapsActivity(requireContext(), ArrayList(), false)
+            if (isMapClick) {
+                viewModel.isNearPage.postValue(false)
+                NavHandler.instance.toMapsActivity(requireContext(), ArrayList())
+            }
         }
     }
 
     private fun observeFilterIconClick() {
         viewModel.apply {
             clickFilter.observe(viewLifecycleOwner) { isFilterClick ->
-                if (isFilterClick)
+                if (isFilterClick) {
+                    viewModel.isNearPage.postValue(null)
                     NavHandler.instance.toFilterActivity(requireContext())
+                }
             }
         }
     }

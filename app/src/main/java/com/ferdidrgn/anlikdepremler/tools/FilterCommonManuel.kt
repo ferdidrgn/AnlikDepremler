@@ -35,7 +35,7 @@ fun getAllFilterQueriers(
             ) && ml.isNotEmpty()
         ) {
             filterEarthquakeList =
-                getAllFilterCheck(
+                getManuelFilterCheck(
                     getFilterEarthquakeList,
                     earthquakeBodyRequest, true, true, true
                 )
@@ -48,7 +48,7 @@ fun getAllFilterQueriers(
             ) && ml.isEmpty()
         ) {
             filterEarthquakeList =
-                getAllFilterCheck(
+                getManuelFilterCheck(
                     getFilterEarthquakeList,
                     earthquakeBodyRequest, true, true, false
                 )
@@ -63,7 +63,7 @@ fun getAllFilterQueriers(
             )
         ) {
             filterEarthquakeList =
-                getAllFilterCheck(
+                getManuelFilterCheck(
                     getFilterEarthquakeList,
                     earthquakeBodyRequest, true, false, true
                 )
@@ -74,7 +74,7 @@ fun getAllFilterQueriers(
             ) && !checkMapManuelStatus
                 (userLat ?: 0.0, userLong ?: 0.0)
         ) {
-            filterEarthquakeList = getAllFilterCheck(
+            filterEarthquakeList = getManuelFilterCheck(
                 getFilterEarthquakeList,
                 earthquakeBodyRequest, false, true, true
             )
@@ -82,7 +82,7 @@ fun getAllFilterQueriers(
         else if (checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
             ml.isEmpty() && !checkBetweenData(startDate, endDate)
         ) {
-            filterEarthquakeList = getAllFilterCheck(
+            filterEarthquakeList = getManuelFilterCheck(
                 getFilterEarthquakeList,
                 earthquakeBodyRequest, true, false, false
             )
@@ -90,7 +90,7 @@ fun getAllFilterQueriers(
         else if (ml.isNotEmpty() && !checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0) &&
             !checkBetweenData(startDate, endDate)
         ) {
-            filterEarthquakeList = getAllFilterCheck(
+            filterEarthquakeList = getManuelFilterCheck(
                 getFilterEarthquakeList,
                 earthquakeBodyRequest, false, false, true
             )
@@ -98,7 +98,7 @@ fun getAllFilterQueriers(
         else if (ml.isEmpty() && checkBetweenData(startDate, endDate) &&
             !checkMapManuelStatus(userLat ?: 0.0, userLong ?: 0.0)
         ) {
-            filterEarthquakeList = getAllFilterCheck(
+            filterEarthquakeList = getManuelFilterCheck(
                 getFilterEarthquakeList,
                 earthquakeBodyRequest, false, true, false
             )
@@ -108,8 +108,46 @@ fun getAllFilterQueriers(
     return status.invoke(filterEarthquakeList)
 }
 
+fun getApiFilterCheck(
+    getFilterEarthquakeList: ArrayList<Earthquake>?,
+    locationList: ArrayList<Earthquake>?,
+    dateList: ArrayList<Earthquake>?,
+    mlList: ArrayList<Earthquake>?
+): ArrayList<Earthquake>? {
+    val filterEarthquakeList = ArrayList<Earthquake>()
+    val filterDate = ArrayList<Earthquake>()
+    var returnFilterList: ArrayList<Earthquake> = ArrayList()
 
-fun getAllFilterCheck(
+    if (!locationList.isNullOrEmpty())
+        returnFilterList = locationList
+
+    if (!mlList.isNullOrEmpty()) {
+        (if (isNotEmpty(returnFilterList)) returnFilterList else getFilterEarthquakeList)?.forEach { earthquake ->
+            if (earthquake.ml.isNullOrEmpty().not())
+                mlList.forEach { ml ->
+                    if (earthquake == ml)
+                        filterEarthquakeList.add(earthquake)
+                }
+        }
+        returnFilterList = filterEarthquakeList
+    }
+
+    if (!dateList.isNullOrEmpty()) {
+
+        (if (isNotEmpty(returnFilterList)) returnFilterList else getFilterEarthquakeList)?.forEach { data ->
+            val dataDate = changeStringToDate(data.date.toString())
+            dateList.forEach { listDate ->
+                if (dataDate == changeStringToDate(listDate.date.toString()))
+                    filterDate.add(listDate)
+            }
+        }
+
+        returnFilterList = filterDate
+    }
+    return returnFilterList
+}
+
+fun getManuelFilterCheck(
     getFilterEarthquakeList: ArrayList<Earthquake>,
     earthquakeBodyRequest: EarthquakeBodyRequest,
     locationFilter: Boolean,

@@ -46,7 +46,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     private var latLng: LatLng? = null
     private var earthquakeList = ArrayList<Earthquake>()
     private var cameEarthquakeList = ArrayList<Earthquake>()
-    private var isNearEarthquake = false
+    private var isNearEarthquake: Boolean? = null
 
     override fun getVM(): Lazy<MainViewModel> = viewModels()
 
@@ -75,15 +75,15 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     }
 
     private fun observeArgumentsData() {
-        isNearEarthquake = intent.getBooleanExtra(NEAR_EARTHQUAKE, false)
+        isNearEarthquake = viewModel.isNearPage.value
         cameEarthquakeList = intent.getSerializableExtra(FILTER_LIST) as ArrayList<Earthquake>
-        if (isNearEarthquake)
+        if (isNearEarthquake == true)
             getLocation()
 
         if (cameEarthquakeList.size > 0)
             viewModel.getNowEarthquakeList.postValue(cameEarthquakeList)
         else
-            if (!isNearEarthquake)
+            if (isNearEarthquake != true)
                 viewModel.getNowEarthquake()
     }
 
@@ -163,7 +163,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
             true
         }
 
-        if (isNearEarthquake)
+        if (isNearEarthquake == true)
             requestNowLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
@@ -180,7 +180,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
         }
 
         gMap.isMyLocationEnabled = false
-        if (isNearEarthquake)
+        if (isNearEarthquake == true)
             getLocation()
     }
 
@@ -413,14 +413,15 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     }
 
     private fun whereActionPage() {
-        if (isNearEarthquake)
-            NavHandler.instance.toMainActivity(this, ToMain.NearEarthquake)
-        else
-            NavHandler.instance.toMainActivity(this, ToMain.NowEarthquake)
+        when (isNearEarthquake) {
+            true -> NavHandler.instance.toMainActivity(this, ToMain.NearEarthquake)
+            false -> NavHandler.instance.toMainActivity(this, ToMain.NowEarthquake)
+            else -> NavHandler.instance.toFilterActivity(this)
+        }
     }
 
     private fun grantedPermissionMainAction() {
-        NavHandler.instance.toMainActivityClearTask(this, ToMain.Home)
+        NavHandler.instance.toMainActivity(this, ToMain.Home, onlyClearTask = true)
         showToast(getString(R.string.please_accept_location))
     }
 

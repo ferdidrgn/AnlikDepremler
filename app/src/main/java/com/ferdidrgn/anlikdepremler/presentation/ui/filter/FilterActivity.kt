@@ -50,7 +50,8 @@ class FilterActivity : BaseActivity<FilterViewModel, ActivityFilterBinding>(), O
         binding.viewModel = viewModel
         binding.nowEarthquakeAdapter = NowEarthquakeAdapter(viewModel, false)
         binding.customToolbar.backIconOnBackPress(this)
-        setAds(binding.adView)
+        setAds(binding.adViewFirst)
+        setAds(binding.adViewSecond)
 
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.mapBottomSheet) as? SupportMapFragment
@@ -75,17 +76,22 @@ class FilterActivity : BaseActivity<FilterViewModel, ActivityFilterBinding>(), O
 
         viewModel.clickMap.observe(this) { isMapClick ->
             if (isMapClick)
-                NavHandler.instance.toMapsActivity(this, viewModel.filterNowList, false)
+                NavHandler.instance.toMapsActivity(
+                    this, viewModel.getNowEarthquakeList.value ?: ArrayList()
+                )
         }
 
-        viewModel.clickFilterClear.observe(this) {
-            if (it) {
+        viewModel.clickFilterClear.observe(this) { clear ->
+            if (clear) {
                 viewModel.clearXmlData()
-                mMap.clear()
+                OnMapReadyCallback { googleMap ->
+                    mMap = googleMap
+                    mMap.clear()
+                }
             }
         }
 
-        viewModel.getNowFilterList.observe(this) {
+        viewModel.getNowEarthquakeList.observe(this) {
             scrollToTop()
         }
 
