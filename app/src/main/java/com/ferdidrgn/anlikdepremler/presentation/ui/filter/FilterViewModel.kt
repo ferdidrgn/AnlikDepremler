@@ -21,9 +21,9 @@ import javax.inject.Inject
 @HiltViewModel
 class FilterViewModel @Inject constructor(
     private val getEarthquakeUseCase: GetEarthquakeUseCase,
-    private val getOnlyDateEarthquakeUseCase: GetOnlyDateEarthquakeUseCase,
     private val getDateBetweenEarthquakeUseCase: GetDateBetweenEarthquakeUseCase,
-    private val getLocationEarthquakeUseCase: GetLocationEarthquakeUseCase
+    private val getLocationEarthquakeUseCase: GetLocationEarthquakeUseCase,
+    private val getOnlyDateEarthquakeUseCase: GetOnlyDateEarthquakeUseCase
 ) : BaseViewModel(), NowEarthQuakeAdapterListener {
 
     private var job: Job? = null
@@ -39,9 +39,6 @@ class FilterViewModel @Inject constructor(
     var ml = MutableStateFlow("")
     var startDate = MutableStateFlow("")
     var endDate = MutableStateFlow("")
-    var onlyDate = MutableStateFlow("")
-
-    private var filterNearLocationList = ArrayList<Earthquake>()
 
     var userLat = MutableStateFlow<Double?>(null)
     var userLong = MutableStateFlow<Double?>(null)
@@ -225,7 +222,6 @@ class FilterViewModel @Inject constructor(
     fun clearXmlData() {
         location.value = ""
         ml.value = ""
-        onlyDate.value = ""
         startDate.value = ""
         endDate.value = ""
     }

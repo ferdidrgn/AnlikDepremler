@@ -35,13 +35,11 @@ class MainViewModel @Inject constructor(
 
     private var job: Job? = null
 
-    //XML
-    var location = MutableStateFlow("")
-
     //For Near Location Page
     var userLat = MutableStateFlow<Double?>(null)
     var userLong = MutableStateFlow<Double?>(null)
     var nearLocationList = ArrayList<Earthquake>()
+    var isNearPage = MutableLiveData<Boolean>(null)
 
     //Get Api List
     var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
@@ -50,8 +48,10 @@ class MainViewModel @Inject constructor(
     var getTopTenLocationEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var homeSliderList = MutableLiveData<List<HomeSliderData>>()
 
-    var isNearPage = MutableLiveData(false)
     var clickableHeaderMenus = MutableLiveData<Boolean>()
+
+    //XML
+    var location = MutableStateFlow("")
 
     //XML Click
     val clickList = LiveEvent<Boolean>()
@@ -63,7 +63,7 @@ class MainViewModel @Inject constructor(
     val clickSeeAllLocationEarthquake = LiveEvent<Boolean>()
 
     init {
-        falseToNearPageAndClickableMenus()
+        clickableHeaderMenus.postValue(false)
     }
 
     fun getHomePage() {
@@ -135,7 +135,7 @@ class MainViewModel @Inject constructor(
     fun getNowEarthquake() {
         mainScope {
             showLoading()
-            falseToNearPageAndClickableMenus()
+            clickableHeaderMenus.postValue(false)
 
             //collectlatest -> eger 2 defa emit edilirse ilk emit iptal olur 2. emit calisir. ilk emit bitmeden 2.ye gecilir
             //collect -> tum emitler calisir, ilk emitin bitmesini bekler sonra digerine gecer.
@@ -192,11 +192,6 @@ class MainViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    private fun falseToNearPageAndClickableMenus() {
-        isNearPage.postValue(false)
-        clickableHeaderMenus.postValue(false)
     }
 
     fun cancelDataFetching() {

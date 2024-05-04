@@ -53,7 +53,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     override fun getDataBinding(): FragmentMapsNowEarthquakeBinding =
         FragmentMapsNowEarthquakeBinding.inflate(layoutInflater)
 
-    override fun onCreateFinished(savedInstanceState: Bundle?) {
+    override fun onCreateFinished(savedInstance: Bundle?) {
         binding.viewModel = viewModel
         setAds(binding.adView)
 
@@ -427,7 +427,6 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     override fun onResume() {
         super.onResume()
-
         setAds(binding.adView)
     }
 

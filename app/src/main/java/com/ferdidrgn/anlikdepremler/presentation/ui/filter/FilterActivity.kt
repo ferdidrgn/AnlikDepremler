@@ -187,4 +187,10 @@ class FilterActivity : BaseActivity<FilterViewModel, ActivityFilterBinding>(), O
         }, 3000)
     }
 
+    override fun onResume() {
+        super.onResume()
+        setAds(binding.adViewFirst)
+        setAds(binding.adViewSecond)
+    }
+
 }
