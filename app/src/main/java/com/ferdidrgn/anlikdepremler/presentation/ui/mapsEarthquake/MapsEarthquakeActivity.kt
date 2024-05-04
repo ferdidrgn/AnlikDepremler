@@ -75,7 +75,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     }
 
     private fun observeArgumentsData() {
-        isNearEarthquake = viewModel.isNearPage.value
+        isNearEarthquake = viewModel.isNearPage?.value
         cameEarthquakeList = intent.getSerializableExtra(FILTER_LIST) as ArrayList<Earthquake>
         if (isNearEarthquake == true)
             getLocation()
@@ -101,20 +101,16 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
             //Observe
             getNearEarthquakeList.observe(this@MapsEarthquakeActivity) { dataResponse ->
-                if (isNearPage.value == true) {
+                if (isNearPage?.value == true) {
                     earthquakeList.clear()
-                    dataResponse?.forEach { earthquake ->
-                        earthquakeList.addAll(listOf(earthquake))
-                    }
+                    earthquakeList = dataResponse ?: arrayListOf()
                     setUpEarthquakeAdapter()
                 }
             }
 
             getNowEarthquakeList.observe(this@MapsEarthquakeActivity) { dataResponse ->
-                if (isNearPage.value == false) {
-                    dataResponse?.forEach { earthquake ->
-                        earthquakeList.addAll(listOf(earthquake))
-                    }
+                if (isNearPage?.value == false) {
+                    earthquakeList = dataResponse ?: arrayListOf()
                     setUpEarthquakeAdapter()
                 }
             }
@@ -199,7 +195,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
                         latLng = LatLng(location.latitude, location.longitude)
                         viewModel.userLat.emit(location.latitude)
                         viewModel.userLong.emit(location.longitude)
-                        viewModel.getNearLocationFilter(true)
+                        viewModel.getNearLocationFilter()
                         observeEarthquakeData()
                     }
                 } else {

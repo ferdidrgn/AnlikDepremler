@@ -74,11 +74,8 @@ class FilterActivity : BaseActivity<FilterViewModel, ActivityFilterBinding>(), O
 
     private fun observe() {
 
-        viewModel.clickMap.observe(this) { isMapClick ->
-            if (isMapClick)
-                NavHandler.instance.toMapsActivity(
-                    this, viewModel.getNowEarthquakeList.value ?: ArrayList()
-                )
+        viewModel.clickMap.observe(this) {
+            NavHandler.instance.toMapsActivity(this, viewModel.filterNowList)
         }
 
         viewModel.clickFilterClear.observe(this) { clear ->
@@ -91,9 +88,7 @@ class FilterActivity : BaseActivity<FilterViewModel, ActivityFilterBinding>(), O
             }
         }
 
-        viewModel.getNowEarthquakeList.observe(this) {
-            scrollToTop()
-        }
+        viewModel.getNowEarthquakeList.observe(this) { scrollToTop() }
 
         viewModel.clickCstmDatePickerStartDate.observe(this) {
             binding.cdpStartDate.setCustomDataPickerClick()

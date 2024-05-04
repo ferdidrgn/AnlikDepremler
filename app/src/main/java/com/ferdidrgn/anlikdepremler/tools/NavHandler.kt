@@ -66,7 +66,7 @@ class NavHandler {
 
     fun toMapsActivity(
         context: Context,
-        filterList: ArrayList<Earthquake>?
+        filterList: ArrayList<Earthquake>
     ) {
         val intent = Intent(context, MapsEarthquakeActivity::class.java)
         intent.putExtra(FILTER_LIST, filterList)

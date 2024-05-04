@@ -39,7 +39,10 @@ class MainViewModel @Inject constructor(
     var userLat = MutableStateFlow<Double?>(null)
     var userLong = MutableStateFlow<Double?>(null)
     var nearLocationList = ArrayList<Earthquake>()
-    var isNearPage = MutableLiveData<Boolean>(null)
+    var isNearPage: MutableLiveData<Boolean?>? = null
+
+    //XML
+    var location = MutableStateFlow("")
 
     //Get Api List
     var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
@@ -49,9 +52,6 @@ class MainViewModel @Inject constructor(
     var homeSliderList = MutableLiveData<List<HomeSliderData>>()
 
     var clickableHeaderMenus = MutableLiveData<Boolean>()
-
-    //XML
-    var location = MutableStateFlow("")
 
     //XML Click
     val clickList = LiveEvent<Boolean>()
@@ -160,7 +160,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getNearLocationFilter(isNearPage: Boolean) {
+    fun getNearLocationFilter() {
         job = mainScope {
             showLoading()
             clickableHeaderMenus.postValue(false)
@@ -175,8 +175,6 @@ class MainViewModel @Inject constructor(
                                         getLocationFilterManuel(lat, long, getEarthquake)
                                     }
                                 } ?: ArrayList()
-
-                            this@MainViewModel.isNearPage.postValue(isNearPage)
                             getNearEarthquakeList.postValue(nearLocationList)
                             clickableHeaderMenus.postValue(true)
                         }

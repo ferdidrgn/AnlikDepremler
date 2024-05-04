@@ -16,6 +16,7 @@ fun checkBetweenData(startDate: String, endDate: String): Boolean {
     return startDate.isNotEmpty() && endDate.isNotEmpty()
 }
 
+// Her seçenek kontrolü yapılır
 fun getAllFilterQueriers(
     earthquakeBodyRequest: EarthquakeBodyRequest,
     getFilterEarthquakeList: ArrayList<Earthquake>,
@@ -108,6 +109,7 @@ fun getAllFilterQueriers(
     return status.invoke(filterEarthquakeList)
 }
 
+//Apideki veriler çekilerek filtreleme için karşılaştırılır
 fun getApiFilterCheck(
     getFilterEarthquakeList: ArrayList<Earthquake>?,
     locationList: ArrayList<Earthquake>?,
@@ -147,6 +149,7 @@ fun getApiFilterCheck(
     return returnFilterList
 }
 
+//Api siz manuel olarak verileri filtreleme için karşılaştırılır
 fun getManuelFilterCheck(
     getFilterEarthquakeList: ArrayList<Earthquake>,
     earthquakeBodyRequest: EarthquakeBodyRequest,
@@ -240,5 +243,4 @@ fun distanceOperations(
     val c = 2 * kotlin.math.atan2(sqrt(a), sqrt(1 - a))
 
     return r * c
-
 }
