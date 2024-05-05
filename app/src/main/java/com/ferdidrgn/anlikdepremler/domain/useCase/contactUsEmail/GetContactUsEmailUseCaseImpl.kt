@@ -1,6 +1,6 @@
-package com.ferdidrgn.anlikdepremler.domain.useCase
+package com.ferdidrgn.anlikdepremler.domain.useCase.contactUsEmail
 
-import com.ferdidrgn.anlikdepremler.data.repository.AppToolsFireBaseQueriesRepository
+import com.ferdidrgn.anlikdepremler.domain.repository.AppToolsFireBaseQueriesRepository
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import javax.inject.Inject
 

@@ -1,11 +1,11 @@
-package com.ferdidrgn.anlikdepremler.data.repository
+package com.ferdidrgn.anlikdepremler.domain.repository
 
 import com.ferdidrgn.anlikdepremler.base.Resource
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import kotlinx.coroutines.flow.Flow
 
 interface EarthquakeRepository {
-    fun getEarthquake(): Flow<Resource<ArrayList<Earthquake>?>>
+    fun getEarthquakes(): Flow<Resource<ArrayList<Earthquake>?>>
 
     fun getLocationEarthquakeList(city: String): Flow<Resource<ArrayList<Earthquake>?>>
 

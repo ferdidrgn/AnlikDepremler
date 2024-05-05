@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.domain.useCase
+package com.ferdidrgn.anlikdepremler.domain.useCase.dataBetweenEarthquake
 
 import com.ferdidrgn.anlikdepremler.base.Resource
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake

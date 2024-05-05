@@ -1,6 +1,7 @@
 package com.ferdidrgn.anlikdepremler.data.repository
 
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
+import com.ferdidrgn.anlikdepremler.domain.repository.HomeSliderRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

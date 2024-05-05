@@ -5,13 +5,13 @@ import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.base.Err
 import com.ferdidrgn.anlikdepremler.base.Resource
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.earthquakes.GetEarthquakesUseCase
 import kotlinx.coroutines.flow.collectLatest
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetExampleHomeSliderUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetTopTenEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetTopTenLocationEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.homeSliderExample.GetExampleHomeSliderUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.topTenEarthquake.GetTopTenEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.locationTopTenEarthquake.GetTopTenLocationEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.SliderDetailsAdapterListener
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.TopTenEarthquakeAdapterListener
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.home.TopTenLocationEarthquakeAdapterListener
@@ -27,7 +27,7 @@ import kotlin.collections.ArrayList
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getExampleHomeSliderUseCase: GetExampleHomeSliderUseCase,
-    private val getEarthquakeUseCase: GetEarthquakeUseCase,
+    private val getEarthquakesUseCase: GetEarthquakesUseCase,
     private val getTopTenEarthquakeUseCase: GetTopTenEarthquakeUseCase,
     private val getTopTenLocationEarthquakeUseCase: GetTopTenLocationEarthquakeUseCase,
 ) : BaseViewModel(), NowEarthQuakeAdapterListener, SliderDetailsAdapterListener,
@@ -140,7 +140,7 @@ class MainViewModel @Inject constructor(
 
             //collectlatest -> eger 2 defa emit edilirse ilk emit iptal olur 2. emit calisir. ilk emit bitmeden 2.ye gecilir
             //collect -> tum emitler calisir, ilk emitin bitmesini bekler sonra digerine gecer.
-            getEarthquakeUseCase().collectLatest { response ->
+            getEarthquakesUseCase().collectLatest { response ->
                 when (response) {
                     is Resource.Success -> {
                         response.data?.let { getEarthquake ->
@@ -165,7 +165,7 @@ class MainViewModel @Inject constructor(
         job = mainScope {
             showLoading()
             clickableHeaderMenus.postValue(false)
-            getEarthquakeUseCase().collectLatest { response ->
+            getEarthquakesUseCase().collectLatest { response ->
                 when (response) {
                     is Resource.Success -> {
                         getNearEarthquakeList.postValue(null)

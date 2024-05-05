@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.data.repository
+package com.ferdidrgn.anlikdepremler.domain.repository
 
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
 import kotlinx.coroutines.flow.Flow

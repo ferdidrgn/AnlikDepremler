@@ -1,23 +1,23 @@
 package com.ferdidrgn.anlikdepremler.di
 
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetContactUsEmailUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetContactUsEmailUseCaseImpl
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetDateBetweenEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetDateBetweenEarthquakeUseCaseImpl
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetEarthquakeUseCaseImpl
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetExampleHomeSliderUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetExampleHomeSliderUseCaseImpl
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetLocationEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetLocationEarthquakeUseCaseImpl
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetOnlyDateEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetOnlyDateEarthquakeUseCaseImpl
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetTermsConditionOrPrivacyPolicyUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetTermsConditionOrPrivacyPolicyUseCaseImpl
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetTopTenEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetTopTenEarthquakeUseCaseImpl
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetTopTenLocationEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetTopTenLocationEarthquakeUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.contactUsEmail.GetContactUsEmailUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.contactUsEmail.GetContactUsEmailUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.dataBetweenEarthquake.GetDateBetweenEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.dataBetweenEarthquake.GetDateBetweenEarthquakeUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.earthquakes.GetEarthquakesUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.earthquakes.GetEarthquakesUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.homeSliderExample.GetExampleHomeSliderUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.homeSliderExample.GetExampleHomeSliderUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.locationEarthquake.GetLocationEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.locationEarthquake.GetLocationEarthquakeUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.dataOnlyEarthquake.GetOnlyDateEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.dataOnlyEarthquake.GetOnlyDateEarthquakeUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.termsConditionPrivacyPolicy.GetTermsConditionOrPrivacyPolicyUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.termsConditionPrivacyPolicy.GetTermsConditionOrPrivacyPolicyUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.topTenEarthquake.GetTopTenEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.topTenEarthquake.GetTopTenEarthquakeUseCaseImpl
+import com.ferdidrgn.anlikdepremler.domain.useCase.locationTopTenEarthquake.GetTopTenLocationEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.locationTopTenEarthquake.GetTopTenLocationEarthquakeUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -30,7 +30,7 @@ abstract class AppUseCaseModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindGetEarthquakeUseCase(getDrinksWithFirstLetterUseCaseImpl: GetEarthquakeUseCaseImpl): GetEarthquakeUseCase
+    abstract fun bindGetEarthquakeUseCase(getDrinksWithFirstLetterUseCaseImpl: GetEarthquakesUseCaseImpl): GetEarthquakesUseCase
 
     @Binds
     @ViewModelScoped

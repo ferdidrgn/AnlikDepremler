@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.data
+package com.ferdidrgn.anlikdepremler.data.remote
 
 import com.ferdidrgn.anlikdepremler.BuildConfig
 import com.ferdidrgn.anlikdepremler.tools.enums.Environment

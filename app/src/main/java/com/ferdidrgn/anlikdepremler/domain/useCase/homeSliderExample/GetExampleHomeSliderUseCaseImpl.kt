@@ -1,6 +1,6 @@
-package com.ferdidrgn.anlikdepremler.domain.useCase
+package com.ferdidrgn.anlikdepremler.domain.useCase.homeSliderExample
 
-import com.ferdidrgn.anlikdepremler.data.repository.HomeSliderRepository
+import com.ferdidrgn.anlikdepremler.domain.repository.HomeSliderRepository
 import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

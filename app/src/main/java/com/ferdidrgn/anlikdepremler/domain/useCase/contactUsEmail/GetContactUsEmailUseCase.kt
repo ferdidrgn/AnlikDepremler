@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.domain.useCase
+package com.ferdidrgn.anlikdepremler.domain.useCase.contactUsEmail
 
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 

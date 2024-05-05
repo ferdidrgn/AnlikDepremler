@@ -3,7 +3,7 @@ package com.ferdidrgn.anlikdepremler.presentation.ui.main.settings
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetContactUsEmailUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.contactUsEmail.GetContactUsEmailUseCase
 import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.tools.mainScope

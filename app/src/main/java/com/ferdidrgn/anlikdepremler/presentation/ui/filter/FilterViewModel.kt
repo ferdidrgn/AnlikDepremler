@@ -4,16 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import com.ferdidrgn.anlikdepremler.base.BaseViewModel
 import com.ferdidrgn.anlikdepremler.base.Resource
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetDateBetweenEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetLocationEarthquakeUseCase
-import com.ferdidrgn.anlikdepremler.domain.useCase.GetOnlyDateEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.dataBetweenEarthquake.GetDateBetweenEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.earthquakes.GetEarthquakesUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.locationEarthquake.GetLocationEarthquakeUseCase
+import com.ferdidrgn.anlikdepremler.domain.useCase.dataOnlyEarthquake.GetOnlyDateEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthQuakeAdapterListener
-import com.ferdidrgn.anlikdepremler.tools.getApiFilterCheck
 import com.ferdidrgn.anlikdepremler.tools.helpers.LiveEvent
-import com.ferdidrgn.anlikdepremler.tools.log
 import com.ferdidrgn.anlikdepremler.tools.mainScope
-import com.ferdidrgn.anlikdepremler.tools.showToast
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -21,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FilterViewModel @Inject constructor(
-    private val getEarthquakeUseCase: GetEarthquakeUseCase,
+    private val getEarthquakesUseCase: GetEarthquakesUseCase,
     private val getDateBetweenEarthquakeUseCase: GetDateBetweenEarthquakeUseCase,
     private val getLocationEarthquakeUseCase: GetLocationEarthquakeUseCase,
     private val getOnlyDateEarthquakeUseCase: GetOnlyDateEarthquakeUseCase
@@ -57,7 +54,7 @@ class FilterViewModel @Inject constructor(
         mainScope {
             showLoading()
 
-            getEarthquakeUseCase().collectLatest { response ->
+            getEarthquakesUseCase().collectLatest { response ->
                 when (response) {
                     is Resource.Success -> {
                         response.data?.let { getEarthquake ->

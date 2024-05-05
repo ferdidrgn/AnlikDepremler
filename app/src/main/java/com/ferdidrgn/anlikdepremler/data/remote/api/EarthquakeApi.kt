@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.data.api
+package com.ferdidrgn.anlikdepremler.data.remote.api
 
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import retrofit2.Response
@@ -8,7 +8,7 @@ import retrofit2.http.Path
 interface EarthquakeApi {
 
     @GET("kandilli/")
-    suspend fun getEarthquake(): Response<ArrayList<Earthquake>>
+    suspend fun getEarthquakes(): Response<ArrayList<Earthquake>>
 
     @GET("kandilli/api/limit/10")
     suspend fun getTopTenEarthquakeList(): Response<ArrayList<Earthquake>>

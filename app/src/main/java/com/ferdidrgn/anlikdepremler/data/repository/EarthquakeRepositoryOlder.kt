@@ -3,7 +3,7 @@ package com.ferdidrgn.anlikdepremler.data.repository
 import com.ferdidrgn.anlikdepremler.base.BaseRepo
 import com.ferdidrgn.anlikdepremler.base.Resource
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
-import com.ferdidrgn.anlikdepremler.data.api.EarthquakeApi
+import com.ferdidrgn.anlikdepremler.data.remote.api.EarthquakeApi
 import javax.inject.Inject
 
 class EarthquakeRepositoryOlder @Inject constructor(
@@ -12,7 +12,7 @@ class EarthquakeRepositoryOlder @Inject constructor(
 
     //Example function
     //Older version of getEarthquake function
-    suspend fun getEarthquake(): Resource<ArrayList<Earthquake>?> = suspendSafeApiCall {
-        api.getEarthquake()
+    suspend fun getEarthquakes(): Resource<ArrayList<Earthquake>?> = suspendSafeApiCall {
+        api.getEarthquakes()
     }
 }

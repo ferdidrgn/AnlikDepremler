@@ -1,15 +1,15 @@
-package com.ferdidrgn.anlikdepremler.domain.useCase
+package com.ferdidrgn.anlikdepremler.domain.useCase.earthquakes
 
 import com.ferdidrgn.anlikdepremler.base.Resource
-import com.ferdidrgn.anlikdepremler.data.repository.EarthquakeRepository
+import com.ferdidrgn.anlikdepremler.domain.repository.EarthquakeRepository
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetEarthquakeUseCaseImpl @Inject constructor(
+class GetEarthquakesUseCaseImpl @Inject constructor(
     private val earthquakeRepository: EarthquakeRepository,
-) : GetEarthquakeUseCase {
+) : GetEarthquakesUseCase {
 
     override operator fun invoke(): Flow<Resource<ArrayList<Earthquake>?>> =
-        earthquakeRepository.getEarthquake()
+        earthquakeRepository.getEarthquakes()
 }
