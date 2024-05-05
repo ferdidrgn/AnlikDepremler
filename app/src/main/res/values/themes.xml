@@ -162,7 +162,7 @@
 
     <style name="DialogTheme_transparent" parent="Theme.AppCompat.Dialog">
         <item name="android:windowBackground">
-            @drawable/rounded_border_main_1_dp_radius_10_transparent
+            @drawable/rounded_primary3_2_radius_10
         </item>
         <!--You can set other style items also, such as animations and etc-->
     </style>

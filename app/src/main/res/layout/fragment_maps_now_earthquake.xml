@@ -175,7 +175,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:setAdapter="@{nowEarthquakeAdapter}"
-            app:submitListSet="@{viewModel.isNearPage() ? viewModel.getNearEarthquakeList : viewModel.getNowEarthquakeList}"
+            app:submitListSet="@{viewModel.mapEarthquakeList}"
             tools:layout_editor_absoluteX="1dp"
             tools:listitem="@layout/item_now_earthquake_maps" />
 

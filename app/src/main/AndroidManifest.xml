@@ -39,7 +39,7 @@
             android:name=".presentation.ui.mapsEarthquake.MapsEarthquakeActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsandPrivacyPolicyActivity"
+            android:name=".presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsAndPrivacyPolicyActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.main.MainActivity"

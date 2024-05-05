@@ -115,7 +115,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/rounded_main_secondary_radius_10"
+                android:background="@drawable/rounded_primary4_2_radius_10"
                 android:scaleType="center"
                 android:src="@drawable/ic_filter"
                 android:visibility="gone" />

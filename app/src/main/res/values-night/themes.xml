@@ -25,7 +25,6 @@
         <item name="colorOnSurfaceVariant">@color/red_err</item>
         <item name="colorOnSurfaceInverse">@color/green_light</item>
         <item name="colorOnTertiary">@color/primary10</item>
-
     </style>
 
     <!-- Customize style -->

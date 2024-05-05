@@ -98,7 +98,7 @@ class BasePopUp(val isSuccess: Boolean? = null) : DialogFragment() {
             container.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.bg_main_forth_10_border_red)
             positiveTv.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.rounded_bg_red_radius_10)
+                ContextCompat.getDrawable(requireContext(), R.drawable.rounded_red_radius_10)
         }
     }
 

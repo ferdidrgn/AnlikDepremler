@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 
-class EarthQuakeMapAdapter(private val earthquakeList: List<Earthquake?>) :
-    RecyclerView.Adapter<EarthQuakeMapAdapter.MapHolder>() {
+class EartqhuakeMapAdapter(private val earthquakeList: List<Earthquake?>) :
+    RecyclerView.Adapter<EartqhuakeMapAdapter.MapHolder>() {
 
     class MapHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 

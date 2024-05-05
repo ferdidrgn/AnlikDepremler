@@ -45,7 +45,6 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     var location: LocationManager? = null
     private var latLng: LatLng? = null
     private var earthquakeList = ArrayList<Earthquake>()
-    private var cameEarthquakeList = ArrayList<Earthquake>()
     private var isNearEarthquake: Boolean? = null
 
     override fun getVM(): Lazy<MainViewModel> = viewModels()
@@ -75,16 +74,12 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     }
 
     private fun observeArgumentsData() {
-        isNearEarthquake = viewModel.isNearPage?.value
-        cameEarthquakeList = intent.getSerializableExtra(FILTER_LIST) as ArrayList<Earthquake>
+        isNearEarthquake = intent.getBooleanExtra(NEAR_EARTHQUAKE, false)
+
         if (isNearEarthquake == true)
             getLocation()
-
-        if (cameEarthquakeList.size > 0)
-            viewModel.getNowEarthquakeList.postValue(cameEarthquakeList)
         else
-            if (isNearEarthquake != true)
-                viewModel.getNowEarthquake()
+            viewModel.getNowEarthquake()
     }
 
     private fun observeEarthquakeData() {
@@ -101,18 +96,18 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
             //Observe
             getNearEarthquakeList.observe(this@MapsEarthquakeActivity) { dataResponse ->
-                if (isNearPage?.value == true) {
-                    earthquakeList.clear()
-                    earthquakeList = dataResponse ?: arrayListOf()
-                    setUpEarthquakeAdapter()
-                }
+                if (isNearEarthquake == true)
+                    mapEarthquakeList.postValue(dataResponse)
             }
 
             getNowEarthquakeList.observe(this@MapsEarthquakeActivity) { dataResponse ->
-                if (isNearPage?.value == false) {
-                    earthquakeList = dataResponse ?: arrayListOf()
-                    setUpEarthquakeAdapter()
-                }
+                if (isNearEarthquake == false)
+                    mapEarthquakeList.postValue(dataResponse)
+            }
+
+            mapEarthquakeList.observe(this@MapsEarthquakeActivity) { dataResponse ->
+                earthquakeList = dataResponse ?: arrayListOf()
+                setUpEarthquakeAdapter()
             }
 
             error.observe(this@MapsEarthquakeActivity) { errorApi ->
@@ -129,9 +124,9 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
 
     private val requestNowLocationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (isGranted)
+            if (isGranted) {
                 setUpMap()
-            else
+            } else
                 grantedPermissionMainAction()
         }
 
@@ -411,8 +406,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     private fun whereActionPage() {
         when (isNearEarthquake) {
             true -> NavHandler.instance.toMainActivity(this, ToMain.NearEarthquake)
-            false -> NavHandler.instance.toMainActivity(this, ToMain.NowEarthquake)
-            else -> NavHandler.instance.toFilterActivity(this)
+            else -> NavHandler.instance.toMainActivity(this, ToMain.NowEarthquake)
         }
     }
 

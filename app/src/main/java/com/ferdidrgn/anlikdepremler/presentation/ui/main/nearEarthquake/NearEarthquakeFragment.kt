@@ -44,7 +44,7 @@ class NearEarthquakeFragment :
             swipeRefreshLayout.setOnRefreshListener {
                 this@NearEarthquakeFragment.viewModel.apply {
                     getNearEarthquakeList.postValue(null)
-                    isNearPage?.postValue(true)
+                    isNearPage.postValue(true)
                     getLocationFromUser()
                 }
                 swipeRefreshLayout.isRefreshing = false
@@ -62,8 +62,7 @@ class NearEarthquakeFragment :
             clickableHeaderMenus.observe(viewLifecycleOwner) {
                 if (it) {
                     clickMap.observe(viewLifecycleOwner) {
-                        isNearPage?.postValue(true)
-                        NavHandler.instance.toMapsActivity(requireContext(), nearLocationList)
+                        NavHandler.instance.toMapsActivity(requireContext(), true)
                     }
                 }
             }

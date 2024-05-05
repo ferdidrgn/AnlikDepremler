@@ -35,7 +35,7 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
             swipeRefreshLayout.setOnRefreshListener {
                 this@NowEarthquakeFragment.viewModel.apply {
                     getNearEarthquakeList.postValue(null)
-                    isNearPage?.postValue(false)
+                    isNearPage.postValue(true)
                     getNowEarthquake()
                 }
                 swipeRefreshLayout.isRefreshing = false
@@ -70,21 +70,18 @@ class NowEarthquakeFragment : BaseFragment<MainViewModel, FragmentNowEarthquakeB
     }
 
     private fun observeMapIconClick() {
-        viewModel.clickMap.observe(viewLifecycleOwner) { isMapClick ->
-            if (isMapClick) {
-                viewModel.isNearPage?.postValue(false)
-                NavHandler.instance.toMapsActivity(requireContext(), ArrayList())
+        viewModel.apply {
+            clickMap.observe(viewLifecycleOwner) {
+                NavHandler.instance.toMapsActivity(requireContext(), isNearPage.value)
             }
         }
     }
 
     private fun observeFilterIconClick() {
         viewModel.apply {
-            clickFilter.observe(viewLifecycleOwner) { isFilterClick ->
-                if (isFilterClick) {
-                    viewModel.isNearPage?.postValue(null)
-                    NavHandler.instance.toFilterActivity(requireContext())
-                }
+            clickFilter.observe(viewLifecycleOwner) {
+                viewModel.isNearPage.postValue(null)
+                NavHandler.instance.toFilterActivity(requireContext())
             }
         }
     }

@@ -39,10 +39,11 @@ class MainViewModel @Inject constructor(
     var userLat = MutableStateFlow<Double?>(null)
     var userLong = MutableStateFlow<Double?>(null)
     var nearLocationList = ArrayList<Earthquake>()
-    var isNearPage: MutableLiveData<Boolean?>? = null
+    var isNearPage = MutableLiveData(false)
 
     //XML
     var location = MutableStateFlow("")
+    var mapEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
 
     //Get Api List
     var getNowEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()

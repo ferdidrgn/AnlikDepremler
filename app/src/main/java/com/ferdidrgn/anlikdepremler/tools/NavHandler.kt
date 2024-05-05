@@ -13,7 +13,7 @@ import com.ferdidrgn.anlikdepremler.presentation.ui.filter.FilterActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.language.LanguageActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.main.MainActivity
 import com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.MapsEarthquakeActivity
-import com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsandPrivacyPolicyActivity
+import com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsAndPrivacyPolicyActivity
 
 class NavHandler {
 
@@ -66,10 +66,10 @@ class NavHandler {
 
     fun toMapsActivity(
         context: Context,
-        filterList: ArrayList<Earthquake>
+        isNearEarthquake: Boolean?
     ) {
         val intent = Intent(context, MapsEarthquakeActivity::class.java)
-        intent.putExtra(FILTER_LIST, filterList)
+        intent.putExtra(NEAR_EARTHQUAKE, isNearEarthquake)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         context.startActivity(intent)
     }
@@ -90,7 +90,7 @@ class NavHandler {
         context: Context,
         whichTermsAndPrivacy: WhichTermsAndPrivacy
     ) {
-        val intent = Intent(context, TermsAndConditionsandPrivacyPolicyActivity::class.java)
+        val intent = Intent(context, TermsAndConditionsAndPrivacyPolicyActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
         intent.putExtra(WHICH_TERMS_PRIVACY, whichTermsAndPrivacy)
         context.startActivity(intent)

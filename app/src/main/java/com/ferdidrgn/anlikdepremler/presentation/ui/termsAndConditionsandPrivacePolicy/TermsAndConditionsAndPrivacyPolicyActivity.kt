@@ -3,20 +3,19 @@ package com.ferdidrgn.anlikdepremler.presentation.ui.termsAndConditionsandPrivac
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.ferdidrgn.anlikdepremler.base.BaseActivity
-import com.ferdidrgn.anlikdepremler.databinding.ActivityTermsAndConditionsandPrivacePolicyBinding
+import com.ferdidrgn.anlikdepremler.databinding.ActivityTermsAndConditionsandPrivacyPolicyBinding
 import com.ferdidrgn.anlikdepremler.tools.enums.WhichTermsAndPrivacy
 import com.ferdidrgn.anlikdepremler.tools.WHICH_TERMS_PRIVACY
-import com.ferdidrgn.anlikdepremler.tools.builderADS
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TermsAndConditionsandPrivacyPolicyActivity :
-    BaseActivity<TermsAndConditionAndPrivacyPolicyViewModel, ActivityTermsAndConditionsandPrivacePolicyBinding>() {
+class TermsAndConditionsAndPrivacyPolicyActivity :
+    BaseActivity<TermsAndConditionAndPrivacyPolicyViewModel, ActivityTermsAndConditionsandPrivacyPolicyBinding>() {
 
     override fun getVM(): Lazy<TermsAndConditionAndPrivacyPolicyViewModel> = viewModels()
 
-    override fun getDataBinding(): ActivityTermsAndConditionsandPrivacePolicyBinding =
-        ActivityTermsAndConditionsandPrivacePolicyBinding.inflate(layoutInflater)
+    override fun getDataBinding(): ActivityTermsAndConditionsandPrivacyPolicyBinding =
+        ActivityTermsAndConditionsandPrivacyPolicyBinding.inflate(layoutInflater)
 
     override fun onCreateFinished(savedInstance: Bundle?) {
         binding.viewModel = viewModel
