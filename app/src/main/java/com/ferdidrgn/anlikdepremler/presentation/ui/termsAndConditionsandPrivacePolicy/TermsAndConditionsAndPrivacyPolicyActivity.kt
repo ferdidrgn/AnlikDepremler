@@ -32,7 +32,6 @@ class TermsAndConditionsAndPrivacyPolicyActivity :
 
     override fun onResume() {
         super.onResume()
-
         setAds(binding.adView)
     }
 

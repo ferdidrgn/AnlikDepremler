@@ -54,7 +54,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
 
     override fun onResume() {
         super.onResume()
-
         setAds(binding.adView)
     }
 
