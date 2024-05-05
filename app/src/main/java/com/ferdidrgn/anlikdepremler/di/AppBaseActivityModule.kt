@@ -1,7 +1,7 @@
 package com.ferdidrgn.anlikdepremler.di
 
 import android.app.Activity
-import com.ferdidrgn.anlikdepremler.base.BaseActivity
+import com.ferdidrgn.anlikdepremler.util.base.BaseActivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -7,7 +7,7 @@
 
         <variable
             name="listener"
-            type="com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthQuakeAdapterListener" />
+            type="com.ferdidrgn.anlikdepremler.presentation.mapsEarthquake.NowEarthQuakeAdapterListener" />
 
         <variable
             name="earthquake"

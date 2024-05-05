@@ -1,7 +1,7 @@
 package com.ferdidrgn.anlikdepremler.data.repository
 
-import com.ferdidrgn.anlikdepremler.base.BaseRepo
-import com.ferdidrgn.anlikdepremler.base.Resource
+import com.ferdidrgn.anlikdepremler.util.base.BaseRepo
+import com.ferdidrgn.anlikdepremler.util.base.Resource
 import com.ferdidrgn.anlikdepremler.data.remote.api.EarthquakeApi
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
 import com.ferdidrgn.anlikdepremler.domain.repository.EarthquakeRepository

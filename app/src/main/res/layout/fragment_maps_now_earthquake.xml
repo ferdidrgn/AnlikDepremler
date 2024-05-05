@@ -7,18 +7,18 @@
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel" />
+            type="com.ferdidrgn.anlikdepremler.presentation.main.MainViewModel" />
 
         <variable
             name="nowEarthquakeAdapter"
-            type="com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthquakeAdapter" />
+            type="com.ferdidrgn.anlikdepremler.presentation.mapsEarthquake.NowEarthquakeAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/ScreenBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.mapsEarthquake.MapsEarthquakeActivity">
+        tools:context=".presentation.mapsEarthquake.MapsEarthquakeActivity">
 
         <include
             android:id="@+id/mapMarker"

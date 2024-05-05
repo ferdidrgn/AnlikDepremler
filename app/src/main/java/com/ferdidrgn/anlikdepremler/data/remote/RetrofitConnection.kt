@@ -1,9 +1,9 @@
 package com.ferdidrgn.anlikdepremler.data.remote
 
 import com.ferdidrgn.anlikdepremler.BuildConfig
-import com.ferdidrgn.anlikdepremler.tools.enums.Environment
-import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
-import com.ferdidrgn.anlikdepremler.tools.log
+import com.ferdidrgn.anlikdepremler.util.helpers.ClientPreferences
+import com.ferdidrgn.anlikdepremler.util.helpers.Environment
+import com.ferdidrgn.anlikdepremler.util.helpers.log
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor

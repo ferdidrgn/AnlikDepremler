@@ -1,7 +1,7 @@
 package com.ferdidrgn.anlikdepremler.domain.useCase.contactUsEmail
 
 import com.ferdidrgn.anlikdepremler.domain.repository.AppToolsFireBaseQueriesRepository
-import com.ferdidrgn.anlikdepremler.tools.enums.Response
+import com.ferdidrgn.anlikdepremler.util.helpers.Response
 import javax.inject.Inject
 
 class GetContactUsEmailUseCaseImpl @Inject constructor(

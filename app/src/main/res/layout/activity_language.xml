@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.presentation.ui.language.LanguageViewModel" />
+            type="com.ferdidrgn.anlikdepremler.presentation.language.LanguageViewModel" />
     </data>
 
     <LinearLayout
@@ -16,9 +16,9 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".presentation.ui.language.LanguageActivity">
+        tools:context=".presentation.language.LanguageActivity">
 
-        <com.ferdidrgn.anlikdepremler.tools.components.CustomToolbar
+        <com.ferdidrgn.anlikdepremler.util.components.CustomToolbar
             android:id="@+id/customToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

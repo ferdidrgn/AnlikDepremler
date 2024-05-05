@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.ui.filter.FilterActivity">
+    tools:context=".presentation.filter.FilterActivity">
 
     <data>
 
@@ -10,11 +10,11 @@
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.presentation.ui.filter.FilterViewModel" />
+            type="com.ferdidrgn.anlikdepremler.presentation.filter.FilterViewModel" />
 
         <variable
             name="nowEarthquakeAdapter"
-            type="com.ferdidrgn.anlikdepremler.presentation.ui.mapsEarthquake.NowEarthquakeAdapter" />
+            type="com.ferdidrgn.anlikdepremler.presentation.mapsEarthquake.NowEarthquakeAdapter" />
 
     </data>
 
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.ferdidrgn.anlikdepremler.tools.components.CustomToolbar
+        <com.ferdidrgn.anlikdepremler.util.components.CustomToolbar
             android:id="@+id/customToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -201,7 +201,7 @@
                                         android:textSize="14sp" />
                                 </RelativeLayout>
 
-                                <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                                <com.ferdidrgn.anlikdepremler.util.components.CustomEditText
                                     android:id="@+id/tvLocation"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
@@ -237,7 +237,7 @@
                                     android:orientation="horizontal"
                                     android:weightSum="2">
 
-                                    <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
+                                    <com.ferdidrgn.anlikdepremler.util.components.CustomDatePicker
                                         android:id="@+id/cdpStartDate"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -247,7 +247,7 @@
                                         app:cst_date_picker_hint_text="@string/start_date"
                                         app:cst_picker_changeable_text="@={viewModel.startDate}" />
 
-                                    <com.ferdidrgn.anlikdepremler.tools.components.CustomDatePicker
+                                    <com.ferdidrgn.anlikdepremler.util.components.CustomDatePicker
                                         android:id="@+id/cdpEndDate"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
                                         android:orientation="horizontal"
                                         android:weightSum="2">
 
-                                        <com.ferdidrgn.anlikdepremler.tools.components.CustomEditText
+                                        <com.ferdidrgn.anlikdepremler.util.components.CustomEditText
                                             android:id="@+id/tvMl"
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"

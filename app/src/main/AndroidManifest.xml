@@ -30,19 +30,19 @@
             android:value="${API_KEY_LOCATION}" />
 
         <activity
-            android:name=".presentation.ui.filter.FilterActivity"
+            android:name=".presentation.filter.FilterActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.language.LanguageActivity"
+            android:name=".presentation.language.LanguageActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.mapsEarthquake.MapsEarthquakeActivity"
+            android:name=".presentation.mapsEarthquake.MapsEarthquakeActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.termsAndConditionsandPrivacePolicy.TermsAndConditionsAndPrivacyPolicyActivity"
+            android:name=".presentation.termsAndConditionsandPrivacePolicy.TermsAndConditionsAndPrivacyPolicyActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.ui.main.MainActivity"
+            android:name=".presentation.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

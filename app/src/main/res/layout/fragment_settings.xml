@@ -13,7 +13,7 @@
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.settings.SettingsViewModel" />
+            type="com.ferdidrgn.anlikdepremler.presentation.main.settings.SettingsViewModel" />
     </data>
 
     <LinearLayout
@@ -21,9 +21,9 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".presentation.ui.main.settings.SettingsFragment">
+        tools:context=".presentation.main.settings.SettingsFragment">
 
-        <com.ferdidrgn.anlikdepremler.tools.components.CustomToolbar
+        <com.ferdidrgn.anlikdepremler.util.components.CustomToolbar
             android:id="@+id/customToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

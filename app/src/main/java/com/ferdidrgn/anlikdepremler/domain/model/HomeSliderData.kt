@@ -1,6 +1,6 @@
 package com.ferdidrgn.anlikdepremler.domain.model
 
-import com.ferdidrgn.anlikdepremler.base.ListAdapterItem
+import com.ferdidrgn.anlikdepremler.util.base.ListAdapterItem
 
 data class HomeSliderData(
     val image: String? = null,

@@ -1,7 +1,7 @@
 package com.ferdidrgn.anlikdepremler
 
 import android.app.Application
-import com.ferdidrgn.anlikdepremler.tools.ClientPreferences
+import com.ferdidrgn.anlikdepremler.util.helpers.ClientPreferences
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

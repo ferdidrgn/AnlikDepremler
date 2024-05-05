@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.ferdidrgn.anlikdepremler.presentation.ui.main.MainViewModel" />
+            type="com.ferdidrgn.anlikdepremler.presentation.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         style="@style/ScreenBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.main.MainActivity">
+        tools:context=".presentation.main.MainActivity">
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainer"

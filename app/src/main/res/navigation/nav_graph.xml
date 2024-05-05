@@ -6,18 +6,18 @@
 
     <fragment
         android:id="@+id/homeFragmentNav"
-        android:name="com.ferdidrgn.anlikdepremler.presentation.ui.main.home.HomeFragment"
+        android:name="com.ferdidrgn.anlikdepremler.presentation.main.home.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/nearEarthquakeFragmentNav"
-        android:name="com.ferdidrgn.anlikdepremler.presentation.ui.main.nearEarthquake.NearEarthquakeFragment"
+        android:name="com.ferdidrgn.anlikdepremler.presentation.main.nearEarthquake.NearEarthquakeFragment"
         android:label="NearEarthquakeFragment"/>
     <fragment
         android:id="@+id/nowEarthquakeFragmentNav"
-        android:name="com.ferdidrgn.anlikdepremler.presentation.ui.main.nowEarthquake.NowEarthquakeFragment"
+        android:name="com.ferdidrgn.anlikdepremler.presentation.main.nowEarthquake.NowEarthquakeFragment"
         android:label="NowEarthquakeFragment"/>
     <fragment
         android:id="@+id/settingsFragmentNav"
-        android:name="com.ferdidrgn.anlikdepremler.presentation.ui.main.settings.SettingsFragment"
+        android:name="com.ferdidrgn.anlikdepremler.presentation.main.settings.SettingsFragment"
         android:label="SettingsFragment" />
 </navigation>

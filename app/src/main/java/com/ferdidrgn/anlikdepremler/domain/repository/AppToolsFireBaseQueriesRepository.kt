@@ -1,6 +1,6 @@
 package com.ferdidrgn.anlikdepremler.domain.repository
 
-import com.ferdidrgn.anlikdepremler.tools.enums.Response
+import com.ferdidrgn.anlikdepremler.util.helpers.Response
 
 interface AppToolsFireBaseQueriesRepository {
 

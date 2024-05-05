@@ -1,7 +1,7 @@
 package com.ferdidrgn.anlikdepremler.domain.model
 
 import java.io.Serializable
-import com.ferdidrgn.anlikdepremler.base.ListAdapterItem
+import com.ferdidrgn.anlikdepremler.util.base.ListAdapterItem
 import com.google.gson.annotations.SerializedName
 
 data class Earthquake(
