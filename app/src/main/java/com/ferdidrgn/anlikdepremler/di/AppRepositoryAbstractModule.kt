@@ -1,11 +1,11 @@
 package com.ferdidrgn.anlikdepremler.di
 
-import com.ferdidrgn.anlikdepremler.data.repositroy.AppToolsFireBaseQueriesRepositoryImpl
-import com.ferdidrgn.anlikdepremler.data.repositroy.EarthquakeRepository
-import com.ferdidrgn.anlikdepremler.data.repositroy.EarthquakeRepositoryImpl
-import com.ferdidrgn.anlikdepremler.data.repositroy.AppToolsFireBaseQueriesRepository
-import com.ferdidrgn.anlikdepremler.data.repositroy.HomeSliderRepository
-import com.ferdidrgn.anlikdepremler.data.repositroy.HomeSliderRepositoryImpl
+import com.ferdidrgn.anlikdepremler.data.repository.AppToolsFireBaseQueriesRepositoryImpl
+import com.ferdidrgn.anlikdepremler.data.repository.EarthquakeRepository
+import com.ferdidrgn.anlikdepremler.data.repository.EarthquakeRepositoryImpl
+import com.ferdidrgn.anlikdepremler.data.repository.AppToolsFireBaseQueriesRepository
+import com.ferdidrgn.anlikdepremler.data.repository.HomeSliderRepository
+import com.ferdidrgn.anlikdepremler.data.repository.HomeSliderRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

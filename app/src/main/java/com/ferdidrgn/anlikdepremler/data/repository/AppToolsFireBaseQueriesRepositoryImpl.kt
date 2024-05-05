@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.data.repositroy
+package com.ferdidrgn.anlikdepremler.data.repository
 
 import com.ferdidrgn.anlikdepremler.tools.enums.Response
 import com.google.firebase.firestore.ktx.firestore

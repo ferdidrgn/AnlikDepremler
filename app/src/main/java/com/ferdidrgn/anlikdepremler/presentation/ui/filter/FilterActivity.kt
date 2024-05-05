@@ -75,7 +75,7 @@ class FilterActivity : BaseActivity<FilterViewModel, ActivityFilterBinding>(), O
     private fun observe() {
 
         viewModel.clickMap.observe(this) {
-            
+
         }
 
         viewModel.clickFilterClear.observe(this) { clear ->
