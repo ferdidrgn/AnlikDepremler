@@ -5,7 +5,7 @@ import androidx.fragment.app.activityViewModels
 import com.ferdidrgn.anlikdepremler.util.base.BaseFragment
 import com.ferdidrgn.anlikdepremler.databinding.FragmentHomeBinding
 import com.ferdidrgn.anlikdepremler.util.helpers.ToMain
-import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
+import com.ferdidrgn.anlikdepremler.data.remote.dto.HomeSliderDto
 import com.ferdidrgn.anlikdepremler.util.handler.NavHandler
 import com.ferdidrgn.anlikdepremler.util.helpers.getPositionAndSendHandler2
 import com.ferdidrgn.anlikdepremler.util.helpers.ioScope
@@ -41,7 +41,7 @@ class HomeFragment : BaseFragment<MainViewModel, FragmentHomeBinding>() {
             homeSliderList.observe(viewLifecycleOwner) { homeSliderList ->
                 ioScope {
                     binding.apply {
-                        homeSliderAdapter?.differ?.submitList(homeSliderList as List<HomeSliderData?>?)
+                        homeSliderAdapter?.differ?.submitList(homeSliderList as List<HomeSliderDto?>?)
                         if (homeSliderList != null)
                             indicator.count = homeSliderList.size
 

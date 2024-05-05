@@ -3,15 +3,15 @@ package com.ferdidrgn.anlikdepremler.presentation.main.home
 import com.ferdidrgn.anlikdepremler.R
 import com.ferdidrgn.anlikdepremler.util.base.BaseAdapter
 import com.ferdidrgn.anlikdepremler.databinding.ItemHomeSliderBinding
-import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
+import com.ferdidrgn.anlikdepremler.data.remote.dto.HomeSliderDto
 
 class HomeSliderHorizontalAdapter(
     private val sliderDetailsAdapterListener: SliderDetailsAdapterListener
-) : BaseAdapter<ItemHomeSliderBinding, HomeSliderData>() {
+) : BaseAdapter<ItemHomeSliderBinding, HomeSliderDto>() {
 
     override val layoutId: Int = R.layout.item_home_slider
 
-    override fun bind(binding: ItemHomeSliderBinding, item: HomeSliderData, position: Int) {
+    override fun bind(binding: ItemHomeSliderBinding, item: HomeSliderDto, position: Int) {
         binding.apply {
             homeSliderData = item
             index = position
@@ -22,5 +22,5 @@ class HomeSliderHorizontalAdapter(
 }
 
 interface SliderDetailsAdapterListener {
-    fun onSliderDetailsAdapterListener(homeSliderData: HomeSliderData){}
+    fun onSliderDetailsAdapterListener(homeSliderDto: HomeSliderDto){}
 }

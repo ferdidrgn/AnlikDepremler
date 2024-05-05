@@ -9,7 +9,7 @@
 
         <variable
             name="homeSliderData"
-            type="com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData" />
+            type="com.ferdidrgn.anlikdepremler.data.remote.dto.HomeSliderDto" />
 
         <variable
             name="listener"

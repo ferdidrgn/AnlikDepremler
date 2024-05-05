@@ -8,7 +8,7 @@ import com.ferdidrgn.anlikdepremler.util.base.Resource
 import com.ferdidrgn.anlikdepremler.domain.useCase.earthquakes.GetEarthquakesUseCase
 import kotlinx.coroutines.flow.collectLatest
 import com.ferdidrgn.anlikdepremler.domain.model.Earthquake
-import com.ferdidrgn.anlikdepremler.domain.model.HomeSliderData
+import com.ferdidrgn.anlikdepremler.data.remote.dto.HomeSliderDto
 import com.ferdidrgn.anlikdepremler.domain.useCase.homeSliderExample.GetExampleHomeSliderUseCase
 import com.ferdidrgn.anlikdepremler.domain.useCase.topTenEarthquake.GetTopTenEarthquakeUseCase
 import com.ferdidrgn.anlikdepremler.domain.useCase.locationTopTenEarthquake.GetTopTenLocationEarthquakeUseCase
@@ -52,7 +52,7 @@ class MainViewModel @Inject constructor(
     var getNearEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var getTopTenEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
     var getTopTenLocationEarthquakeList = MutableLiveData<ArrayList<Earthquake>?>()
-    var homeSliderList = MutableLiveData<List<HomeSliderData>>()
+    var homeSliderList = MutableLiveData<List<HomeSliderDto>>()
 
     var clickableHeaderMenus = MutableLiveData<Boolean>()
 

@@ -30,7 +30,6 @@ class LanguageActivity : BaseActivity<LanguageViewModel, ActivityLanguageBinding
 
     override fun onResume() {
         super.onResume()
-
         setAds(binding.adView)
     }
 }
