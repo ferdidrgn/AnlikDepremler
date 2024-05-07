@@ -12,7 +12,7 @@ import com.ferdidrgn.anlikdepremler.presentation.filter.FilterActivity
 import com.ferdidrgn.anlikdepremler.presentation.language.LanguageActivity
 import com.ferdidrgn.anlikdepremler.presentation.main.MainActivity
 import com.ferdidrgn.anlikdepremler.presentation.mapsEarthquake.MapsEarthquakeActivity
-import com.ferdidrgn.anlikdepremler.presentation.termsAndConditionsandPrivacePolicy.TermsAndConditionsAndPrivacyPolicyActivity
+import com.ferdidrgn.anlikdepremler.presentation.termsAndConditionsAndPrivacyPolicy.TermsAndConditionsAndPrivacyPolicyActivity
 import com.ferdidrgn.anlikdepremler.util.helpers.NEAR_EARTHQUAKE
 import com.ferdidrgn.anlikdepremler.util.helpers.TO_MAIN
 import com.ferdidrgn.anlikdepremler.util.helpers.WHICH_TERMS_PRIVACY

@@ -1,4 +1,4 @@
-package com.ferdidrgn.anlikdepremler.presentation.termsAndConditionsandPrivacePolicy
+package com.ferdidrgn.anlikdepremler.presentation.termsAndConditionsAndPrivacyPolicy
 
 import android.text.Html
 import com.ferdidrgn.anlikdepremler.R

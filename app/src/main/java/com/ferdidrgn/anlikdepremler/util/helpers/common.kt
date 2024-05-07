@@ -157,7 +157,8 @@ fun enableLocation(
                             e.status.resolution?.let { panding ->
                                 IntentSenderRequest.Builder(panding).build()
                             }
-                        launch.launch(intentSenderRequest)
+                        if (intentSenderRequest != null)
+                            launch.launch(intentSenderRequest)
                     } catch (e: IntentSender.SendIntentException) {
                         e.localizedMessage?.let { showToast(it) }
                     }
