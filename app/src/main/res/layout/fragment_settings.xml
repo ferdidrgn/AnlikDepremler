@@ -329,7 +329,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/btnPrivacePolicy"
+                    android:id="@+id/btnPrivacyPolicy"
                     style="@style/rectangle_primary2_border_primary3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -356,7 +356,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
-                            android:text="@string/privace_policy"
+                            android:text="@string/privacy_policy"
                             android:textSize="18sp" />
 
                     </LinearLayout>

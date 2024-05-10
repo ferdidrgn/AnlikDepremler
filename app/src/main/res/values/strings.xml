@@ -30,13 +30,13 @@
     <string name="rate_the_app">Uygulamayı Oyla</string>
     <string name="notification_permission">Bildirim İzni</string>
     <string name="share_app">Uygulamayı Paylaş</string>
-    <string name="privace_policy">Gizlilik Politikası</string>
+    <string name="privacy_policy">Gizlilik Politikası</string>
     <string name="terms_condition">Koşullar&amp;Şartlar</string>
     <string name="contact_us">Bizimle İletişime Geç</string>
     <string name="buy_me_coffee">Bana Bir Kahve Ismarla</string>
     <string name="e_mail" translatable="false">hesap_yok_a@hotmail.com</string>
     <string name="notification">bildirim</string>
-    <string name="contact_us_producter">deprem uygulama içi</string>
+    <string name="contact_us_producter">deprem uygulama için</string>
     <string name="send_mail">Mail i Gönder</string>
     <string name="error_not_mail_installed">Hiçbir Mail Uygulaması Bulamadık</string>
 

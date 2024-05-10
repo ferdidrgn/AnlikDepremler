@@ -39,7 +39,7 @@ class TermsAndConditionAndPrivacyPolicyViewModel @Inject constructor(
                 }
 
                 WhichTermsAndPrivacy.PrivacyAndPolicy -> {
-                    toolBarText.value = message(R.string.privace_policy)
+                    toolBarText.value = message(R.string.privacy_policy)
                     getTermsConditionOrPrivacyPolicyUseCase(PRIVACY_POLICY) { status, html ->
                         hideLoading()
                         loopWhen(status, html)

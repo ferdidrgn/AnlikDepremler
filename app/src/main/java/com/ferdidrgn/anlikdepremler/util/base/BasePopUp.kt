@@ -86,7 +86,7 @@ class BasePopUp(val isSuccess: Boolean? = null) : DialogFragment() {
             tbTitle.hide()
             imgSuccess.setImageResource(R.drawable.ic_accept_done_ok)
             container.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.bg_main_forth_10_green_light)
+                ContextCompat.getDrawable(requireContext(), R.drawable.bg_primary6__10_green_light)
         }
     }
 
@@ -96,7 +96,7 @@ class BasePopUp(val isSuccess: Boolean? = null) : DialogFragment() {
             imgSuccess.setImageResource(R.drawable.ic_error)
             tbTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.red_err))
             container.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.bg_main_forth_10_border_red)
+                ContextCompat.getDrawable(requireContext(), R.drawable.bg_primary6_10_border_red)
             positiveTv.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.rounded_red_radius_10)
         }

@@ -34,6 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
+import  com.google.android.material.bottomnavigation.BottomNavigationView
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
@@ -84,6 +85,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                 showToast(getString(R.string.error_update_failed))
     }
 
+    private fun getNavHost() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
+        navController = navHostFragment.navController
+
+        val bottomNav: BottomNavigationView = binding.bottomNav
+        bottomNav.setupWithNavController(navController)
+    }
+
     private fun whereToFromIntentActivity() {
         val toMain = intent.getSerializableExtra(TO_MAIN) as ToMain?
         whereToGetBottomNavItem(toMain ?: return)
@@ -100,16 +110,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
             ToMain.Settings -> binding.bottomNav.selectedItemId = R.id.settingsFragmentNav
         }
-    }
-
-    private fun getNavHost() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
-        navController = navHostFragment.navController
-
-        val bottomNav =
-            findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNav)
-        bottomNav.setupWithNavController(navController)
     }
 
     private fun checkForAppUpdate() {

@@ -36,7 +36,6 @@
 
     //Don't use this color for dark mode
     <color name="red_err">#B00020</color>
-
     <color name="green_light">#4CAF50</color>
 
 </resources>

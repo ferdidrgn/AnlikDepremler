@@ -27,7 +27,7 @@ class SettingsViewModel @Inject constructor(
     val btnRateAppClicked = LiveEvent<Boolean>()
     val btnContactUsClicked = LiveEvent<Boolean>()
     val btnChangeThemeClicked = LiveEvent<Boolean>()
-    val btnPrivacePolicyClicked = LiveEvent<Boolean>()
+    val btnPrivacyPolicyClicked = LiveEvent<Boolean>()
     val btnTermsAndConditionsClicked = LiveEvent<Boolean>()
     val btnBuyCoffeeUrlClick = LiveEvent<Boolean>()
     val btnBuyCoffeeGooglePlayClick = LiveEvent<Boolean>()
@@ -102,7 +102,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun onPrivacyPolicyClick() {
-        btnPrivacePolicyClicked.postValue(true)
+        btnPrivacyPolicyClicked.postValue(true)
     }
 
     fun onTermsAndConditionsClick() {

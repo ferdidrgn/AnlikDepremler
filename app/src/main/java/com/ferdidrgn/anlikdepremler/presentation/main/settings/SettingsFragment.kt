@@ -77,7 +77,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             btnChangeThemeClicked.observe(viewLifecycleOwner) {
                 themeLightOrDark()
             }
-            btnPrivacePolicyClicked.observe(viewLifecycleOwner) {
+            btnPrivacyPolicyClicked.observe(viewLifecycleOwner) {
                 goToTermsAndConditionsAction(true)
             }
             btnTermsAndConditionsClicked.observe(viewLifecycleOwner) {
