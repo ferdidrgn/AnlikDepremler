@@ -43,6 +43,8 @@ import com.google.android.gms.maps.model.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
@@ -54,6 +56,7 @@ class MapsEarthquakeActivity : BaseActivity<MainViewModel, FragmentMapsNowEarthq
     private var latLng: LatLng? = null
     private var earthquakeList = ArrayList<Earthquake>()
     private var isNearEarthquake: Boolean? = null
+    private var job: Job? = null
 
     override fun getVM(): Lazy<MainViewModel> = viewModels()
 

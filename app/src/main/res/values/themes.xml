@@ -32,14 +32,7 @@
 
     <!-- Customize style -->
     <style name="ScreenBackground">
-        <item name="android:background">@color/primary2</item>
-    </style>
-
-    <style name="CardBackgroundTint_StrokeColor">
-        <item name="android:backgroundTint">@color/primary2</item>
-        <item name="strokeColor">@color/primary4</item>
-        <item name="strokeWidth">3dp</item>
-        <item name="cardCornerRadius">10dp</item>
+        <item name="android:background">@color/primary</item>
     </style>
 
     <style name="ShapeableImageViewStyle">
@@ -80,6 +73,13 @@
 
     <style name="CardBackgroundTint_primary3">
         <item name="android:backgroundTint">@color/primary3</item>
+    </style>
+
+    <style name="CardBackgroundTint_StrokeColor">
+        <item name="android:backgroundTint">@color/primary2</item>
+        <item name="strokeColor">@color/primary4</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="cardCornerRadius">10dp</item>
     </style>
 
     <style name="ViewBackground">

@@ -8,7 +8,7 @@
     <color name="white">#FFFFFFFF</color>
 
     //DarkMode
-    <color name="black">#FF000000</color>
+    <color name="black">#000000</color>
     <color name="dark2">#161515</color>
     <color name="dark3">#212121</color>
     <color name="dark4">#292528</color>

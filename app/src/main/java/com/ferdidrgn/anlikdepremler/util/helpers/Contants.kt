@@ -9,12 +9,10 @@ const val GUEST_TOKEN = "guestToken"
 const val LANGUAGE = "language"
 const val CONTEXT_LANGUAGE = "CONTEXT_LANGUAGE"
 
-const val USER_ID = "UserID"
 const val USER_LAT = "UserLat"
 const val USER_LONG = "UserLong"
 const val USER_LOCATION = "UserLocation"
 
-const val CONNECTION = "connection"
 const val IS_FIRST_LUNCH = "isFirstLunch"
 
 const val IS_DARK_MODE = "isDarkMode"
@@ -35,7 +33,6 @@ const val NEAR_EARTHQUAKE = "nearEarthquake"
 
 const val DEFAULT_DATE_FORMAT = "dd-MM-yyyy"
 
-const val FILTER_LIST = "FILTER_LIST"
 const val APP_LINK = "https://play.google.com/store/apps/details?id=com.ferdidrgn.anlikdepremler"
 
 //FireBaseRemoteConfig

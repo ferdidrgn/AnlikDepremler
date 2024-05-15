@@ -32,13 +32,6 @@
         <item name="android:background">@color/black</item>
     </style>
 
-    <style name="CardBackgroundTint_StrokeColor">
-        <item name="android:backgroundTint">@color/dark2</item>
-        <item name="strokeColor">@color/dark4</item>
-        <item name="strokeWidth">3dp</item>
-        <item name="cardCornerRadius">10dp</item>
-    </style>
-
     <style name="ShapeableImageViewStyle">
         <item name="android:scaleType">centerCrop</item>
         <item name="shapeAppearanceOverlay">@style/ImageView.SquareBorder</item>
@@ -77,6 +70,13 @@
 
     <style name="CardBackgroundTint_primary3">
         <item name="android:backgroundTint">@color/dark3</item>
+    </style>
+
+    <style name="CardBackgroundTint_StrokeColor">
+        <item name="android:backgroundTint">@color/dark2</item>
+        <item name="strokeColor">@color/dark4</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="cardCornerRadius">10dp</item>
     </style>
 
     <style name="ViewBackground">
