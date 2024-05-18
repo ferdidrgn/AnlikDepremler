@@ -33,12 +33,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- List -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingTop="100dp"
-            android:visibility="@{viewModel.isMapPage() ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customToolbar">
 
@@ -46,7 +44,6 @@
                 android:id="@+id/adViewList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 ads:adSize="BANNER"
                 ads:adUnitId="@string/BANNER_ADS_REAL"
                 ads:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +57,6 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
-                android:onClick="@{() -> viewModel.onClickMap()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adViewList">
 
@@ -102,84 +98,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Map -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:paddingTop="100dp"
-            android:visibility="@{viewModel.isMapPage() ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customToolbar">
-
-            <include
-                android:id="@+id/mapMarker"
-                layout="@layout/item_map_marker"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/btnList"
-                style="@style/rounded_primary2_10_border_primary3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    style="@style/ImgTintColor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="6dp"
-                    android:src="@drawable/ic_format_list" />
-
-                <TextView
-                    style="@style/TextColor_primary8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="4dp"
-                    android:text="@string/list"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adViewMap"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="5dp"
-                app:adSize="BANNER"
-                app:adUnitId="@string/BANNER_ADS_REAL"
-                app:layout_constraintTop_toBottomOf="@+id/btnList" />
-
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/adViewMap" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMap"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:setAdapter="@{nowEarthquakeAdapter}"
-                app:submitListSet="@{viewModel.getNowEarthquakeList}"
-                tools:layout_editor_absoluteX="1dp"
-                tools:listitem="@layout/item_now_earthquake_maps" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -191,13 +109,13 @@
 
             <com.tayfuncesur.curvedbottomsheet.CurvedLayout
                 android:id="@+id/bottomSheet"
+                style="@style/FillColor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:orientation="vertical"
                 app:behavior_hideable="false"
                 app:behavior_peekHeight="100dp"
-                app:fillColor="@color/red_err"
                 app:layout_behavior="com.tayfuncesur.curvedbottomsheet.TopSheetBehavior">
 
                 <LinearLayout

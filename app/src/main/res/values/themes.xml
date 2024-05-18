@@ -134,6 +134,10 @@
         <item name="android:background">@color/primary</item>
     </style>
 
+    <style name="FillColor">
+        <item name="fillColor">@color/primary2</item>
+    </style>
+
     <style name="rounded_primary2_10_border_primary3">
         <item name="android:background">@drawable/bg_primary2_10_border_primary3</item>
         <item name="android:textColor">@color/primary6</item>

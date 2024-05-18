@@ -19,7 +19,9 @@ import com.ferdidrgn.anlikdepremler.util.helpers.LiveEvent
 import com.ferdidrgn.anlikdepremler.presentation.mapsEarthquake.NowEarthQuakeAdapterListener
 import com.ferdidrgn.anlikdepremler.util.helpers.getLocationFilterManuel
 import com.ferdidrgn.anlikdepremler.util.helpers.ioScope
+import com.ferdidrgn.anlikdepremler.util.helpers.log
 import com.ferdidrgn.anlikdepremler.util.helpers.mainScope
+import com.ferdidrgn.anlikdepremler.util.helpers.showToast
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow

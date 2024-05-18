@@ -41,9 +41,6 @@ class FilterViewModel @Inject constructor(
 
     //XML Click
     val clickFilterClear = LiveEvent<Boolean>()
-    val clickMap = LiveEvent<Boolean>()
-    val clickList = LiveEvent<Boolean>()
-    var isMapPage = MutableLiveData(false)
 
     val clickCstmDatePickerStartDate = LiveEvent<Boolean?>()
     val clickCstmDatePickerEndDate = LiveEvent<Boolean?>()
@@ -171,14 +168,6 @@ class FilterViewModel @Inject constructor(
         if (location.value.isEmpty() && startDate.value.isEmpty() && endDate.value.isEmpty() && ml.value.isEmpty())
             getNowEarthquake()
 
-    }
-
-    fun onClickMap() {
-        clickMap.postValue(true)
-    }
-
-    fun onClickList() {
-        clickList.postValue(true)
     }
 
     fun onClickClear() {
