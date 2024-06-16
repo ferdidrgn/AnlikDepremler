@@ -27,11 +27,20 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        // Local properties dosyasını oku
+        def localProperties = new Properties()
+        def localPropertiesFile = rootProject.file('local.properties')
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.withInputStream { stream ->
+                localProperties.load(stream)
+            }
+        }
 
-        buildConfigField "String", "API_KEY_LOCATION", "\"${properties.getProperty("API_KEY_LOCATION")}\""
-        buildConfigField "String", "API_KEY_ADMOB", "\"${properties.getProperty("API_KEY_ADMOB")}\""
+        // Manifest yer tutucularını tanımla
+        manifestPlaceholders = [
+                API_KEY_ADMOB: localProperties.getProperty("API_KEY_ADMOB", ""),
+                API_KEY_LOCATION: localProperties.getProperty("API_KEY_LOCATION", "")
+        ]
     }
 
     buildTypes {
